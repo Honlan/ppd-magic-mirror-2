@@ -1,11 +1,1189 @@
 {% extends 'layout.html' %} {% block style %}
 <style>
+p {
+    font-size: 13px;
+    color: #999;
+}
 
+#plot1 {
+    width: 100%;
+    height: 240px;
+    background-color: #373a47 !important;
+    margin-bottom: 20px;
+}
+
+#plot2 {
+    width: 100%;
+    height: 360px;
+    background-color: #373a47 !important;
+    margin-bottom: 30px;
+}
+
+#plot3 {
+    width: 100%;
+    height: 250px;
+    background-color: #373a47 !important;
+    margin-bottom: 40px;
+}
+
+#p3 #param {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+}
+
+#p3 #xAxis {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+}
+
+#p3 .cell {
+    padding: 8px;
+    padding-left: 12px;
+    color: rgb(90, 103, 121);
+    background-color: #fff;
+    font-size: 12px;
+    z-index: 999;
+    text-align: left;
+    display: none;
+}
+
+#p3 .cell:nth-of-type(2n) {
+    background-color: rgb(250, 251, 253);
+}
+
+#p3 .cell:nth-of-type(2n + 1) {
+    background-color: rgb(255, 255, 255);
+}
+
+#p3 .cell:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#p3 .cell:hover {
+    cursor: pointer;
+    background-color: #50a3ba;
+    color: #fff;
+}
+
+#p3 input {
+    color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 150px;
+    background-color: #444650;
+    font-size: 12px;
+}
+
+#p3 input:hover {
+    cursor: pointer;
+}
+
+#p3 #param.active input,
+#p3 #xAxis.active input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#plot4 {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#plot4 rect.bar:hover {
+    cursor: pointer;
+}
+
+#plot5,
+#plot6 {
+    width: 100%;
+    height: 200px;
+    background-color: #373a47 !important;
+    margin-bottom: 30px;
+}
+
+#plot7 {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    text-align: center;
+}
+
+
+/*#plot7 #month {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#plot7 .cell {
+    padding: 8px;
+    padding-left: 12px;
+    color: rgb(90, 103, 121);
+    background-color: #fff;
+    font-size: 12px;
+    z-index: 999;
+    text-align: left;
+    display: none;
+}
+
+#plot7 .cell:nth-of-type(2n) {
+    background-color: rgb(250, 251, 253);
+}
+
+#plot7 .cell:nth-of-type(2n + 1) {
+    background-color: rgb(255, 255, 255);
+}
+
+#plot7 .cell:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#plot7 .cell:hover {
+    cursor: pointer;
+    background-color: #50a3ba;
+    color: #fff;
+}
+
+#plot7 input {
+    color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 150px;
+    background-color: #444650;
+    font-size: 12px;
+}
+
+#plot7 input:hover {
+    cursor: pointer;
+}
+
+#plot7 #month.active input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}*/
+
+#plot7 .foreground path {
+    fill: none;
+    stroke-opacity: .5;
+    stroke-width: 1.5px;
+}
+
+#plot7 .foreground path.fade {
+    stroke: #000;
+    stroke-opacity: .05;
+}
+
+#plot7 .brush .extent {
+    fill-opacity: .3;
+    stroke: #fff;
+    shape-rendering: crispEdges;
+}
+
+#plot7 .axis line,
+#plot7 .axis path {
+    fill: none;
+    stroke: rgba(240, 240, 240, 0.4);
+    shape-rendering: crispEdges;
+}
+
+#plot7 .axis .tick text {
+    fill-opacity: 0.4;
+    fill: #f2f2f2;
+    font-size: 12px;
+}
+
+#plot7 div p {
+    color: #f2f2f2;
+    font-size: 12px;
+}
+
+#plot7 div span {
+    display: inline-block;
+    width: 24px;
+    height: 14px;
+    position: relative;
+    top: 2px;
+    margin-left: 16px;
+}
+
+#plot7 div p:hover {
+    cursor: pointer;
+}
+
+#plot7 div p:hover span {
+    border: 1px solid #f2f2f2;
+}
+
+#plot7 div p.disabled {
+    color: #888;
+}
+
+#plot7 div p.disabled span {
+    background-color: #888 !important;
+}
 </style>
 {% endblock %} {% block body %}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="text-align:center;">
+        <img src="{{url_for('static', filename='img/ppd.png')}}" alt="" style="width:110px;margin-top:10px;margin-bottom:25px;">
+        <p>信用标数量<span style="color:#50a3ba;font-size:20px;margin-left:6px;margin-right:6px;">328,553</span></p>
+        <p>借款总金额<span style="color:#96b37e;font-size:20px;margin-left:6px;margin-right:6px;">1,453,458,316</span>元</p>
+        <p style="margin-top:18px;margin-bottom:15px;">时间跨度<span style="color:#eac736;margin-left:6px;margin-right:6px;">2015-01-01</span>至<span style="color:#eac736;margin-left:6px;margin-right:6px;">2017-01-30</span></p>
+        <p>用户数量<span style="color:#d94e5d;font-size:20px;margin-left:6px;margin-right:6px;">99999</span></p>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div id="plot1"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="plot2"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p3">
+        <div id="plot3"></div>
+        <div id="param">
+            <input type="text" class="form-control" value="初始评级" readOnly="readOnly">
+            <div class="cell" name="初始评级">初始评级</div>
+            <div class="cell" name="借款类型">借款类型</div>
+            <div class="cell" name="是否首标">是否首标</div>
+            <div class="cell" name="性别">性别</div>
+            <div class="cell" name="年龄区间">年龄区间</div>
+        </div>
+        <div id="xAxis">
+            <input type="text" class="form-control" value="借款利率" readOnly="readOnly">
+            <div class="cell" name="0">借款利率</div>
+            <div class="cell" name="1">借款金额</div>
+        </div>
+    </div>
+</div>
+<div id="plot4">
+    <div style="position:absolute;bottom:20px;width:160px;">
+        <p>对应信用标数量</p>
+        <h3 style="color:#d94e5d;font-size:36px;margin-top:12px;">328553</h3>
+    </div>
+    <svg width="1000" height="500">
+        <g></g>
+    </svg>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div id="plot5"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div id="plot6"></div>
+    </div>
+</div>
+<div id="plot7">
+    <!-- <div id="month">
+        <input type="text" class="form-control" value="" readOnly="readOnly">
+        <div class="cell" name="初始评级">初始评级</div>
+    </div> -->
+    <svg width="1000px" height="500px">
+        <g></g>
+    </svg>
+    <div style="position:absolute;top:160px;">
+        <p name="A">A<span style="background-color:#ba5050;"></span></p>
+        <p name="B">B<span style="background-color:#a350ba;"></span></p>
+        <p name="C">C<span style="background-color:#5055ba;"></span></p>
+        <p name="D">D<span style="background-color:#50b2ba;"></span></p>
+        <p name="E">E<span style="background-color:#50ba6a;"></span></p>
+        <p name="F">F<span style="background-color:#bab950;"></span></p>
+    </div>
+</div>
 <script>
 $(document).ready(function() {
-    
+    $('.menu-wrap a').removeClass('active');
+    $('#nav1').addClass('active');
+
+    var dataset = eval({{dataset | safe}});
+    console.log(dataset);
+
+    function num_to_week(n) {
+        if (n == 0) {
+            return '<span style="color:#96b37e;">星期日</span>';
+        } else if (n == 1) {
+            return '<span style="color:#d94e5d;">星期一</span>';
+        } else if (n == 2) {
+            return '<span style="color:#d94e5d;">星期二</span>';
+        } else if (n == 3) {
+            return '<span style="color:#d94e5d;">星期三</span>';
+        } else if (n == 4) {
+            return '<span style="color:#d94e5d;">星期四</span>';
+        } else if (n == 5) {
+            return '<span style="color:#d94e5d;">星期五</span>';
+        } else if (n == 6) {
+            return '<span style="color:#96b37e;">星期六</span>';
+        }
+    }
+
+    var plot1 = echarts.init(document.getElementById('plot1'), 'dark');
+    var option = {
+        color: ['#eac736', '#50a3ba'],
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(params) {
+                return params[0]['name'] + ' ' + num_to_week(new Date('20' + params[0]['name']).getDay()) + '<br/><span style="color:#eac736;">信用标数量</span>：' + params[0]['data'] + '<br/><span style="color:#50a3ba;">借款金额</span>：' + params[1]['data'] + '万';
+            }
+        },
+        grid: {
+            left: 55,
+            right: 60,
+            top: 10,
+            bottom: 65
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+            data: dataset['json']['bid_daily_stat']['dates']
+        },
+        dataZoom: {
+            height: 20,
+            show: true,
+            realtime: true,
+            start: 80,
+            end: 100,
+            y2: 10,
+        },
+        yAxis: [{
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                textStyle: {
+                    color: '#eac736'
+                }
+            }
+        }, {
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                formatter: '{value}万',
+                margin: 12,
+                textStyle: {
+                    color: '#50a3ba'
+                }
+            }
+        }],
+        series: [{
+            name: '信用标数量',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            yAxisIndex: 0,
+            data: dataset['json']['bid_daily_stat']['num']
+        }, {
+            name: '借款金额',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            yAxisIndex: 1,
+            data: dataset['json']['bid_daily_stat']['amount']
+        }]
+    };
+    plot1.setOption(option);
+
+    var plot2 = echarts.init(document.getElementById('plot2'), 'dark');
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        calculable: true,
+        series: [{
+            name: '年龄区间',
+            type: 'pie',
+            radius: [30, 70],
+            center: ['19%', '30%'],
+            data: dataset['json']['bid_pie_stat']['年龄区间']
+        }, {
+            name: '用户性别',
+            type: 'pie',
+            radius: [30, 70],
+            center: ['50%', '30%'],
+            data: dataset['json']['bid_pie_stat']['性别']
+        }, {
+            name: '是否首标',
+            type: 'pie',
+            radius: [30, 70],
+            center: ['81%', '30%'],
+            data: dataset['json']['bid_pie_stat']['是否首标']
+        }, {
+            name: '初始评级',
+            type: 'pie',
+            radius: [30, 70],
+            center: ['34.5%', '74%'],
+            data: dataset['json']['bid_pie_stat']['初始评级']
+        }, {
+            name: '借款期限',
+            type: 'pie',
+            radius: [30, 70],
+            center: ['65.5%', '74%'],
+            data: dataset['json']['bid_pie_stat']['借款期限']
+        }]
+    };
+    plot2.setOption(option);
+
+    var plot3 = echarts.init(document.getElementById('plot3'), 'dark');
+    var cold_colors = d3.interpolate(d3.rgb(80, 163, 186), d3.rgb(234, 199, 54));
+    var warm_colors = d3.interpolate(d3.rgb(234, 199, 54), d3.rgb(217, 78, 93));
+    var param3 = '初始评级';
+    var mode3 = 0;
+    var data3 = {
+        'x': [],
+        'y': []
+    };
+    var legend3 = [];
+    for (var key in dataset['json']['bid_line_stat'][param3]) {
+        legend3.push(key);
+        data3['x'] = dataset['json']['bid_line_stat'][param3][key][mode3][0];
+        data3['y'].push({
+            name: key,
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            data: dataset['json']['bid_line_stat'][param3][key][mode3][1]
+        });
+    }
+    var option3 = {
+        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        legend: {
+            data: legend3,
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: {
+            left: 60,
+            right: 40,
+            top: 40,
+            bottom: 65
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true,
+            },
+            data: data3.x
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12
+            }
+        },
+        dataZoom: {
+            height: 20,
+            show: true,
+            realtime: true,
+            start: 0,
+            end: 10,
+            y2: 10
+        },
+        series: data3.y
+    };
+    if (mode3 == 0) {
+        option3.dataZoom.start = 20;
+        option3.dataZoom.end = 100;
+    } else {
+        option3.dataZoom.start = 0;
+        option3.dataZoom.end = 5;
+    }
+    plot3.setOption(option3);
+
+    $('#p3 #param input').click(function(event) {
+        $('#p3 #param').addClass('active');
+        $('#p3 #param .cell').show();
+    });
+    $('#p3 #param .cell').click(function(event) {
+        $('#p3 #param').removeClass('active');
+        $('#p3 #param input').val($(this).text());
+        $('#p3 #param .cell').hide();
+        param3 = $('#p3 #param input').val();
+        set_bid_line_param();
+    });
+
+    $('#p3 #xAxis input').click(function(event) {
+        $('#p3 #xAxis').addClass('active');
+        $('#p3 #xAxis .cell').show();
+    });
+    $('#p3 #xAxis .cell').click(function(event) {
+        $('#p3 #xAxis').removeClass('active');
+        $('#p3 #xAxis input').val($(this).text());
+        $('#p3 #xAxis .cell').hide();
+        mode3 = parseInt($(this).attr('name'));
+        set_bid_line_param();
+    });
+
+    function set_bid_line_param() {
+        data3 = {
+            'x': [],
+            'y': []
+        };
+        legend3 = [];
+        for (var key in dataset['json']['bid_line_stat'][param3]) {
+            legend3.push(key);
+            data3['x'] = dataset['json']['bid_line_stat'][param3][key][mode3][0];
+            data3['y'].push({
+                name: key,
+                type: 'line',
+                symbol: 'none',
+                showSymbol: false,
+                smooth: true,
+                data: dataset['json']['bid_line_stat'][param3][key][mode3][1]
+            });
+        }
+        var plot3 = echarts.init(document.getElementById('plot3'), 'dark');
+        var option3 = {
+            color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+            legend: {
+                data: legend3,
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            grid: {
+                left: 60,
+                right: 40,
+                top: 40,
+                bottom: 65
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    margin: 12,
+                    show: true,
+                },
+                data: data3.x
+            },
+            yAxis: {
+                type: 'value',
+                scale: true,
+                splitNumber: 3,
+                splitLine: {
+                    show: true,
+                },
+                axisLine: {
+                    show: false,
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    margin: 12
+                }
+            },
+            dataZoom: {
+                height: 20,
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 10,
+                y2: 10
+            },
+            series: data3.y
+        };
+        if (mode3 == 0) {
+            option3.dataZoom.start = 20;
+            option3.dataZoom.end = 100;
+        } else {
+            option3.dataZoom.start = 0;
+            option3.dataZoom.end = 5;
+        }
+        plot3.setOption(option3);
+    }
+
+    var plot4_width = 1000;
+    var plot4_height = 500;
+    var plot4_margins = [30, 20, 20, 20];
+    var plot4_w1 = 60;
+    var plot4_w2 = 200;
+    var titles = ['手机认证', '户口认证', '视频认证', '学历认证', '征信认证', '淘宝认证'];
+    var text4 = d3.select('#plot4 svg g').selectAll('text').data(titles, function(d) {
+        return d;
+    })
+    text4.enter().append('text').text(function(d) {
+        return d;
+    }).attr('transform', function(d, i) {
+        return 'translate(' + (plot4_margins[3] + i * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length + plot4_w1 / 2 - 28) + ',' + (plot4_margins[0] - 12) + ')';
+    }).attr('fill', '#f2f2f2').attr('fill-opacity', 1).attr('font-size', '12px');
+
+    var data4 = [];
+    for (var i = 1; i <= titles.length; i++) {
+        var n = Math.pow(2, i);
+        var h = (plot4_height - plot4_margins[0] - plot4_margins[2]) / n;
+        for (var j = 0; j < n; j++) {
+            data4.push([plot4_margins[3] + (i - 1) * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length, plot4_margins[0] + j * h, h, j / n])
+        }
+    }
+    var rect_bar4 = d3.select('#plot4 svg g').selectAll('rect.bar').data(dataset['json']['bid_sankey_stat']['bars'], function(d) {
+        return d;
+    });
+    rect_bar4.enter().append('rect').attr({
+        class: 'bar',
+        x: function(d) {
+            return plot4_margins[3] + d[0] * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length;
+        },
+        y: function(d) {
+            return plot4_margins[0] + d[1] * (plot4_height - plot4_margins[0] - plot4_margins[2]);
+        },
+        width: plot4_w1,
+        height: function(d) {
+            return (d[2] - d[1]) * (plot4_height - plot4_margins[0] - plot4_margins[2]);
+        },
+        fill: function(d) {
+            return cold_colors(d[5]);
+        },
+        'fill-opacity': function(d, i) {
+            if (i % 2) {
+                return 0.6;
+            } else {
+                return 1;
+            }
+        },
+        'stroke': '#f2f2f2',
+        'stroke-width': 0,
+        'name': function(d, i) {
+            return i;
+        }
+    });
+
+    var curve4 = d3.svg.line().x(function(d, i) {
+        if (i == 1) {
+            return plot4_margins[3] + d[0] * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length;
+        } else {
+            return plot4_margins[3] + d[0] * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length + plot4_w1;
+        }
+
+    }).y(function(d) {
+        return plot4_margins[0] + d[1] * (plot4_height - plot4_margins[0] - plot4_margins[2]);
+    }).interpolate('linear');
+
+    var line4 = d3.select('#plot4 svg g').selectAll('path').data(dataset['json']['bid_sankey_stat']['lines'], function(d) {
+        return d;
+    })
+    line4.enter().append('path').attr({
+        'd': function(d) {
+            return curve4(d);
+        },
+        'stroke-width': 1.5,
+        'stroke': function(d) {
+            return cold_colors(d[0][3]);
+        },
+        'opacity': function(d) {
+            return d[0][2];
+        },
+        'name': function(d, i) {
+                return i;
+            }
+            // 'shape-rendering': 'crispEdges',
+    });
+
+    var data_cell4 = [];
+    var count = 0.0;
+    for (var i = 0; i < dataset['json']['bid_sankey_stat']['bars'].length; i++) {
+        if (dataset['json']['bid_sankey_stat']['bars'][i][0] == 5) {
+            for (var j = 0; j < titles.length; j++) {
+                if (dataset['json']['bid_sankey_stat']['bars'][i][4][j] == '成功认证') {
+                    data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], 'rgb(80, 163, 186)']);
+                } else {
+                    data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], 'rgb(215, 195, 71)']);
+                }
+            }
+            count += dataset['json']['bid_sankey_stat']['bars'][i][3];
+        }
+    }
+    var rect_cell4 = d3.select('#plot4 svg g').selectAll('rect.cell').data(data_cell4);
+
+    rect_cell4.enter().append('rect').attr({
+        class: 'cell',
+        x: function(d, i) {
+            return plot4_width - plot4_margins[1] - plot4_w2 + parseInt(i % titles.length) * plot4_w2 / titles.length;
+        },
+        y: function(d, i) {
+            return plot4_margins[0] + d[0] / 328553 * (plot4_height - plot4_margins[0] - plot4_margins[2] - 100);
+        },
+        width: plot4_w2 / titles.length,
+        height: function(d, i) {
+            return d[1] / 328553 * (plot4_height - plot4_margins[0] - plot4_margins[2] - 100);
+        },
+        fill: function(d, i) {
+            return d[2];
+            // return cold_colors(parseFloat(i) / data.length);
+        },
+        'fill-opacity': 0.92
+    });
+
+    function isParent(a, b) {
+        if (a > b) {
+            return false;
+        }
+        if (a == b || (a + 1) * 2 == b || (a + 1) * 2 + 1 == b) {
+            return true;
+        } else {
+            return isParent((a + 1) * 2, b) || isParent((a + 1) * 2 + 1, b);
+        }
+    }
+
+    $('#plot4 div').css('left', $('#plot4').width() / 2 + plot4_width / 2 - plot4_margins[1] - plot4_w2 / 2 - 80);
+
+    $('#plot4').on('mouseenter', 'rect.bar', function(event) {
+        var id = parseFloat($(this).attr('name'));
+
+        $('#plot4 div h3').text(dataset['json']['bid_sankey_stat']['bars'][parseInt(id)][3]);
+
+        var text_id = parseInt(Math.log(id / 2 + 1) / Math.log(2));
+
+        event.preventDefault();
+        text4.transition().duration(400).attr('fill-opacity', function(d, i) {
+            if (i <= text_id) {
+                return 1;
+            } else {
+                return 0.2;
+            }
+        });
+        rect_bar4.transition().duration(400).attr({
+            'stroke-width': function(d, i) {
+                if (isParent(i, id)) {
+                    return 1.5;
+                } else {
+                    return 0;
+                }
+            },
+            'fill-opacity': function(d, i) {
+                if (isParent(i, id)) {
+                    if (i % 2) {
+                        return 0.6;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return 0.1;
+                }
+            },
+            'stroke': function(d, i) {
+                if (isParent(i, id)) {
+                    if (i % 2) {
+                        return 'rgb(221, 107, 102)';
+                    } else {
+                        return '#f2f2f2';
+                    }
+                } else {
+                    return '#f2f2f2';
+                }
+            },
+        });
+        rect_cell4.transition().duration(400).attr({
+            'fill-opacity': function(d, i) {
+                var r = Math.floor(i / titles.length);
+                if (isParent(id, r + 62)) {
+                    return 1;
+                } else {
+                    return 0.2;
+                }
+            },
+        });
+        line4.transition().duration(400).attr({
+            'opacity': function(d, i) {
+                if (isParent(i + 2, id)) {
+                    return d[0][2];
+                } else {
+                    return 0.2;
+                }
+            },
+        });
+    });
+
+    $('#plot4').on('mouseleave', 'rect.bar', function(event) {
+        event.preventDefault();
+
+        $('#plot4 div h3').text('328553');
+
+        text4.transition().duration(400).attr('fill-opacity', 1);
+        rect_bar4.transition().duration(400).attr({
+            'stroke-width': 0,
+            'fill-opacity': function(d, i) {
+                if (i % 2) {
+                    return 0.6;
+                } else {
+                    return 1;
+                }
+            },
+        });
+        line4.transition().duration(400).attr({
+            'opacity': function(d) {
+                return d[0][2];
+            },
+        });
+        rect_cell4.transition().duration(400).attr({
+            'fill-opacity': 0.92
+        });
+    });
+
+    var plot5 = echarts.init(document.getElementById('plot5'), 'dark');
+    var data5 = [];
+    var index5 = ['手机', '户口', '视频', '学历', '征信', '淘宝'];
+    for (var i = 0; i < index5.length; i++) {
+        data5.push({
+            name: index5[i],
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            yAxisIndex: 0,
+            data: dataset['json']['bid_auth_stat']['ratios'][index5[i]]
+        });
+    }
+    var option = {
+        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(params) {
+                var t = '';
+                for (var i = 0; i < params.length; i++) {
+                    if (i % 3 == 0) {
+                        t += '<br/><span style="color:' + params[i]['color'] + '">' + params[i]['seriesName'] + '</span>：' + params[i]['data'] + '%'
+                    } else {
+                        t += '<span style="color:' + params[i]['color'] + ';margin-left:15px;">' + params[i]['seriesName'] + '</span>：' + params[i]['data'] + '%'
+                    }
+                }
+                return '累积认证比例 ' + params[0]['name'] + t;
+            }
+        },
+        legend: {
+            data: ['手机', '户口', '视频', '学历', '征信', '淘宝'],
+        },
+        grid: {
+            left: 50,
+            right: 25,
+            top: 30,
+            bottom: 65
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+            data: dataset['json']['bid_auth_stat']['dates']
+        },
+        dataZoom: {
+            height: 20,
+            show: true,
+            realtime: true,
+            start: 0,
+            end: 100,
+            y2: 10,
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                formatter: '{value}%',
+                margin: 12,
+            }
+        },
+        series: data5
+    };
+    plot5.setOption(option);
+
+    var plot6 = echarts.init(document.getElementById('plot6'), 'dark');
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: function(params) {
+                return params['seriesName'] + '<br/>' + params['value'][2].toFixed(2);
+            }
+        },
+        grid: {
+            left: 70,
+            right: 60,
+            top: 10,
+            bottom: 30
+        },
+        xAxis: {
+            type: 'category',
+            data: dataset['json']['bid_heat_stat']['xAxis'],
+            splitArea: {
+                show: true
+            },
+            axisLabel: {
+                margin: 12,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+        },
+        yAxis: {
+            type: 'category',
+            data: dataset['json']['bid_heat_stat']['yAxis'],
+            splitArea: {
+                show: true
+            },
+            axisLabel: {
+                margin: 12,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+        },
+        visualMap: {
+            min: dataset['json']['bid_heat_stat']['min'],
+            max: dataset['json']['bid_heat_stat']['max'],
+            calculable: true,
+            orient: 'vertical',
+            top: 'middle',
+            right: 10
+        },
+        series: [{
+            name: '认证指标关联性',
+            type: 'heatmap',
+            data: dataset['json']['bid_heat_stat']['heatdata'],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+    plot6.setOption(option);
+
+    var plot7_traits = ['借款金额', '借款期限', '借款利率', '年龄', '历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数'];
+    var plot7_margins = [20, 100, 40, 60];
+    var plot7_width = 1000;
+    var plot7_height = 500;
+    $('#plot7 div').css('left', $('#plot7').width() / 2 + 440);
+    var plot7_x = d3.scale.ordinal().domain(plot7_traits).rangePoints([0, plot7_width - plot7_margins[1] - plot7_margins[3]]);
+    var plot7_y;
+    var plot7_y_reverse;
+    var plot7_line = d3.svg.line();
+    var plot7_axis = d3.svg.axis().orient("left").tickPadding([5]);
+    var plot7_foreground;
+    var plot7_colors = {
+        'A': '#ba5050',
+        'B': '#a350ba',
+        'C': '#5055ba',
+        'D': '#50b2ba',
+        'E': '#50ba6a',
+        'F': '#bab950'
+    };
+    var plot7_data = [];
+    d3.select('#plot7 svg g').attr("transform", "translate(" + plot7_margins[3] + "," + plot7_margins[0] + ")");
+    // add foreground
+    d3.select('#plot7 svg g').append("svg:g").attr("class", "foreground");
+    // Add a group element for each trait.
+    d3.select('#plot7 svg g').selectAll(".trait").data(plot7_traits).enter().append("svg:g").attr("class", "trait").attr("transform", function(d) {
+        return "translate(" + plot7_x(d) + ")";
+    }).call(d3.behavior.drag()
+        .origin(function(d) {
+            return {
+                x: plot7_x(d)
+            };
+        })
+        .on("dragstart", plot7_dragstart)
+        .on("drag", plot7_drag)
+        .on("dragend", plot7_dragend));
+    // Add an axis and title.
+    d3.select('#plot7 svg').selectAll('.trait').append("svg:g")
+        .attr("class", "axis")
+        .append("svg:text")
+        .attr("text-anchor", "middle")
+        .attr("y", 0)
+        .attr("fill", '#f2f2f2')
+        .attr("font-size", "12px")
+        .text(function(d) {
+            return d;
+        });
+    // Add a brush for each axis.
+    $('#plot7 svg .trait .brush').remove();
+    d3.select('#plot7 svg').selectAll('.trait').append("svg:g")
+        .attr("class", "brush");
+
+    plotRank();
+
+    function plotRank() {
+        plot7_data = dataset['json']['bid_rate_stat']['stats'];
+        plot7_y = {};
+        plot7_y_reverse = {};
+
+        // add a scale and brush for each trait.
+        plot7_traits.forEach(function(d) {
+            plot7_y[d] = d3.scale.linear().domain(d3.extent(plot7_data, function(p) {
+                return p[d];
+            })).range([plot7_height - plot7_margins[2], plot7_margins[0]]);
+            plot7_y_reverse[d] = d3.scale.linear().domain(d3.extent(plot7_data, function(p) {
+                return p[d];
+            })).range([plot7_margins[0], plot7_height - plot7_margins[2]]);
+
+            plot7_y[d].brush = d3.svg.brush().y(plot7_y[d]).on("brush", plot7_brush);
+        });
+        d3.select('#plot7 svg').selectAll('g.axis').each(function(d) {
+            d3.select(this).call(plot7_axis.scale(plot7_y[d]));
+        });
+
+        // Add foreground lines.
+        plot7_foreground = d3.select('#plot7 svg g.foreground').selectAll("path").data(plot7_data);
+
+        plot7_foreground.enter().append("svg:path").attr("d", plot7_path).attr("stroke", function(d, i) {
+            return plot7_colors[d['rate']];
+        }).attr({
+            opacity: function(d, i){
+            	return 0.5 * d['month'] / dataset['json']['bid_rate_stat']['months'].length + 0.5;
+            },
+        });
+
+        d3.select("#plot7 svg").selectAll('g.brush').each(function(d) {
+            d3.select(this).call(plot7_y[d].brush);
+        }).selectAll("rect").attr("x", -8).attr("width", 16);
+    }
+
+    function plot7_dragstart(d) {
+        i = plot7_traits.indexOf(d);
+    }
+
+    function plot7_drag(d) {}
+
+    function plot7_dragend(d) {}
+
+    function plot7_path(d, i) {
+        return plot7_line(plot7_traits.map(function(p) {
+            return [plot7_x(p), plot7_y[p](plot7_data[i][p])];
+        }));
+    }
+
+    // Handles a brush event, toggling the display of foreground lines.
+    function plot7_brush() {
+        var actives = plot7_traits.filter(function(p) {
+            return !plot7_y[p].brush.empty();
+        });
+        var extents = actives.map(function(p) {
+            return plot7_y[p].brush.extent();
+        });
+        plot7_foreground.classed("fade", function(d, j) {
+            return !actives.every(function(p, i) {
+                return extents[i][0] <= plot7_data[j][p] && plot7_data[j][p] <= extents[i][1];
+            });
+        });
+    }
+
+    var disabled = {
+        'A': false,
+        'B': false,
+        'C': false,
+        'D': false,
+        'E': false,
+        'F': false
+    };
+    $('#plot7 div p').click(function(event) {
+        if ($(this).hasClass('disabled')) {
+            $(this).removeClass('disabled');
+            disabled[$(this).attr('name')] = false;
+        } else {
+            $(this).addClass('disabled');
+            disabled[$(this).attr('name')] = true;
+        }
+        plot7_foreground.transition().duration(400).attr({
+            opacity: function(d) {
+                if (disabled[d['rate']]) {
+                    return 0;
+                } else {
+                    return 0.5 * d['month'] / dataset['json']['bid_rate_stat']['months'].length + 0.5;
+                }
+            },
+        });
+    });
 });
 </script>
 {% endblock %}

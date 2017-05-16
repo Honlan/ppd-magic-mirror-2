@@ -30,10 +30,29 @@ def closedb(db,cursor):
 	db.close()
 	cursor.close()
 
-# 首页
+# 平台透视
 @app.route('/')
 def index():
-	return render_template('index.html')
+	(db,cursor) = connectdb()
+	cursor.execute("select * from json_data where page=%s",['index'])
+	json_data = cursor.fetchall()
+	
+	dataset = {}
+	dataset['json'] = {item['keyword']: json.loads(item['json']) for item in json_data}
+
+	closedb(db,cursor)
+
+	return render_template('index.html', dataset=json.dumps(dataset))
+
+# 个人中心
+@app.route('/user')
+def user():
+	return render_template('user.html')
+
+# 投资顾问
+@app.route('/invest')
+def invest():
+	return render_template('invest.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)

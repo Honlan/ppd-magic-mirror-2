@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>魔镜杯 | DeepInvest</title>
+    <title>魔镜杯 | 拍知心</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
@@ -15,12 +15,12 @@
     <script src="{{url_for('static',filename='lib/bootstrap.min.js')}}"></script>
     <link href="{{url_for('static',filename='fa/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='css/magic.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='css/menu_sideslide.css')}}" rel="stylesheet">
     <script src="{{url_for('static',filename='js/d3.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/dark.js')}}"></script>
     <!--script src="{{url_for('static',filename='js/echarts2/echarts.js')}}"></script-->
     <style>
-
     .magictime {
         -webkit-animation-duration: .5s;
         -moz-animation-duration: .5s;
@@ -31,7 +31,7 @@
     body {
         font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
         -webkit-font-smoothing: antialiased;
-        background-color: #30323c;
+        background-color: #373a47;
         color: #fff;
     }
     
@@ -41,33 +41,6 @@
         position: relative;
         font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
         -webkit-font-smoothing: antialiased;
-    }
-    
-    #header #nav {
-        position: absolute;
-        right: 60px;
-        top: 27px;
-        font-size: 13px;
-    }
-    
-    #header #nav a {
-        text-decoration: none;
-        display: inline-block;
-        color: #888;
-        padding: 10px 20px;
-        border-radius: 5px;
-        margin-right: 0px;
-        cursor: pointer;
-        transition: color .3s;
-        -o-transition: color .3s;
-        -ms-transition: color .3s;
-        -moz-transition: color .3s;
-        -webkit-transition: color .3s;
-    }
-    
-    #header #nav a.active,
-    #header #nav a:hover {
-        color: #eee;
     }
     
     #header h1 {
@@ -87,6 +60,30 @@
         display: inline-block;
         margin-top: 0;
         margin-bottom: 0;
+    }
+
+    .menu-wrap {
+        width: 220px;
+    }
+
+    .menu-wrap a {
+        text-decoration: none;
+        display: inline-block;
+        color: #666;
+        padding: 12px 20px;
+        border-radius: 5px;
+        margin-right: 0px;
+        cursor: pointer;
+    }
+    
+    .menu-wrap a.active,
+    .menu-wrap a:hover {
+        color: #eee;
+    }
+
+    .menu-button {
+        width: 2.25em;
+        height: 2em;
     }
     
     #footer {
@@ -131,6 +128,18 @@
         margin-bottom: 0;
         box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
     }
+
+    .plot-title {
+        padding: 5px 10px;
+        font-size: 12px;
+        background-color: #3C833C;
+        z-index: 999;
+        color: #f2f2f2;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0;
+        box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
+    }
     
     .BMap_cpyCtrl,
     .anchorBL {
@@ -141,29 +150,37 @@
 </head>
 
 <body>
-    <div id="header">
-        <h1>魔镜杯</h1>
-        <p>DeepInvest</p>
-        <div id="nav">
-            <a href="" id="nav1">
-                平台透视
-            </a>
-            <a href="" id="nav2">
-                个人中心
-            </a>
-            <a href="" id="nav3">
-                投资顾问
-            </a>
+    <div class="container" style="padding:0;">
+        <div class="menu-wrap">
+            <nav class="menu">
+                <div class="icon-list">
+                    <a href="{{url_for('index')}}" id="nav1"><i class="fa fa-fw fa-star"></i><span>平台概览</span></a>
+                    <a href="{{url_for('user')}}" id="nav2"><i class="fa fa-fw fa-user"></i><span>个人中心</span></a>
+                    <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
+                </div>
+            </nav>
+        </div>
+        <button class="menu-button" id="open-button"></button>
+        <div class="content-wrap">
+            <div class="content">
+                <div id="header">
+                    <h1>魔镜杯</h1>
+                    <p>拍知心</p>
+                </div>
+                <div style="padding:50px 60px;">
+                    <div id="main">
+                        {% block body %} {% endblock %}
+                    </div>
+                </div>
+                <div id="footer">
+                    <p>Copyright <span class="fa fa-fw fa-copyright"></span> 上海交通大学 DI
+                        <br/> <span style="font-size:13px;">数据应用大赛</span></p>
+                </div>
+            </div>
         </div>
     </div>
-    <div style="padding:50px 60px;">
-        <div id="main">
-            {% block body %} {% endblock %}
-        </div>
-    </div>
-    <div id="footer">
-        <p>Copyright <span class="fa fa-fw fa-copyright"></span> 上海交通大学 DI<br/> <span style="font-size:13px;">数据应用大赛</span></p>
-    </div>
+    <script src="{{url_for('static',filename='js/classie.js')}}"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
 </body>
 
 </html>
