@@ -140,6 +140,11 @@
         margin-bottom: 0;
         box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
     }
+
+    #auth {
+        display: block;
+        margin: 0 auto;
+    }
     
     .BMap_cpyCtrl,
     .anchorBL {
@@ -157,6 +162,7 @@
                     <a href="{{url_for('index')}}" id="nav1"><i class="fa fa-fw fa-star"></i><span>平台概览</span></a>
                     <a href="{{url_for('user')}}" id="nav2"><i class="fa fa-fw fa-user"></i><span>个人中心</span></a>
                     <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
+                    <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn" id="auth">授权登陆</a>
                 </div>
             </nav>
         </div>
