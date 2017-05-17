@@ -61,11 +61,11 @@
         margin-top: 0;
         margin-bottom: 0;
     }
-
+    
     .menu-wrap {
         width: 220px;
     }
-
+    
     .menu-wrap a {
         text-decoration: none;
         display: inline-block;
@@ -80,7 +80,7 @@
     .menu-wrap a:hover {
         color: #eee;
     }
-
+    
     .menu-button {
         width: 2.25em;
         height: 2em;
@@ -128,7 +128,7 @@
         margin-bottom: 0;
         box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
     }
-
+    
     .plot-title {
         padding: 5px 10px;
         font-size: 12px;
@@ -140,7 +140,7 @@
         margin-bottom: 0;
         box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
     }
-
+    
     #auth {
         display: block;
         margin: 0 auto;
@@ -162,7 +162,11 @@
                     <a href="{{url_for('index')}}" id="nav1"><i class="fa fa-fw fa-star"></i><span>平台概览</span></a>
                     <a href="{{url_for('user')}}" id="nav2"><i class="fa fa-fw fa-user"></i><span>个人中心</span></a>
                     <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
+                    {% if auth['is_auth'] %}
+                    {{ auth['Username'] }}</h1> 
+                    {% else %}
                     <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="auth">授权登陆</a>
+                    {% endif %}
                 </div>
             </nav>
         </div>

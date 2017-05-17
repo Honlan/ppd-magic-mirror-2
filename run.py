@@ -28,6 +28,28 @@ app.config.from_object(__name__)
 app.secret_key = SECRETKEY
 app.permanent_session_lifetime = timedelta(days=90)
 
+# 判断是否已授权
+def is_auth():
+	result = {}
+	if 'OpenID' in session:
+		result['is_auth'] = True
+		result['Username'] = escape(session['Username'])
+	else:
+		result['is_auth'] = False
+	return result
+
+# 获取用户授权资料
+def auth_data():
+	result = {}
+	result['Username'] = escape(session['Username'])
+	result['OpenID'] = escape(session['OpenID'])
+	result['AccessToken'] = escape(session['AccessToken'])
+	result['RefreshToken'] = escape(session['RefreshToken'])
+	result['ExpiresIn'] = escape(session['ExpiresIn'])
+	result['AuthTimestamp'] = escape(session['AuthTimestamp'])
+
+	return result
+
 # 连接数据库
 def connectdb():
 	db = MySQLdb.connect(host=HOST, user=USER, passwd=PASSWORD, db=DATABASE, port=PORT, charset=CHARSET, cursorclass = MySQLdb.cursors.DictCursor)
@@ -52,17 +74,17 @@ def index():
 
 	closedb(db,cursor)
 
-	return render_template('index.html', dataset=json.dumps(dataset))
+	return render_template('index.html', dataset=json.dumps(dataset), auth=is_auth())
 
 # 个人中心
 @app.route('/user')
 def user():
-	return render_template('user.html')
+	return render_template('user.html', auth=is_auth())
 
 # 投资顾问
 @app.route('/invest')
 def invest():
-	return render_template('invest.html')
+	return render_template('invest.html', auth=is_auth())
 
 # 授权登陆
 @app.route('/auth')
