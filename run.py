@@ -18,7 +18,6 @@ import random
 # ppdai api
 from openapi_client import openapi_client as client
 from core.rsa_client import rsa_client as rsa
-import pickle
 import json
 import datetime
 import os
@@ -68,10 +67,15 @@ def invest():
 def auth():
 	code = request.values.get('code')
 	authorizeStr = client.authorize(appid=APPID, code=code)
-	# authorizeObj = pickle.loads(authorizeStr)
+	authorizeObj = json.loads(authorizeStr)
+
+	OpenId = authorizeObj['OpenId']
+	AccessToken = authorizeObj['AccessToken']
+	RefreshToken = authorizeObj['RefreshToken']
+	ExpiresIn = authorizeObj['ExpiresIn']
 	
 	(db,cursor) = connectdb()
-	cursor.execute('insert into user(OpenId, content) values(%s, %s)', [type(authorizeStr), authorizeStr])
+	cursor.execute('insert into user(OpenId, AccessToken, RefreshToken) values(%s, %s, %s)', [OpenId, AccessToken, RefreshToken])
 	closedb(db,cursor)
 	return redirect(url_for('index'))
 
