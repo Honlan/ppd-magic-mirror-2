@@ -68,10 +68,10 @@ def invest():
 def auth():
 	code = request.values.get('code')
 	authorizeStr = client.authorize(appid=APPID, code=code)
-	authorizeObj = pickle.loads(authorizeStr)
+	# authorizeObj = pickle.loads(authorizeStr)
 	
 	(db,cursor) = connectdb()
-	cursor.execute('insert into user(OpenId, content) values(%s, %s)', [type(authorizeObj), authorizeObj])
+	cursor.execute('insert into user(OpenId, content) values(%s, %s)', [type(authorizeStr), code])
 	closedb(db,cursor)
 	return redirect(url_for('index'))
 
