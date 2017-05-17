@@ -88,7 +88,7 @@ def auth():
 	data = {'OpenID': OpenID}
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
-	list_result = json.loads(json.dumps(xmltodict.parse(client.send(access_url,json.dumps(data), appid, sign, access_token))))
+	list_result = json.loads(json.dumps(xmltodict.parse(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))))
 	UserName = list_result['QueryUserInfoForOpenApiResponse']['UserName']
 	UserName = rsa.decrypt(UserName)
 
