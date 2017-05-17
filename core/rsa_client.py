@@ -46,3 +46,9 @@ class rsa_client:
             if type(dic[1]) is str:
                 params += dic[0] + dic[1]
         return params
+
+    @staticmethod
+    def decrypt(data):
+        data = base64.b64decode(data)
+        PrivateKey = rsa.PrivateKey.load_pkcs1(Global.privatekey)
+        return rsa.decrypt(data, PrivateKey)
