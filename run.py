@@ -84,7 +84,7 @@ def auth():
 	session['ExpiresIn'] = ExpiresIn
 
 	access_url = "http://gw.open.ppdai.com/open/openApiPublicQueryService/QueryUserNameByOpenID"
-	data = {'OpenID': OpenID}
+	data = {"OpenID": OpenID}
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
 	list_result = client.send(access_url, json.dumps(data), APPID, sign)
