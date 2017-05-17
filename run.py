@@ -71,7 +71,7 @@ def auth():
 	# authorizeObj = pickle.loads(authorizeStr)
 	
 	(db,cursor) = connectdb()
-	cursor.execute('insert into user(OpenId, content) values(%s, %s)', [type(authorizeStr), code])
+	cursor.execute('insert into user(OpenId, content) values(%s, %s)', [type(authorizeStr), authorizeStr])
 	closedb(db,cursor)
 	return redirect(url_for('index'))
 
