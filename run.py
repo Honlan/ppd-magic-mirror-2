@@ -15,6 +15,15 @@ from config import *
 import pprint
 import random
 
+# ppdai api
+from openapi_client import openapi_client as client
+from core.rsa_client import rsa_client as rsa
+import pickle
+import json
+import datetime
+import os
+import xmltodict
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -53,6 +62,18 @@ def user():
 @app.route('/invest')
 def invest():
 	return render_template('invest.html')
+
+# 授权登陆
+@app.route('/auth')
+def auth():
+	code = request.values.get('code')
+	authorizeStr = client.authorize(appid=APPID, code=code)
+	authorizeObj = pickle.loads(authorizeStr)
+	
+	(db,cursor) = connectdb()
+	cursor.execute('insert into user(OpenId, content) values(%s, %s)', [type(authorizeObj), authorizeObj])
+	closedb(db,cursor)
+	return redirect(url_for('index'))
 
 if __name__ == '__main__':
 	app.run(debug=True)
