@@ -22,9 +22,12 @@ import json
 import datetime
 import os
 import xmltodict
+from datetime import timedelta
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.secret_key = SECRETKEY
+app.permanent_session_lifetime = timedelta(days=90)
 
 # 连接数据库
 def connectdb():
@@ -73,10 +76,29 @@ def auth():
 	AccessToken = authorizeObj['AccessToken']
 	RefreshToken = authorizeObj['RefreshToken']
 	ExpiresIn = authorizeObj['ExpiresIn']
-	
+
+	session['OpenID'] = OpenID
+	session['AccessToken'] = AccessToken
+	session['RefreshToken'] = RefreshToken
+	session['AuthTimestamp'] = int(time.time())
+	session['ExpiresIn'] = ExpiresIn
+
+	access_url = "http://gw.open.ppdai.com/open/openApiPublicQueryService/QueryUserNameByOpenID"
+	data = {'OpenID': OpenID}
+	sort_data = rsa.sort(data)
+	sign = rsa.sign(sort_data)
+	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+	Username = list_result
+
 	(db,cursor) = connectdb()
-	cursor.execute('insert into user(OpenID, AccessToken, RefreshToken) values(%s, %s, %s)', [OpenID, AccessToken, RefreshToken])
+	count = cursor.execute("select count(*) from user where OpenID=%s", [OpenID])
+	if count > 0:
+		cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s where OpenID=%s', 
+			[AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, OpenID])
+	else:
+		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username) values(%s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username])
 	closedb(db,cursor)
+
 	return redirect(url_for('index'))
 
 if __name__ == '__main__':
