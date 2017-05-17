@@ -89,9 +89,9 @@ def auth():
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
 	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-	Username = type(list_result)
+	Username = str(list_result)
 
-	# session['Username'] = Username
+	session['Username'] = Username
 
 	(db,cursor) = connectdb()
 	cursor.execute("select count(*) as count from user where OpenID=%s", [OpenID])
