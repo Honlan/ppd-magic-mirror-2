@@ -21,7 +21,6 @@ from core.rsa_client import rsa_client as rsa
 import json
 import datetime
 import os
-import xmltodict
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -88,9 +87,8 @@ def auth():
 	data = {'OpenID': OpenID}
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
-	list_result = json.loads(json.dumps(xmltodict.parse(client.send(access_url, json.dumps(data), APPID, sign))))
-	UserName = list_result['QueryUserInfoForOpenApiResponse']['UserName']
-	UserName = rsa.decrypt(UserName)
+	list_result = client.send(access_url, json.dumps(data), APPID, sign)
+	UserName = rsa.decrypt(list_result[list_result.find('<UserName>') + len('<UserName>'):list_result.find('</UserName>')])
 
 	session['Username'] = Username
 

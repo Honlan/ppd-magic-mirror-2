@@ -2,4 +2,3 @@ Flask
 mysql-python
 numpy
 rsa
-xmltodict
