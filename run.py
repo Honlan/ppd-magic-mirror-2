@@ -71,7 +71,7 @@ def auth():
 	authorizeStr = client.authorize(appid=APPID, code=code)
 	authorizeObj = json.loads(authorizeStr)
 
-	OpenID = authorizeObj['OpenID']
+	OpenID = str(authorizeObj['OpenID'])
 	AccessToken = authorizeObj['AccessToken']
 	RefreshToken = authorizeObj['RefreshToken']
 	ExpiresIn = authorizeObj['ExpiresIn']
