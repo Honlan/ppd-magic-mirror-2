@@ -67,7 +67,7 @@ def invest():
 def auth():
 	code = request.values.get('code')
 	authorizeStr = client.authorize(appid=APPID, code=code)
-	authorizeObj = json.loads(authorizeStr)
+	# authorizeObj = json.loads(authorizeStr)
 
 	# OpenId = authorizeObj['OpenId']
 	# AccessToken = authorizeObj['AccessToken']
@@ -75,7 +75,7 @@ def auth():
 	# ExpiresIn = authorizeObj['ExpiresIn']
 	
 	(db,cursor) = connectdb()
-	cursor.execute('insert into user(OpenId, AccessToken, RefreshToken) values(%s, %s, %s)', [type(authorizeObj), authorizeObj, ''])
+	cursor.execute('insert into user(OpenId, AccessToken, RefreshToken) values(%s, %s, %s)', [type(authorizeStr), authorizeStr, ''])
 	closedb(db,cursor)
 	return redirect(url_for('index'))
 
