@@ -69,13 +69,13 @@ def auth():
 	authorizeStr = client.authorize(appid=APPID, code=code)
 	authorizeObj = json.loads(authorizeStr)
 
-	OpenId = authorizeObj['OpenId']
-	AccessToken = authorizeObj['AccessToken']
-	RefreshToken = authorizeObj['RefreshToken']
-	ExpiresIn = authorizeObj['ExpiresIn']
+	# OpenId = authorizeObj['OpenId']
+	# AccessToken = authorizeObj['AccessToken']
+	# RefreshToken = authorizeObj['RefreshToken']
+	# ExpiresIn = authorizeObj['ExpiresIn']
 	
 	(db,cursor) = connectdb()
-	cursor.execute('insert into user(OpenId, AccessToken, RefreshToken) values(%s, %s, %s)', [OpenId, AccessToken, RefreshToken])
+	cursor.execute('insert into user(OpenId, AccessToken, RefreshToken) values(%s, %s, %s)', [type(authorizeObj), authorizeObj, ''])
 	closedb(db,cursor)
 	return redirect(url_for('index'))
 
