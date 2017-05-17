@@ -31,11 +31,19 @@ app.permanent_session_lifetime = timedelta(days=90)
 # 判断是否已授权
 def is_auth():
 	result = {}
+
+	(db,cursor) = connectdb()
+	cursor.execute('select count(*) as count from user')
+	count = cursor.fetchone()['count']
+	closedb(db,cursor)
+
 	if 'OpenID' in session:
 		result['is_auth'] = True
 		result['Username'] = escape(session['Username'])
+		result['count'] = count
 	else:
 		result['is_auth'] = False
+		result['count'] = count
 	return result
 
 # 获取用户授权资料
