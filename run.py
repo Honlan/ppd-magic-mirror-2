@@ -95,11 +95,12 @@ def auth():
 
 	(db,cursor) = connectdb()
 	count = cursor.execute("select count(*) from user where OpenID=%s", [OpenID])
-	cursor.execute('insert into user(OpenID) values(%s)', [count])
-	# if count > 0:
-		# cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s where OpenID=%s', [AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, OpenID])
-	# else:
-		# cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username) values(%s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username])
+	if count > 0:
+		cursor.execute('insert into user(OpenID) values(%s)', [1])
+		cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s where OpenID=%s', [AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, OpenID])
+	else:
+		cursor.execute('insert into user(OpenID) values(%s)', [2])
+		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username) values(%s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username])
 	closedb(db,cursor)
 
 	return redirect(url_for('index'))
