@@ -89,7 +89,7 @@ def auth():
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
 	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-	Username = list_result
+	Username = type(list_result)
 
 	session['Username'] = Username
 
