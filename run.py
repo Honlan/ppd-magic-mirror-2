@@ -76,11 +76,12 @@ def auth():
 	AccessToken = authorizeObj['AccessToken']
 	RefreshToken = authorizeObj['RefreshToken']
 	ExpiresIn = authorizeObj['ExpiresIn']
+	AuthTimestamp = int(time.time())
 
 	session['OpenID'] = OpenID
 	session['AccessToken'] = AccessToken
 	session['RefreshToken'] = RefreshToken
-	session['AuthTimestamp'] = int(time.time())
+	session['AuthTimestamp'] = AuthTimestamp
 	session['ExpiresIn'] = ExpiresIn
 
 	access_url = "http://gw.open.ppdai.com/open/openApiPublicQueryService/QueryUserNameByOpenID"
@@ -89,6 +90,8 @@ def auth():
 	sign = rsa.sign(sort_data)
 	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
 	Username = list_result
+
+	session['Username'] = Username
 
 	(db,cursor) = connectdb()
 	count = cursor.execute("select count(*) from user where OpenID=%s", [OpenID])
