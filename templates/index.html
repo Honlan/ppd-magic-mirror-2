@@ -104,7 +104,7 @@ p {
     width: 100%;
     height: 200px;
     background-color: #373a47 !important;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 #plot7 {
@@ -113,62 +113,6 @@ p {
     position: relative;
     text-align: center;
 }
-
-
-/*#plot7 #month {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-#plot7 .cell {
-    padding: 8px;
-    padding-left: 12px;
-    color: rgb(90, 103, 121);
-    background-color: #fff;
-    font-size: 12px;
-    z-index: 999;
-    text-align: left;
-    display: none;
-}
-
-#plot7 .cell:nth-of-type(2n) {
-    background-color: rgb(250, 251, 253);
-}
-
-#plot7 .cell:nth-of-type(2n + 1) {
-    background-color: rgb(255, 255, 255);
-}
-
-#plot7 .cell:last-child {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-#plot7 .cell:hover {
-    cursor: pointer;
-    background-color: #50a3ba;
-    color: #fff;
-}
-
-#plot7 input {
-    color: #fff;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    width: 150px;
-    background-color: #444650;
-    font-size: 12px;
-}
-
-#plot7 input:hover {
-    cursor: pointer;
-}
-
-#plot7 #month.active input {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}*/
 
 #plot7 .foreground path {
     fill: none;
@@ -229,6 +173,81 @@ p {
 #plot7 div p.disabled span {
     background-color: #888 !important;
 }
+
+#plot8 {
+    width: 100%;
+    height: 250px;
+    background-color: #373a47 !important;
+    margin-bottom: 20px;
+}
+
+#p8 #group {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+}
+
+#p8 .cell {
+    padding: 8px;
+    padding-left: 12px;
+    color: rgb(90, 103, 121);
+    background-color: #fff;
+    font-size: 12px;
+    z-index: 999;
+    text-align: left;
+    display: none;
+}
+
+#p8 .cell:nth-of-type(2n) {
+    background-color: rgb(250, 251, 253);
+}
+
+#p8 .cell:nth-of-type(2n + 1) {
+    background-color: rgb(255, 255, 255);
+}
+
+#p8 .cell:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#p8 .cell:hover {
+    cursor: pointer;
+    background-color: #50a3ba;
+    color: #fff;
+}
+
+#p8 input {
+    color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 150px;
+    background-color: #444650;
+    font-size: 12px;
+}
+
+#p8 input:hover {
+    cursor: pointer;
+}
+
+#p8 #group.active input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#plot9 {
+    width: 100%;
+    height: 200px;
+    background-color: #373a47 !important;
+    margin-bottom: 10px;
+}
+#plot10,
+#plot11 {
+    width: 100%;
+    height: 200px;
+    background-color: #373a47 !important;
+    margin-bottom: 40px;
+}
 </style>
 {% endblock %} {% block body %}
 <div class="row">
@@ -282,11 +301,29 @@ p {
         <div id="plot6"></div>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p8">
+        <div id="plot8"></div>
+        <div id="group">
+            <input type="text" class="form-control" value="初始评级" readOnly="readOnly">
+            <div class="cell" name="初始评级">初始评级</div>
+            <div class="cell" name="借款类型">借款类型</div>
+            <div class="cell" name="是否首标">是否首标</div>
+            <div class="cell" name="性别">性别</div>
+            <div class="cell" name="年龄区间">年龄区间</div>
+        </div>
+        <div id="plot9"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div id="plot10"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div id="plot11"></div>
+    </div>
+</div>
 <div id="plot7">
-    <!-- <div id="month">
-        <input type="text" class="form-control" value="" readOnly="readOnly">
-        <div class="cell" name="初始评级">初始评级</div>
-    </div> -->
     <svg width="1000px" height="500px">
         <g></g>
     </svg>
@@ -330,6 +367,9 @@ $(document).ready(function() {
         color: ['#eac736', '#50a3ba'],
         tooltip: {
             trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
             formatter: function(params) {
                 return params[0]['name'] + ' ' + num_to_week(new Date('20' + params[0]['name']).getDay()) + '<br/><span style="color:#eac736;">信用标数量</span>：' + params[0]['data'] + '<br/><span style="color:#50a3ba;">借款金额</span>：' + params[1]['data'] + '万';
             }
@@ -427,6 +467,9 @@ $(document).ready(function() {
     var option = {
         tooltip: {
             trigger: 'item',
+            axisPointer : {
+                type : 'shadow'
+            },
             formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         calculable: true,
@@ -492,11 +535,14 @@ $(document).ready(function() {
             data: legend3,
         },
         tooltip: {
-            trigger: 'axis'
+            trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
         },
         grid: {
             left: 60,
-            right: 40,
+            right: 20,
             top: 40,
             bottom: 65
         },
@@ -600,7 +646,10 @@ $(document).ready(function() {
                 data: legend3,
             },
             tooltip: {
-                trigger: 'axis'
+                trigger: 'axis',
+                axisPointer : {
+                    type : 'shadow'
+                },
             },
             grid: {
                 left: 60,
@@ -897,7 +946,6 @@ $(document).ready(function() {
             symbol: 'none',
             showSymbol: false,
             smooth: true,
-            yAxisIndex: 0,
             data: dataset['json']['bid_auth_stat']['ratios'][index5[i]]
         });
     }
@@ -905,6 +953,9 @@ $(document).ready(function() {
         color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         tooltip: {
             trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
             formatter: function(params) {
                 var t = '';
                 for (var i = 0; i < params.length; i++) {
@@ -922,7 +973,7 @@ $(document).ready(function() {
         },
         grid: {
             left: 50,
-            right: 25,
+            right: 10,
             top: 30,
             bottom: 65
         },
@@ -975,6 +1026,9 @@ $(document).ready(function() {
     var option = {
         tooltip: {
             trigger: 'item',
+            axisPointer : {
+                type : 'shadow'
+            },
             formatter: function(params) {
                 return params['seriesName'] + '<br/>' + params['value'][2].toFixed(2);
             }
@@ -1039,7 +1093,18 @@ $(document).ready(function() {
     };
     plot6.setOption(option);
 
-    var plot7_traits = ['借款金额', '借款期限', '借款利率', '年龄', '历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数'];
+    for (var i = 0; i < dataset['json']['bid_rate_stat']['stats'].length; i++) {
+        dataset['json']['bid_rate_stat']['stats'][i]['逾期率'] = dataset['json']['bid_history_stat']['parallel'][i]['逾期率'];
+        dataset['json']['bid_rate_stat']['stats'][i]['坏账率'] = dataset['json']['bid_history_stat']['parallel'][i]['坏账率'];
+    }
+    var plot7_traits = ['借款金额', '借款期限', '借款利率', '年龄', '历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数', '逾期率', '坏账率'];
+    var plot7_name_mappings = {
+        '历史成功借款次数': '历史借款次数', 
+        '历史成功借款金额': '历史借款金额', 
+        '总待还本金': '总待还', 
+        '历史正常还款期数': '正常还款期数', 
+        '历史逾期还款期数': '逾期还款期数'
+    };
     var plot7_margins = [20, 100, 40, 60];
     var plot7_width = 1000;
     var plot7_height = 500;
@@ -1083,7 +1148,12 @@ $(document).ready(function() {
         .attr("fill", '#f2f2f2')
         .attr("font-size", "12px")
         .text(function(d) {
-            return d;
+            if (d in plot7_name_mappings) {
+                return plot7_name_mappings[d]
+            }
+            else {
+                return d;
+            }
         });
     // Add a brush for each axis.
     $('#plot7 svg .trait .brush').remove();
@@ -1119,7 +1189,7 @@ $(document).ready(function() {
             return plot7_colors[d['rate']];
         }).attr({
             opacity: function(d, i){
-            	return 0.5 * d['month'] / dataset['json']['bid_rate_stat']['months'].length + 0.5;
+            	return 0.6 * d['month'] + 0.3;
             },
         });
 
@@ -1178,10 +1248,332 @@ $(document).ready(function() {
                 if (disabled[d['rate']]) {
                     return 0;
                 } else {
-                    return 0.5 * d['month'] / dataset['json']['bid_rate_stat']['months'].length + 0.5;
+                    return 0.6 * d['month'] + 0.3;
                 }
             },
         });
+    });
+
+    var plot8 = echarts.init(document.getElementById('plot8'), 'dark');
+    var param8 = '初始评级';
+
+    var legend8 = [];
+    for (var i = 0; i < dataset['json']['bid_status_stat']['stats'][param8].length; i++) {
+        legend8.push(dataset['json']['bid_status_stat']['stats'][param8][i]['name']);
+    }
+    var option8 = {
+        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        legend: {
+            data: legend8,
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
+        },
+        grid: {
+            left: 65,
+            right: 20,
+            top: 40,
+            bottom: 30
+        },
+        xAxis: {
+            type: 'category',
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true,
+            },
+            data: dataset['json']['bid_status_stat']['status']
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12
+            }
+        },
+        series: dataset['json']['bid_status_stat']['stats'][param8]
+    };
+    plot8.setOption(option8);
+
+    var plot9 = echarts.init(document.getElementById('plot9'), 'dark');
+    var option9 = {
+        legend: {
+            data: ['未还款', '已正常还款', '已逾期还款', '已提前还清该标全部欠款', '已部分还款']
+        },
+        tooltip: {
+            trigger: 'item',
+            axisPointer : {
+                type : 'shadow'
+            },
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        calculable: true,
+        series: []
+    };
+    for (var i = 0; i < dataset['json']['bid_status_stat']['pies'][param8].length; i++) {
+        var d = dataset['json']['bid_status_stat']['pies'][param8][i];
+        var x = 100.0 / dataset['json']['bid_status_stat']['pies'][param8].length * (i + 0.5);
+        option9.series.push({
+            name: param8 + ' ' + d['name'],
+            type: 'pie',
+            radius: [30, 60],
+            center: [x + '%', '58%'],
+            data: d['value'],
+            label: {
+                normal: {
+                    show: false,
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+        });
+    };
+    plot9.setOption(option9);
+
+    var plot10 = echarts.init(document.getElementById('plot10'), 'dark');
+    var plot11 = echarts.init(document.getElementById('plot11'), 'dark');
+    var option10 = {
+        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
+        },
+        legend: {
+            data: [],
+        },
+        grid: {
+            left: 50,
+            right: 10,
+            top: 30,
+            bottom: 65
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+            data: dataset['json']['bid_history_stat']['dates']
+        },
+        dataZoom: {
+            height: 20,
+            show: true,
+            realtime: true,
+            start: 0,
+            end: 100,
+            y2: 10,
+        },
+        yAxis: {
+            name: '逾期率',
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                formatter: '{value}%',
+                margin: 12,
+            }
+        },
+        series: []
+    };
+    var option11 = {
+        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
+        },
+        legend: {
+            data: [],
+        },
+        grid: {
+            left: 50,
+            right: 10,
+            top: 30,
+            bottom: 65
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+            data: dataset['json']['bid_history_stat']['dates']
+        },
+        dataZoom: {
+            height: 20,
+            show: true,
+            realtime: true,
+            start: 0,
+            end: 100,
+            y2: 10,
+        },
+        yAxis: {
+            name: '坏账率',
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                formatter: '{value}%',
+                margin: 12,
+            }
+        },
+        series: []
+    };
+    for (var i = 0; i < dataset['json']['bid_history_stat']['lines'][param8].length; i++) {
+        var d = dataset['json']['bid_history_stat']['lines'][param8][i];
+        option10.series.push({
+            name: d['name'],
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            data: d['data'][0]
+        });
+        option10.legend.data.push(d['name']);
+        option11.series.push({
+            name: d['name'],
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            data: d['data'][1]
+        });
+        option11.legend.data.push(d['name']);
+    }
+    plot10.setOption(option10);
+    plot11.setOption(option11);
+    echarts.connect([plot8, plot10, plot11]);
+
+    $('#p8 #group input').click(function(event) {
+        $('#p8 #group').addClass('active');
+        $('#p8 #group .cell').show();
+    });
+    $('#p8 #group .cell').click(function(event) {
+        $('#p8 #group').removeClass('active');
+        $('#p8 #group input').val($(this).text());
+        $('#p8 #group .cell').hide();
+        param8 = $('#p8 #group input').val();
+
+        plot8 = echarts.init(document.getElementById('plot8'), 'dark');
+        legend8 = [];
+        for (var i = 0; i < dataset['json']['bid_status_stat']['stats'][param8].length; i++) {
+            legend8.push(dataset['json']['bid_status_stat']['stats'][param8][i]['name']);
+        }
+        option8.legend.data = legend8;
+        option8.series = dataset['json']['bid_status_stat']['stats'][param8];
+        plot8.setOption(option8);
+
+        plot9 = echarts.init(document.getElementById('plot9'), 'dark');
+        option9.series = [];
+        for (var i = 0; i < dataset['json']['bid_status_stat']['pies'][param8].length; i++) {
+            var d = dataset['json']['bid_status_stat']['pies'][param8][i];
+            var x = 100.0 / dataset['json']['bid_status_stat']['pies'][param8].length * (i + 0.5);
+            option9.series.push({
+                name: param8 + ' ' + d['name'],
+                type: 'pie',
+                radius: [30, 60],
+                center: [x + '%', '58%'],
+                data: d['value'],
+                label: {
+                    normal: {
+                        show: false,
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+            });
+        };
+        plot9.setOption(option9);
+
+        plot10 = echarts.init(document.getElementById('plot10'), 'dark');
+        plot11 = echarts.init(document.getElementById('plot11'), 'dark');
+        option10.series = [];
+        option11.series = [];
+        option10.legend.data = [];
+        option11.legend.data = [];
+        for (var i = 0; i < dataset['json']['bid_history_stat']['lines'][param8].length; i++) {
+            var d = dataset['json']['bid_history_stat']['lines'][param8][i];
+            option10.series.push({
+                name: d['name'],
+                type: 'line',
+                symbol: 'none',
+                showSymbol: false,
+                smooth: true,
+                data: d['data'][0]
+            });
+            option10.legend.data.push(d['name']);
+            option11.series.push({
+                name: d['name'],
+                type: 'line',
+                symbol: 'none',
+                showSymbol: false,
+                smooth: true,
+                data: d['data'][1]
+            });
+            option11.legend.data.push(d['name']);
+        }
+        plot10.setOption(option10);
+        plot11.setOption(option11);
+        echarts.connect([plot8, plot10, plot11]);
     });
 });
 </script>
