@@ -7,35 +7,35 @@ p {
 
 #plot1 {
     width: 100%;
-    height: 240px;
-    background-color: #373a47 !important;
-    margin-bottom: 20px;
+    height: 230px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
 }
 
 #plot2 {
     width: 100%;
-    height: 360px;
-    background-color: #373a47 !important;
+    height: 350px;
+    background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
 
 #plot3 {
     width: 100%;
-    height: 250px;
-    background-color: #373a47 !important;
-    margin-bottom: 40px;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
 }
 
 #p3 #param {
     position: absolute;
-    top: -20px;
-    right: 20px;
+    top: 45px;
+    right: 145px;
 }
 
 #p3 #xAxis {
     position: absolute;
-    top: -20px;
-    left: 20px;
+    top: 45px;
+    left: 205px;
 }
 
 #p3 .cell {
@@ -92,6 +92,7 @@ p {
     width: 100%;
     text-align: center;
     position: relative;
+    background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
 
@@ -102,15 +103,16 @@ p {
 #plot5,
 #plot6 {
     width: 100%;
-    height: 200px;
-    background-color: #373a47 !important;
-    margin-bottom: 50px;
+    height: 250px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
 }
 
 #plot7 {
     width: 100%;
-    height: 500px;
+    height: 560px;
     position: relative;
+    background-color: #2c2f3c !important;
     text-align: center;
 }
 
@@ -177,14 +179,14 @@ p {
 #plot8 {
     width: 100%;
     height: 250px;
-    background-color: #373a47 !important;
-    margin-bottom: 20px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
 }
 
 #p8 #group {
     position: absolute;
-    top: -15px;
-    right: 20px;
+    top: 45px;
+    right: 40px;
 }
 
 #p8 .cell {
@@ -235,40 +237,49 @@ p {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 #plot9 {
     width: 100%;
-    height: 200px;
-    background-color: #373a47 !important;
-    margin-bottom: 10px;
+    height: 250px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
 }
+
 #plot10,
 #plot11 {
     width: 100%;
-    height: 200px;
-    background-color: #373a47 !important;
-    margin-bottom: 40px;
+    height: 250px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
 }
 </style>
 {% endblock %} {% block body %}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="text-align:center;">
-        <img src="{{url_for('static', filename='img/ppd.png')}}" alt="" style="width:110px;margin-top:25px;margin-bottom:27px;">
+        <img src="{{url_for('static', filename='img/ppd.png')}}" alt="" style="width:110px;margin-top:35px;margin-bottom:30px;">
         <p>信用标数量<span style="color:#50a3ba;font-size:20px;margin-left:6px;margin-right:6px;">328,553</span></p>
         <p>借款总金额<span style="color:#96b37e;font-size:20px;margin-left:6px;margin-right:6px;">1,453,458,316</span>元</p>
         <p style="margin-top:18px;margin-bottom:15px;">时间跨度<span style="color:#eac736;margin-left:6px;margin-right:6px;">2015-01-01</span>至<span style="color:#d94e5d;margin-left:6px;margin-right:6px;">2017-01-30</span></p>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="plot-title">历史每日信用标数量和借款总金额</div>
         <div id="plot1"></div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">不同特征下信用标数量比例</div>
         <div id="plot2"></div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p3">
+        <div class="plot-title">不同特征下信用标密度分布</div>
         <div id="plot3"></div>
+        <span class="fa fa-fw fa-angle-down" style="position:absolute;top:55px;left:330px;z-index:999;color:#999;"></span>
+        <span style="position:absolute;top:53px;left:145px;z-index:999;font-size:13px;">X轴指标</span>
+        <span class="fa fa-fw fa-angle-down" style="position:absolute;top:55px;right:150px;z-index:999;color:#999;"></span>
+        <span style="position:absolute;top:53px;right:310px;z-index:999;font-size:13px;">分类特征</span>
         <div id="param">
             <input type="text" class="form-control" value="初始评级" readOnly="readOnly">
             <div class="cell" name="初始评级">初始评级</div>
@@ -278,13 +289,14 @@ p {
             <div class="cell" name="年龄区间">年龄区间</div>
         </div>
         <div id="xAxis">
-            <input type="text" class="form-control" value="借款利率" readOnly="readOnly">
+            <input type="text" class="form-control" value="借款金额" readOnly="readOnly">
             <div class="cell" name="0">借款利率</div>
             <div class="cell" name="1">借款金额</div>
         </div>
     </div>
 </div>
 <div id="plot4">
+    <div class="plot-title" style="margin-bottom:15px;">信用标各项认证完成比例</div>
     <div style="position:absolute;bottom:20px;width:160px;">
         <p>对应信用标数量</p>
         <h3 style="color:#d94e5d;font-size:36px;margin-top:12px;">328553</h3>
@@ -295,14 +307,19 @@ p {
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">历史每日各项认证累积完成比例</div>
         <div id="plot5"></div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">各项认证关联热力图</div>
         <div id="plot6"></div>
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p8">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="position:relative;" id="p8">
+        <div class="plot-title">不同特征下信用标还款情况</div>
+        <span class="fa fa-fw fa-angle-down" style="position:absolute;top:55px;right:45px;z-index:999;color:#999;"></span>
+        <span style="position:absolute;top:53px;right:205px;z-index:999;font-size:13px;">分类特征</span>
         <div id="plot8"></div>
         <div id="group">
             <input type="text" class="form-control" value="初始评级" readOnly="readOnly">
@@ -312,18 +329,24 @@ p {
             <div class="cell" name="性别">性别</div>
             <div class="cell" name="年龄区间">年龄区间</div>
         </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="plot-title">信用标还款情况雷达图</div>
         <div id="plot9"></div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">不同特征下信用标历史逾期率</div>
         <div id="plot10"></div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">不同特征下信用标历史坏账率</div>
         <div id="plot11"></div>
     </div>
 </div>
 <div id="plot7">
+    <div class="plot-title" style="margin-bottom:15px;">历史每月不同初始评级信用标各项特征均值</div>
     <svg width="1000px" height="500px">
         <g></g>
     </svg>
@@ -363,22 +386,22 @@ $(document).ready(function() {
     }
 
     var plot1 = echarts.init(document.getElementById('plot1'), 'dark');
-    var option = {
+    var option1 = {
         color: ['#eac736', '#50a3ba'],
         tooltip: {
             trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
             formatter: function(params) {
-                return params[0]['name'] + ' ' + num_to_week(new Date('20' + params[0]['name']).getDay()) + '<br/><span style="color:#eac736;">信用标数量</span>：' + params[0]['data'] + '<br/><span style="color:#50a3ba;">借款金额</span>：' + params[1]['data'] + '万';
+                return params[0]['name'] + ' ' + num_to_week(new Date('20' + params[0]['name']).getDay()) + '<br/><span style="color:#eac736;">信用标数量</span>：' + params[0]['data'] + '个<br/><span style="color:#50a3ba;">借款总金额</span>：' + params[1]['data'] + '万';
             }
         },
         grid: {
-            left: 55,
-            right: 60,
-            top: 10,
-            bottom: 65
+            left: 70,
+            right: 70,
+            top: 25,
+            bottom: 75
         },
         xAxis: {
             type: 'category',
@@ -401,7 +424,7 @@ $(document).ready(function() {
             realtime: true,
             start: 80,
             end: 100,
-            y2: 10,
+            y2: 20,
         },
         yAxis: [{
             type: 'value',
@@ -417,6 +440,7 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
+                formatter: '{value}个',
                 margin: 12,
                 textStyle: {
                     color: '#eac736'
@@ -461,14 +485,14 @@ $(document).ready(function() {
             data: dataset['json']['bid_daily_stat']['amount']
         }]
     };
-    plot1.setOption(option);
+    plot1.setOption(option1);
 
     var plot2 = echarts.init(document.getElementById('plot2'), 'dark');
-    var option = {
+    var option2 = {
         tooltip: {
             trigger: 'item',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
             formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
@@ -476,42 +500,42 @@ $(document).ready(function() {
         series: [{
             name: '年龄区间',
             type: 'pie',
-            radius: [30, 70],
-            center: ['19%', '30%'],
+            radius: [30, 60],
+            center: ['19%', '32%'],
             data: dataset['json']['bid_pie_stat']['年龄区间']
         }, {
             name: '用户性别',
             type: 'pie',
-            radius: [30, 70],
-            center: ['50%', '30%'],
+            radius: [30, 60],
+            center: ['50%', '32%'],
             data: dataset['json']['bid_pie_stat']['性别']
         }, {
             name: '是否首标',
             type: 'pie',
-            radius: [30, 70],
-            center: ['81%', '30%'],
+            radius: [30, 60],
+            center: ['81%', '32%'],
             data: dataset['json']['bid_pie_stat']['是否首标']
         }, {
             name: '初始评级',
             type: 'pie',
-            radius: [30, 70],
-            center: ['34.5%', '74%'],
+            radius: [30, 60],
+            center: ['34.5%', '73%'],
             data: dataset['json']['bid_pie_stat']['初始评级']
         }, {
             name: '借款期限',
             type: 'pie',
-            radius: [30, 70],
-            center: ['65.5%', '74%'],
+            radius: [30, 60],
+            center: ['65.5%', '73%'],
             data: dataset['json']['bid_pie_stat']['借款期限']
         }]
     };
-    plot2.setOption(option);
+    plot2.setOption(option2);
 
     var plot3 = echarts.init(document.getElementById('plot3'), 'dark');
     var cold_colors = d3.interpolate(d3.rgb(80, 163, 186), d3.rgb(234, 199, 54));
     var warm_colors = d3.interpolate(d3.rgb(234, 199, 54), d3.rgb(217, 78, 93));
     var param3 = '初始评级';
-    var mode3 = 0;
+    var mode3 = 1;
     var data3 = {
         'x': [],
         'y': []
@@ -533,18 +557,19 @@ $(document).ready(function() {
         color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         legend: {
             data: legend3,
+            top: 23
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
         },
         grid: {
-            left: 60,
-            right: 20,
-            top: 40,
-            bottom: 65
+            left: 85,
+            right: 45,
+            top: 70,
+            bottom: 75
         },
         xAxis: {
             type: 'category',
@@ -556,6 +581,7 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
+                formatter: '{value}元',
                 margin: 12,
                 show: true,
             },
@@ -575,6 +601,7 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
+                formatter: '{value}个',
                 margin: 12
             }
         },
@@ -584,16 +611,18 @@ $(document).ready(function() {
             realtime: true,
             start: 0,
             end: 10,
-            y2: 10
+            y2: 20
         },
         series: data3.y
     };
     if (mode3 == 0) {
         option3.dataZoom.start = 20;
         option3.dataZoom.end = 100;
+        option3.xAxis.axisLabel.formatter = '{value}%';
     } else {
         option3.dataZoom.start = 0;
         option3.dataZoom.end = 5;
+        option3.xAxis.axisLabel.formatter = '{value}元';
     }
     plot3.setOption(option3);
 
@@ -640,71 +669,17 @@ $(document).ready(function() {
             });
         }
         var plot3 = echarts.init(document.getElementById('plot3'), 'dark');
-        var option3 = {
-            color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
-            legend: {
-                data: legend3,
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer : {
-                    type : 'shadow'
-                },
-            },
-            grid: {
-                left: 60,
-                right: 40,
-                top: 40,
-                bottom: 65
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                axisLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLabel: {
-                    margin: 12,
-                    show: true,
-                },
-                data: data3.x
-            },
-            yAxis: {
-                type: 'value',
-                scale: true,
-                splitNumber: 3,
-                splitLine: {
-                    show: true,
-                },
-                axisLine: {
-                    show: false,
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLabel: {
-                    margin: 12
-                }
-            },
-            dataZoom: {
-                height: 20,
-                show: true,
-                realtime: true,
-                start: 0,
-                end: 10,
-                y2: 10
-            },
-            series: data3.y
-        };
+        option3.legend.data = legend3;
+        option3.xAxis.data = data3.x;
+        option3.series = data3.y;
         if (mode3 == 0) {
             option3.dataZoom.start = 20;
             option3.dataZoom.end = 100;
+            option3.xAxis.axisLabel.formatter = '{value}%';
         } else {
             option3.dataZoom.start = 0;
             option3.dataZoom.end = 5;
+            option3.xAxis.axisLabel.formatter = '{value}元';
         }
         plot3.setOption(option3);
     }
@@ -721,7 +696,7 @@ $(document).ready(function() {
     text4.enter().append('text').text(function(d) {
         return d;
     }).attr('transform', function(d, i) {
-        return 'translate(' + (plot4_margins[3] + i * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length + plot4_w1 / 2 - 28) + ',' + (plot4_margins[0] - 12) + ')';
+        return 'translate(' + (plot4_margins[3] + i * (plot4_width - plot4_margins[1] - plot4_margins[3] - plot4_w2) / titles.length + plot4_w1 / 2 - 24) + ',' + (plot4_margins[0] - 12) + ')';
     }).attr('fill', '#f2f2f2').attr('fill-opacity', 1).attr('font-size', '12px');
 
     var data4 = [];
@@ -819,7 +794,7 @@ $(document).ready(function() {
         y: function(d, i) {
             return plot4_margins[0] + d[0] / 328553 * (plot4_height - plot4_margins[0] - plot4_margins[2] - 100);
         },
-        width: plot4_w2 / titles.length,
+        width: parseInt(plot4_w2 / titles.length),
         height: function(d, i) {
             return d[1] / 328553 * (plot4_height - plot4_margins[0] - plot4_margins[2] - 100);
         },
@@ -949,12 +924,12 @@ $(document).ready(function() {
             data: dataset['json']['bid_auth_stat']['ratios'][index5[i]]
         });
     }
-    var option = {
+    var option5 = {
         color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         tooltip: {
             trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
             formatter: function(params) {
                 var t = '';
@@ -970,12 +945,13 @@ $(document).ready(function() {
         },
         legend: {
             data: ['手机', '户口', '视频', '学历', '征信', '淘宝'],
+            top: 10
         },
         grid: {
-            left: 50,
-            right: 10,
-            top: 30,
-            bottom: 65
+            left: 55,
+            right: 20,
+            top: 45,
+            bottom: 75
         },
         xAxis: {
             type: 'category',
@@ -998,7 +974,7 @@ $(document).ready(function() {
             realtime: true,
             start: 0,
             end: 100,
-            y2: 10,
+            y2: 20,
         },
         yAxis: {
             type: 'value',
@@ -1020,24 +996,24 @@ $(document).ready(function() {
         },
         series: data5
     };
-    plot5.setOption(option);
+    plot5.setOption(option5);
 
     var plot6 = echarts.init(document.getElementById('plot6'), 'dark');
-    var option = {
+    var option6 = {
         tooltip: {
             trigger: 'item',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
             formatter: function(params) {
                 return params['seriesName'] + '<br/>' + params['value'][2].toFixed(2);
             }
         },
         grid: {
-            left: 70,
-            right: 60,
-            top: 10,
-            bottom: 30
+            left: 80,
+            right: 65,
+            top: 20,
+            bottom: 40
         },
         xAxis: {
             type: 'category',
@@ -1076,8 +1052,8 @@ $(document).ready(function() {
             max: dataset['json']['bid_heat_stat']['max'],
             calculable: true,
             orient: 'vertical',
-            top: 'middle',
-            right: 10
+            top: 28,
+            right: 15
         },
         series: [{
             name: '认证指标关联性',
@@ -1091,7 +1067,7 @@ $(document).ready(function() {
             }
         }]
     };
-    plot6.setOption(option);
+    plot6.setOption(option6);
 
     for (var i = 0; i < dataset['json']['bid_rate_stat']['stats'].length; i++) {
         dataset['json']['bid_rate_stat']['stats'][i]['逾期率'] = dataset['json']['bid_history_stat']['parallel'][i]['逾期率'];
@@ -1099,10 +1075,10 @@ $(document).ready(function() {
     }
     var plot7_traits = ['借款金额', '借款期限', '借款利率', '年龄', '历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数', '逾期率', '坏账率'];
     var plot7_name_mappings = {
-        '历史成功借款次数': '历史借款次数', 
-        '历史成功借款金额': '历史借款金额', 
-        '总待还本金': '总待还', 
-        '历史正常还款期数': '正常还款期数', 
+        '历史成功借款次数': '历史借款次数',
+        '历史成功借款金额': '历史借款金额',
+        '总待还本金': '总待还',
+        '历史正常还款期数': '正常还款期数',
         '历史逾期还款期数': '逾期还款期数'
     };
     var plot7_margins = [20, 100, 40, 60];
@@ -1150,8 +1126,7 @@ $(document).ready(function() {
         .text(function(d) {
             if (d in plot7_name_mappings) {
                 return plot7_name_mappings[d]
-            }
-            else {
+            } else {
                 return d;
             }
         });
@@ -1188,8 +1163,8 @@ $(document).ready(function() {
         plot7_foreground.enter().append("svg:path").attr("d", plot7_path).attr("stroke", function(d, i) {
             return plot7_colors[d['rate']];
         }).attr({
-            opacity: function(d, i){
-            	return 0.6 * d['month'] + 0.3;
+            opacity: function(d, i) {
+                return 0.6 * d['month'] + 0.3;
             },
         });
 
@@ -1256,7 +1231,6 @@ $(document).ready(function() {
 
     var plot8 = echarts.init(document.getElementById('plot8'), 'dark');
     var param8 = '初始评级';
-
     var legend8 = [];
     for (var i = 0; i < dataset['json']['bid_status_stat']['stats'][param8].length; i++) {
         legend8.push(dataset['json']['bid_status_stat']['stats'][param8][i]['name']);
@@ -1265,18 +1239,20 @@ $(document).ready(function() {
         color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         legend: {
             data: legend8,
+            top: 20,
+            left: 100
         },
         tooltip: {
             trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
         },
         grid: {
-            left: 65,
-            right: 20,
-            top: 40,
-            bottom: 30
+            left: 80,
+            right: 30,
+            top: 65,
+            bottom: 40
         },
         xAxis: {
             type: 'category',
@@ -1313,41 +1289,76 @@ $(document).ready(function() {
     };
     plot8.setOption(option8);
 
+    var color_sets9 = [
+        ['#8e3838', '#a64242', '#ba5050', '#c46868', '#cd8181'],
+        ['#7b388e', '#9142a6', '#a350ba', '#b068c4', '#bd81cd'],
+        ['#383c8e', '#4246a6', '#5055ba', '#686dc4', '#8184cd'],
+        ['#38888e', '#429fa6', '#50b2ba', '#68bdc4', '#81c7cd'],
+        ['#388e4d', '#42a65a', '#50ba6a', '#68c47f', '#81cd93'],
+        ['#8e8d38', '#a6a542', '#bab950', '#c4c368', '#cdcc81']
+    ];
     var plot9 = echarts.init(document.getElementById('plot9'), 'dark');
     var option9 = {
+        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         legend: {
-            data: ['未还款', '已正常还款', '已逾期还款', '已提前还清该标全部欠款', '已部分还款']
+            data: [],
+            top: 15
         },
-        tooltip: {
-            trigger: 'item',
-            axisPointer : {
-                type : 'shadow'
+        tooltip: {},
+        radar: {
+            center: ['50%', '60%'],
+            radius: '55%',
+            splitArea: {
+                show: false
             },
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            startAngle: 20,
+            splitLine: {
+                lineStyle: {
+                    color: ['rgba(200, 200, 200, 0.3)']
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(200, 200, 200, 0.3)'
+                }
+            },
+            indicator: [{
+                name: '未还款',
+                min: 0,
+                max: 0.12
+            }, {
+                name: '已正常还款',
+                min: 0,
+                max: 1
+            }, {
+                name: '已逾期还款',
+                min: 0,
+                max: 0.3
+            }, {
+                name: '已提前还清该标全部欠款',
+                min: 0,
+                max: 0.05
+            }, {
+                name: '已部分还款',
+                min: 0,
+                max: 0.01
+            }]
         },
-        calculable: true,
-        series: []
+        series: [{
+            name: '',
+            type: 'radar',
+            data: [],
+            symbol: 'none'
+        }]
     };
+    option9.series[0].name = param8;
     for (var i = 0; i < dataset['json']['bid_status_stat']['pies'][param8].length; i++) {
         var d = dataset['json']['bid_status_stat']['pies'][param8][i];
-        var x = 100.0 / dataset['json']['bid_status_stat']['pies'][param8].length * (i + 0.5);
-        option9.series.push({
-            name: param8 + ' ' + d['name'],
-            type: 'pie',
-            radius: [30, 60],
-            center: [x + '%', '58%'],
-            data: d['value'],
-            label: {
-                normal: {
-                    show: false,
-                }
-            },
-            labelLine: {
-                normal: {
-                    show: false
-                }
-            },
+        option9.series[0].data.push({
+            value: d['value'],
+            name: d['name']
         });
+        option9.legend.data.push(d['name']);
     };
     plot9.setOption(option9);
 
@@ -1357,18 +1368,19 @@ $(document).ready(function() {
         color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         tooltip: {
             trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
         },
         legend: {
             data: [],
+            top: 15
         },
         grid: {
-            left: 50,
-            right: 10,
-            top: 30,
-            bottom: 65
+            left: 55,
+            right: 25,
+            top: 50,
+            bottom: 75
         },
         xAxis: {
             type: 'category',
@@ -1391,10 +1403,9 @@ $(document).ready(function() {
             realtime: true,
             start: 0,
             end: 100,
-            y2: 10,
+            y2: 20,
         },
         yAxis: {
-            name: '逾期率',
             type: 'value',
             scale: true,
             splitNumber: 3,
@@ -1418,18 +1429,19 @@ $(document).ready(function() {
         color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
         tooltip: {
             trigger: 'axis',
-            axisPointer : {
-                type : 'shadow'
+            axisPointer: {
+                type: 'shadow'
             },
         },
         legend: {
             data: [],
+            top: 15
         },
         grid: {
-            left: 50,
-            right: 10,
-            top: 30,
-            bottom: 65
+            left: 55,
+            right: 25,
+            top: 50,
+            bottom: 75
         },
         xAxis: {
             type: 'category',
@@ -1452,10 +1464,9 @@ $(document).ready(function() {
             realtime: true,
             start: 0,
             end: 100,
-            y2: 10,
+            y2: 20,
         },
         yAxis: {
-            name: '坏账率',
             type: 'value',
             scale: true,
             splitNumber: 3,
@@ -1520,27 +1531,16 @@ $(document).ready(function() {
         plot8.setOption(option8);
 
         plot9 = echarts.init(document.getElementById('plot9'), 'dark');
-        option9.series = [];
+        option9.series[0].name = param8;
+        option9.series[0].data = [];
+        option9.legend.data = [];
         for (var i = 0; i < dataset['json']['bid_status_stat']['pies'][param8].length; i++) {
             var d = dataset['json']['bid_status_stat']['pies'][param8][i];
-            var x = 100.0 / dataset['json']['bid_status_stat']['pies'][param8].length * (i + 0.5);
-            option9.series.push({
-                name: param8 + ' ' + d['name'],
-                type: 'pie',
-                radius: [30, 60],
-                center: [x + '%', '58%'],
-                data: d['value'],
-                label: {
-                    normal: {
-                        show: false,
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
+            option9.series[0].data.push({
+                value: d['value'],
+                name: d['name']
             });
+            option9.legend.data.push(d['name']);
         };
         plot9.setOption(option9);
 

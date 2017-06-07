@@ -82,6 +82,17 @@ def index():
 
 	closedb(db,cursor)
 
+	# 处理雷达图数据
+	radar = dataset['json']['bid_status_stat']['pies'];
+	for key, value in radar.items():
+		tmp = []
+		for d in value:
+			tall = np.sum([x['value'] for x in d['value']])
+			t = [float('%.3f' % (float(x['value']) / tall)) for x in d['value']]
+			tmp.append({'name': d['name'], 'value': t})
+		radar[key] = tmp
+	dataset['json']['bid_status_stat']['pies'] = radar;
+
 	return render_template('index.html', dataset=json.dumps(dataset), auth=is_auth())
 
 # 个人中心
