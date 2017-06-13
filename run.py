@@ -98,7 +98,37 @@ def index():
 # 个人中心
 @app.route('/user')
 def user():
-	return render_template('user.html', auth=is_auth())
+	(db,cursor) = connectdb()
+	cursor.execute("select * from json_data where page=%s",['user'])
+	json_data = cursor.fetchall()
+	
+	dataset = {}
+	dataset['json'] = {item['keyword']: json.loads(item['json']) for item in json_data}
+
+	closedb(db,cursor)
+
+	for key in ['daily_amount_sum', 'daily_amount_sum_back', 'daily_interest', 'daily_rate', 'daily_amount_average', 'daily_term', 'daily_interest_sum', 'daily_interest_sum_total']:
+		dataset['json']['bid_stat'][key] = [float('%.1f' % d) for d in dataset['json']['bid_stat'][key]]
+
+	dataset['age'] = '%.1f' % ((float(time.time()) - dataset['json']['bid_stat']['from']) / 3600 / 24 / 365)
+	dataset['tags'] = [];
+	if dataset['json']['bid_stat']['bid_interest_average'] < 12:
+		dataset['tags'].append('低风险')
+		dataset['tags'].append('低收益')
+	elif dataset['json']['bid_stat']['bid_interest_average'] < 18:
+		dataset['tags'].append('中风险')
+		dataset['tags'].append('中收益')
+	else:
+		dataset['tags'].append('高风险')
+		dataset['tags'].append('高收益')
+	if dataset['json']['bid_stat']['bid_term_average'] < 8:
+		dataset['tags'].append('短期投资')
+	elif dataset['json']['bid_stat']['bid_term_average'] < 16:
+		dataset['tags'].append('中期投资')
+	else:
+		dataset['tags'].append('长期投资')
+
+	return render_template('user.html', dataset=json.dumps(dataset), auth=is_auth())
 
 # 投资顾问
 @app.route('/invest')

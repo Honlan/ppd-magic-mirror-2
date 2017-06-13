@@ -178,7 +178,7 @@ p {
 
 #plot8 {
     width: 100%;
-    height: 250px;
+    height: 300px;
     background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
@@ -240,7 +240,7 @@ p {
 
 #plot9 {
     width: 100%;
-    height: 250px;
+    height: 300px;
     background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
@@ -257,9 +257,9 @@ p {
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="text-align:center;">
         <img src="{{url_for('static', filename='img/ppd.png')}}" alt="" style="width:110px;margin-top:35px;margin-bottom:30px;">
-        <p>信用标数量<span style="color:#50a3ba;font-size:20px;margin-left:6px;margin-right:6px;">328,553</span></p>
-        <p>借款总金额<span style="color:#96b37e;font-size:20px;margin-left:6px;margin-right:6px;">1,453,458,316</span>元</p>
-        <p style="margin-top:18px;margin-bottom:15px;">时间跨度<span style="color:#eac736;margin-left:6px;margin-right:6px;">2015-01-01</span>至<span style="color:#d94e5d;margin-left:6px;margin-right:6px;">2017-01-30</span></p>
+        <p>信用标数量<span style="color:rgba(109, 188, 191, 0.9);font-size:20px;margin-left:6px;margin-right:6px;">328,553</span></p>
+        <p>借款总金额<span style="color:rgba(117, 179, 117, 0.9);font-size:20px;margin-left:6px;margin-right:6px;">1,453,458,316</span>元</p>
+        <p style="margin-top:18px;margin-bottom:15px;">时间跨度<span style="color:rgba(243, 230, 162, 0.9);margin-left:6px;margin-right:6px;">2015-01-01</span>至<span style="color:rgba(221, 107, 102, 0.9);margin-left:6px;margin-right:6px;">2017-01-30</span></p>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
         <div class="plot-title">历史每日信用标数量和借款总金额</div>
@@ -299,7 +299,7 @@ p {
     <div class="plot-title" style="margin-bottom:15px;">信用标各项认证完成比例</div>
     <div style="position:absolute;bottom:20px;width:160px;">
         <p>对应信用标数量</p>
-        <h3 style="color:#d94e5d;font-size:36px;margin-top:12px;">328553</h3>
+        <h3 style="color:rgba(221, 107, 102, 0.9);font-size:36px;margin-top:12px;">328553</h3>
     </div>
     <svg width="1000" height="500">
         <g></g>
@@ -351,12 +351,12 @@ p {
         <g></g>
     </svg>
     <div style="position:absolute;top:160px;">
-        <p name="A">A<span style="background-color:#ba5050;"></span></p>
-        <p name="B">B<span style="background-color:#a350ba;"></span></p>
-        <p name="C">C<span style="background-color:#5055ba;"></span></p>
-        <p name="D">D<span style="background-color:#50b2ba;"></span></p>
-        <p name="E">E<span style="background-color:#50ba6a;"></span></p>
-        <p name="F">F<span style="background-color:#bab950;"></span></p>
+        <p name="A">A<span style="background-color:rgba(221, 107, 102, 0.9);"></span></p>
+        <p name="B">B<span style="background-color:rgba(215, 135, 230, 0.9);"></span></p>
+        <p name="C">C<span style="background-color:rgba(110, 113, 199, 0.9);"></span></p>
+        <p name="D">D<span style="background-color:rgba(109, 188, 191, 0.9);"></span></p>
+        <p name="E">E<span style="background-color:rgba(117, 179, 117, 0.9);"></span></p>
+        <p name="F">F<span style="background-color:rgba(243, 230, 162, 0.9);"></span></p>
     </div>
 </div>
 <script>
@@ -367,34 +367,36 @@ $(document).ready(function() {
     var dataset = eval({{dataset | safe}});
     console.log(dataset);
 
+    var colorset = ['rgba(221, 107, 102, 0.9)', 'rgba(215, 135, 230, 0.9)', 'rgba(110, 113, 199, 0.9)', 'rgba(109, 188, 191, 0.9)', 'rgba(117, 179, 117, 0.9)', 'rgba(243, 230, 162, 0.9)'];
+
     function num_to_week(n) {
         if (n == 0) {
-            return '<span style="color:#96b37e;">星期日</span>';
+            return '<span style="color:' + colorset[4] + ';">星期日</span>';
         } else if (n == 1) {
-            return '<span style="color:#d94e5d;">星期一</span>';
+            return '<span style="color:' + colorset[0] + ';">星期一</span>';
         } else if (n == 2) {
-            return '<span style="color:#d94e5d;">星期二</span>';
+            return '<span style="color:' + colorset[0] + ';">星期二</span>';
         } else if (n == 3) {
-            return '<span style="color:#d94e5d;">星期三</span>';
+            return '<span style="color:' + colorset[0] + ';">星期三</span>';
         } else if (n == 4) {
-            return '<span style="color:#d94e5d;">星期四</span>';
+            return '<span style="color:' + colorset[0] + ';">星期四</span>';
         } else if (n == 5) {
-            return '<span style="color:#d94e5d;">星期五</span>';
+            return '<span style="color:' + colorset[0] + ';">星期五</span>';
         } else if (n == 6) {
-            return '<span style="color:#96b37e;">星期六</span>';
+            return '<span style="color:' + colorset[4] + ';">星期六</span>';
         }
     }
 
     var plot1 = echarts.init(document.getElementById('plot1'), 'dark');
     var option1 = {
-        color: ['#eac736', '#50a3ba'],
+        color: [colorset[5], colorset[3]],
         tooltip: {
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow'
             },
             formatter: function(params) {
-                return params[0]['name'] + ' ' + num_to_week(new Date('20' + params[0]['name']).getDay()) + '<br/><span style="color:#eac736;">信用标数量</span>：' + params[0]['data'] + '个<br/><span style="color:#50a3ba;">借款总金额</span>：' + params[1]['data'] + '万';
+                return params[0]['name'] + ' ' + num_to_week(new Date('20' + params[0]['name']).getDay()) + '<br/><span style="color:' + colorset[5] + ';">信用标数量</span>：' + params[0]['data'] + '个<br/><span style="color:' + colorset[3] + ';">借款总金额</span>：' + params[1]['data'] + '万';
             }
         },
         grid: {
@@ -443,7 +445,7 @@ $(document).ready(function() {
                 formatter: '{value}个',
                 margin: 12,
                 textStyle: {
-                    color: '#eac736'
+                    color: colorset[5]
                 }
             }
         }, {
@@ -463,7 +465,7 @@ $(document).ready(function() {
                 formatter: '{value}万',
                 margin: 12,
                 textStyle: {
-                    color: '#50a3ba'
+                    color: colorset[3]
                 }
             }
         }],
@@ -489,6 +491,7 @@ $(document).ready(function() {
 
     var plot2 = echarts.init(document.getElementById('plot2'), 'dark');
     var option2 = {
+        color: colorset,
         tooltip: {
             trigger: 'item',
             axisPointer: {
@@ -532,8 +535,11 @@ $(document).ready(function() {
     plot2.setOption(option2);
 
     var plot3 = echarts.init(document.getElementById('plot3'), 'dark');
-    var cold_colors = d3.interpolate(d3.rgb(80, 163, 186), d3.rgb(234, 199, 54));
-    var warm_colors = d3.interpolate(d3.rgb(234, 199, 54), d3.rgb(217, 78, 93));
+    // var cold_colors = d3.interpolate(d3.rgb(80, 163, 186), d3.rgb(234, 199, 54));
+    var cold_colors = d3.interpolate(d3.rgb(109, 188, 191), d3.rgb(243, 230, 162));
+
+    var colorset = ['rgba(221, 107, 102, 0.9)', 'rgba(215, 135, 230, 0.9)', 'rgba(110, 113, 199, 0.9)', 'rgba(109, 188, 191, 0.9)', 'rgba(117, 179, 117, 0.9)', 'rgba(243, 230, 162, 0.9)'];
+
     var param3 = '初始评级';
     var mode3 = 1;
     var data3 = {
@@ -554,7 +560,7 @@ $(document).ready(function() {
         });
     }
     var option3 = {
-        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        color: colorset,
         legend: {
             data: legend3,
             top: 23
@@ -722,17 +728,16 @@ $(document).ready(function() {
         height: function(d) {
             return (d[2] - d[1]) * (plot4_height - plot4_margins[0] - plot4_margins[2]);
         },
-        fill: function(d) {
-            return cold_colors(d[5]);
-        },
-        'fill-opacity': function(d, i) {
-            if (i % 2) {
-                return 0.6;
-            } else {
-                return 1;
+        fill: function(d, i) {
+            // return cold_colors(d[5]);
+            if (i % 2 == 0) {
+                return colorset[3];
+            }
+            else {
+                return colorset[5];
             }
         },
-        'stroke': '#f2f2f2',
+        'fill-opacity': 1,
         'stroke-width': 0,
         'name': function(d, i) {
             return i;
@@ -757,7 +762,7 @@ $(document).ready(function() {
         'd': function(d) {
             return curve4(d);
         },
-        'stroke-width': 1.5,
+        'stroke-width': 1,
         'stroke': function(d) {
             return cold_colors(d[0][3]);
         },
@@ -765,9 +770,8 @@ $(document).ready(function() {
             return d[0][2];
         },
         'name': function(d, i) {
-                return i;
-            }
-            // 'shape-rendering': 'crispEdges',
+            return i;
+        }
     });
 
     var data_cell4 = [];
@@ -776,9 +780,11 @@ $(document).ready(function() {
         if (dataset['json']['bid_sankey_stat']['bars'][i][0] == 5) {
             for (var j = 0; j < titles.length; j++) {
                 if (dataset['json']['bid_sankey_stat']['bars'][i][4][j] == '成功认证') {
-                    data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], 'rgb(80, 163, 186)']);
+                    // data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], 'rgb(80, 163, 186)']);
+                    data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], colorset[3]]);
                 } else {
-                    data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], 'rgb(215, 195, 71)']);
+                    // data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], 'rgb(215, 195, 71)']);
+                    data_cell4.push([count, dataset['json']['bid_sankey_stat']['bars'][i][3], colorset[5]]);
                 }
             }
             count += dataset['json']['bid_sankey_stat']['bars'][i][3];
@@ -802,7 +808,7 @@ $(document).ready(function() {
             return d[2];
             // return cold_colors(parseFloat(i) / data.length);
         },
-        'fill-opacity': 0.92
+        'fill-opacity': 1
     });
 
     function isParent(a, b) {
@@ -830,37 +836,15 @@ $(document).ready(function() {
             if (i <= text_id) {
                 return 1;
             } else {
-                return 0.2;
+                return 0.1;
             }
         });
         rect_bar4.transition().duration(400).attr({
-            'stroke-width': function(d, i) {
-                if (isParent(i, id)) {
-                    return 1.5;
-                } else {
-                    return 0;
-                }
-            },
             'fill-opacity': function(d, i) {
                 if (isParent(i, id)) {
-                    if (i % 2) {
-                        return 0.6;
-                    } else {
-                        return 1;
-                    }
+                    return 1;
                 } else {
                     return 0.1;
-                }
-            },
-            'stroke': function(d, i) {
-                if (isParent(i, id)) {
-                    if (i % 2) {
-                        return 'rgb(221, 107, 102)';
-                    } else {
-                        return '#f2f2f2';
-                    }
-                } else {
-                    return '#f2f2f2';
                 }
             },
         });
@@ -870,7 +854,7 @@ $(document).ready(function() {
                 if (isParent(id, r + 62)) {
                     return 1;
                 } else {
-                    return 0.2;
+                    return 0.1;
                 }
             },
         });
@@ -879,7 +863,7 @@ $(document).ready(function() {
                 if (isParent(i + 2, id)) {
                     return d[0][2];
                 } else {
-                    return 0.2;
+                    return 0.1;
                 }
             },
         });
@@ -892,14 +876,7 @@ $(document).ready(function() {
 
         text4.transition().duration(400).attr('fill-opacity', 1);
         rect_bar4.transition().duration(400).attr({
-            'stroke-width': 0,
-            'fill-opacity': function(d, i) {
-                if (i % 2) {
-                    return 0.6;
-                } else {
-                    return 1;
-                }
-            },
+            'fill-opacity': 1,
         });
         line4.transition().duration(400).attr({
             'opacity': function(d) {
@@ -907,7 +884,7 @@ $(document).ready(function() {
             },
         });
         rect_cell4.transition().duration(400).attr({
-            'fill-opacity': 0.92
+            'fill-opacity': 1
         });
     });
 
@@ -925,7 +902,7 @@ $(document).ready(function() {
         });
     }
     var option5 = {
-        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        color: colorset,
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -1053,7 +1030,10 @@ $(document).ready(function() {
             calculable: true,
             orient: 'vertical',
             top: 28,
-            right: 15
+            right: 15,
+            inRange: {
+                color: [colorset[5], colorset[0]]
+            }
         },
         series: [{
             name: '认证指标关联性',
@@ -1092,12 +1072,12 @@ $(document).ready(function() {
     var plot7_axis = d3.svg.axis().orient("left").tickPadding([5]);
     var plot7_foreground;
     var plot7_colors = {
-        'A': '#ba5050',
-        'B': '#a350ba',
-        'C': '#5055ba',
-        'D': '#50b2ba',
-        'E': '#50ba6a',
-        'F': '#bab950'
+        'A': 0,
+        'B': 1,
+        'C': 2,
+        'D': 3,
+        'E': 4,
+        'F': 5
     };
     var plot7_data = [];
     d3.select('#plot7 svg g').attr("transform", "translate(" + plot7_margins[3] + "," + plot7_margins[0] + ")");
@@ -1161,7 +1141,7 @@ $(document).ready(function() {
         plot7_foreground = d3.select('#plot7 svg g.foreground').selectAll("path").data(plot7_data);
 
         plot7_foreground.enter().append("svg:path").attr("d", plot7_path).attr("stroke", function(d, i) {
-            return plot7_colors[d['rate']];
+            return colorset[plot7_colors[d['rate']]];
         }).attr({
             opacity: function(d, i) {
                 return 0.6 * d['month'] + 0.3;
@@ -1236,7 +1216,7 @@ $(document).ready(function() {
         legend8.push(dataset['json']['bid_status_stat']['stats'][param8][i]['name']);
     }
     var option8 = {
-        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        color: colorset,
         legend: {
             data: legend8,
             top: 20,
@@ -1299,15 +1279,15 @@ $(document).ready(function() {
     ];
     var plot9 = echarts.init(document.getElementById('plot9'), 'dark');
     var option9 = {
-        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        color: colorset,
         legend: {
             data: [],
-            top: 15
+            top: 20
         },
         tooltip: {},
         radar: {
             center: ['50%', '60%'],
-            radius: '55%',
+            radius: '60%',
             splitArea: {
                 show: false
             },
@@ -1335,7 +1315,7 @@ $(document).ready(function() {
                 min: 0,
                 max: 0.3
             }, {
-                name: '已提前还清该标全部欠款',
+                name: '已提前还清',
                 min: 0,
                 max: 0.05
             }, {
@@ -1365,12 +1345,9 @@ $(document).ready(function() {
     var plot10 = echarts.init(document.getElementById('plot10'), 'dark');
     var plot11 = echarts.init(document.getElementById('plot11'), 'dark');
     var option10 = {
-        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        color: colorset,
         tooltip: {
             trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            },
         },
         legend: {
             data: [],
@@ -1426,12 +1403,9 @@ $(document).ready(function() {
         series: []
     };
     var option11 = {
-        color: ['#ba5050', '#a350ba', '#5055ba', '#50b2ba', '#50ba6a', '#bab950'],
+        color: colorset,
         tooltip: {
             trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            },
         },
         legend: {
             data: [],

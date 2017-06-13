@@ -1,12 +1,1741 @@
 {% extends 'layout.html' %} {% block style %}
 <style>
+#plot1 #tags {
+	margin-bottom: 15px;
+}
+#plot1 #tags span {
+	display: inline-block;
+	border: 1px solid #f2f2f2;
+	background-color: transparent;
+	padding: 3px 5px;
+	margin: 3px;
+	font-size: 12px;
+	border-radius: 4px;
+	color: #f2f2f2;
+	opacity: 0;
+}
+#plot1 {
+	text-align: center;
+}
+#plot1 p {
+	color: #888;
+	font-size: 13px;
+	margin-bottom: 3px;
+	opacity: 0;
+}
+#plot1 span.number {
+	font-size: 25px;
+	color: rgba(221, 107, 102, 0.9);
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#plot2 {
+	width: 100%;
+    height: 230px;
+    padding: 30px 40px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot2 p {
+	font-size: 15px;
+	color: #2c2f3c;
+}
+#plot2 #num_stat span {
+	margin-left: 5px;
+	margin-right: 15px;
+	font-size: 18px;
+	color: rgba(221, 107, 102, 0.9);
+}
+#plot3, #plot4 {
+    width: 100%;
+    height: 250px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot5, #plot6, #plot7 {
+    width: 100%;
+    height: 200px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot8, #plot9, #plot10 {
+    width: 100%;
+    height: 200px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot11 {
+	width: 100%;
+	text-align: center;
+    position: relative;
+    background-color: #2c2f3c !important;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+#plot11 #modes {
+    position: absolute;
+    top: 115px;
+    opacity: 0;
+}
+#plot11 #params {
+	position: absolute;
+    top: 65px;
+    opacity: 0;
+}
+#plot11 .cell, #p12 .cell, #plot17 .cell {
+    padding: 8px;
+    padding-left: 12px;
+    color: rgb(90, 103, 121);
+    background-color: #fff;
+    font-size: 12px;
+    z-index: 9999;
+    text-align: left;
+    display: none;
+}
+
+#plot11 .cell:nth-of-type(2n), #p12 .cell:nth-of-type(2n), #plot17 .cell:nth-of-type(2n) {
+    background-color: rgb(250, 251, 253);
+}
+
+#plot11 .cell:nth-of-type(2n + 1), #p12 .cell:nth-of-type(2n + 1), #plot17 .cell:nth-of-type(2n + 1) {
+    background-color: rgb(255, 255, 255);
+}
+
+#plot11 .cell:last-child, #p12 .cell:last-child, #plot17 .cell:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#plot11 .cell:hover, #p12 .cell:hover, #plot17 .cell:hover {
+    cursor: pointer;
+    background-color: #50a3ba;
+    color: #fff;
+}
+
+#plot11 input, #p12 input, #plot17 input {
+    color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 120px;
+    background-color: #444650;
+    font-size: 12px;
+}
+
+#plot11 input:hover, #p12 input:hover, #plot17 input:hover {
+    cursor: pointer;
+}
+
+#plot11 #modes.active input, #plot11 #params.active input, #p12 #terms.active input, #plot17 #params2.active input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#plot12, #plot13 {
+    width: 100%;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#p12 {
+	position: relative;
+}
+#p12 #terms {
+	position: absolute;
+    top: 44px;
+    right: 40px;
+}
+#plot14, #plot15, #plot16 {
+    width: 100%;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot17 {
+	width: 100%;
+	text-align: center;
+    position: relative;
+    background-color: #2c2f3c !important;
+    padding-bottom: 20px;
+}
+#plot17 #params2 {
+	position: absolute;
+    top: 65px;
+    opacity: 0;
+}
+#plot17 circle:hover {
+	cursor: pointer;
+}
+#plot17 #info {
+	position: absolute;
+	bottom: 25px;
+	text-align: right;
+	display: none;
+}
+#plot17 #info h4 {
+	color: #bbb;
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+#plot17 #info p {
+	color: #999;
+	font-size: 13px;
+	margin-bottom: 5px;
+}
 </style>
 {% endblock %} {% block body %}
-功能开发中，敬请期待！
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    	<div id="plot1">
+    		<span class="fa fa-fw fa-user" style="display:block;font-size:60px;color:#f2f2f2;margin:15px auto;margin-top:30px;"></span>
+    		<div id="tags"></div>
+	    	<p>我的拍龄<span class="number" id="age"></span>年</p>
+	    	<p>击败了<span class="number" id="other">75%</span>的用户</p>
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="plot-title">我的投资概况</div>
+        <div id="plot2">
+        	<div id="bid_amount_sum" style="position:relative;margin-bottom:2px;">
+        		<div style="height:27px;width:0px;background-color:rgba(109, 188, 191, 0.9);"></div>
+        		<p style="position:absolute;left:8px;top:3px;display:none;">投资总金额 <span></span> 元</p>
+	        </div>
+	        <div id="bid_amount_back_sum" style="position:relative;display:inline-block;">
+        		<div style="height:27px;background-color:rgba(243, 230, 162, 0.9);"></div>
+        		<p style="position:absolute;left:8px;top:3px;display:none;">已收 <span></span> 元</p>
+	        </div>
+	        <div id="bid_amount_waiting_sum" style="position:relative;display:inline-block;left:-4px;">
+        		<div style="height:27px;background-color:rgba(230, 157, 135, 0.9);"></div>
+        		<p style="position:absolute;left:8px;top:3px;display:none;">待收 <span></span> 元</p>
+	        </div>
+
+	        <div id="num_stat">
+	        	<p style="color:#999;margin-top:10px;margin-bottom:15px;font-size:13px;opacity:0;">投资标数<span id="bid_num"></span>笔均投资金额<span id="bid_amount_average"></span>平均利率<span id="bid_interest_average"></span>平均期限<span id="bid_term_average"></span></p>
+	        </div>
+
+	        <div id="bid_interest_sum" style="position:relative;margin-bottom:2px;">
+        		<div style="height:27px;width:0px;background-color:rgba(109, 188, 191, 0.9);"></div>
+        		<p style="position:absolute;left:8px;top:3px;display:none;">投资总利息 <span></span> 元</p>
+	        </div>
+	        <div id="bid_interest_back_sum" style="position:relative;display:inline-block;">
+        		<div style="height:27px;background-color:rgba(243, 230, 162, 0.9);"></div>
+        		<p style="position:absolute;left:8px;top:3px;display:none;">已收 <span></span> 元</p>
+	        </div>
+	        <div id="bid_interest_waiting_sum" style="position:relative;display:inline-block;left:-4px;">
+        		<div style="height:27px;background-color:rgba(230, 157, 135, 0.9);"></div>
+        		<p style="position:absolute;left:8px;top:3px;display:none;">待收 <span></span> 元</p>
+	        </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">不同初始评级信用标基本特征</div>
+    	<div id="plot14">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">不同初始评级信用标认证特征</div>
+    	<div id="plot15">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">不同初始评级信用标历史特征</div>
+    	<div id="plot16">
+    	</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    	<div class="plot-title">历史累计投资总金额</div>
+    	<div id="plot3">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    	<div class="plot-title">历史累计投资总利息</div>
+    	<div id="plot4">
+    	</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">历史每日投资金额</div>
+    	<div id="plot5">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">历史每日收入利息</div>
+    	<div id="plot6">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">历史每日平均利率</div>
+    	<div id="plot7">
+    	</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">历史每日投资标数</div>
+    	<div id="plot8">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">历史每日笔均投资金额</div>
+    	<div id="plot9">
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    	<div class="plot-title">历史每日平均期限</div>
+    	<div id="plot10">
+    	</div>
+    </div>
+</div>
+<div id="plot11">
+	<span class="fa fa-fw fa-angle-down" style="position:absolute;top:75px;z-index:99;color:#999;opacity:0;"></span>
+	<span class="fa fa-fw fa-angle-down" style="position:absolute;top:125px;z-index:99;color:#999;opacity:0;" id="arrow2"></span>
+
+	<div id="modes">
+        <input type="text" class="form-control" value="信用标数量" readOnly="readOnly">
+        <div class="cell" name="信用标数量">信用标数量</div>
+        <div class="cell" name="投资总金额">投资总金额</div>
+    </div>
+    <div id="params">
+        <input type="text" class="form-control" value="初始评级" readOnly="readOnly">
+        <div class="cell" name="初始评级">初始评级</div>
+        <div class="cell" name="借款类型">借款类型</div>
+        <div class="cell" name="年龄区间">年龄区间</div>
+        <div class="cell" name="性别">性别</div>
+        <div class="cell" name="是否首标">是否首标</div>
+        <div class="cell" name="期限区间">期限区间</div>
+    </div>
+    <div class="plot-title" style="margin-bottom:10px;">不同特征下信用标数量和借款总金额历史比例</div>
+    <svg width="1000" height="500">
+        <g></g>
+    </svg>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" id="p12">
+    	<div class="plot-title">信用标借款期限和剩余期限</div>
+    	<div id="plot12">
+    	</div>
+    	<div id="terms">
+	        <input type="text" class="form-control" value="信用标数量" readOnly="readOnly">
+	        <div class="cell" name="信用标数量">信用标数量</div>
+	        <div class="cell" name="投资总金额">投资总金额</div>
+	    </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    	<div class="plot-title">历史每月信用标当前剩余期限</div>
+    	<div id="plot13">
+    	</div>
+    </div>
+</div>
+<div id="plot17">
+	<span class="fa fa-fw fa-angle-down" style="position:absolute;top:75px;z-index:99;color:#999;opacity:0;"></span>
+	<div id="params2">
+        <input type="text" class="form-control" value="初始评级" readOnly="readOnly">
+        <div class="cell" name="初始评级">初始评级</div>
+        <div class="cell" name="借款类型">借款类型</div>
+        <div class="cell" name="年龄区间">年龄区间</div>
+        <div class="cell" name="性别">性别</div>
+        <div class="cell" name="是否首标">是否首标</div>
+        <div class="cell" name="期限区间">期限区间</div>
+    </div>
+    <div class="plot-title" style="margin-bottom:20px;">不同特征下信用标历史累计利率和逾期率</div>
+    <svg width="1000" height="500">
+    	<g>
+    		<text></text>	
+    	</g>
+    </svg>
+    <div id="info">
+    	<h4><span></span><span style="margin-left:12px;"></span></h4>
+    	<p>历史累计利率：<span id="s1" style="font-size:15px;color:#fff;margin-right:6px;"></span>%</p>
+    	<p>历史累计逾期率：<span id="s2" style="font-size:15px;color:#fff;margin-right:6px;"></span>%</p>
+    	<p>当月新增待收利息：<span id="s3" style="font-size:15px;color:#fff;margin-right:6px;"></span>元</p>
+    	<p>当月新增逾期金额：<span id="s4" style="font-size:15px;color:#fff;margin-right:6px;"></span>元</p>
+    </div>
+</div>
 <script>
 $(document).ready(function() {
 	$('.menu-wrap a').removeClass('active');
     $('#nav2').addClass('active');
+
+    var dataset = eval({{dataset | safe}});
+    console.log(dataset);
+
+    var colorset = ['rgba(243, 230, 162, 0.9)', 'rgba(234, 126, 83, 0.9)', 'rgba(221, 107, 102, 0.9)', 'rgba(230, 157, 135, 0.9)', 'rgba(215, 135, 230, 0.9)', 'rgba(110, 113, 199, 0.9)', 'rgba(109, 188, 191, 0.9)', 'rgba(117, 179, 117, 0.9)'];
+
+    for (var i = 0; i < dataset['tags'].length; i++) {
+    	$('#tags').append('<span>' + dataset['tags'][i] + '</span>');
+    }
+    $('#plot1 #age').text(dataset['age']);
+    $('#plot1 p').animate({opacity: 1}, 1000);
+    $('#plot1 span').animate({opacity: 1}, 1000);
+
+    var width2 = $('#plot2').width() - 12;
+    $('#plot2 #bid_amount_sum div').animate({width: width2}, 1000, function(){
+    	$('#plot2 #bid_amount_sum span').text(dataset['json']['bid_stat']['bid_amount_sum']);
+    	$('#plot2 #bid_amount_sum p').fadeIn();
+    });
+    $('#plot2 #bid_amount_back_sum div').animate({width: width2 * dataset['json']['bid_stat']['bid_amount_back_sum'] / dataset['json']['bid_stat']['bid_amount_sum']}, 1000, function(){
+    	$('#plot2 #bid_amount_back_sum span').text(dataset['json']['bid_stat']['bid_amount_back_sum']);
+    	$('#plot2 #bid_amount_back_sum p').fadeIn();
+    });
+    $('#plot2 #bid_amount_waiting_sum div').animate({width: width2 * (1 - dataset['json']['bid_stat']['bid_amount_back_sum'] / dataset['json']['bid_stat']['bid_amount_sum'])}, 1000, function(){
+    	$('#plot2 #bid_amount_waiting_sum span').text(dataset['json']['bid_stat']['bid_amount_sum'] - dataset['json']['bid_stat']['bid_amount_back_sum']);
+    	$('#plot2 #bid_amount_waiting_sum p').fadeIn();
+    });
+
+    $('#plot2 #bid_num').text(dataset['json']['bid_stat']['bid_num']);
+    $('#plot2 #bid_amount_average').text(dataset['json']['bid_stat']['bid_amount_average'].toFixed(2));
+    $('#plot2 #bid_interest_average').text(dataset['json']['bid_stat']['bid_interest_average'].toFixed(2));
+    $('#plot2 #bid_term_average').text(dataset['json']['bid_stat']['bid_term_average'].toFixed(2));
+    $('#plot2 #num_stat p').animate({opacity: 1}, 1000);
+
+    $('#plot2 #bid_interest_sum div').animate({width: width2}, 1000, function(){
+    	$('#plot2 #bid_interest_sum span').text(dataset['json']['bid_stat']['bid_interest_sum'] + dataset['json']['bid_stat']['bid_interest_waiting_sum']);
+    	$('#plot2 #bid_interest_sum p').fadeIn();
+    });
+    $('#plot2 #bid_interest_back_sum div').animate({width: width2 * dataset['json']['bid_stat']['bid_interest_sum'] / (dataset['json']['bid_stat']['bid_interest_sum'] + dataset['json']['bid_stat']['bid_interest_waiting_sum'])}, 1000, function(){
+    	$('#plot2 #bid_interest_back_sum span').text(dataset['json']['bid_stat']['bid_interest_sum']);
+    	$('#plot2 #bid_interest_back_sum p').fadeIn();
+    });
+    $('#plot2 #bid_interest_waiting_sum div').animate({width: width2 * dataset['json']['bid_stat']['bid_interest_waiting_sum'] / (dataset['json']['bid_stat']['bid_interest_sum'] + dataset['json']['bid_stat']['bid_interest_waiting_sum'])}, 1000, function(){
+    	$('#plot2 #bid_interest_waiting_sum span').text(dataset['json']['bid_stat']['bid_interest_waiting_sum']);
+    	$('#plot2 #bid_interest_waiting_sum p').fadeIn();
+    });
+
+    var daily_option = {
+    	color: ['#d94e5d'],
+    	legend: {
+    		data: [],
+    		top: 10
+    	},
+        tooltip: {
+            trigger: 'axis',
+            formatter: '{b}<br/>{a}：{c}'
+        },
+        grid: {
+            left: 55,
+            right: 25,
+            top: 22,
+            bottom: 75
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+            data: dataset['json']['bid_stat']['dates']
+        },
+        dataZoom: {
+            height: 20,
+            show: true,
+            realtime: true,
+            start: 80,
+            end: 100,
+            y2: 20,
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitNumber: 2,
+            splitLine: {
+                show: false,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+            }
+        },
+        series: {
+            name: '',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            data: []
+        }
+    };
+
+    var plot5 = echarts.init(document.getElementById('plot5'), 'dark');
+    daily_option.color = [colorset[2]];
+    daily_option.series.name = '历史每日投资金额';
+    daily_option.series.data = dataset['json']['bid_stat']['daily_amount'];
+    daily_option.grid.left = 65;
+    daily_option.tooltip.formatter = '{b}<br/>{a}：{c}元';
+    plot5.setOption(daily_option);
+
+    var plot6 = echarts.init(document.getElementById('plot6'), 'dark');
+    daily_option.color = [colorset[1]];
+    daily_option.series.name = '历史每日收入利息';
+    daily_option.series.data = dataset['json']['bid_stat']['daily_interest'];
+    daily_option.grid.left = 60;
+    daily_option.tooltip.formatter = '{b}<br/>{a}：{c}元';
+    plot6.setOption(daily_option);
+
+    var plot7 = echarts.init(document.getElementById('plot7'), 'dark');
+    daily_option.color = [colorset[3]];
+    daily_option.series.name = '历史每日平均利率';
+    daily_option.series.data = dataset['json']['bid_stat']['daily_rate'];
+    daily_option.grid.left = 40;
+    daily_option.tooltip.formatter = '{b}<br/>{a}：{c}%';
+    plot7.setOption(daily_option);
+
+    var plot8 = echarts.init(document.getElementById('plot8'), 'dark');
+    daily_option.color = [colorset[4]];
+    daily_option.series.name = '历史每日投资标数';
+    daily_option.series.data = dataset['json']['bid_stat']['daily_num'];
+    daily_option.grid.left = 50;
+    daily_option.tooltip.formatter = '{b}<br/>{a}：{c}个';
+    plot8.setOption(daily_option);
+
+    var plot9 = echarts.init(document.getElementById('plot9'), 'dark');
+    daily_option.color = [colorset[5]];
+    daily_option.series.name = '历史每日笔均投资金额';
+    daily_option.series.data = dataset['json']['bid_stat']['daily_amount_average'];
+    daily_option.grid.left = 50;
+    daily_option.tooltip.formatter = '{b}<br/>{a}：{c}元';
+    plot9.setOption(daily_option);
+
+    var plot10 = echarts.init(document.getElementById('plot10'), 'dark');
+    daily_option.color = [colorset[7]];
+    daily_option.series.name = '历史每日平均期限';
+    daily_option.series.data = dataset['json']['bid_stat']['daily_term'];
+    daily_option.grid.left = 40;
+    daily_option.tooltip.formatter = '{b}<br/>{a}：{c}月';
+    plot10.setOption(daily_option);
+
+    var plot3 = echarts.init(document.getElementById('plot3'), 'dark');
+    daily_option.color = ['rgba(109, 188, 191, 1)', 'rgba(243, 230, 162, 1)'];
+    daily_option.series = [{
+    	name: '累计投资总金额',
+        type: 'line',
+        symbol: 'none',
+        showSymbol: false,
+        smooth: true,
+        data: dataset['json']['bid_stat']['daily_amount_sum']
+    }, {
+    	name: '累计已收回本金',
+        type: 'line',
+        symbol: 'none',
+        showSymbol: false,
+        smooth: true,
+        data: dataset['json']['bid_stat']['daily_amount_sum_back']
+    }];
+    daily_option.legend.data = ['累计投资总金额', '累计已收回本金'];
+    daily_option.yAxis.axisLabel.formatter = '{value}万';
+    daily_option.grid.left = 65;
+    daily_option.grid.top = 45;
+    daily_option.tooltip.formatter = '';
+    daily_option.yAxis.splitLine.show = true;
+    daily_option.yAxis.splitNumber = 3;
+    plot3.setOption(daily_option);
+
+    var plot4 = echarts.init(document.getElementById('plot4'), 'dark');
+    daily_option.series = [{
+    	name: '累计投资总利息',
+        type: 'line',
+        symbol: 'none',
+        showSymbol: false,
+        smooth: true,
+        data: dataset['json']['bid_stat']['daily_interest_sum_total']
+    }, {
+    	name: '累计已收回利息',
+        type: 'line',
+        symbol: 'none',
+        showSymbol: false,
+        smooth: true,
+        data: dataset['json']['bid_stat']['daily_interest_sum']
+    }];
+    daily_option.legend.data = ['累计投资总利息', '累计已收回利息'];
+    daily_option.grid.left = 55;
+    plot4.setOption(daily_option);
+
+    echarts.connect([plot3, plot4, plot5, plot6, plot7, plot8, plot9, plot10]);
+
+    var plot11_margins = [10, 160, 20, 20];
+    var plot11_width = 1000;
+    var plot11_height = 500;
+    $('#plot11 #modes').css('left', $('#plot11').width() / 2 + plot11_width / 2 - 130);
+    $('#plot11 #params').css('left', $('#plot11').width() / 2 + plot11_width / 2 - 130);
+    $('#plot11 .fa').css('left', $('#plot11').width() / 2 + plot11_width / 2 - 35);
+    var axis11 = [];
+    for (var i = 0; i < dataset['json']['bid_flow']['months'].length; i++) {
+    	axis11.push({
+	    	'x11': plot11_margins[3] + i * (plot11_width - plot11_margins[1] - plot11_margins[3]) / (dataset['json']['bid_flow']['months'].length - 1),
+	    	'y11': plot11_height - plot11_margins[2],
+	    	'x21': plot11_margins[3] + i * (plot11_width - plot11_margins[1] - plot11_margins[3]) / (dataset['json']['bid_flow']['months'].length - 1),
+	    	'y21': plot11_height - plot11_margins[2],
+	    	'x12': plot11_margins[3] + i * (plot11_width - plot11_margins[1] - plot11_margins[3]) / (dataset['json']['bid_flow']['months'].length - 1),
+	    	'y12': plot11_margins[0],
+	    	'x22': plot11_margins[3] + i * (plot11_width - plot11_margins[1] - plot11_margins[3]) / (dataset['json']['bid_flow']['months'].length - 1),
+	    	'y22': plot11_margins[0],
+	    });
+    };
+
+    setTimeout(function(){
+    	$('#plot11 #modes').animate({opacity: 1}, 1000);
+	    $('#plot11 #params').animate({opacity: 1}, 1000);
+	    $('#plot11 .fa').animate({opacity: 1}, 1000);
+    }, 1000);
+
+    d3.select('#plot11 svg g').selectAll('line.axis').data(axis11).enter().append('line').attr({
+    	class: 'axis',
+    	x1: function(d){
+    		return d['x11'];
+    	},
+    	y1: function(d){
+    		return d['y11'];
+    	},
+    	x2: function(d){
+    		return d['x21'];
+    	},
+    	y2: function(d){
+    		return d['y21'];
+    	},
+    	stroke: function(d, i){
+    		if (i % 3 == 0) {
+    			return 'rgba(240, 240, 240, 0.4)';
+    		}
+    		else {
+    			return 'rgba(240, 240, 240, 0.1)';
+    		}
+    	},
+    	'stroke-width': 1,
+        'shape-rendering': 'crispEdges',
+    }).transition().duration(1000).attr({
+    	x2: function(d){
+    		return d['x22'];
+    	},
+    	y2: function(d){
+    		return d['y22'];
+    	},
+    });
+
+    d3.select('#plot11 svg g').selectAll('text.axis').data(dataset['json']['bid_flow']['months']).enter().append('text').attr({
+    	class: 'axis',
+    	transform: function(d, i){
+    		return 'translate(' + (4 + i * (plot11_width - plot11_margins[1] - plot11_margins[3]) / (dataset['json']['bid_flow']['months'].length - 1)) + ',' + (plot11_height - plot11_margins[2] + 20) + ')';
+    	},
+    	'text-anchor': 'start',
+    	'fill': 'rgba(240, 240, 240, 0.8)',
+    	'font-size': 12
+    }).text(function(d, i){
+    	if (i % 3 == 0) {
+    		return d;
+    	}
+    	else {
+    		return '';
+    	}
+    });
+
+    var curve11_init = d3.svg.line().x(function(d) {
+        return (plot11_width - plot11_margins[1] - plot11_margins[3]) * d[0] + plot11_margins[3];
+    }).y(function(d) {
+        return plot11_height - plot11_margins[2];
+        // }).interpolate('linear');
+    }).interpolate('monotone');
+
+    var curve11 = d3.svg.line().x(function(d) {
+        return (plot11_width - plot11_margins[1] - plot11_margins[3]) * d[0] + plot11_margins[3];
+    }).y(function(d) {
+        return plot11_height - plot11_margins[2] - (plot11_height - plot11_margins[0] - plot11_margins[2]) * d[1] * 0.9;
+        // }).interpolate('linear');
+    }).interpolate('monotone');
+
+    var param11 = '初始评级';
+    var mode11 = 0;
+    var data11 = [];
+    for (var i = 0; i < dataset['json']['bid_flow']['params'][param11].length; i++) {
+    	data11.push(i);
+    }
+    var plot11_paths = d3.select('#plot11 svg g').selectAll('path').data(data11, function(d) {
+        return d;
+    });
+    plot11_paths.enter().append('path').attr('d', function(d, i) {
+        return curve11_init(dataset['json']['bid_flow']['flow'][param11][mode11][0]);
+    }).attr('name', function(d) {
+        return d;
+    }).attr('fill', function(d, i) {
+        return colorset[i];
+    }).attr('fill-opacity', 0).transition().duration(1000).attr('fill-opacity', 0.8).attr('d', function(d, i) {
+        return curve11(dataset['json']['bid_flow']['flow'][param11][mode11][i]);
+    });
+
+    var plot11_legends = d3.select('#plot11 svg g').selectAll('rect').data(data11, function(d) {
+        return d;
+    });
+    plot11_legends.enter().append('rect').attr({
+    	x: function(d, i){
+    		return plot11_width - 120;
+    	},
+    	y: function(d, i){
+    		return plot11_height - plot11_margins[2];
+    	},
+    	width: 24,
+    	height: 14,
+    	fill: function(d, i){
+    		return colorset[i];
+    	},
+    	'fill-opacity': 0
+    }).transition().delay(function(d){
+    	return d * 100;
+    }).duration(1000).attr('y', function(d, i){
+		return 130 + plot11_margins[0] + 30 * i;
+	}).attr('fill-opacity', 0.9);
+    var plot11_texts = d3.select('#plot11 svg g').selectAll('text.legend').data(dataset['json']['bid_flow']['params'][param11], function(d) {
+        return d;
+    });
+    plot11_texts.enter().append('text').attr({
+    	class: 'legend',
+    	transform: function(d, i){
+    		return 'translate(' + (plot11_width - 80) + ',' + (plot11_height - plot11_margins[2]) + ')';
+    	},
+    	'text-anchor': 'start',
+    	'fill': 'rgba(240, 240, 240, 0.9)',
+    	'font-size': 12,
+    	'fill-opacity': 0,
+    	'dx': 0
+    }).text(function(d){
+    	return d;
+    }).transition().delay(function(d, i){
+    	return i * 100;
+    }).duration(1000).attr('transform', function(d, i){
+		return 'translate(' + (plot11_width - 80) + ',' + (141 + plot11_margins[0] + 30 * i) + ')';
+	}).attr('fill-opacity', 0.9);
+
+    $('#plot11 #modes input').click(function(event) {
+        $('#plot11 #modes').addClass('active');
+        $('#plot11 #modes .cell').show();
+    });
+    $('#plot11 #modes .cell').click(function(event) {
+        $('#plot11 #modes').removeClass('active');
+        $('#plot11 #modes input').val($(this).text());
+        $('#plot11 #modes .cell').hide();
+        mode11 = $('#plot11 #modes input').val();
+        if (mode11 == '信用标数量') {
+        	mode11 = 0;
+        }
+        else {
+        	mode11 = 1;
+        }
+        flow();
+    });
+
+    $('#plot11 #params input').click(function(event) {
+        $('#plot11 #params').addClass('active');
+        $('#plot11 #params .cell').show();
+        $('#plot11 #arrow2').hide();
+    });
+    $('#plot11 #params .cell').click(function(event) {
+        $('#plot11 #arrow2').show();
+
+        $('#plot11 #params').removeClass('active');
+        $('#plot11 #params input').val($(this).text());
+        $('#plot11 #params .cell').hide();
+        param11 = $('#plot11 #params input').val();
+
+        flow();
+    });
+
+    function flow() {
+    	data11 = [];
+        for (var i = 0; i < dataset['json']['bid_flow']['params'][param11].length; i++) {
+	    	data11.push(i);
+	    }
+
+    	plot11_paths = d3.select('#plot11 svg g').selectAll('path').data(data11, function(d) {
+	        return d;
+	    });
+
+		plot11_paths.exit().transition().duration(1000).attr({
+	    	d: function(d, i) {
+		        return curve11_init(dataset['json']['bid_flow']['flow'][param11][mode11][0]);
+		    },
+		    'fill-opacity': 0
+	    }).remove();
+
+    	plot11_paths.transition().duration(1000).attr('d', function(d, i) {
+	        return curve11(dataset['json']['bid_flow']['flow'][param11][mode11][i]);
+	    }).attr('fill', function(d, i) {
+	        return colorset[i];
+	    });
+
+	    plot11_paths.enter().append('path').attr('d', function(d, i) {
+	        return curve11_init(dataset['json']['bid_flow']['flow'][param11][mode11][0]);
+	    }).attr('name', function(d) {
+	        return d;
+	    }).attr('fill', function(d, i) {
+	        return colorset[i];
+	    }).attr('fill-opacity', 0).transition().duration(1000).attr('fill-opacity', 0.8).attr('d', function(d, i) {
+	        return curve11(dataset['json']['bid_flow']['flow'][param11][mode11][i]);
+	    });
+
+		plot11_texts = d3.select('#plot11 svg g').selectAll('text.legend').data(dataset['json']['bid_flow']['params'][param11], function(d) {
+	        return d;
+	    });
+
+	    plot11_texts.exit().transition().duration(1000).attr({
+	    	dx: 50,
+	    	'fill-opacity': 0
+	    }).remove();
+
+	    plot11_texts.transition().delay(function(d, i){
+	    	return i * 100;
+	    }).duration(1000).attr('transform', function(d, i){
+			return 'translate(' + (plot11_width - 80) + ',' + (141 + plot11_margins[0] + 30 * i) + ')';
+		});
+
+	    plot11_texts.enter().append('text').attr({
+	    	class: 'legend',
+	    	transform: function(d, i){
+	    		return 'translate(' + (plot11_width - 80) + ',' + (plot11_height - plot11_margins[2]) + ')';
+	    	},
+	    	'text-anchor': 'start',
+	    	'fill': 'rgba(240, 240, 240, 0.9)',
+	    	'font-size': 12,
+	    	'fill-opacity': 0,
+	    	'dx': 0
+	    }).text(function(d){
+	    	return d;
+	    }).transition().delay(function(d, i){
+	    	return i * 100;
+	    }).duration(1000).attr('transform', function(d, i){
+			return 'translate(' + (plot11_width - 80) + ',' + (141 + plot11_margins[0] + 30 * i) + ')';
+		}).attr('fill-opacity', 0.9);
+
+		plot11_legends = d3.select('#plot11 svg g').selectAll('rect').data(data11, function(d) {
+	        return d;
+	    });
+
+	    plot11_legends.exit().transition().duration(1000).attr({
+	    	x: function(d, i){
+	    		return plot11_width;
+	    	},
+	    	y: function(d, i){
+	    		return plot11_height - plot11_margins[2];
+	    	},
+	    	'fill-opacity': 0
+	    }).remove();
+
+	    plot11_legends.transition().delay(function(d, i){
+	    	return i * 100;
+	    }).duration(1000).attr('y', function(d, i){
+			return 130 + plot11_margins[0] + 30 * i;
+		});
+
+	    plot11_legends.enter().append('rect').attr({
+	    	x: function(d, i){
+	    		return plot11_width - 120;
+	    	},
+	    	y: function(d, i){
+	    		return plot11_height - plot11_margins[2];
+	    	},
+	    	width: 24,
+	    	height: 14,
+	    	fill: function(d, i){
+	    		return colorset[i];
+	    	},
+	    	'fill-opacity': 0
+	    }).transition().delay(function(d){
+	    	return d * 100;
+	    }).duration(1000).attr('y', function(d, i){
+			return 130 + plot11_margins[0] + 30 * i;
+		}).attr('fill-opacity', 0.9);
+	}
+
+    var mode12 = 0;
+    var plot12 = echarts.init(document.getElementById('plot12'), 'dark');
+    var option12 = {
+        // color: ['rgba(109, 188, 191, 1)', 'rgba(243, 230, 162, 1)'],
+        color: [colorset[1], colorset[0]],
+        legend: {
+            data: ['借款期限', '剩余期限'],
+            top: 20,
+            left: 100
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+        },
+        grid: {
+            left: 80,
+            right: 30,
+            top: 65,
+            bottom: 40
+        },
+        xAxis: {
+            type: 'category',
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true,
+                formatter: '{value}月'
+            },
+            data: dataset['json']['bid_terms']['terms']
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+            	formatter: '{value}个',
+                margin: 12
+            }
+        },
+        series: dataset['json']['bid_terms']['data'][mode12]
+    };
+    plot12.setOption(option12);
+
+    var plot13 = echarts.init(document.getElementById('plot13'), 'dark');
+    var colorset13 = [];
+    for (var i = 2; i < colorset.length; i++) {
+    	colorset13.push(colorset[i]);
+    }
+    var option13 = {
+        // color: ['rgba(109, 188, 191, 1)', 'rgba(243, 230, 162, 1)'],
+        color: colorset13,
+        legend: {
+            data: dataset['json']['bid_terms_history']['ranges'],
+            top: 20,
+            left: 100
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+        },
+        grid: {
+            left: 75,
+            right: 30,
+            top: 65,
+            bottom: 40
+        },
+        xAxis: {
+            type: 'category',
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true,
+            },
+            data: dataset['json']['bid_terms_history']['months']
+        },
+        yAxis: {
+            type: 'value',
+            scale: true,
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+            	formatter: '{value}个',
+                margin: 12
+            }
+        },
+        series: dataset['json']['bid_terms_history']['data'][mode12]
+    };
+    plot13.setOption(option13);
+
+    $('#p12 #terms input').click(function(event) {
+        $('#p12 #terms').addClass('active');
+        $('#p12 #terms .cell').show();
+    });
+    $('#p12 #terms .cell').click(function(event) {
+        $('#p12 #terms').removeClass('active');
+        $('#p12 #terms input').val($(this).text());
+        $('#p12 #terms .cell').hide();
+        mode12 = $('#p12 #terms input').val();
+        if (mode12 == '信用标数量') {
+        	mode12 = 0;
+        	option12.grid.left = 80;
+        	option12.yAxis.axisLabel.formatter = '{value}个';
+        	option13.grid.left = 80;
+        	option13.yAxis.axisLabel.formatter = '{value}个';
+        }
+        else {
+        	mode12 = 1;
+        	option12.grid.left = 60;
+        	option12.yAxis.axisLabel.formatter = '{value}万';
+        	option13.grid.left = 60;
+        	option13.yAxis.axisLabel.formatter = '{value}万';
+        }
+
+        plot12 = echarts.init(document.getElementById('plot12'), 'dark');
+        option12.series = dataset['json']['bid_terms']['data'][mode12];
+        plot12.setOption(option12);
+
+        plot13 = echarts.init(document.getElementById('plot13'), 'dark');
+        option13.series = dataset['json']['bid_terms_history']['data'][mode12];
+        plot13.setOption(option13);
+    });
+
+	var plot14 = echarts.init(document.getElementById('plot14'), 'dark');
+	var plot15 = echarts.init(document.getElementById('plot15'), 'dark');
+	var plot16 = echarts.init(document.getElementById('plot16'), 'dark');
+    var option14 = {
+        color: colorset,
+        legend: {
+            // data: dataset['json']['bid_radar']['legend'],
+            data: ['AAA', 'AA'],
+            top: 17,
+        },
+        tooltip: {},
+        radar: {
+            center: ['50%', '57%'],
+            radius: '55%',
+            splitArea: {
+                show: false
+            },
+            // startAngle: 20,
+            splitLine: {
+                lineStyle: {
+                    color: ['rgba(200, 200, 200, 0.3)']
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(200, 200, 200, 0.3)'
+                }
+            },
+            indicator: dataset['json']['bid_radar']['indicators'][0]
+        },
+        series: [{
+            name: '',
+            type: 'radar',
+            data: dataset['json']['bid_radar']['data'][0],
+            symbol: 'none'
+        }]
+    };
+    plot14.setOption(option14);
+    option14.legend.data = ['A', 'B', 'C', 'D'];
+    option14.radar.center[1] = '55%';
+    option14.radar.indicator = dataset['json']['bid_radar']['indicators'][1];
+    option14.series[0]['data'] = dataset['json']['bid_radar']['data'][1];
+    plot15.setOption(option14);
+    option14.legend.data = ['E', 'F'];
+    option14.radar.center[1] = '58%';
+    option14.radar.indicator = dataset['json']['bid_radar']['indicators'][2];
+    option14.series[0]['data'] = dataset['json']['bid_radar']['data'][2];
+    plot16.setOption(option14);
+    echarts.connect([plot14, plot15, plot16]);
+
+    var param17 = '初始评级';
+    var plot17_margins = [10, 20, 20, 180];
+    var plot17_width = 1000;
+    var plot17_height = 500;
+    var gap17 = 30
+    $('#plot17 #params2').css('right', $('#plot17').width() / 2 + plot17_width / 2 - 110);
+    $('#plot17 .fa').css('right', $('#plot17').width() / 2 + plot17_width / 2 - 105);
+    $('#plot17 #info').css('right', $('#plot17').width() / 2 + plot17_width / 2 - 85);
+    var axis17 = [];
+    for (var i = 0; i < dataset['json']['bid_bad']['months'].length; i++) {
+    	axis17.push({
+	    	'x1': plot17_margins[3] + (i + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1),
+	    	'y1': plot17_height / 2,
+	    	'x2': plot17_margins[3] + (i + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1),
+	    	'y2': plot17_height / 2 - 5,
+	    });
+    };
+    axis17.push({
+    	'x1': plot17_margins[3],
+    	'y1': 0,
+    	'x2': plot17_margins[3],
+    	'y2': plot17_height
+    });
+    axis17.push({
+    	'x1': plot17_margins[3],
+    	'y1': plot17_height / 2,
+    	'x2': plot17_width - plot17_margins[1],
+    	'y2': plot17_height / 2
+    });
+
+    var yAxis17 = [];
+    var N = 5;
+    for (var i = 0; i < N; i++) {
+    	axis17.push({
+	    	'x1': plot17_margins[3],
+	    	'y1': plot17_height / 2 - gap17 - i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[0]),
+	    	'x2': plot17_margins[3] + 5,
+	    	'y2': plot17_height / 2 - gap17 - i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[0])
+	    });
+	    yAxis17.push([plot17_height / 2 - gap17 - i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[0]), (i * dataset['json']['bid_bad']['max_r']['interest'][param17] / (N - 1) * 100).toFixed(1), param17]);
+	    axis17.push({
+	    	'x1': plot17_margins[3],
+	    	'y1': plot17_height / 2 + gap17 + i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[2]),
+	    	'x2': plot17_margins[3] + 5,
+	    	'y2': plot17_height / 2 + gap17 + i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[2])
+	    });
+	    yAxis17.push([plot17_height / 2 + gap17 + i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[2]), (i * dataset['json']['bid_bad']['max_r']['bad'][param17] / (N - 1) * 100).toFixed(1), param17]);
+	        }
+
+    setTimeout(function(){
+	    $('#plot17 #params2').animate({opacity: 1}, 1000);
+	    $('#plot17 .fa').animate({opacity: 1}, 1000);
+    }, 1000);
+
+    d3.select('#plot17 svg g').selectAll('line.axis').data(axis17).enter().append('line').attr({
+    	class: 'axis',
+    	x1: function(d){
+    		return d['x1'];
+    	},
+    	y1: function(d){
+    		return d['y1'];
+    	},
+    	x2: function(d){
+    		return d['x2'];
+    	},
+    	y2: function(d){
+    		return d['y2'];
+    	},
+    	'stroke': 'rgba(240, 240, 240, 0.4)',
+    	'stroke-width': 1,
+        'shape-rendering': 'crispEdges',
+    });
+
+    d3.select('#plot17 svg g').selectAll('text.xaxis').data(dataset['json']['bid_bad']['months']).enter().append('text').attr({
+    	class: 'xaxis',
+    	transform: function(d, i){
+    		return 'translate(' + (plot17_margins[3] + (i + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1)) + ',' + (plot17_height / 2 + 15) + ')';
+    	},
+    	'text-anchor': 'middle',
+    	'fill': 'rgba(240, 240, 240, 0.8)',
+    	'font-size': 12
+    }).text(function(d, i){
+    	if (i % 2 == 0) {
+    		return d;
+    	}
+    	else {
+    		return '';
+    	}
+    });
+    d3.select('#plot17 svg g').selectAll('text.yaxis').data(yAxis17).enter().append('text').attr({
+    	class: 'yaxis',
+    	transform: function(d, i){
+    		return 'translate(' + (plot17_margins[3] - 8) + ',' + (d[0] + 5) + ')';
+    	},
+    	'text-anchor': 'end',
+    	'fill': 'rgba(240, 240, 240, 0.8)',
+    	'font-size': 12,
+    	'opacity': 0,
+    	'dy': 20
+    }).text(function(d, i){
+    	return d[1] + '%';
+    }).transition().duration(1000).attr('opacity', 1).attr('dy', 0);
+
+    var lines_interest17 = d3.select('#plot17 svg g').selectAll('line.interest').data(dataset['json']['bid_bad']['lines']['interest'][param17], function(d){
+    	return d;
+    });
+    lines_interest17.enter().append('line').attr({
+    	class: 'interest',
+    	x1: function(d){
+    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+    	},
+    	y1: function(d){
+    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+    	},
+    	x2: function(d){
+    		return plot17_margins[3] + (d[3] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+    	},
+    	y2: function(d){
+    		return plot17_height / 2 - gap17 - d[4] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+    	},
+    	'stroke': function(d){
+    		return colorset[d[0]];
+    	},
+    	'opacity': 0.4,
+    	'stroke-width': 1,
+    });
+
+    var lines_bad17 = d3.select('#plot17 svg g').selectAll('line.bad').data(dataset['json']['bid_bad']['lines']['bad'][param17], function(d){
+    	return d;
+    });
+    lines_bad17.enter().append('line').attr({
+    	class: 'bad',
+    	x1: function(d){
+    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+    	},
+    	y1: function(d){
+    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+    	},
+    	x2: function(d){
+    		return plot17_margins[3] + (d[3] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+    	},
+    	y2: function(d){
+    		return plot17_height / 2 + gap17 + d[4] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+    	},
+    	'stroke': function(d){
+    		return colorset[d[0]];
+    	},
+    	'opacity': 0.4,
+    	'stroke-width': 1,
+    });
+
+    var interest17 = d3.select('#plot17 svg g').selectAll('circle.interest').data(dataset['json']['bid_bad']['rates']['interest'][param17]).enter().append('circle').attr({
+    	class: 'interest',
+    	cx: function(d) {
+    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+    	},
+    	cy: function(d) {
+    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+    	},
+    	r: function(d, i){
+    		var x = i % 26;
+    		var y = Math.floor(i / 26);
+    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
+    	},
+    	fill: function(d){
+    		return colorset[d[0]];
+    	},
+    	'fill-opacity': 0.7,
+    	name: function(d) {
+    		return dataset['json']['bid_bad']['params'][param17][d[0]];
+    	},
+    	'id': function(d) {
+    		return d[1];
+    	}
+    });
+
+    var bad17 = d3.select('#plot17 svg g').selectAll('circle.bad').data(dataset['json']['bid_bad']['rates']['bad'][param17]).enter().append('circle').attr({
+    	class: 'bad',
+    	cx: function(d) {
+    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+    	},
+    	cy: function(d) {
+    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+    	},
+    	r: function(d, i){
+    		var x = i % 26;
+    		var y = Math.floor(i / 26);
+    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
+    	},
+    	fill: function(d){
+    		return colorset[d[0]];
+    	},
+    	'fill-opacity': 0.7,
+    	name: function(d) {
+    		return dataset['json']['bid_bad']['params'][param17][d[0]];
+    	},
+    	'id': function(d) {
+    		return d[1];
+    	}
+    });
+
+    var data17 = [];
+    for (var i = 0; i < dataset['json']['bid_bad']['params'][param17].length; i++) {
+    	data17.push(i);
+    }
+    var legends17 = d3.select('#plot17 svg g').selectAll('rect').data(data17, function(d) {
+        return d;
+    });
+    legends17.enter().append('rect').attr({
+    	x: function(d, i){
+    		return 80;
+    	},
+    	y: function(d, i){
+    		return 80 + plot17_margins[0] + 30 * i;
+    	},
+    	width: 24,
+    	height: 14,
+    	fill: function(d, i){
+    		return colorset[i];
+    	},
+    	'fill-opacity': 0.9
+    });
+
+    var texts17 = d3.select('#plot17 svg g').selectAll('text.legend').data(dataset['json']['bid_bad']['params'][param17], function(d) {
+        return d;
+    });
+    texts17.enter().append('text').attr({
+    	class: 'legend',
+    	transform: function(d, i){
+    		return 'translate(' + 65 + ',' + (91 + plot17_margins[0] + 30 * i) + ')';
+    	},
+    	'text-anchor': 'end',
+    	'fill': 'rgba(240, 240, 240, 0.9)',
+    	'font-size': 12,
+    	'fill-opacity': 0.9,
+    	'dx': 0
+    }).text(function(d){
+    	return d;
+    });
+
+    $('#plot17').on('mouseenter', 'circle', function(event) {
+    	var c = $(this).attr('class');
+    	var name = $(this).attr('name');
+    	var id = $(this).attr('id');
+
+    	$('#info').show();
+    	$('#info h4 span:first-child').text(param17);
+    	var i = 0;
+    	for (; i < dataset['json']['bid_bad']['params'][param17].length; i++) {
+    		if (dataset['json']['bid_bad']['params'][param17][i] == name) {
+    			break;
+    		}
+    	}
+    	$('#info h4 span:last-child').css('color', colorset[i]).text(name);
+		$('#info #s1').text((dataset['json']['bid_bad']['rates']['interest'][param17][i * 26 + parseInt(id)][2] * 100).toFixed(1));
+		$('#info #s2').text((dataset['json']['bid_bad']['rates']['bad'][param17][i * 26 + parseInt(id)][2] * 100).toFixed(1));
+		$('#info #s3').text(parseInt(dataset['json']['bid_bad']['interest'][param17][name][parseInt(id)]));
+		$('#info #s4').text(parseInt(dataset['json']['bid_bad']['bad'][param17][name][parseInt(id)]));
+
+    	lines_interest17.transition().duration(400).attr('opacity', function(d){
+    		if (dataset['json']['bid_bad']['params'][param17][d[0]] == name) {
+    			return 0.4;
+    		}
+    		else {
+    			return 0.05;
+    		}
+    	});
+    	lines_bad17.transition().duration(400).attr('opacity', function(d){
+    		if (dataset['json']['bid_bad']['params'][param17][d[0]] == name) {
+    			return 0.4;
+    		}
+    		else {
+    			return 0.05;
+    		}
+    	});
+    	interest17.transition().duration(400).attr({
+    		'fill-opacity': function(d) {
+    			if (dataset['json']['bid_bad']['params'][param17][d[0]] == name) {
+    				return 0.7;
+    			}
+    			else {
+    				return 0.05;
+    			}
+    		},
+    		r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		if (dataset['json']['bid_bad']['params'][param17][d[0]] == name && d[1] == id) {
+	    			return 6 + 30 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
+	    		}
+	    		else {
+	    			return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
+	    		}
+	    	},
+    	});
+    	bad17.transition().duration(400).attr({
+    		'fill-opacity': function(d) {
+    			if (dataset['json']['bid_bad']['params'][param17][d[0]] == name) {
+    				return 0.7;
+    			}
+    			else {
+    				return 0.05;
+    			}
+    		},
+    		r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		if (dataset['json']['bid_bad']['params'][param17][d[0]] == name && d[1] == id) {
+	    			return 6 + 30 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
+	    		}
+	    		else {
+	    			return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
+	    		}
+	    	},
+    	});
+    });
+
+    $('#plot17').on('mouseleave', 'circle', function(event) {
+    	$('#info').hide();
+    	lines_interest17.transition().duration(400).attr('opacity', 0.4);
+    	lines_bad17.transition().duration(400).attr('opacity', 0.4);
+    	interest17.transition().duration(400).attr({
+    		'fill-opacity': 0.7,
+    		r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
+	    	},
+    	});
+    	bad17.transition().duration(400).attr({
+    		'fill-opacity': 0.7,
+    		r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
+	    	},
+    	});
+    });
+
+    var labels17 = [{
+    	'text': '利率',
+    	'x': plot17_width - plot17_margins[1] - 62,
+    	'y': plot17_height / 2 - gap17
+    }, {
+    	'text': '逾期',
+    	'x': plot17_margins[3] + 27,
+    	'y': plot17_height / 2 + gap17 + 64
+    }];
+    d3.select('#plot17 svg g').selectAll('text.labels').data(labels17).enter().append('text').attr({
+    	class: 'labels',
+    	transform: function(d, i){
+    		return 'translate(' + d['x'] + ',' + d['y'] + ')';
+    	},
+    	'text-anchor': 'start',
+    	'fill': 'rgba(240, 240, 240, 0.9)',
+    	'font-size': 16,
+    	'fill-opacity': 0.9,
+    }).text(function(d){
+    	return d['text'];
+    });
+
+    $('#plot17 #params2 input').click(function(event) {
+        $('#plot17 #params2').addClass('active');
+        $('#plot17 #params2 .cell').show();
+    });
+    $('#plot17 #params2 .cell').click(function(event) {
+        $('#plot17 #params2').removeClass('active');
+        $('#plot17 #params2 input').val($(this).text());
+        $('#plot17 #params2 .cell').hide();
+        param17 = $('#plot17 #params2 input').val();
+        
+        compare();
+    });
+
+    function compare() {
+    	data17 = [];
+        for (var i = 0; i < dataset['json']['bid_bad']['params'][param17].length; i++) {
+	    	data17.push(i);
+	    }
+
+	    texts17 = d3.select('#plot17 svg g').selectAll('text.legend').data(dataset['json']['bid_bad']['params'][param17], function(d) {
+	        return d;
+	    });
+	    texts17.exit().transition().duration(1000).attr({
+	    	dx: -50,
+	    	'fill-opacity': 0
+	    }).remove();
+
+	    texts17.transition().delay(function(d, i){
+	    	return i * 100;
+	    }).duration(1000).attr({
+	    	'transform': function(d, i){
+	    		return 'translate(' + 65 + ',' + (91 + plot17_margins[0] + 30 * i) + ')';
+	    	},
+	    });
+
+	    texts17.enter().append('text').attr({
+	    	class: 'legend',
+	    	transform: function(d, i){
+	    		return 'translate(' + 65 + ',' + (plot17_height - plot17_margins[2]) + ')';
+	    	},
+	    	'text-anchor': 'end',
+	    	'fill': 'rgba(240, 240, 240, 0.9)',
+	    	'font-size': 12,
+	    	'fill-opacity': 0,
+	    	'dx': 0
+	    }).text(function(d){
+	    	return d;
+	    }).transition().delay(function(d, i){
+	    	return i * 100;
+	    }).duration(1000).attr('transform', function(d, i){
+			return 'translate(' + 65 + ',' + (91 + plot17_margins[0] + 30 * i) + ')';
+		}).attr('fill-opacity', 0.9);
+
+		legends17 = d3.select('#plot17 svg g').selectAll('rect').data(data17, function(d) {
+	        return d;
+	    });
+	    legends17.exit().transition().duration(1000).attr({
+	    	x: function(d, i){
+	    		return 0;
+	    	},
+	    	y: function(d, i){
+	    		return plot17_height - plot17_margins[2];
+	    	},
+	    	'fill-opacity': 0
+	    }).remove();
+
+	    legends17.transition().delay(function(d, i){
+	    	return i * 100;
+	    }).duration(1000).attr('y', function(d, i){
+			return 80 + plot17_margins[0] + 30 * i;
+		});
+
+	    legends17.enter().append('rect').attr({
+	    	x: function(d, i){
+	    		return 80;
+	    	},
+	    	y: function(d, i){
+	    		return plot17_height - plot17_margins[2];
+	    	},
+	    	width: 24,
+	    	height: 14,
+	    	fill: function(d, i){
+	    		return colorset[i];
+	    	},
+	    	'fill-opacity': 0
+	    }).transition().delay(function(d){
+	    	return d * 100;
+	    }).duration(1000).attr('y', function(d, i){
+			return 80 + plot17_margins[0] + 30 * i;
+		}).attr('fill-opacity', 0.9);
+
+		var yAxis17 = [];
+	    var N = 5;
+	    for (var i = 0; i < N; i++) {
+		    yAxis17.push([plot17_height / 2 - gap17 - i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[0]), (i * dataset['json']['bid_bad']['max_r']['interest'][param17] / (N - 1) * 100).toFixed(1), param17]);
+		    yAxis17.push([plot17_height / 2 + gap17 + i / (N - 1) * (plot17_height / 2 - gap17 - plot17_margins[2]), (i * dataset['json']['bid_bad']['max_r']['bad'][param17] / (N - 1) * 100).toFixed(1), param17]);
+		}
+		yAxis17 = d3.select('#plot17 svg g').selectAll('text.yaxis').data(yAxis17, function(d) {
+			return d;
+		});
+		yAxis17.exit().transition().duration(1000).attr('dy', -20).attr('opacity', 0).remove();
+		yAxis17.transition().duration(1000).attr('transform', function(d){
+			return 'translate(' + (plot17_margins[3] - 8) + ',' + (d[0] + 5) + ')';
+		});
+		yAxis17.enter().append('text').attr({
+	    	class: 'yaxis',
+	    	transform: function(d, i){
+	    		return 'translate(' + (plot17_margins[3] - 8) + ',' + (d[0] + 5) + ')';
+	    	},
+	    	'text-anchor': 'end',
+	    	'fill': 'rgba(240, 240, 240, 0.8)',
+	    	'font-size': 12,
+	    	'opacity': 0,
+	    	'dy': 20
+	    }).text(function(d, i){
+	    	return d[1] + '%';
+	    }).transition().duration(1000).attr('opacity', 1).attr('dy', 0);
+
+	    interest17 = d3.select('#plot17 svg g').selectAll('circle.interest').data(dataset['json']['bid_bad']['rates']['interest'][param17], function(d){
+	    	return d;
+	    })
+	    interest17.exit().transition().duration(1000).attr('r', 0).remove();
+	    interest17.transition().duration(1000).attr({
+	    	cx: function(d) {
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	cy: function(d) {
+	    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+	    	},
+	    	r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
+	    	},
+	    	fill: function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'fill-opacity': 0.7,
+	    	name: function(d) {
+	    		return dataset['json']['bid_bad']['params'][param17][d[0]];
+	    	},
+	    	'id': function(d) {
+	    		return d[1];
+	    	}
+	    });
+	    interest17.enter().append('circle').attr({
+	    	class: 'interest',
+	    	cx: function(d) {
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	cy: function(d) {
+	    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+	    	},
+	    	r: 0,
+	    	fill: function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'fill-opacity': 0.7,
+	    	name: function(d) {
+	    		return dataset['json']['bid_bad']['params'][param17][d[0]];
+	    	},
+	    	'id': function(d) {
+	    		return d[1];
+	    	}
+	    }).transition().duration(1000).attr({
+	    	r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
+	    	},
+	    });
+
+	    lines_interest17 = d3.select('#plot17 svg g').selectAll('line.interest').data(dataset['json']['bid_bad']['lines']['interest'][param17], function(d){
+	    	return d;
+	    });
+	    lines_interest17.exit().transition().duration(1000).attr('opacity', 0);
+	    lines_interest17.transition().duration(1000).attr({
+	    	x1: function(d){
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y1: function(d){
+	    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+	    	},
+	    	x2: function(d){
+	    		return plot17_margins[3] + (d[3] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y2: function(d){
+	    		return plot17_height / 2 - gap17 - d[4] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+	    	},
+	    	'stroke': function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'opacity': 0.4
+	    });
+	    lines_interest17.enter().append('line').attr({
+	    	class: 'interest',
+	    	x1: function(d){
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y1: function(d){
+	    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+	    	},
+	    	x2: function(d){
+	    		return plot17_margins[3] + (d[3] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y2: function(d){
+	    		return plot17_height / 2 - gap17 - d[4] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
+	    	},
+	    	'stroke': function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'opacity': 0,
+	    	'stroke-width': 1,
+	    }).transition().duration(1000).attr('opacity', 0.4);
+
+	    bad17 = d3.select('#plot17 svg g').selectAll('circle.bad').data(dataset['json']['bid_bad']['rates']['bad'][param17], function(d){
+	    	return d;
+	    })
+	    bad17.exit().transition().duration(1000).attr('r', 0).remove();
+	    bad17.transition().duration(1000).attr({
+	    	cx: function(d) {
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	cy: function(d) {
+	    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+	    	},
+	    	r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
+	    	},
+	    	fill: function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'fill-opacity': 0.7,
+	    	name: function(d) {
+	    		return dataset['json']['bid_bad']['params'][param17][d[0]];
+	    	},
+	    	'id': function(d) {
+	    		return d[1];
+	    	}
+	    });
+	    bad17.enter().append('circle').attr({
+	    	class: 'bad',
+	    	cx: function(d) {
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	cy: function(d) {
+	    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+	    	},
+	    	r: 0,
+	    	fill: function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'fill-opacity': 0.7,
+	    	name: function(d) {
+	    		return dataset['json']['bid_bad']['params'][param17][d[0]];
+	    	},
+	    	'id': function(d) {
+	    		return d[1];
+	    	}
+	    }).transition().duration(1000).attr({
+	    	r: function(d, i){
+	    		var x = i % 26;
+	    		var y = Math.floor(i / 26);
+	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
+	    	},
+	    });
+
+	    lines_bad17 = d3.select('#plot17 svg g').selectAll('line.bad').data(dataset['json']['bid_bad']['lines']['bad'][param17], function(d){
+	    	return d;
+	    });
+	    lines_bad17.exit().transition().duration(1000).attr('opacity', 0);
+	    lines_bad17.transition().duration(1000).attr({
+	    	x1: function(d){
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y1: function(d){
+	    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+	    	},
+	    	x2: function(d){
+	    		return plot17_margins[3] + (d[3] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y2: function(d){
+	    		return plot17_height / 2 + gap17 + d[4] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+	    	},
+	    	'stroke': function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'opacity': 0.4
+	    });
+	    lines_bad17.enter().append('line').attr({
+	    	class: 'bad',
+	    	x1: function(d){
+	    		return plot17_margins[3] + (d[1] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y1: function(d){
+	    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+	    	},
+	    	x2: function(d){
+	    		return plot17_margins[3] + (d[3] + 1) * (plot17_width - plot17_margins[1] - plot17_margins[3]) / (dataset['json']['bid_bad']['months'].length + 1);
+	    	},
+	    	y2: function(d){
+	    		return plot17_height / 2 + gap17 + d[4] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
+	    	},
+	    	'stroke': function(d){
+	    		return colorset[d[0]];
+	    	},
+	    	'opacity': 0,
+	    	'stroke-width': 1,
+	    }).transition().duration(1000).attr('opacity', 0.4);
+
+    }
 });
 </script>
 {% endblock %}
