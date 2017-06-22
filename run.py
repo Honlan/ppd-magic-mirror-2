@@ -135,6 +135,11 @@ def user():
 def invest():
 	return render_template('invest.html', auth=is_auth())
 
+# 交流社区
+@app.route('/chat')
+def chat():
+	return render_template('chat.html', auth=is_auth())
+
 # 授权登陆
 @app.route('/auth')
 def auth():

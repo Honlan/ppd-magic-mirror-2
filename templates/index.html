@@ -367,6 +367,28 @@ $(document).ready(function() {
     var dataset = eval({{dataset | safe}});
     console.log(dataset);
 
+    var select1 = false;
+    var select2 = false;
+    var select3 = false;
+
+    $('body').click(function(event) {
+        if (select1) {
+            $('#p3 #xAxis').removeClass('active');
+            $('#p3 #xAxis .cell').hide();
+            select1 = false;
+        }
+        if (select2) {
+            $('#p3 #param').removeClass('active');
+            $('#p3 #param .cell').hide();
+            select2 = false;
+        }
+        if (select3) {
+            $('#p8 #group').removeClass('active');
+            $('#p8 #group .cell').hide();
+            select3 = false;
+        }
+    });
+
     var colorset = ['rgba(221, 107, 102, 0.9)', 'rgba(215, 135, 230, 0.9)', 'rgba(110, 113, 199, 0.9)', 'rgba(109, 188, 191, 0.9)', 'rgba(117, 179, 117, 0.9)', 'rgba(243, 230, 162, 0.9)'];
 
     function num_to_week(n) {
@@ -547,7 +569,8 @@ $(document).ready(function() {
         'y': []
     };
     var legend3 = [];
-    for (var key in dataset['json']['bid_line_stat'][param3]) {
+    for (var i = 0; i < dataset['json']['bid_status_stat']['stats'][param3].length; i++) {
+        var key = dataset['json']['bid_status_stat']['stats'][param3][i]['name'];
         legend3.push(key);
         data3['x'] = dataset['json']['bid_line_stat'][param3][key][mode3][0];
         data3['y'].push({
@@ -633,27 +656,35 @@ $(document).ready(function() {
     plot3.setOption(option3);
 
     $('#p3 #param input').click(function(event) {
+        event.stopPropagation();
+        select2 = true;
         $('#p3 #param').addClass('active');
         $('#p3 #param .cell').show();
     });
     $('#p3 #param .cell').click(function(event) {
+        event.stopPropagation();
         $('#p3 #param').removeClass('active');
         $('#p3 #param input').val($(this).text());
         $('#p3 #param .cell').hide();
         param3 = $('#p3 #param input').val();
         set_bid_line_param();
+        select2 = false;
     });
 
     $('#p3 #xAxis input').click(function(event) {
+        event.stopPropagation();
+        select1 = true;
         $('#p3 #xAxis').addClass('active');
         $('#p3 #xAxis .cell').show();
     });
     $('#p3 #xAxis .cell').click(function(event) {
+        event.stopPropagation();
         $('#p3 #xAxis').removeClass('active');
         $('#p3 #xAxis input').val($(this).text());
         $('#p3 #xAxis .cell').hide();
         mode3 = parseInt($(this).attr('name'));
         set_bid_line_param();
+        select1 = false;
     });
 
     function set_bid_line_param() {
@@ -662,7 +693,8 @@ $(document).ready(function() {
             'y': []
         };
         legend3 = [];
-        for (var key in dataset['json']['bid_line_stat'][param3]) {
+        for (var i = 0; i < dataset['json']['bid_status_stat']['stats'][param3].length; i++) {
+            var key = dataset['json']['bid_status_stat']['stats'][param3][i]['name'];
             legend3.push(key);
             data3['x'] = dataset['json']['bid_line_stat'][param3][key][mode3][0];
             data3['y'].push({
@@ -1486,10 +1518,13 @@ $(document).ready(function() {
     echarts.connect([plot8, plot10, plot11]);
 
     $('#p8 #group input').click(function(event) {
+        event.stopPropagation();
+        select3 = true;
         $('#p8 #group').addClass('active');
         $('#p8 #group .cell').show();
     });
     $('#p8 #group .cell').click(function(event) {
+        event.stopPropagation();
         $('#p8 #group').removeClass('active');
         $('#p8 #group input').val($(this).text());
         $('#p8 #group .cell').hide();
@@ -1548,6 +1583,7 @@ $(document).ready(function() {
         plot10.setOption(option10);
         plot11.setOption(option11);
         echarts.connect([plot8, plot10, plot11]);
+        select3 = false;
     });
 });
 </script>

@@ -364,6 +364,35 @@ $(document).ready(function() {
     var dataset = eval({{dataset | safe}});
     console.log(dataset);
 
+    var select1 = false;
+    var select2 = false;
+    var select3 = false;
+    var select4 = false;
+
+    $('body').click(function(event) {
+    	console.log()
+        if (select1) {
+            $('#plot11 #params').removeClass('active');
+            $('#plot11 #params .cell').hide();
+            select1 = false;
+        }
+        if (select2) {
+            $('#plot11 #modes').removeClass('active');
+            $('#plot11 #modes .cell').hide();
+            select2 = false;
+        }
+        if (select3) {
+            $('#p12 #terms').removeClass('active');
+            $('#p12 #terms .cell').hide();
+            select3 = false;
+        }
+        if (select4) {
+            $('#plot17 #params2').removeClass('active');
+            $('#plot17 #params2 .cell').hide();
+            select4 = false;
+        }
+    });
+
     var colorset = ['rgba(243, 230, 162, 0.9)', 'rgba(234, 126, 83, 0.9)', 'rgba(221, 107, 102, 0.9)', 'rgba(230, 157, 135, 0.9)', 'rgba(215, 135, 230, 0.9)', 'rgba(110, 113, 199, 0.9)', 'rgba(109, 188, 191, 0.9)', 'rgba(117, 179, 117, 0.9)'];
 
     for (var i = 0; i < dataset['tags'].length; i++) {
@@ -720,10 +749,13 @@ $(document).ready(function() {
 	}).attr('fill-opacity', 0.9);
 
     $('#plot11 #modes input').click(function(event) {
+        event.stopPropagation();
+    	select2 = true;
         $('#plot11 #modes').addClass('active');
         $('#plot11 #modes .cell').show();
     });
     $('#plot11 #modes .cell').click(function(event) {
+    	event.stopPropagation();
         $('#plot11 #modes').removeClass('active');
         $('#plot11 #modes input').val($(this).text());
         $('#plot11 #modes .cell').hide();
@@ -735,14 +767,18 @@ $(document).ready(function() {
         	mode11 = 1;
         }
         flow();
+        select2 = false;
     });
 
     $('#plot11 #params input').click(function(event) {
+    	event.stopPropagation();
+    	select1 = true;
         $('#plot11 #params').addClass('active');
         $('#plot11 #params .cell').show();
         $('#plot11 #arrow2').hide();
     });
     $('#plot11 #params .cell').click(function(event) {
+    	event.stopPropagation();
         $('#plot11 #arrow2').show();
 
         $('#plot11 #params').removeClass('active');
@@ -751,6 +787,7 @@ $(document).ready(function() {
         param11 = $('#plot11 #params input').val();
 
         flow();
+        select1 = false;
     });
 
     function flow() {
@@ -980,10 +1017,13 @@ $(document).ready(function() {
     plot13.setOption(option13);
 
     $('#p12 #terms input').click(function(event) {
+    	event.stopPropagation();
+    	select3 = true;
         $('#p12 #terms').addClass('active');
         $('#p12 #terms .cell').show();
     });
     $('#p12 #terms .cell').click(function(event) {
+    	event.stopPropagation();
         $('#p12 #terms').removeClass('active');
         $('#p12 #terms input').val($(this).text());
         $('#p12 #terms .cell').hide();
@@ -1010,6 +1050,7 @@ $(document).ready(function() {
         plot13 = echarts.init(document.getElementById('plot13'), 'dark');
         option13.series = dataset['json']['bid_terms_history']['data'][mode12];
         plot13.setOption(option13);
+        select3 = false;
     });
 
 	var plot14 = echarts.init(document.getElementById('plot14'), 'dark');
@@ -1424,16 +1465,20 @@ $(document).ready(function() {
     });
 
     $('#plot17 #params2 input').click(function(event) {
+    	event.stopPropagation();
+    	select4 = true;
         $('#plot17 #params2').addClass('active');
         $('#plot17 #params2 .cell').show();
     });
     $('#plot17 #params2 .cell').click(function(event) {
+    	event.stopPropagation();
         $('#plot17 #params2').removeClass('active');
         $('#plot17 #params2 input').val($(this).text());
         $('#plot17 #params2 .cell').hide();
         param17 = $('#plot17 #params2 input').val();
         
         compare();
+        select4 = false;
     });
 
     function compare() {
