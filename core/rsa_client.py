@@ -49,6 +49,6 @@ class rsa_client:
 
     @staticmethod
     def decrypt(data):
-        data = base64.b64decode(data)
+        # data = base64.b64decode(data)
         PrivateKey = rsa.PrivateKey.load_pkcs1(Global.privatekey)
         return rsa.decrypt(data, PrivateKey)

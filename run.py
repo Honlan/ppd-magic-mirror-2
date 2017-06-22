@@ -164,7 +164,8 @@ def auth():
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
 	list_result = client.send(access_url, json.dumps(data), APPID, sign)
-	Username = rsa.decrypt(list_result[list_result.find('<UserName>') + len('<UserName>'):list_result.find('</UserName>')])
+	Username = list_result[list_result.find('<UserName>') + len('<UserName>'):list_result.find('</UserName>')]
+	# Username = rsa.decrypt(list_result[list_result.find('<UserName>') + len('<UserName>'):list_result.find('</UserName>')])
 
 	session['Username'] = Username
 
