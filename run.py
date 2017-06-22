@@ -163,15 +163,15 @@ def auth():
 	data = {"OpenID": OpenID}
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
-	list_result = client.send(access_url, json.dumps(data), APPID, sign)
-	Username = list_result[list_result.find('<UserName>') + len('<UserName>'):list_result.find('</UserName>')]
+	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+	Username = list_result
 	# Username = rsa.decrypt(list_result[list_result.find('<UserName>') + len('<UserName>'):list_result.find('</UserName>')])
 
 	session['Username'] = Username
 
 	(db,cursor) = connectdb()
 	cursor.execute("select count(*) as count from user where OpenID=%s", [OpenID])
-	count = count = cursor.fetchone()['count']
+	count = cursor.fetchone()['count']
 	if count > 0:
 		cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s where OpenID=%s', [AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, OpenID])
 	else:
