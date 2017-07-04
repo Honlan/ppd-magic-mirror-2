@@ -167,8 +167,8 @@ def auth():
 	sign = rsa.sign(sort_data)
 	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
 	list_result = json.loads(list_result)
-	UserName = rsa.decrypt(list_result['UserName'])
-	session['Username'] = UserName
+	Username = rsa.decrypt(list_result['UserName'])
+	session['Username'] = Username
 
 	(db,cursor) = connectdb()
 	cursor.execute("select count(*) as count from user where OpenID=%s", [OpenID])
