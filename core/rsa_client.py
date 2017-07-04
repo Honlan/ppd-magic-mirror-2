@@ -1,19 +1,12 @@
 # coding=utf-8
-try:
-    from __builtin__ import str
-except ImportError:
-    pass
+from __builtin__ import str
 
 __author__ = "yangl"
 
 
 import base64 
 import rsa
-
-try:
-    import Global
-except ImportError:
-    from core import Global
+import Global
  
 # rsa操作类
 class rsa_client:
@@ -28,8 +21,7 @@ class rsa_client:
         '''
         signdata = signdata.lower()
         PrivateKey = rsa.PrivateKey.load_pkcs1(Global.privatekey)
-        signature = base64.b64encode(rsa.sign(signdata.encode('utf-8'), PrivateKey, 'SHA-1'))
-
+        signature = base64.b64encode(rsa.sign(signdata, PrivateKey, 'SHA-1'))
         return signature
 #       
 
@@ -47,8 +39,17 @@ class rsa_client:
                 params += dic[0] + dic[1]
         return params
 
+
     @staticmethod
-    def decrypt(data):
-        data = base64.b64decode(data)
+    def encrypt(encryptdata):
+        PublicKey = rsa.PublicKey.load_pkcs1_openssl_pem(Global.publickey)
+        # PublicKey = rsa.PublicKey.load_pkcs1(Global.publickey)
+        encrypted = base64.b64encode(rsa.encrypt(encryptdata, PublicKey))
+        return encrypted
+
+    @staticmethod
+    def decrypt(decryptdata):
         PrivateKey = rsa.PrivateKey.load_pkcs1(Global.privatekey)
-        return rsa.decrypt(data, PrivateKey)
+        # decrypted = base64.b64decode(rsa.decrypt(decryptdata, PrivateKey))
+        decrypted = rsa.decrypt(base64.b64decode(decryptdata), PrivateKey)
+        return decrypted
