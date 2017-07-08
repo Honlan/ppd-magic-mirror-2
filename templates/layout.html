@@ -66,8 +66,8 @@
     .menu-button {
         width: 40px;
         height: 40px;
-        background-image: url("http://zhanghonglun.cn/pdi/static/img/avatar.png");
         border-radius: 50%;
+        opacity: 0;
     }
     
     .menu-wrap {
@@ -194,6 +194,7 @@
                     <p>拍知心</p>
                     {% if auth['is_auth'] %}
                     <button class="menu-button" id="open-button"></button>
+                    <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;height:40px;position:absolute;top:10px;right:20px;border-radius:50%;">
                     {% else %}
                     <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
                     {% endif %}
