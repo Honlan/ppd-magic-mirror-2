@@ -187,7 +187,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
     	<div id="plot1">
-    		<img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:60px;height:60px;border-radius:50%;margin: 20px auto;margin-top:30px;">
+    		<img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:60px;height:60px;border-radius:50%;margin:20px auto;margin-top:30px;opacity:0;">
     		<div id="tags"></div>
 	    	<p>我的拍龄<span class="number" id="age"></span>年</p>
 	    	<p>击败了<span class="number" id="other">75%</span>的用户</p>
@@ -370,7 +370,6 @@ $(document).ready(function() {
     var select4 = false;
 
     $('body').click(function(event) {
-    	console.log()
         if (select1) {
             $('#plot11 #params').removeClass('active');
             $('#plot11 #params .cell').hide();
@@ -399,6 +398,7 @@ $(document).ready(function() {
     	$('#tags').append('<span>' + dataset['tags'][i] + '</span>');
     }
     $('#plot1 #age').text(dataset['age']);
+    $('#plot1 img').animate({opacity: 1}, 1000);
     $('#plot1 p').animate({opacity: 1}, 1000);
     $('#plot1 span').animate({opacity: 1}, 1000);
 

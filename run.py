@@ -179,7 +179,7 @@ def auth():
 		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username) values(%s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username])
 	closedb(db,cursor)
 
-	return redirect(url_for('index'))
+	return redirect(url_for('user'))
 
 # 退出授权
 @app.route('/logout')
