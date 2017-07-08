@@ -50,15 +50,13 @@ body,
 /* Menu Button */
 .menu-button {
 	position: fixed;
-	right: 0;
+	right: 10px;
 	z-index: 1000;
 	margin: 1em;
 	padding: 0;
-	width: 2.5em;
-	height: 2.25em;
 	border: none;
 	text-indent: 2.5em;
-	font-size: 1.5em;
+	top: 10px;
 	color: transparent;
 	background: transparent;
 	outline: none;

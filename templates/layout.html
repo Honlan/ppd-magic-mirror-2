@@ -82,11 +82,6 @@
         color: #eee;
     }
     
-    /*.menu-button {
-        width: 2.25em;
-        height: 2em;
-    }*/
-    
     #footer {
         text-align: center;
         color: white;
@@ -192,7 +187,7 @@
                     <p>拍知心</p>
                     {% if auth['is_auth'] %}
                     <button class="menu-button" id="open-button">
-                        <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;border-radius:50%;position:relative;top:-10px;">
+                        <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;border-radius:50%;position:relative;top:-25px;">
                     </button>
                     {% else %}
                     <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
