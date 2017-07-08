@@ -64,7 +64,7 @@ body,
 	outline: none;
 }
 
-.menu-button::before {
+/*.menu-button::before {
 	position: absolute;
 	top: 0.5em;
 	right: 0.5em;
@@ -72,11 +72,11 @@ body,
 	left: 0.5em;
 	background: linear-gradient(#373a47 20%, transparent 20%, transparent 40%, #373a47 40%, #373a47 60%, transparent 60%, transparent 80%, #373a47 80%);
 	content: '';
-}
+}*/
 
-.menu-button:hover {
+/*.menu-button:hover {
 	opacity: 0.6;
-}
+}*/
 
 /* Close Button */
 .close-button {
