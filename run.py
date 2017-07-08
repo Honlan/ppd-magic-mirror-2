@@ -133,14 +133,6 @@ def user():
 # 投资顾问
 @app.route('/invest')
 def invest():
-	access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
-	data =  {
-	  "PageIndex": 1, 
-	  "StartDateTime": "2015-11-11 12:00:00.000"
-	}
-	sort_data = rsa.sort(data)
-	sign = rsa.sign(sort_data)
-	list_result = client.send(access_url,json.dumps(data) , appid, sign)
 	return render_template('invest.html', auth=is_auth())
 
 # 交流社区
