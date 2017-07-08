@@ -133,6 +133,14 @@ def user():
 # 投资顾问
 @app.route('/invest')
 def invest():
+	access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
+	data =  {
+	  "PageIndex": 1, 
+	  "StartDateTime": "2015-11-11 12:00:00.000"
+	}
+	sort_data = rsa.sort(data)
+	sign = rsa.sign(sort_data)
+	list_result = client.send(access_url,json.dumps(data) , appid, sign)
 	return render_template('invest.html', auth=is_auth())
 
 # 交流社区
@@ -179,6 +187,17 @@ def auth():
 		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username) values(%s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username])
 	closedb(db,cursor)
 
+	return redirect(url_for('index'))
+
+# 退出授权
+@app.route('/logout')
+def logout():
+	session.pop('Username')
+	session.pop('OpenID')
+	session.pop('AccessToken')
+	session.pop('RefreshToken')
+	session.pop('AuthTimestamp')
+	session.pop('ExpiresIn')
 	return redirect(url_for('index'))
 
 if __name__ == '__main__':

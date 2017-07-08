@@ -129,17 +129,22 @@
         margin-bottom: 0;
         box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
     }
-    
-    #auth {
+
+    #nav_auth {
+        position: absolute;
+        top: 24px;
+        font-size: 13px;
+        right: 40px;
         display: block;
+        width: 120px;
         margin: 0 auto;
-        margin-bottom: 20px;
-        padding: 12px 16px;
-        border-radius: 4px;
+        text-decoration: none;
+        padding: 10px 16px;
+        border-radius: 2px;
         border: 1px solid #f2f2f2;
         color: #f2f2f2;
-        font-size: 14px;
-        background-color: #15161b;
+        text-align: center;
+        background-color: #252732;
         -webkit-transition: color, background-color .6s;
         -ms-transition: color, background-color .6s;
         -moz-transition: color, background-color .6s;
@@ -147,9 +152,10 @@
         transition: color, background-color .6s;
     }
 
-    #auth:hover {
-        color: #d94e5d;
-        background-color: #f2f2f2;
+    #nav_auth:hover {
+        color: rgba(221, 107, 102, 0.9);
+        background-color: #fff;
+        cursor: pointer;
     }
     
     .BMap_cpyCtrl,
@@ -169,33 +175,28 @@
                     <a href="{{url_for('index')}}" id="nav1"><i class="fa fa-fw fa-paper-plane"></i><span>平台概览</span></a>
                     <a href="{{url_for('user')}}" id="nav2"><i class="fa fa-fw fa-star"></i><span>个人中心</span></a>
                     <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
-                    <a href="{{url_for('chat')}}" id="nav4"><i class="fa fa-fw fa-comment"></i><span>拍粉社区</span></a> {% if auth['is_auth'] %}
+                    <a href="{{url_for('chat')}}" id="nav4"><i class="fa fa-fw fa-comment"></i><span>拍粉社区</span></a>
+                    <a href="{{url_for('logout')}}"><i class="fa fa-fw fa-logout"></i><span>注销授权</span></a>
                     <div style="text-align:center;margin:30px 0;">
-                        <a href="{{url_for('user')}}" style="padding-left:0;padding-right:0;">
-                            <div style="text-align:center;">
-                                <span class="fa fa-fw fa-user" style="display:block;font-size:35px;color:#f2f2f2;margin:0 auto;margin-bottom:10px;"></span>
-                                <p style="margin-bottom:25px;"><span style="color:#fff;margin:0;margin-right:12px;">{{ auth['Username'] }}</span>您好</p>
-                                <p style="font-size:13px;margin-bottom:6px;"><span style="font-size:27px;color:#d94e5d;margin:0;margin-right:10px;">{{ auth['count'] }}</span></p>
-                                <p style="color:#888;font-size:13px;">授权登陆用户总数</p>
-                            </div>
-                        </a>
-                    </div>
-                    {% else %}
-                    <div style="text-align:center;margin:30px 0;">
-                        <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="auth">授权登陆</a>
+                        <p style="margin-bottom:25px;"><span style="color:#fff;margin:0;margin-right:12px;">{{ auth['Username'] }}</span>您好</p>
                         <p style="font-size:13px;margin-bottom:6px;"><span style="font-size:27px;color:#d94e5d;margin:0;margin-right:10px;">{{ auth['count'] }}</span></p>
                         <p style="color:#888;font-size:13px;">授权登陆用户总数</p>
                     </div>
-                    {% endif %}
                 </div>
             </nav>
         </div>
-        <button class="menu-button" id="open-button"></button>
         <div class="content-wrap">
             <div class="content">
-                <div id="header">
+                <div id="header" style="position:relative;">
                     <h1>魔镜杯</h1>
                     <p>拍知心</p>
+                    {% if auth['is_auth'] %}
+                    <button class="menu-button" id="open-button">
+                        <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;border-radius:50%;position:relative;top:-10px;">
+                    </button>
+                    {% else %}
+                    <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
+                    {% endif %}
                 </div>
                 <div style="padding:50px 60px;">
                     <div id="main">
