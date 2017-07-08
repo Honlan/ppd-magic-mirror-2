@@ -50,7 +50,7 @@ body,
 /* Menu Button */
 .menu-button {
 	position: fixed;
-	right: 20px;
+	right: 10px;
 	z-index: 1000;
 	margin: 1em;
 	padding: 0;

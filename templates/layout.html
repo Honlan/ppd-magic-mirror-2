@@ -180,7 +180,7 @@
                     <a href="{{url_for('logout')}}"><i class="fa fa-fw fa-sign-out"></i><span>注销授权</span></a>
                     <div style="text-align:center;margin:30px 0;">
                         <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;margin:0 auto;margin-bottom:20px;border-radius:50%;">
-                        <p style="margin-bottom:25px;"><span style="color:#fff;margin:0;margin-right:12px;">{{ auth['Username'] }}</span>您好</p>
+                        <p style="margin-bottom:25px;"><span style="color:#fff;margin:0;margin-right:12px;">{{ auth['Username'] }}</span></p>
                         <p style="font-size:13px;margin-bottom:6px;"><span style="font-size:27px;color:#d94e5d;margin:0;margin-right:10px;">{{ auth['count'] }}</span></p>
                         <p style="color:#888;font-size:13px;">授权登陆用户总数</p>
                     </div>
@@ -194,7 +194,7 @@
                     <p>拍知心</p>
                     {% if auth['is_auth'] %}
                     <button class="menu-button" id="open-button"></button>
-                    <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;height:40px;position:absolute;top:20px;right:35px;border-radius:50%;">
+                    <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;height:40px;position:absolute;top:20px;right:25px;border-radius:50%;">
                     {% else %}
                     <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
                     {% endif %}
@@ -215,5 +215,4 @@
     <script src="{{url_for('static',filename='js/classie.js')}}"></script>
     <script src="{{url_for('static',filename='js/main.js')}}"></script>
 </body>
-
 </html>
