@@ -1,12 +1,339 @@
 {% extends 'layout.html' %} {% block style %}
 <style>
+#plot1, #plot2 {
+	background-color: #2c2f3c;
+	margin-bottom: 30px;
+}
+#plot1 #sys, #plot2 #my {
+	padding: 30px 40px;
+}
+#plot2 #add {
+	color: #535d63;
+	text-align: center;
+	border: 3px solid #535d63;
+	border-radius: 6px;
+	font-size: 30px;
+	width: 25%;
+	height: 180px;
+	display: inline-block;
+	-webkit-transition: color, background-color .6s;
+    -ms-transition: color, background-color .6s;
+    -moz-transition: color, background-color .6s;
+    -o-transition: color, background-color .6s;
+    transition: color, background-color .6s;
+}
+#plot2 #add:hover {
+	cursor: pointer;
+	background-color: #252732;
+}
+#plot2 #add span {
+	margin-top: 75px;
+}
+#add_info {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(40, 40, 40, 0.8);
+    text-align: left;
+}
+#add_info_content {
+    width: 820px;
+    background-color: rgba(55, 58, 71, 0.8);
+    border: 1px solid #ddd;
+    padding: 30px 40px;
+    margin: 0 auto;
+    margin-top: 60px;
+    border-radius: 4px;
+    position: relative;
+}
+#add_info_content input {
+	display: inline-block;
+    color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 150px;
+    background-color: #444650;
+    font-size: 13px;
+    margin-left: 15px;
+}
+
+#add_info_content input:hover {
+    cursor: pointer;
+}
+#add_info_content span.title {
+	display: inline-block;
+	font-weight: normal;
+	padding: 4px 10px;
+	border: 1px solid #fff;
+	border-radius: 1px;
+	font-size: 13px;
+	margin-right: 20px;
+	width: 126px !important;
+	text-align: center;
+}
+#add_info_content span.title:hover {
+	cursor: default;
+}
+#add_info_content span.item {
+	display: inline-block;
+	padding: 4px 10px;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	font-size: 13px;
+	margin-right: 8px;
+	-webkit-transition: color, background-color .3s;
+    -ms-transition: color, background-color .3s;
+    -moz-transition: color, background-color .3s;
+    -o-transition: color, background-color .3s;
+    transition: color, background-color .3s;
+}
+#add_info_content span.item:hover {
+	cursor: pointer;
+}
+#add_info_content span.item.active {
+	background-color: #4a606d;
+	color: #fff;
+}
+#add_info_content button {
+	display: inline-block;
+    color: #fff;
+    outline: none;
+    box-shadow: none;
+    width: 100px;
+    background-color: rgba(55, 58, 71, 1);
+    border: 1px solid #fff;
+    border-radius: 1px;
+    font-size: 13px;
+    margin-right: 15px;
+}
+#add_info_content button:hover {
+	background-color: #4a606d;
+}
+#message {
+	position: absolute;
+	bottom: -10px;
+	right: 0px;
+	font-size: 13px;
+	color: #bbb;
+}
 </style>
 {% endblock %} {% block body %}
-功能开发中，敬请期待！
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+		<div id="plot1">
+			<div class="plot-title">系统自动投标策略</div>
+			<div id="sys">
+				暂无
+			</div>
+		</div>
+		<div id="plot2">
+			<div class="plot-title">我的自动投标策略</div>
+			<div id="my">
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<div id="plot3">
+			<div class="plot-title">我的投标策略偏好</div>
+		</div>
+	</div>
+</div>
+<div id="add_info">
+    <div id="add_info_content">
+        <h4 style="margin-top:0px;margin-bottom:25px;">
+        	新增个人投资策略
+        	<input type="text" name="name" placeholder="策略名称" class="form-control">
+        	<input type="text" name="description" placeholder="策略描述" class="form-control" style="width:400px;">
+        </h4>
+        <div style="margin-bottom:10px;">
+        	<span class="title">初始评级</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">AA</span>
+        	<span class="item">A</span>
+        	<span class="item">B</span>
+        	<span class="item">C</span>
+        	<span class="item">D</span>
+        	<span class="item">E</span>
+        	<span class="item">F</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">借款金额</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">1千以下</span>
+        	<span class="item">1千至5千</span>
+        	<span class="item">5千至1万</span>
+        	<span class="item">1万以上</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">借款期限</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">3个月以下</span>
+        	<span class="item">4至6个月</span>
+        	<span class="item">6至12个月</span>
+        	<span class="item">12个月以上</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">借款利率</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">13%以下</span>
+        	<span class="item">14-17%</span>
+        	<span class="item">18-21%</span>
+        	<span class="item">22%以上</span>
+        </div>
+        <!-- <div style="margin-bottom:18px;">
+        	<b>借款类型</b>
+        	<span class="active">不限</span>
+        </div> -->
+        <div style="margin-bottom:10px;">
+        	<span class="title">是否首标</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">是</span>
+        	<span class="item">否</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">年龄</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">20以下</span>
+        	<span class="item">21-30</span>
+        	<span class="item">31-40</span>
+        	<span class="item">41-50</span>
+        	<span class="item">50以上</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">性别</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">男</span>
+        	<span class="item">女</span>	
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">认证情况</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">手机认证</span> 
+        	<span class="item">户口认证</span> 
+        	<span class="item">视频认证</span> 
+        	<span class="item">学历认证</span> 
+        	<span class="item">征信认证</span> 
+        	<span class="item">淘宝认证</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">历史成功借款次数</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">有成功借款</span>
+        	<span class="item">无成功借款</span>
+        </div>
+        <!-- <div style="margin-bottom:10px;">
+        	<span class="title">历史成功借款金额</span>
+        	<span class="item active">不限</span>
+        </div> -->
+        <div style="margin-bottom:10px;">
+        	<span class="title">总待还本金</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">有待还</span>
+        	<span class="item">无待还</span>
+        </div>
+        <div style="margin-bottom:10px;">
+        	<span class="title">历史正常还款期数</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">有正常还款记录</span>
+        	<span class="item">无正常还款记录</span>
+        </div>
+        <div style="margin-bottom:30px;">
+        	<span class="title">历史逾期还款期数</span>
+        	<span class="item active all">不限</span>
+        	<span class="item">有逾期还款记录</span>
+        	<span class="item">无逾期还款记录</span>
+        </div>
+        <div style="position:relative;">
+        	<button id="save" class="form-control">新增</button>
+        	<button id="cancel" class="form-control">取消</button>
+        	<p id="message">策略新增后不能再进行修改，以便进行历史数据统计</p>
+        </div>
+    </div>
+</div>
 <script>
 $(document).ready(function() {
 	$('.menu-wrap a').removeClass('active');
     $('#nav3').addClass('active');
+
+    var dataset = eval({{dataset | safe}});
+    console.log(dataset);
+
+    if (dataset['my'].length == 0) {
+    	$('#plot2 #my').append("<div id='add'><span class='fa fa-fw fa-plus'></span></div>")
+    }
+
+    $('#add').click(function(event) {
+    	$('#add_info').fadeIn();
+    });
+
+    $('#add_info_content span.item').click(function(event) {
+    	if ($(this).text() == '不限') {
+    		$(this).siblings('span.item').removeClass('active');
+    		$(this).addClass('active');
+    	}
+    	else {
+    		$(this).toggleClass('active');
+    		var count = 0;
+    		$(this).siblings('span.item').each(function(index, el) {
+    			if ($(this).text() == '不限') {
+    				$(this).removeClass('active');
+    			}
+    			if ($(this).hasClass('active')) {
+    				count += 1;
+    			}
+    		});
+    		if (count == 0 && !$(this).hasClass('active')) {
+    			$(this).siblings('span.item.all').addClass('active');
+    		}
+    	}
+    });
+
+    $('#cancel').click(function(event) {
+    	$('#add_info').fadeOut();
+    });
+
+    $('#save').click(function(event) {
+    	if ($('#add_info_content input[name="name"]').val() == '' || $('#add_info_content input[name="description"]').val() == '') {
+    		$('#message').text('策略名称或策略描述不能为空');
+    	}
+    	else {
+    		var data = {};
+	    	$('#add_info_content span.title').each(function(index, el) {
+	    		var key = $(this).text();
+	    		if ($(this).siblings('span.all').hasClass('active')) {
+	    			data[key] = '不限';
+	    		}
+	    		else {
+	    			var t = '';
+	    			$(this).siblings('span.item').each(function(i, e) {
+	    				if (!$(this).hasClass('all') && $(this).hasClass('active')) {
+	    					t += $(this).text() + '_';
+	    				}
+	    			});
+	    			data[key] = t.substr(0, t.length - 1);
+	    		}
+	    	});
+	    	data['name'] = $('#add_info_content input[name="name"]').val();
+	    	data['description'] = $('#add_info_content input[name="description"]').val();
+	    	$.ajax({
+	    		url: '{{url_for("strategy_add")}}',
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: data,
+	    	})
+	    	.done(function(data) {
+	    		window.location.reload();
+	    	})
+	    	.fail(function() {
+	    	})
+	    	.always(function() {
+	    	});
+    	}
+    });
 });
 </script>
 {% endblock %}

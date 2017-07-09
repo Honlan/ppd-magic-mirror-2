@@ -15,7 +15,6 @@
     <script src="{{url_for('static',filename='lib/bootstrap.min.js')}}"></script>
     <link href="{{url_for('static',filename='fa/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='css/magic.min.css')}}" rel="stylesheet">
-    <link href="{{url_for('static',filename='css/menu_sideslide.css')}}" rel="stylesheet">
     <script src="{{url_for('static',filename='js/d3.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/dark.js')}}"></script>
@@ -43,6 +42,33 @@
         font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
         -webkit-font-smoothing: antialiased;
     }
+
+    #header #nav {
+        position: absolute;
+        right: 60px;
+        top: 27px;
+        font-size: 13px;
+    }
+    
+    #header #nav a {
+        text-decoration: none;
+        display: inline-block;
+        color: #888;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-right: 0px;
+        cursor: pointer;
+        transition: color .3s;
+        -o-transition: color .3s;
+        -ms-transition: color .3s;
+        -moz-transition: color .3s;
+        -webkit-transition: color .3s;
+    }
+    
+    #header #nav a.active,
+    #header #nav a:hover {
+        color: #eee;
+    }
     
     #header h1 {
         color: #eee;
@@ -61,32 +87,6 @@
         display: inline-block;
         margin-top: 0;
         margin-bottom: 0;
-    }
-
-    .menu-button {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        opacity: 0;
-    }
-    
-    .menu-wrap {
-        width: 220px;
-    }
-    
-    .menu-wrap a {
-        text-decoration: none;
-        display: inline-block;
-        color: #666;
-        padding: 12px 20px;
-        border-radius: 5px;
-        margin-right: 0px;
-        cursor: pointer;
-    }
-    
-    .menu-wrap a.active,
-    .menu-wrap a:hover {
-        color: #eee;
     }
     
     #footer {
@@ -155,8 +155,7 @@
     }
 
     #nav_auth:hover {
-        color: rgba(221, 107, 102, 0.9);
-        background-color: #fff;
+        background-color: #535d63;
         cursor: pointer;
     }
     
@@ -169,50 +168,29 @@
 </head>
 
 <body>
-    <div class="container" style="padding:0;">
-        <div class="menu-wrap">
-            <nav class="menu">
-                <div class="icon-list">
-                    <a href="{{url_for('index')}}" id="nav1"><i class="fa fa-fw fa-paper-plane"></i><span>平台概览</span></a>
-                    <a href="{{url_for('user')}}" id="nav2"><i class="fa fa-fw fa-star"></i><span>个人中心</span></a>
-                    <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
-                    <a href="{{url_for('chat')}}" id="nav4"><i class="fa fa-fw fa-comment"></i><span>拍粉社区</span></a>
-                    <a href="{{url_for('logout')}}"><i class="fa fa-fw fa-sign-out"></i><span>注销授权</span></a>
-                    <div style="text-align:center;margin:30px 0;">
-                        <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;margin:0 auto;margin-bottom:20px;border-radius:50%;">
-                        <p style="margin-bottom:25px;"><span style="color:#fff;margin:0;">{{ auth['Username'] }}</span></p>
-                        <p style="font-size:13px;margin-bottom:6px;"><span style="font-size:27px;color:#d94e5d;margin:0;margin-right:10px;">{{ auth['count'] }}</span></p>
-                        <p style="color:#888;font-size:13px;">授权登陆用户总数</p>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="content-wrap">
-            <div class="content">
-                <div id="header" style="position:relative;">
-                    <h1>魔镜杯</h1>
-                    <p>拍知心</p>
-                    {% if auth['is_auth'] %}
-                    <button class="menu-button" id="open-button"></button>
-                    <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:40px;height:40px;position:absolute;top:20px;right:25px;border-radius:50%;">
-                    {% else %}
-                    <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
-                    {% endif %}
-                </div>
-                <div style="padding:50px 60px;">
-                    <div id="main">
-                        {% block body %} {% endblock %}
-                    </div>
-                </div>
-                <div id="footer">
-                    <!-- <p>Copyright <span class="fa fa-fw fa-copyright"></span> 上海交通大学 DI -->
-                    <p>Copyright <span class="fa fa-fw fa-copyright"></span> 第二届拍拍贷魔镜杯
-                        <br/> <span style="font-size:13px;">数据应用大赛</span></p>
-                </div>
-            </div>
+    <div id="header">
+        <h1>魔镜杯</h1>
+        <p>拍知心</p>
+        {% if auth['is_auth'] %}
+        <a href="{{url_for('index')}}" id="nav1"><i class="fa fa-fw fa-paper-plane"></i><span>平台概览</span></a>
+        <a href="{{url_for('user')}}" id="nav2"><i class="fa fa-fw fa-star"></i><span>个人中心</span></a>
+        <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
+        <a href="{{url_for('chat')}}" id="nav4"><i class="fa fa-fw fa-comment"></i><span>拍粉社区</span></a>
+        <a href="{{url_for('logout')}}"><i class="fa fa-fw fa-sign-out"></i><span>注销授权</span></a>
+        {% else %}
+        <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
+        {% endif %}
+    </div>
+    <div style="padding:50px 60px;">
+        <div id="main">
+            {% block body %} {% endblock %}
         </div>
     </div>
-    <script src="{{url_for('static',filename='js/classie.js')}}"></script>
-    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+    <div id="footer">
+        <!-- <p>Copyright <span class="fa fa-fw fa-copyright"></span> 上海交通大学 DI -->
+        <p>Copyright <span class="fa fa-fw fa-copyright"></span> 第二届拍拍贷魔镜杯
+            <br/> <span style="font-size:13px;color:#888;">数据应用大赛</span></p>
+        <p style="font-size:13px;margin-top:5px;color:#ccc">已有<span style="color:#d94e5d;margin-left:10px;margin-right:10px;">{{ auth['count'] }}</span>名用户授权登陆</p>
+    </div>
 </body>
 </html>

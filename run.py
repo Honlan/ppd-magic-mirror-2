@@ -133,7 +133,9 @@ def user():
 # 投资顾问
 @app.route('/invest')
 def invest():
-	return render_template('invest.html', auth=is_auth())
+	dataset = {}
+	dataset['my'] = []
+	return render_template('invest.html', auth=is_auth(), dataset=json.dumps(dataset))
 
 # 交流社区
 @app.route('/chat')
@@ -191,6 +193,19 @@ def logout():
 	session.pop('AuthTimestamp')
 	session.pop('ExpiresIn')
 	return redirect(url_for('index'))
+
+# 新增个人策略
+@app.route('/strategy_add', methods=['POST'])
+def strategy_add():
+	data = dict(request.form)
+	name = data['name']
+	description = data['description']
+	data.pop('name')
+	data.pop('description')
+	(db,cursor) = connectdb()
+	cursor.execute("insert into strategy(OpenID, content, weight, active, name, description) values(%s, %s, %s, %s, %s, %s)", [0, json.dumps(data), 1, 0, name, description])
+	closedb(db,cursor)
+	return json.dumps({'result': 'ok', 'msg': '新增个人策略成功'})
 
 if __name__ == '__main__':
 	app.run(debug=True)
