@@ -42,7 +42,7 @@ class openapi_client:
         result = http_client.http_post(openapi_client.AUTHORIZE_URL,data)
         #result = gzip.GzipFile(fileobj=StringIO.StringIO(result),mode="r")
         #result = result.read().decode("gbk").encode("utf-8")
-        print("authorize_data:%s" % (result))
+        # print("authorize_data:%s" % (result))
         return result
         
     '''
@@ -55,7 +55,7 @@ class openapi_client:
     def refresh_token(appid,openid,refreshtoken):
         data = "{\"AppID\":\"%s\",\"OpenId\":\"%s\",\"RefreshToken\":\"%s\"}" % (appid,openid,refreshtoken)
         result = http_client.http_post(openapi_client.REFRESHTOKEN_URL,data)
-        print("refresh_token_data:%s" % (result))
+        # print("refresh_token_data:%s" % (result))
         return result
     
     '''
@@ -79,7 +79,7 @@ class openapi_client:
             headers["X-PPD-ACCESSTOKEN"] = accesstoken
         result = http_client.http_post(url,data,headers=headers)
         # json.loads(result)
-        print("send_data:\n%s" % (result))
+        # print("send_data:\n%s" % (result))
         return result
         
         

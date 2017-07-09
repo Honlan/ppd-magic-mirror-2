@@ -167,18 +167,23 @@ def auth():
 	}
 	sort_data = rsa.sort(data)
 	sign = rsa.sign(sort_data)
-	list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-	list_result = json.loads(list_result)
+	list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
 	Username = rsa.decrypt(list_result['UserName'])
 	session['Username'] = Username
+
+	access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+	data = {}
+	sort_data = rsa.sort(data)
+	sign = rsa.sign(sort_data)
+	balance = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))['Balance']
 
 	(db,cursor) = connectdb()
 	cursor.execute("select count(*) as count from user where OpenID=%s", [OpenID])
 	count = cursor.fetchone()['count']
 	if count > 0:
-		cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s where OpenID=%s', [AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, OpenID])
+		cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s, balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
 	else:
-		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username) values(%s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username])
+		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance, balanceBid, balanceWithdraw) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance']])
 	closedb(db,cursor)
 
 	return redirect(url_for('user'))
