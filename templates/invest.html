@@ -7,27 +7,59 @@
 #plot1 #sys, #plot2 #my {
 	padding: 30px 40px;
 }
-#plot2 #add {
+#plot2 #add, #plot1 .cell {
 	color: #535d63;
 	text-align: center;
-	border: 3px solid #535d63;
+	border: 2px solid #535d63;
 	border-radius: 6px;
 	font-size: 30px;
 	width: 25%;
-	height: 180px;
+	height: 160px;
 	display: inline-block;
-	-webkit-transition: color, background-color .6s;
-    -ms-transition: color, background-color .6s;
-    -moz-transition: color, background-color .6s;
-    -o-transition: color, background-color .6s;
-    transition: color, background-color .6s;
+	-webkit-transition: color, background-color 1s;
+    -ms-transition: color, background-color 1s;
+    -moz-transition: color, background-color 1s;
+    -o-transition: color, background-color 1s;
+    transition: color, background-color 1s;
+}
+#plot1 .cell {
+    padding: 10px 16px;
+    border: 2px solid #f2f2f2;
+    position: relative;
+}
+#plot1 .cell h5 {
+    font-size: 16px;
+    color: #f2f2f2;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(200, 200, 200, 1);
+}
+#plot1 .cell p {
+    font-size: 13px;
+    color: #eee;
+}
+#plot1 .cell:hover {
+    cursor: pointer;
+}
+#plot1 .cell.active {
+    background-color: rgba(117, 179, 117, 0.9);
+}
+#plot1 .cell.inactive {
+    background-color: rgba(221, 107, 102, 0.9);
+}
+#plot1 .cell span {
+    position: absolute;
+    bottom: 15px;
+    font-size: 14px;
+    color: #2c2f3c;
+    left: 50%;
+    margin-left: -21px;
 }
 #plot2 #add:hover {
 	cursor: pointer;
 	background-color: #252732;
 }
 #plot2 #add span {
-	margin-top: 75px;
+	margin-top: 65px;
 }
 #add_info {
     display: none;
@@ -127,7 +159,21 @@
 		<div id="plot1">
 			<div class="plot-title">系统自动投标策略</div>
 			<div id="sys">
-				暂无
+				{% for item in dataset['sys'] %}
+                    {% if item['active'] == 1%}
+                        <div class="cell active" id="{{item['id']}}">
+                            <h5>{{item['name']}}</h5>
+                            <p>{{item['description']}}</p>
+                            <span>已启用</span>
+                        </div>
+                    {% else %}
+                        <div class="cell inactive" id="{{item['id']}}">
+                            <h5>{{item['name']}}</h5>
+                            <p>{{item['description']}}</p>
+                            <span>已停用</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 			</div>
 		</div>
 		<div id="plot2">
@@ -152,6 +198,7 @@
         <div style="margin-bottom:10px;">
         	<span class="title">初始评级</span>
         	<span class="item active all">不限</span>
+            <span class="item">AAA</span>
         	<span class="item">AA</span>
         	<span class="item">A</span>
         	<span class="item">B</span>
@@ -259,10 +306,10 @@ $(document).ready(function() {
 	$('.menu-wrap a').removeClass('active');
     $('#nav3').addClass('active');
 
-    var dataset = eval({{dataset | safe}});
-    console.log(dataset);
+    var datasetJson = eval({{datasetJson | safe}});
+    console.log(datasetJson);
 
-    if (dataset['my'].length == 0) {
+    if (datasetJson['my'].length == 0) {
     	$('#plot2 #my').append("<div id='add'><span class='fa fa-fw fa-plus'></span></div>")
     }
 
@@ -304,10 +351,7 @@ $(document).ready(function() {
     		var data = {};
 	    	$('#add_info_content span.title').each(function(index, el) {
 	    		var key = $(this).text();
-	    		if ($(this).siblings('span.all').hasClass('active')) {
-	    			data[key] = '不限';
-	    		}
-	    		else {
+	    		if (!$(this).siblings('span.all').hasClass('active')) {
 	    			var t = '';
 	    			$(this).siblings('span.item').each(function(i, e) {
 	    				if (!$(this).hasClass('all') && $(this).hasClass('active')) {
@@ -333,6 +377,48 @@ $(document).ready(function() {
 	    	.always(function() {
 	    	});
     	}
+    });
+
+    $('#plot1 .cell').click(function(event) {
+        var $obj = $(this);
+        if ($(this).hasClass('active')) {
+            $.ajax({
+                url: '{{url_for("strategy_stop")}}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    strategyId: $(this).attr('id'),
+                    type: 'sys'
+                },
+            })
+            .done(function(data) {
+                $obj.removeClass('active').addClass('inactive');
+                $obj.children('span').text('已停用');
+            })
+            .fail(function() {
+            })
+            .always(function() {
+            });
+        }
+        else {
+            $.ajax({
+                url: '{{url_for("strategy_start")}}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    strategyId: $(this).attr('id'),
+                    type: 'sys'
+                },
+            })
+            .done(function(data) {
+                $obj.removeClass('inactive').addClass('active');
+                $obj.children('span').text('已启用');
+            })
+            .fail(function() {
+            })
+            .always(function() {
+            });
+        }
     });
 });
 </script>

@@ -14,6 +14,7 @@ import numpy as np
 from config import *
 import pprint
 import random
+from celery import Celery
 
 # ppdai api
 from openapi_client import openapi_client as client
@@ -27,6 +28,9 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.secret_key = SECRETKEY
 app.permanent_session_lifetime = timedelta(days=90)
+
+celery = Celery(app.name, broker=CELERY_BROKER_URL)
+celery.conf.update(app.config)
 
 # 判断是否已授权
 def is_auth():
@@ -134,8 +138,28 @@ def user():
 @app.route('/invest')
 def invest():
 	dataset = {}
-	dataset['my'] = []
-	return render_template('invest.html', auth=is_auth(), dataset=json.dumps(dataset))
+
+	# session['OpenID'] = '2fc103ba972f4212aaf5f3213d1968f1'
+	# session['Username'] = 'zhanghonglun'
+	(db,cursor) = connectdb()
+	cursor.execute("select * from strategy where OpenID=%s",[0])
+	dataset['sys'] = cursor.fetchall()
+	cursor.execute("select * from strategy where OpenID=%s",[session['OpenID']])
+	dataset['my'] = cursor.fetchall()
+	cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+	
+	sys_strategy = cursor.fetchone()['strategy']
+	if not sys_strategy == '':
+		sys_strategy = sys_strategy.split('-')
+		for s in sys_strategy:
+			for x in xrange(0, len(dataset['sys'])):
+				if int(dataset['sys'][x]['id']) == int(s):
+					dataset['sys'][x]['active'] = 1
+					break
+
+	closedb(db,cursor)
+
+	return render_template('invest.html', auth=is_auth(), datasetJson=json.dumps(dataset), dataset=dataset)
 
 # 交流社区
 @app.route('/chat')
@@ -208,9 +232,61 @@ def strategy_add():
 	data.pop('name')
 	data.pop('description')
 	(db,cursor) = connectdb()
-	cursor.execute("insert into strategy(OpenID, content, weight, active, name, description) values(%s, %s, %s, %s, %s, %s)", [0, json.dumps(data), 1, 0, name, description])
+	cursor.execute("insert into strategy(OpenID, content, weight, active, name, description) values(%s, %s, %s, %s, %s, %s)", [session['OpenID'], json.dumps(data), 1, 0, name, description])
+	# cursor.execute("insert into strategy(OpenID, content, weight, active, name, description) values(%s, %s, %s, %s, %s, %s)", [0, json.dumps(data), 1, 0, name, description])
 	closedb(db,cursor)
 	return json.dumps({'result': 'ok', 'msg': '新增个人策略成功'})
+
+# 开启策略投标
+@app.route('/strategy_start', methods=['POST'])
+def strategy_start():
+	(db,cursor) = connectdb()
+
+	data = request.form
+	if data['type'] == 'sys':
+		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+		sys_strategy = cursor.fetchone()['strategy']
+		if sys_strategy == '':
+			sys_strategy = data['strategyId']
+		else:
+			sys_strategy = sys_strategy + '-' + data['strategyId']
+		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
+	else:
+		pass
+	# strategy_autobid.apply_async(args=[data['strategyID'], session['OpenID']])
+	
+	closedb(db,cursor)
+	
+	return json.dumps({'result': 'ok', 'msg': '启用个人策略成功'})
+
+# 关闭策略投标
+@app.route('/strategy_stop', methods=['POST'])
+def strategy_stop():
+	(db,cursor) = connectdb()
+
+	data = request.form
+	if data['type'] == 'sys':
+		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+		sys_strategy = cursor.fetchone()['strategy'].split('-')
+		tmp = ''
+		for s in sys_strategy:
+			if not s == data['strategyId']:
+				tmp = tmp + s + '-'
+		if not tmp == '':
+			tmp = tmp[:-1]
+		sys_strategy = tmp
+		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
+	else:
+		pass
+	
+	closedb(db,cursor)
+
+	return json.dumps({'result': 'ok', 'msg': '停用个人策略成功'})
+
+# 监测投标
+@celery.task
+def strategy_autobid(strategyID, OpenID):
+	pass
 
 if __name__ == '__main__':
 	app.run(debug=True)

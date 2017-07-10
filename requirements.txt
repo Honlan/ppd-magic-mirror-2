@@ -2,3 +2,6 @@ Flask
 mysql-python
 numpy
 rsa
+celery
+redis
+Flask-Mail
