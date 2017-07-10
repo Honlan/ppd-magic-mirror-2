@@ -253,7 +253,7 @@ def strategy_start():
 		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
 	else:
 		pass
-	# strategy_autobid.apply_async(args=[data['strategyID'], session['OpenID']])
+	strategy_autobid.apply_async(args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken']])
 	
 	closedb(db,cursor)
 	
@@ -283,10 +283,43 @@ def strategy_stop():
 
 	return json.dumps({'result': 'ok', 'msg': '停用个人策略成功'})
 
-# 监测投标
+# 策略投标
 @celery.task
-def strategy_autobid(strategyID, OpenID):
-	pass
+def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
+	(db,cursor) = connectdb()
+
+	cursor.execute("select * from strategy where id=%s", [strategyId])
+	strategy = cursor.fetchone()
+
+	if strategy['name'] == '信用至上':
+		while True:
+			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
+			data =  {
+			  "PageIndex": 1, 
+			}
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
+
+			for item in list_result['LoanInfos']:
+				if item['CreditCode'] in ['AAA', 'AA']:
+					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
+					data = {
+						"ListingId": item['ListingId'], 
+						"Amount": 20,
+					}
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
+					if list_result['Result'] == 0:
+						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount) values(%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount']])
+
+			time.sleep(300)
+	else:
+		pass
+
+	closedb(db,cursor)
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
