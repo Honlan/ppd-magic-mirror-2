@@ -291,6 +291,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	cursor.execute("select * from strategy where id=%s", [strategyId])
 	strategy = cursor.fetchone()
 
+	# 信用至上
 	if strategy['name'] == '信用至上':
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
@@ -315,6 +316,21 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount) values(%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount']])
 
 			time.sleep(300)
+	else:
+		pass
+
+	# 更改数据库
+	if strategy['OpenID'] == 0:
+		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+		sys_strategy = cursor.fetchone()['strategy'].split('-')
+		tmp = ''
+		for s in sys_strategy:
+			if not s == data['strategyId']:
+				tmp = tmp + s + '-'
+		if not tmp == '':
+			tmp = tmp[:-1]
+		sys_strategy = tmp
+		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
 	else:
 		pass
 
