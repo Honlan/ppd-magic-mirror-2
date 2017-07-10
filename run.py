@@ -300,7 +300,12 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			}
 			sort_data = rsa.sort(data)
 			sign = rsa.sign(sort_data)
-			list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
+			list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+
+			if list_result == '':
+				continue
+
+			list_result = json.loads(list_result)
 
 			for item in list_result['LoanInfos']:
 				if item['CreditCode'] in ['AAA', 'AA']:
@@ -314,8 +319,9 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount) values(%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount']])
+						break
 
-			time.sleep(300)
+			time.sleep(120)
 	else:
 		pass
 
@@ -335,7 +341,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 		pass
 
 	closedb(db,cursor)
-
 
 if __name__ == '__main__':
 	app.run(debug=True)
