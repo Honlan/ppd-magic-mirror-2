@@ -14,7 +14,7 @@
 	border-radius: 6px;
 	font-size: 30px;
 	width: 25%;
-	height: 160px;
+	height: 170px;
 	display: inline-block;
 	-webkit-transition: color, background-color 1s;
     -ms-transition: color, background-color 1s;
@@ -72,7 +72,7 @@
     text-align: left;
 }
 #add_info_content {
-    width: 820px;
+    width: 820px; 
     background-color: rgba(55, 58, 71, 0.8);
     border: 1px solid #ddd;
     padding: 30px 40px;
@@ -193,7 +193,7 @@
         <h4 style="margin-top:0px;margin-bottom:25px;">
         	新增个人投资策略
         	<input type="text" name="name" placeholder="策略名称" class="form-control">
-        	<input type="text" name="description" placeholder="策略描述" class="form-control" style="width:400px;">
+        	<input type="text" name="description" placeholder="策略描述，不多于20字" class="form-control" style="width:400px;">
         </h4>
         <div style="margin-bottom:10px;">
         	<span class="title">初始评级</span>
@@ -295,9 +295,11 @@
         	<span class="item">无逾期还款记录</span>
         </div>
         <div style="position:relative;">
+            <input type="text" name="amount" placeholder="单个标投资金额／元" class="form-control" style="position:absolute;right:0;top:-114px;">
+            <input type="text" name="timedelta" placeholder="投资时间间隔／分钟" class="form-control" style="position:absolute;right:0;top:-64px;">
         	<button id="save" class="form-control">新增</button>
         	<button id="cancel" class="form-control">取消</button>
-        	<p id="message">策略新增后不能再进行修改，以便进行历史数据统计</p>
+        	<p id="message">策略生成后不能再修改，以便进行历史数据统计</p>
         </div>
     </div>
 </div>
@@ -344,8 +346,8 @@ $(document).ready(function() {
     });
 
     $('#save').click(function(event) {
-    	if ($('#add_info_content input[name="name"]').val() == '' || $('#add_info_content input[name="description"]').val() == '') {
-    		$('#message').text('策略名称或策略描述不能为空');
+    	if ($('#add_info_content input[name="name"]').val() == '' || $('#add_info_content input[name="description"]').val() == '' || $('#add_info_content input[name="amount"]').val() == '' || $('#add_info_content input[name="timedelta"]').val() == '') {
+    		$('#message').text('策略信息填写不完善');
     	}
     	else {
     		var data = {};
@@ -362,7 +364,10 @@ $(document).ready(function() {
 	    		}
 	    	});
 	    	data['name'] = $('#add_info_content input[name="name"]').val();
-	    	data['description'] = $('#add_info_content input[name="description"]').val();
+            data['description'] = $('#add_info_content input[name="description"]').val();
+	    	data['amount'] = $('#add_info_content input[name="amount"]').val();
+            data['timedelta'] = $('#add_info_content input[name="timedelta"]').val();
+
 	    	$.ajax({
 	    		url: '{{url_for("strategy_add")}}',
 	    		type: 'POST',

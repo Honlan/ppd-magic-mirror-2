@@ -229,11 +229,14 @@ def strategy_add():
 	data = dict(request.form)
 	name = data['name']
 	description = data['description']
+	timedelta = data['timedelta']
+	amount = data['amount']
 	data.pop('name')
 	data.pop('description')
+	data.pop('timedelta')
+	data.pop('amount')
 	(db,cursor) = connectdb()
-	cursor.execute("insert into strategy(OpenID, content, weight, active, name, description) values(%s, %s, %s, %s, %s, %s)", [session['OpenID'], json.dumps(data), 1, 0, name, description])
-	# cursor.execute("insert into strategy(OpenID, content, weight, active, name, description) values(%s, %s, %s, %s, %s, %s)", [0, json.dumps(data), 1, 0, name, description])
+	cursor.execute("insert into strategy(OpenID, content, weight, active, name, description, timedelta, amount) values(%s, %s, %s, %s, %s, %s)", [session['OpenID'], json.dumps(data), 1, 0, name, description, timedelta, amount])
 	closedb(db,cursor)
 	return json.dumps({'result': 'ok', 'msg': '新增个人策略成功'})
 
@@ -252,12 +255,12 @@ def strategy_start():
 			sys_strategy = sys_strategy + '-' + data['strategyId']
 		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
 	else:
-		pass
+		cursor.execute("update strategy set active=%s where id=%s", [1, data['strategyId']])
 	strategy_autobid.apply_async(args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken']])
 	
 	closedb(db,cursor)
 	
-	return json.dumps({'result': 'ok', 'msg': '启用个人策略成功'})
+	return json.dumps({'result': 'ok', 'msg': '启用策略成功'})
 
 # 关闭策略投标
 @app.route('/strategy_stop', methods=['POST'])
@@ -277,11 +280,11 @@ def strategy_stop():
 		sys_strategy = tmp
 		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
 	else:
-		pass
+		cursor.execute("update strategy set active=%s where id=%s", [0, data['strategyId']])
 	
 	closedb(db,cursor)
 
-	return json.dumps({'result': 'ok', 'msg': '停用个人策略成功'})
+	return json.dumps({'result': 'ok', 'msg': '停用策略成功'})
 
 # 策略投标
 @celery.task
@@ -291,8 +294,14 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	cursor.execute("select * from strategy where id=%s", [strategyId])
 	strategy = cursor.fetchone()
 
-	# 信用至上
-	if strategy['name'] == '信用至上':
+	content = json.loads(strategy['content'])
+	flag = True
+	for key in content.keys():
+		if not key in ['初始评级', '借款利率', '借款期限']:
+			flag = False
+
+	# 只需基本信息
+	if flag:
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
 			data =  {
@@ -308,35 +317,65 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			list_result = json.loads(list_result)
 
 			for item in list_result['LoanInfos']:
-				if item['CreditCode'] in ['AAA', 'AA']:
+				flag = True
+				if content.has_key('初始评级') and (not item['CreditCode'] in content['初始评级']):
+					flag = False
+				if content.has_key('借款利率'):
+					cflag = False
+					condition = content['借款利率'].split('_')
+					for c in condition:
+						if c == '13%以下' and item['Rate'] <= 13:
+							cflag = True
+						elif c == '22%以上' and item['Rate'] >= 22:
+							cflag = True
+						else:
+							c = c[:-1].split('-')
+							if item['Rate'] >= int(c[0]) and item['Rate'] <= int(c[1]):
+								cflag = True
+					if not cflag:
+						flag = False
+				if content.has_key('借款期限'):
+					cflag = False
+					condition = content['借款期限'].split('_')
+					for c in condition:
+						if c == '3个月以下' and item['Months'] <= 3:
+							cflag = True
+						elif c == '12个月以上' and item['Months'] >= 12:
+							cflag = True
+						elif c == '4至6个月' and item['Months'] >= 4 and item['Months'] <= 6:
+							cflag = True
+						elif c == '6至12个月' and item['Months'] >= 6 and item['Months'] <= 12:
+							cflag = True
+					if not cflag:
+						flag = False
+				if flag:
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": item['ListingId'], 
-						"Amount": 20,
+						"Amount": strategy['amount'],
+						# 50 - 500
 					}
 					sort_data = rsa.sort(data)
 					sign = rsa.sign(sort_data)
 					list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
 					if list_result['Result'] == 0:
-						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount) values(%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount']])
+						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						break
 
-			time.sleep(120)
-	else:
-		pass
+			time.sleep(60 * int(strategy['timedelta']))
 
-	# 更改数据库
-	if strategy['OpenID'] == 0:
-		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
-		sys_strategy = cursor.fetchone()['strategy'].split('-')
-		tmp = ''
-		for s in sys_strategy:
-			if not s == data['strategyId']:
-				tmp = tmp + s + '-'
-		if not tmp == '':
-			tmp = tmp[:-1]
-		sys_strategy = tmp
-		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
+			# 检查任务是否已结束
+			if strategy['OpenID'] == 0:
+				cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+				sys_strategy = cursor.fetchone()['strategy'].split('-')
+				if not strategy['id'] in sys_strategy:
+					break
+			else:
+				cursor.execute("select active from strategy where id=%s", [strategy['id']])
+				active = cursor.fetchone()['active']
+				if active == 0:
+					break
+	# 还需详细信息
 	else:
 		pass
 
