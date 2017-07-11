@@ -309,12 +309,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			}
 			sort_data = rsa.sort(data)
 			sign = rsa.sign(sort_data)
-			list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-
-			if list_result == '':
-				continue
-
-			list_result = json.loads(list_result)
+			list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
 
 			for item in list_result['LoanInfos']:
 				flag = True
@@ -363,6 +358,16 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						break
 
 			time.sleep(60 * int(strategy['timedelta']))
+
+			# 检查余额
+			access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+			data = {}
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			balance = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))['Balance']
+			cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
+			if balance[1]['Balance'] + balance[0]['Balance']:
+				break
 
 			# 检查任务是否已结束
 			if strategy['OpenID'] == 0:
