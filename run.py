@@ -309,7 +309,10 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			}
 			sort_data = rsa.sort(data)
 			sign = rsa.sign(sort_data)
-			list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
+			list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+			if list_result == '':
+				continue
+			list_result = json.loads(list_result)
 
 			for item in list_result['LoanInfos']:
 				flag = True
@@ -352,7 +355,10 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					}
 					sort_data = rsa.sort(data)
 					sign = rsa.sign(sort_data)
-					list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
+					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+					if list_result == '':
+						continue
+					list_result = json.loads(list_result)
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						break
@@ -364,7 +370,10 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			data = {}
 			sort_data = rsa.sort(data)
 			sign = rsa.sign(sort_data)
-			balance = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))['Balance']
+			balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+			if balance == '':
+				continue
+			balance = json.loads(balance)['Balance']
 			cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
 			if balance[1]['Balance'] + balance[0]['Balance']:
 				break
