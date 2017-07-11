@@ -375,7 +375,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				continue
 			balance = json.loads(balance)['Balance']
 			cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
-			if balance[1]['Balance'] + balance[0]['Balance']:
+			if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
 				break
 
 			# 检查任务是否已结束
