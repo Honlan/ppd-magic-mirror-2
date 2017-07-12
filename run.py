@@ -295,6 +295,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	strategy = cursor.fetchone()
 
 	content = json.loads(strategy['content'])
+	timedelta = int(strategy['timedelta'])
 	flag = True
 	for key in content.keys():
 		if not key in ['初始评级', '借款利率', '借款期限']:
@@ -361,9 +362,12 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					list_result = json.loads(list_result)
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
+						timedelta = int(strategy['timedelta'])
 						break
 
-			time.sleep(60 * int(strategy['timedelta']))
+			timedelta = 2 * timedelta
+
+			time.sleep(60 * timedelta)
 
 			# 检查余额
 			access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
@@ -392,6 +396,21 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	# 还需详细信息
 	else:
 		pass
+
+	# 修改状态
+	if strategy['OpenID'] in [0, '0']:
+		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+		sys_strategy = cursor.fetchone()['strategy'].split('-')
+		tmp = ''
+		for s in sys_strategy:
+			if not s == data['strategyId']:
+				tmp = tmp + s + '-'
+		if not tmp == '':
+			tmp = tmp[:-1]
+		sys_strategy = tmp
+		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
+	else:
+		cursor.execute("update strategy set active=%s where id=%s", [0, strategy['id']])
 
 	closedb(db,cursor)
 
