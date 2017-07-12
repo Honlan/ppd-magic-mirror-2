@@ -54,9 +54,27 @@
 #plot1 .cell h6, #plot2 .cell h6 {
     width: 100%;
     position: absolute;
-    bottom: 15px;
+    bottom: 18px;
+    margin-bottom: 0;
     font-size: 14px;
     color: #2c2f3c;
+    font-weight: normal;
+}
+#plot1 .cell span.fa-info-circle, #plot2 .cell span.fa-info-circle {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 15px;
+    color: #fff;
+    padding: 5px;
+}
+#plot1 .cell span.fa-times, #plot2 .cell span.fa-times {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 15px;
+    color: #fff;
+    padding: 5px;
 }
 #plot2 #add:hover {
 	cursor: pointer;
@@ -175,7 +193,7 @@
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
                             <h6>已停用</h6>
-                            <span class="fa fa-fw fa-info"></span>
+                            <span class="fa fa-fw fa-info-circle"></span>
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -196,7 +214,8 @@
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
                             <h6>已停用</h6>
-                            <span class="fa fa-fw fa-info"></span>
+                            <span class="fa fa-fw fa-info-circle"></span>
+                            <span class="fa fa-fw fa-times"></span>
                         </div>
                     {% endif %}
                 {% endfor %}
