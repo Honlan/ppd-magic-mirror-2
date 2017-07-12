@@ -303,6 +303,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 
 	# 只需基本信息
 	if flag:
+		finish = False
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
 			data =  {
@@ -366,34 +367,40 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						timedelta = int(strategy['timedelta'])
 						break
 
+				# 检查余额
+				access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+				data = {}
+				sort_data = rsa.sort(data)
+				sign = rsa.sign(sort_data)
+				balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+				if not balance == '':
+					balance = json.loads(balance)['Balance']
+					cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
+					if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
+						finish = True
+						break
+
+				# 检查任务是否已结束
+				if strategy['OpenID'] in [0, '0']:
+					cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+					sys_strategy = cursor.fetchone()['strategy'].split('-')
+					if not strategy['id'] in sys_strategy:
+						finish = True
+						break
+				else:
+					cursor.execute("select active from strategy where id=%s", [strategy['id']])
+					active = cursor.fetchone()['active']
+					if active == 0:
+						finish = True
+						break
+
+			if finish:
+				break
+
 			timedelta = 2 * timedelta
 
 			time.sleep(60 * timedelta)
 
-			# 检查余额
-			access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
-			data = {}
-			sort_data = rsa.sort(data)
-			sign = rsa.sign(sort_data)
-			balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-			if balance == '':
-				continue
-			balance = json.loads(balance)['Balance']
-			cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
-			if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
-				break
-
-			# 检查任务是否已结束
-			if strategy['OpenID'] in [0, '0']:
-				cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
-				sys_strategy = cursor.fetchone()['strategy'].split('-')
-				if not strategy['id'] in sys_strategy:
-					break
-			else:
-				cursor.execute("select active from strategy where id=%s", [strategy['id']])
-				active = cursor.fetchone()['active']
-				if active == 0:
-					break
 	# 还需详细信息
 	else:
 		pass
