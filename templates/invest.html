@@ -51,13 +51,12 @@
 #plot1 .cell.inactive, #plot2 .cell.inactive {
     background-color: rgba(221, 107, 102, 0.9);
 }
-#plot1 .cell span, #plot2 .cell span {
+#plot1 .cell p, #plot2 .cell p {
+    width: 100%;
     position: absolute;
     bottom: 15px;
     font-size: 14px;
     color: #2c2f3c;
-    left: 50%;
-    margin-left: -21px;
 }
 #plot2 #add:hover {
 	cursor: pointer;
@@ -169,13 +168,13 @@
                         <div class="cell active" id="{{item['id']}}">
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
-                            <span>已启用</span>
+                            <p>已启用</p>
                         </div>
                     {% else %}
                         <div class="cell inactive" id="{{item['id']}}">
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
-                            <span>已停用</span>
+                            <p>已停用</p>
                             <span class="fa fa-fw fa-info"></span>
                         </div>
                     {% endif %}
@@ -185,23 +184,23 @@
 		<div id="plot2">
 			<div class="plot-title">我的自动投标策略</div>
 			<div id="my">
-                <div id='add'><span class='fa fa-fw fa-plus'></span></div>
                 {% for item in dataset['my'] %}
                     {% if item['active'] == 1%}
                         <div class="cell active" id="{{item['id']}}">
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
-                            <span>已启用</span>
+                            <p>已启用</p>
                         </div>
                     {% else %}
                         <div class="cell inactive" id="{{item['id']}}">
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
-                            <span>已停用</span>
+                            <p>已停用</p>
                             <span class="fa fa-fw fa-info"></span>
                         </div>
                     {% endif %}
                 {% endfor %}
+                <div id='add'><span class='fa fa-fw fa-plus'></span></div>
 			</div>
 		</div>
 	</div>
@@ -417,7 +416,7 @@ $(document).ready(function() {
             })
             .done(function(data) {
                 $obj.removeClass('active').addClass('inactive');
-                $obj.children('span').text('已停用');
+                $obj.children('p').text('已停用');
             })
             .fail(function() {
             })
@@ -436,7 +435,7 @@ $(document).ready(function() {
             })
             .done(function(data) {
                 $obj.removeClass('inactive').addClass('active');
-                $obj.children('span').text('已启用');
+                $obj.children('p').text('已启用');
             })
             .fail(function() {
             })
