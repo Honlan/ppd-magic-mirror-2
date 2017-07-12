@@ -363,7 +363,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					list_result = json.loads(list_result)
 					print item['ListingId'], strategy['id'], list_result
 					if list_result['Result'] == 0:
-						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
+						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						timedelta = int(strategy['timedelta'])
 						break
 
@@ -382,7 +382,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 
 				# 检查任务是否已结束
 				if strategy['OpenID'] in [0, '0']:
-					cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 					sys_strategy = cursor.fetchone()['strategy'].split('-')
 					if not strategy['id'] in sys_strategy:
 						finish = True
@@ -407,7 +407,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 
 	# 修改状态
 	if strategy['OpenID'] in [0, '0']:
-		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+		cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 		sys_strategy = cursor.fetchone()['strategy'].split('-')
 		tmp = ''
 		for s in sys_strategy:
@@ -416,7 +416,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 		if not tmp == '':
 			tmp = tmp[:-1]
 		sys_strategy = tmp
-		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
+		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, OpenID])
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [0, strategy['id']])
 
