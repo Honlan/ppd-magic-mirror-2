@@ -348,7 +348,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not cflag:
 						flag = False
 				if flag:
-					print item['ListingId'], strategy['id']
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": item['ListingId'], 
@@ -361,6 +360,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if list_result == '':
 						continue
 					list_result = json.loads(list_result)
+					print item['ListingId'], strategy['id'], list_result
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [session['OpenID'], list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						timedelta = int(strategy['timedelta'])
