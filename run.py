@@ -273,7 +273,7 @@ def strategy_stop():
 		sys_strategy = cursor.fetchone()['strategy'].split('-')
 		tmp = ''
 		for s in sys_strategy:
-			if not s == data['strategyId']:
+			if not int(s) == int(data['strategyId']):
 				tmp = tmp + s + '-'
 		if not tmp == '':
 			tmp = tmp[:-1]
@@ -324,13 +324,13 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					cflag = False
 					condition = content['借款利率'].split('_')
 					for c in condition:
-						if c == '13%以下' and item['Rate'] <= 13:
+						if c == '13%以下' and int(item['Rate']) <= 13:
 							cflag = True
-						elif c == '22%以上' and item['Rate'] >= 22:
+						elif c == '22%以上' and int(item['Rate']) >= 22:
 							cflag = True
 						else:
 							c = c[:-1].split('-')
-							if item['Rate'] >= int(c[0]) and item['Rate'] <= int(c[1]):
+							if int(item['Rate']) >= int(c[0]) and int(item['Rate']) <= int(c[1]):
 								cflag = True
 					if not cflag:
 						flag = False
@@ -338,13 +338,13 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					cflag = False
 					condition = content['借款期限'].split('_')
 					for c in condition:
-						if c == '3个月以下' and item['Months'] <= 3:
+						if c == '3个月以下' and int(item['Months']) <= 3:
 							cflag = True
-						elif c == '12个月以上' and item['Months'] >= 12:
+						elif c == '12个月以上' and int(item['Months']) >= 12:
 							cflag = True
-						elif c == '4至6个月' and item['Months'] >= 4 and item['Months'] <= 6:
+						elif c == '4至6个月' and int(item['Months']) >= 4 and int(item['Months']) <= 6:
 							cflag = True
-						elif c == '6至12个月' and item['Months'] >= 6 and item['Months'] <= 12:
+						elif c == '6至12个月' and int(item['Months']) >= 6 and int(item['Months']) <= 12:
 							cflag = True
 					if not cflag:
 						flag = False
@@ -352,7 +352,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": item['ListingId'], 
-						"Amount": strategy['amount'],
+						"Amount": int(strategy['amount']),
 						# 50 - 500
 					}
 					sort_data = rsa.sort(data)
@@ -377,7 +377,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					balance = json.loads(balance)['Balance']
 					cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
 					if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
-						print 'balance', balance
 						finish = True
 						break
 
@@ -385,8 +384,8 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				if strategy['OpenID'] in [0, '0']:
 					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 					sys_strategy = cursor.fetchone()['strategy'].split('-')
-					if not strategy['id'] in sys_strategy:
-						print strategy['id'], sys_strategy, type(strategy['id']), type(sys_strategy[0])
+					sys_strategy = [int(s) for s in sys_strategy]
+					if not int(strategy['id']) in sys_strategy:
 						finish = True
 						break
 				else:
@@ -396,7 +395,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						finish = True
 						break
 
-			print 1111111, finish
 			if finish:
 				break
 
@@ -414,7 +412,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 		sys_strategy = cursor.fetchone()['strategy'].split('-')
 		tmp = ''
 		for s in sys_strategy:
-			if not s == strategy['id']:
+			if not int(s) == int(strategy['id']):
 				tmp = tmp + s + '-'
 		if not tmp == '':
 			tmp = tmp[:-1]
