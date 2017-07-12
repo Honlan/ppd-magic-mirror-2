@@ -231,9 +231,9 @@ def auth():
 		history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
 		for x in range(0, 10):
 			history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-			history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-			history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-			history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			# history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			# history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			# history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 
 	closedb(db,cursor)
 
@@ -399,7 +399,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if list_result == '':
 						continue
 					list_result = json.loads(list_result)
-					print item['ListingId'], strategy['id'], list_result
+					# print item['ListingId'], strategy['id'], list_result
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						timedelta = int(strategy['timedelta'])
@@ -492,6 +492,8 @@ def history_basic(OpenID, APPID, AccessToken):
 			continue
 		list_result = json.loads(list_result)
 		for item in list_result['BidList']:
+			if int(item['ListingId']) == 0:
+				continue
 			cursor.execute("select count(*) as count from listing where ListingId=%s", [item['ListingId']])
 			count = cursor.fetchone()['count']
 			if count == 0:
