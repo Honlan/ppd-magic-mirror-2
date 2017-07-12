@@ -270,15 +270,17 @@ def strategy_stop():
 	data = request.form
 	if data['type'] == 'sys':
 		cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
-		sys_strategy = cursor.fetchone()['strategy'].split('-')
-		tmp = ''
-		for s in sys_strategy:
-			if not int(s) == int(data['strategyId']):
-				tmp = tmp + s + '-'
-		if not tmp == '':
-			tmp = tmp[:-1]
-		sys_strategy = tmp
-		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
+		sys_strategy = cursor.fetchone()['strategy']
+		if not sys_strategy == '':
+			sys_strategy = sys_strategy.split('-')
+			tmp = ''
+			for s in sys_strategy:
+				if not int(s) == int(data['strategyId']):
+					tmp = tmp + s + '-'
+			if not tmp == '':
+				tmp = tmp[:-1]
+			sys_strategy = tmp
+			cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [0, data['strategyId']])
 	
@@ -383,7 +385,11 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				# 检查任务是否已结束
 				if strategy['OpenID'] in [0, '0']:
 					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
-					sys_strategy = cursor.fetchone()['strategy'].split('-')
+					sys_strategy = cursor.fetchone()['strategy']
+					if sys_strategy == '':
+						finish = True
+						break
+					sys_strategy = sys_strategy.split('-')
 					sys_strategy = [int(s) for s in sys_strategy]
 					if not int(strategy['id']) in sys_strategy:
 						finish = True
@@ -422,6 +428,8 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 		cursor.execute("update strategy set active=%s where id=%s", [0, strategy['id']])
 
 	closedb(db,cursor)
+
+	return
 
 if __name__ == '__main__':
 	app.run(debug=True)
