@@ -411,7 +411,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 		sys_strategy = cursor.fetchone()['strategy'].split('-')
 		tmp = ''
 		for s in sys_strategy:
-			if not s == data['strategyId']:
+			if not s == strategy['id']:
 				tmp = tmp + s + '-'
 		if not tmp == '':
 			tmp = tmp[:-1]
