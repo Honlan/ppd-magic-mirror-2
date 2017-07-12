@@ -386,7 +386,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 					sys_strategy = cursor.fetchone()['strategy'].split('-')
 					if not strategy['id'] in sys_strategy:
-						print strategy['id'], sys_strategy, type(strategy['id']) type(sys_strategy[0])
+						print strategy['id'], sys_strategy, type(strategy['id']), type(sys_strategy[0])
 						finish = True
 						break
 				else:
