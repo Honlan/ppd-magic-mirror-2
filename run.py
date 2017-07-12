@@ -516,7 +516,7 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 		if status == 'finished':
 			break
 		else:
-			time.sleep(30)
+			time.sleep(10)
 
 	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
@@ -556,7 +556,7 @@ def history_money(OpenID, APPID, AccessToken, tail):
 		if status == 'finished':
 			break
 		else:
-			time.sleep(30)
+			time.sleep(10)
 
 	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
@@ -595,7 +595,7 @@ def history_status(OpenID, APPID, AccessToken, tail):
 		if status == 'finished':
 			break
 		else:
-			time.sleep(30)
+			time.sleep(10)
 
 	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
@@ -633,7 +633,7 @@ def history_payback(OpenID, APPID, AccessToken, tail):
 		if status == 'finished':
 			break
 		else:
-			time.sleep(30)
+			time.sleep(10)
 
 	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
