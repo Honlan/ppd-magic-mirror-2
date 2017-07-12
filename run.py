@@ -492,7 +492,7 @@ def history_basic(OpenID, APPID, AccessToken):
 			continue
 		list_result = json.loads(list_result)
 		for item in list_result['BidList']:
-			cursor.execute("select count(*) as count from listing where ListingId=%s", item['ListingId'])
+			cursor.execute("select count(*) as count from listing where ListingId=%s", [item['ListingId']])
 			count = cursor.fetchone()['count']
 			if count == 0:
 				cursor.execute("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", [item['ListingId'], item['Title'], item['Months'], item['Rate'], item['Amount'], OpenID])
