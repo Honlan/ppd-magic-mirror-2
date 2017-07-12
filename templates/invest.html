@@ -7,7 +7,7 @@
 #plot1 #sys, #plot2 #my {
 	padding: 30px 40px;
 }
-#plot2 #add, #plot1 .cell {
+#plot2 #add, #plot1 .cell, #plot2 .cell {
 	color: #535d63;
 	text-align: center;
 	border: 2px solid #535d63;
@@ -24,34 +24,34 @@
     -o-transition: color, background-color 1s;
     transition: color, background-color 1s;
 }
-#plot1 .cell {
+#plot1 .cell, #plot2 .cell {
     padding: 10px 16px;
     border: 2px solid #f2f2f2;
     position: relative;
 }
-#plot1 .cell:last-child {
+#plot1 .cell:last-child, #plot2 .cell:last-child {
     margin-right: 0;
 }
-#plot1 .cell h5 {
+#plot1 .cell h5, #plot2 .cell h5 {
     font-size: 16px;
     color: #f2f2f2;
     padding-bottom: 15px;
     border-bottom: 1px solid rgba(200, 200, 200, 1);
 }
-#plot1 .cell p {
+#plot1 .cell p, #plot2 .cell p {
     font-size: 13px;
     color: #eee;
 }
-#plot1 .cell:hover {
+#plot1 .cell:hover, #plot2 .cell:hover {
     cursor: pointer;
 }
-#plot1 .cell.active {
+#plot1 .cell.active, #plot2 .cell.active {
     background-color: rgba(117, 179, 117, 0.9);
 }
-#plot1 .cell.inactive {
+#plot1 .cell.inactive, #plot2 .cell.inactive {
     background-color: rgba(221, 107, 102, 0.9);
 }
-#plot1 .cell span {
+#plot1 .cell span, #plot2 .cell span {
     position: absolute;
     bottom: 15px;
     font-size: 14px;
@@ -176,6 +176,7 @@
                             <h5>{{item['name']}}</h5>
                             <p>{{item['description']}}</p>
                             <span>已停用</span>
+                            <span class="fa fa-fw fa-info"></span>
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -184,6 +185,23 @@
 		<div id="plot2">
 			<div class="plot-title">我的自动投标策略</div>
 			<div id="my">
+                <div id='add'><span class='fa fa-fw fa-plus'></span></div>
+                {% for item in dataset['my'] %}
+                    {% if item['active'] == 1%}
+                        <div class="cell active" id="{{item['id']}}">
+                            <h5>{{item['name']}}</h5>
+                            <p>{{item['description']}}</p>
+                            <span>已启用</span>
+                        </div>
+                    {% else %}
+                        <div class="cell inactive" id="{{item['id']}}">
+                            <h5>{{item['name']}}</h5>
+                            <p>{{item['description']}}</p>
+                            <span>已停用</span>
+                            <span class="fa fa-fw fa-info"></span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 			</div>
 		</div>
 	</div>
@@ -315,10 +333,6 @@ $(document).ready(function() {
 
     var datasetJson = eval({{datasetJson | safe}});
     console.log(datasetJson);
-
-    if (datasetJson['my'].length == 0) {
-    	$('#plot2 #my').append("<div id='add'><span class='fa fa-fw fa-plus'></span></div>")
-    }
 
     $('#add').click(function(event) {
     	$('#add_info').fadeIn();
