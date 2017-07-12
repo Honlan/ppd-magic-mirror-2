@@ -86,7 +86,7 @@
 }
 #add_info {
     display: none;
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
@@ -174,6 +174,42 @@
 	right: 0px;
 	font-size: 13px;
 	color: #bbb;
+}
+#delete {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(40, 40, 40, 0.8);
+    text-align: left;
+}
+#delete_content {
+    text-align: center;
+    width: 360px; 
+    background-color: rgba(55, 58, 71, 0.8);
+    border: 1px solid #ddd;
+    padding: 30px 40px;
+    margin: 0 auto;
+    margin-top: 200px;
+    border-radius: 4px;
+}
+#delete_content button {
+    display: inline-block;
+    color: #fff;
+    outline: none;
+    box-shadow: none;
+    width: 100px;
+    background-color: rgba(55, 58, 71, 1);
+    border: 1px solid #fff;
+    border-radius: 1px;
+    font-size: 13px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+#delete_content button:hover {
+    background-color: #4a606d;
 }
 </style>
 {% endblock %} {% block body %}
@@ -345,10 +381,22 @@
         </div>
     </div>
 </div>
+<div id="delete">
+    <div id="delete_content">
+        <h4 style="margin-top:10px;margin-bottom:40px;">确认删除个人投资策略</h4>
+        <div>
+            <button id="delete_yes" class="form-control">确认</button>
+            <button id="delete_no" class="form-control">取消</button>
+        </div>
+    </div>
+</div>
 <script>
 $(document).ready(function() {
 	$('.menu-wrap a').removeClass('active');
     $('#nav3').addClass('active');
+
+    $('#add_info').height($('html').height());
+    $('#delete').height($('html').height());
 
     var datasetJson = eval({{datasetJson | safe}});
     console.log(datasetJson);
@@ -468,26 +516,33 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 
+    var delete_strategyId;
     $('.cell .fa-times').click(function(event) {
         event.stopPropagation();
-        var $obj = $(this).parent('.cell');
-        var strategyId = $obj.attr('id');
+        delete_strategyId = $(this).parent('.cell').attr('id');
+        $('#delete').fadeIn();
+    });
+
+    $('#delete_content #delete_yes').click(function(event) {
         $.ajax({
             url: '{{url_for("strategy_delete")}}',
             type: 'POST',
             dataType: 'json',
             data: {
-                strategyId: strategyId
+                strategyId: delete_strategyId
             },
         })
         .done(function(data) {
-            $obj.fadeOut().hide();
+            window.location.reload();
         })
         .fail(function() {
         })
         .always(function() {
         });
-        
+    });
+
+    $('#delete_content #delete_no').click(function(event) {
+        $('#delete').fadeOut();
     });
 });
 </script>
