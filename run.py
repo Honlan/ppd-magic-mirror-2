@@ -147,7 +147,7 @@ def invest():
 	cursor.execute("select * from strategy where OpenID=%s",[session['OpenID']])
 	dataset['my'] = cursor.fetchall()
 	cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
-	
+	dataset['strategy_count'] = 0
 	sys_strategy = cursor.fetchone()['strategy']
 	if not sys_strategy == '':
 		sys_strategy = sys_strategy.split('-')
@@ -155,7 +155,17 @@ def invest():
 			for x in xrange(0, len(dataset['sys'])):
 				if int(dataset['sys'][x]['id']) == int(s):
 					dataset['sys'][x]['active'] = 1
+					dataset['strategy_count'] += 1
 					break
+
+	cursor.execute("select balance, balanceBid, balanceWithdraw from user where OpenID=%s", [session['OpenID']])
+	dataset['balance'] = cursor.fetchone()
+
+	cursor.execute("select count(*) as count from bidding where OpenID=%s", [session['OpenID']])
+	dataset['bidding_count'] = cursor.fetchone()['count']
+
+	cursor.execute("select count(*) as count from strategy where OpenID=%s and active=%s", [session['OpenID'], 1])
+	dataset['strategy_count'] += cursor.fetchone()['count']
 
 	closedb(db,cursor)
 

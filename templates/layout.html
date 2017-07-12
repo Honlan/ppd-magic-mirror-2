@@ -182,6 +182,7 @@
             <a href="{{url_for('invest')}}" id="nav3"><i class="fa fa-fw fa-bar-chart-o"></i><span>投资顾问</span></a>
             <a href="{{url_for('chat')}}" id="nav4"><i class="fa fa-fw fa-comment"></i><span>拍粉社区</span></a>
             <a href="{{url_for('logout')}}"><i class="fa fa-fw fa-sign-out"></i><span>注销授权</span></a>
+            <span style="color:#888;display:inline-block;margin-left:20px;position:relative;top:-2px;">{{auth['Username']}}</span>
         </div>
         {% else %}
         <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>

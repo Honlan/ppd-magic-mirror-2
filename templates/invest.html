@@ -211,10 +211,52 @@
 #delete_content button:hover {
     background-color: #4a606d;
 }
+#plot3 {
+    height: 500px;
+    text-align: center;
+}
+#balance {
+    margin-bottom: 10px;
+}
+#balance>div {
+    width: 30%;
+    display: inline-block;
+}
+#balance h5 {
+    margin-top: 5px;
+    font-weight: normal;
+    color: #999;
+    font-size: 13px;
+}
+#balance p {
+    color: #f2f2f2;
+}
 </style>
 {% endblock %} {% block body %}
 <div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div id="plot3">
+            <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:60px;height:60px;border-radius:50%;margin:25px auto;margin-bottom:10px;">
+            <p>{{user}}</p>
+            <div id="balance">
+                <div>
+                    <h5>现金余额</h5>
+                    <p>{{dataset['balance']['balance']}}</p>
+                </div>
+                <div>
+                    <h5>投标锁定</h5>
+                    <p>{{dataset['balance']['balanceBid']}}</p>
+                </div>
+                <div>
+                    <h5>提现锁定</h5>
+                    <p>{{dataset['balance']['balanceWithdraw']}}</p>
+                </div>
+            </div>
+            <p style="color:#888;margin-bottom:5px;">当前启用策略<span style="font-size:20px;color:rgba(221, 107, 102, 0.9);margin-left:10px;margin-right:10px;">{{dataset['strategy_count']}}</span>个</p>
+            <p style="color:#888;">累计成功自动投标<span style="font-size:20px;color:rgba(221, 107, 102, 0.9);margin-left:10px;margin-right:10px;">{{dataset['bidding_count']}}</span>个</p>
+        </div>
+    </div>
+	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 		<div id="plot1">
 			<div class="plot-title">系统自动投标策略</div>
 			<div id="sys">
@@ -258,11 +300,6 @@
                 {% endfor %}
                 <div id='add'><span class='fa fa-fw fa-plus'></span></div>
 			</div>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-		<div id="plot3">
-			<div class="plot-title">我的投标策略偏好</div>
 		</div>
 	</div>
 </div>
