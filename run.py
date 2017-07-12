@@ -102,6 +102,11 @@ def index():
 # 个人中心
 @app.route('/user')
 def user():
+	return render_template('user.html', auth=is_auth())
+
+# 个人中心例子
+@app.route('/example')
+def example():
 	(db,cursor) = connectdb()
 	cursor.execute("select * from json_data where page=%s",['user'])
 	json_data = cursor.fetchall()
@@ -220,7 +225,7 @@ def auth():
 		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance, balanceBid, balanceWithdraw) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance']])
 	closedb(db,cursor)
 
-	return redirect(url_for('user'))
+	return redirect(url_for('example'))
 
 # 退出授权
 @app.route('/logout')
