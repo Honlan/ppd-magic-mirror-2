@@ -518,7 +518,7 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 		else:
 			time.sleep(30)
 
-	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
 	print ListingIds
@@ -558,7 +558,7 @@ def history_money(OpenID, APPID, AccessToken, tail):
 		else:
 			time.sleep(30)
 
-	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
 	for x in range(0, len(ListingIds), 5):
@@ -597,7 +597,7 @@ def history_status(OpenID, APPID, AccessToken, tail):
 		else:
 			time.sleep(30)
 
-	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
 	for x in range(0, len(ListingIds), 20):
@@ -635,7 +635,7 @@ def history_payback(OpenID, APPID, AccessToken, tail):
 		else:
 			time.sleep(30)
 
-	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['%' + str(tail), OpenID])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
 	for x in ListingIds:
