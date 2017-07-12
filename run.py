@@ -226,7 +226,6 @@ def logout():
 # 新增个人策略
 @app.route('/strategy_add', methods=['POST'])
 def strategy_add():
-	session['OpenID'] = 0
 	data = dict(request.form)
 	name = data['name']
 	description = data['description']
