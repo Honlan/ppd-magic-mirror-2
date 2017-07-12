@@ -223,6 +223,18 @@ def auth():
 		cursor.execute('update user set AccessToken=%s, RefreshToken=%s, ExpiresIn=%s, AuthTimestamp=%s, Username=%s, balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
 	else:
 		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance, balanceBid, balanceWithdraw) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance']])
+	
+	# 是否需要获取个人投资记录
+	cursor.execute("select count(*) as count from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
+	count = cursor.fetchone()['count']
+	if count == 0:
+		history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
+		for x in range(0, 10):
+			history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+
 	closedb(db,cursor)
 
 	return redirect(url_for('example'))
@@ -452,6 +464,189 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, OpenID])
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [0, strategy['id']])
+
+	closedb(db,cursor)
+
+	return
+
+# 获取用户投标记录基本信息
+@celery.task
+def history_basic(OpenID, APPID, AccessToken):
+	(db,cursor) = connectdb()
+
+	cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+	cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
+	access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
+	current = int(time.time()) + 3600 * 24
+	while current > 1180627200:
+		data = {
+			"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
+			"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
+			"PageIndex": 1, 
+			"PageSize": 1000000
+		}
+		sort_data = rsa.sort(data)
+		sign = rsa.sign(sort_data)
+		list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+		if list_result == '':
+			continue
+		list_result = json.loads(list_result)
+		for item in list_result['BidList']:
+			cursor.execute("select count(*) as count from listing where ListingId=%s", item['ListingId'])
+			count = cursor.fetchone()['count']
+			if count == 0:
+				cursor.execute("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", [item['ListingId'], item['Title'], item['Months'], item['Rate'], item['Amount'], OpenID])
+		current -= 3600 * 24 * 30
+
+	cursor.execute("update task set status=%s, timestamp=%s where name=%s and OpenID=%s", ['finished', int(time.time()), 'bidBasicInfo', OpenID])
+	closedb(db,cursor)
+
+	return
+
+# 获取用户投标记录详细信息
+@celery.task
+def history_detail(OpenID, APPID, AccessToken, tail):
+	(db,cursor) = connectdb()
+
+	while True:
+		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+		status = cursor.fetchone()['status']
+		if status == 'finished':
+			break
+		else:
+			time.sleep(30)
+
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	ListingIds = cursor.fetchall()
+	ListingIds = [x['ListingId'] for x in ListingIds]
+	for x in range(0, len(ListingIds), 10):
+		if x + 10 <= len(ListingIds):
+			y = x + 10
+		else:
+			y = len(ListingIds)
+		while True:
+			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
+			data = {"ListingIds": ListingIds[x:y]}
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			list_result = client.send(access_url, json.dumps(data), APPID, sign)
+			if list_result == '':
+				continue
+			list_result = json.loads(list_result)
+			for item in list_result['LoanInfos']:
+				cursor.execute("update listing set FistBidTime=%s, LastBidTime=%s, LenderCount=%s, AuditingTime=%s, RemainFunding=%s, DeadLineTimeOrRemindTimeStr=%s, CreditCode=%s, Amount=%s, Months=%s, CurrentRate=%s, BorrowName=%s, Gender=%s, EducationDegree=%s, GraduateSchool=%s, StudyStyle=%s, Age=%s, SuccessCount=%s, WasteCount=%s, CancelCount=%s, FailedCount=%s, NormalCount=%s, OverdueLessCount=%s, OverdueMoreCount=%s, OwingPrincipal=%s, OwingAmount=%s, AmountToReceive=%s, FirstSuccessBorrowTime=%s, RegisterTime=%s, CertificateValidate=%s, NciicIdentityCheck=%s, PhoneValidate=%s, VideoValidate=%s, CreditValidate=%s, EducateValidate=%s, LastSuccessBorrowTime=%s, HighestPrincipal=%s, HighestDebt=%s, TotalPrincipal=%s where ListingId=%s", [item['FistBidTime'], item['LastBidTime'], item['LenderCount'], item['AuditingTime'], item['RemainFunding'], item['DeadLineTimeOrRemindTimeStr'], item['CreditCode'], item['Amount'], item['Months'], item['CurrentRate'], item['BorrowName'], item['Gender'], item['EducationDegree'], item['GraduateSchool'], item['StudyStyle'], item['Age'], item['SuccessCount'], item['WasteCount'], item['CancelCount'], item['FailedCount'], item['NormalCount'], item['OverdueLessCount'], item['OverdueMoreCount'], item['OwingPrincipal'], item['OwingAmount'], item['AmountToReceive'], item['FirstSuccessBorrowTime'], item['RegisterTime'], item['CertificateValidate'], item['NciicIdentityCheck'], item['PhoneValidate'], item['VideoValidate'], item['CreditValidate'], item['EducateValidate'], item['LastSuccessBorrowTime'], item['HighestPrincipal'], item['HighestDebt'], item['TotalPrincipal'] where item['ListingId']])
+			break
+
+	closedb(db,cursor)
+
+	return
+
+# 获取用户投标记录投资金额
+@celery.task
+def history_money(OpenID, APPID, AccessToken, tail):
+	(db,cursor) = connectdb()
+
+	while True:
+		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+		status = cursor.fetchone()['status']
+		if status == 'finished':
+			break
+		else:
+			time.sleep(30)
+
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	ListingIds = cursor.fetchall()
+	ListingIds = [x['ListingId'] for x in ListingIds]
+	for x in range(0, len(ListingIds), 5):
+		if x + 5 <= len(ListingIds):
+			y = x + 5
+		else:
+			y = len(ListingIds)
+		while True:
+			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
+			data = {"ListingIds": ListingIds[x:y]}
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			list_result = client.send(access_url, json.dumps(data), APPID, sign)
+			if list_result == '':
+				continue
+			list_result = json.loads(list_result)
+			for item in list_result['ListingBidsInfos']:
+				l = ','.join([x['LenderName'] + '_' + str(x['BidAmount']) + '_' + x['BidDateTime'] for x in item['Bids']])
+				cursor.execute("update listing set Lender=%s where ListingId=%s", [l, item['ListingId']])
+			break
+
+	closedb(db,cursor)
+
+	return
+
+# 获取用户投标记录标的状态
+@celery.task
+def history_status(OpenID, APPID, AccessToken, tail):
+	(db,cursor) = connectdb()
+
+	while True:
+		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+		status = cursor.fetchone()['status']
+		if status == 'finished':
+			break
+		else:
+			time.sleep(30)
+
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	ListingIds = cursor.fetchall()
+	ListingIds = [x['ListingId'] for x in ListingIds]
+	for x in range(0, len(ListingIds), 20):
+		if x + 20 <= len(ListingIds):
+			y = x + 20
+		else:
+			y = len(ListingIds)
+		while True:
+			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
+			data ={"ListingIds": ListingIds[x:y]}
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			list_result = client.send(access_url, json.dumps(data), APPID, sign)
+			if list_result == '':
+				continue
+			list_result = json.loads(list_result)
+			for item in list_result['Infos']:
+				cursor.execute("update listing set Status=%s where ListingId=%s", [item['Status'], item['ListingId']])
+			break
+
+	closedb(db,cursor)
+
+	return
+
+# 获取用户投标记录还款状态
+@celery.task
+def history_payback(OpenID, APPID, AccessToken, tail):
+	(db,cursor) = connectdb()
+
+	while True:
+		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+		status = cursor.fetchone()['status']
+		if status == 'finished':
+			break
+		else:
+			time.sleep(30)
+
+	cursor.execute("select ListingId from listing where ListingId like %s and OpenID=%s", ['*' + str(tail), OpenID])
+	ListingIds = cursor.fetchall()
+	ListingIds = [x['ListingId'] for x in ListingIds]
+	for x in ListingIds:
+		while True:
+			access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
+			data =  {"ListingId": x}
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+			if list_result == '':
+				continue
+			list_result = json.loads(list_result)
+			for item in list_result['ListingPayment']:
+				cursor.execute("insert into payback(ListingId, OrderId, DueDate, RepayDate, RepayPrincipal, RepayInterest, OwingPrincipal, OwingInterest, OwingOverdue, OverdueDays, RepayStatus, OpenID) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
+			break
 
 	closedb(db,cursor)
 
