@@ -348,6 +348,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not cflag:
 						flag = False
 				if flag:
+					print item['ListingId'], strategy['id']
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": item['ListingId'], 
@@ -383,7 +384,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				break
 
 			# 检查任务是否已结束
-			if strategy['OpenID'] == 0:
+			if strategy['OpenID'] in [0, '0']:
 				cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
 				sys_strategy = cursor.fetchone()['strategy'].split('-')
 				if not strategy['id'] in sys_strategy:
