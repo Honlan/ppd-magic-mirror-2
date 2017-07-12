@@ -415,15 +415,17 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	# 修改状态
 	if strategy['OpenID'] in [0, '0']:
 		cursor.execute("select strategy from user where OpenID=%s", [OpenID])
-		sys_strategy = cursor.fetchone()['strategy'].split('-')
-		tmp = ''
-		for s in sys_strategy:
-			if not int(s) == int(strategy['id']):
-				tmp = tmp + s + '-'
-		if not tmp == '':
-			tmp = tmp[:-1]
-		sys_strategy = tmp
-		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, OpenID])
+		sys_strategy = cursor.fetchone()['strategy']
+		if not sys_strategy == '':
+			sys_strategy = sys_strategy.split('-')
+			tmp = ''
+			for s in sys_strategy:
+				if not int(s) == int(strategy['id']):
+					tmp = tmp + s + '-'
+			if not tmp == '':
+				tmp = tmp[:-1]
+			sys_strategy = tmp
+			cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, OpenID])
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [0, strategy['id']])
 
