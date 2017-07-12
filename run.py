@@ -377,6 +377,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					balance = json.loads(balance)['Balance']
 					cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
 					if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
+						print 'balance', balance
 						finish = True
 						break
 
@@ -385,6 +386,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 					sys_strategy = cursor.fetchone()['strategy'].split('-')
 					if not strategy['id'] in sys_strategy:
+						print strategy['id'], sys_strategy, type(strategy['id']) type(sys_strategy[0])
 						finish = True
 						break
 				else:
