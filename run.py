@@ -394,9 +394,9 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						finish = True
 						break
 
+			print 1111111, finish
 			if finish:
 				break
-			print finish
 
 			timedelta = 2 * timedelta
 
