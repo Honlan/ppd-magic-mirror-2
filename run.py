@@ -240,6 +240,15 @@ def strategy_add():
 	closedb(db,cursor)
 	return json.dumps({'result': 'ok', 'msg': '新增个人策略成功'})
 
+# 删除个人策略
+@app.route('/strategy_delete', methods=['POST'])
+def strategy_delete():
+	data = request.form
+	(db,cursor) = connectdb()
+	cursor.execute("delete from strategy where OpenID=%s and id=%s", [session['OpenID'], data['strategyId']])
+	closedb(db,cursor)
+	return json.dumps({'result': 'ok', 'msg': '删除个人策略成功'})
+
 # 开启策略投标
 @app.route('/strategy_start', methods=['POST'])
 def strategy_start():

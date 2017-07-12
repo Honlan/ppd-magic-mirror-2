@@ -463,6 +463,32 @@ $(document).ready(function() {
             });
         }
     });
+
+    $('.cell .fa-info').click(function(event) {
+        event.stopPropogation();
+    });
+
+    $('.cell .fa-times').click(function(event) {
+        event.stopPropogation();
+        var $obj = $(this).parent('.cell');
+        var strategyId = $obj.attr('id');
+        $.ajax({
+            url: '{{url_for("strategy_delete")}}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                strategyId: strategyId
+            },
+        })
+        .done(function(data) {
+            $obj.fadeOut().hide();
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+        
+    });
 });
 </script>
 {% endblock %}
