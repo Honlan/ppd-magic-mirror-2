@@ -498,6 +498,8 @@ def history_basic(OpenID, APPID, AccessToken):
 			count = cursor.fetchone()['count']
 			if count == 0:
 				cursor.execute("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", [item['ListingId'], str(item['Title']), item['Months'], item['Rate'], item['Amount'], OpenID])
+			else:
+				cursor.execute("update listing set OpenID=%s where ListingId=%s", [OpenID, item['ListingId']])
 		current -= 3600 * 24 * 30
 
 	cursor.execute("update task set status=%s, timestamp=%s where name=%s and OpenID=%s", ['finished', int(time.time()), 'bidBasicInfo', OpenID])
