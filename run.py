@@ -581,7 +581,7 @@ def history_money(OpenID, APPID, AccessToken, tail):
 			for item in list_result['ListingBidsInfos']:
 				cursor.execute("delete from lender where ListingId=%s", [item['ListingId']])
 				for i in item['Bids']:
-					cursor.execute("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", [item['ListingId'], item['LenderName'], item['BidAmount'], item['BidDateTime']])					
+					cursor.execute("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", [item['ListingId'], i['LenderName'], i['BidAmount'], i['BidDateTime']])					
 			break
 
 	cursor.execute("update task set m" + str(tail) + "=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
@@ -656,7 +656,7 @@ def history_payback(OpenID, APPID, AccessToken, tail):
 			if list_result == '':
 				continue
 			list_result = json.loads(list_result)
-			cursor.execute("delete from payback where ListingId=%s", [item['ListingId']])
+			cursor.execute("delete from payback where ListingId=%s", [x])
 			for item in list_result['ListingRepayment']:
 				cursor.execute("insert into payback(ListingId, OrderId, DueDate, RepayDate, RepayPrincipal, RepayInterest, OwingPrincipal, OwingInterest, OwingOverdue, OverdueDays, RepayStatus, OpenID) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
 			break
