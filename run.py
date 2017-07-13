@@ -70,54 +70,52 @@ def str2time(s, f):
     return int(time.mktime(time.strptime(s, f)))
 
 def get_previous_month(current, spliter, hasday):
-    current = current.split(spliter)
-    year = int(current[0])
-    month = int(current[1])
-    if hasday:
-    	day = int(current[2])
-    
-    month -= 1
-    if month == 0:
-        month = 12
-        year -= 1
-    year = str(year)
-    if month < 10:
-        month = '0' + str(month)
-    else:
-        month = str(month)
-    if hasday:
-	    if day < 10:
-	        day = '0' + str(day)
-	    else:
-	        day = str(day)
+	current = current.split(spliter)
+	year = int(current[0])
+	month = int(current[1])
+	if hasday:
+		day = int(current[2])
 
+	month -= 1
+	if month == 0:
+		month = 12
+		year -= 1
+	year = str(year)
+	if month < 10:
+		month = '0' + str(month)
+	else:
+		month = str(month)
+	if hasday:
+		if day < 10:
+			day = '0' + str(day)
+		else:
+			day = str(day)
 	if hasday:
 		return year + spliter + month + spliter + day
 	else:
 		return year + spliter + month
 
 def get_next_month(current, spliter, hasday):
-    current = current.split(spliter)
-    year = int(current[0])
-    month = int(current[1])
-    if hasday:
-    	day = int(current[2])
-    
-    month += 1
-    if month == 13:
-        month = 1
-        year += 1
-    year = str(year)
-    if month < 10:
-        month = '0' + str(month)
-    else:
-        month = str(month)
-    if hasday:
-	    if day < 10:
-	        day = '0' + str(day)
-	    else:
-	        day = str(day)
+	current = current.split(spliter)
+	year = int(current[0])
+	month = int(current[1])
+	if hasday:
+		day = int(current[2])
 
+	month += 1
+	if month == 13:
+		month = 1
+		year += 1
+	year = str(year)
+	if month < 10:
+		month = '0' + str(month)
+	else:
+		month = str(month)
+	if hasday:
+		if day < 10:
+			day = '0' + str(day)
+		else:
+			day = str(day)
 	if hasday:
 		return year + spliter + month + spliter + day
 	else:
@@ -754,7 +752,7 @@ def history_user(OpenID, Username):
 	for item in basic:
 		l = str(item['ListingId']) 
 		data_dict[l] = {
-			'ListingId': str(item['ListingId'])
+			'ListingId': str(item['ListingId']),
 			'借款金额': float(item['Amount']),
 			'借款期限': float(item['Months']),
 			'借款利率': float(item['CurrentRate']),
