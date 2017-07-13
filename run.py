@@ -229,6 +229,7 @@ def auth():
 	count = cursor.fetchone()['count']
 	if count == 0:
 		history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
+		# history_user.apply_async(args=[session['OpenID'], APPID])
 		for x in range(0, 10):
 			history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 			history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
@@ -541,6 +542,8 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 				cursor.execute("update listing set FistBidTime=%s, LastBidTime=%s, LenderCount=%s, AuditingTime=%s, RemainFunding=%s, DeadLineTimeOrRemindTimeStr=%s, CreditCode=%s, Amount=%s, Months=%s, CurrentRate=%s, BorrowName=%s, Gender=%s, EducationDegree=%s, GraduateSchool=%s, StudyStyle=%s, Age=%s, SuccessCount=%s, WasteCount=%s, CancelCount=%s, FailedCount=%s, NormalCount=%s, OverdueLessCount=%s, OverdueMoreCount=%s, OwingPrincipal=%s, OwingAmount=%s, AmountToReceive=%s, FirstSuccessBorrowTime=%s, RegisterTime=%s, CertificateValidate=%s, NciicIdentityCheck=%s, PhoneValidate=%s, VideoValidate=%s, CreditValidate=%s, EducateValidate=%s, LastSuccessBorrowTime=%s, HighestPrincipal=%s, HighestDebt=%s, TotalPrincipal=%s where ListingId=%s", [str(item['FistBidTime']), str(item['LastBidTime']), item['LenderCount'], str(item['AuditingTime']), item['RemainFunding'], item['DeadLineTimeOrRemindTimeStr'], item['CreditCode'], item['Amount'], item['Months'], item['CurrentRate'], item['BorrowName'], item['Gender'], item['EducationDegree'], item['GraduateSchool'], item['StudyStyle'], item['Age'], item['SuccessCount'], item['WasteCount'], item['CancelCount'], item['FailedCount'], item['NormalCount'], item['OverdueLessCount'], item['OverdueMoreCount'], item['OwingPrincipal'], item['OwingAmount'], item['AmountToReceive'], str(item['FirstSuccessBorrowTime']), str(item['RegisterTime']), item['CertificateValidate'], item['NciicIdentityCheck'], item['PhoneValidate'], item['VideoValidate'], item['CreditValidate'], item['EducateValidate'], item['LastSuccessBorrowTime'], item['HighestPrincipal'], item['HighestDebt'], item['TotalPrincipal'], item['ListingId']])
 			break
 
+	cursor.execute("update task set d" + str(tail) + "=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
+
 	closedb(db,cursor)
 
 	return
@@ -576,9 +579,12 @@ def history_money(OpenID, APPID, AccessToken, tail):
 				continue
 			list_result = json.loads(list_result)
 			for item in list_result['ListingBidsInfos']:
-				l = ','.join([x['LenderName'] + '_' + str(x['BidAmount']) + '_' + x['BidDateTime'] for x in item['Bids']])
-				cursor.execute("update listing set Lender=%s where ListingId=%s", [l, item['ListingId']])
+				cursor.execute("delete from lender where ListingId=%s", [item['ListingId']])
+				for i in item['Bids']:
+					cursor.execute("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", [item['ListingId'], item['LenderName'], item['BidAmount'], item['BidDateTime']])					
 			break
+
+	cursor.execute("update task set m" + str(tail) + "=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
 
 	closedb(db,cursor)
 
@@ -617,6 +623,8 @@ def history_status(OpenID, APPID, AccessToken, tail):
 			for item in list_result['Infos']:
 				cursor.execute("update listing set Status=%s where ListingId=%s", [item['Status'], item['ListingId']])
 			break
+	
+	cursor.execute("update task set s" + str(tail) + "=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
 
 	closedb(db,cursor)
 
@@ -651,6 +659,32 @@ def history_payback(OpenID, APPID, AccessToken, tail):
 			for item in list_result['ListingRepayment']:
 				cursor.execute("insert into payback(ListingId, OrderId, DueDate, RepayDate, RepayPrincipal, RepayInterest, OwingPrincipal, OwingInterest, OwingOverdue, OverdueDays, RepayStatus, OpenID) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
 			break
+
+	cursor.execute("update task set p" + str(tail) + "=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
+
+	closedb(db,cursor)
+
+	return
+
+# 生成个人主页数据
+@celery.task
+def history_user(OpenID, APPID):
+	(db,cursor) = connectdb()
+
+	while True:
+		cursor.execute("select * from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+		task = cursor.fetchone()
+		s = 0
+		for c in ['d', 'm', 's', 'p']:
+			for x in (0, 10):
+				s += task[c + str(x)]
+		if s == 40:
+			break
+		else:
+			time.sleep(10)
+
+	cursor.execute("select Username from user where OpenID=%s", [OpenID])
+	Username = cursor.fetchone()['Username']
 
 	closedb(db,cursor)
 
