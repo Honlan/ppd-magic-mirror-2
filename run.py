@@ -288,12 +288,12 @@ def auth():
 	count = cursor.fetchone()['count']
 	if count == 0:
 		history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
-		history_user.apply_async(args=[session['OpenID'], session['Username']])
 		for x in range(0, 10):
 			history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 			history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 			history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 			history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+		history_user.apply_async(args=[session['OpenID'], session['Username']])
 
 	closedb(db,cursor)
 
