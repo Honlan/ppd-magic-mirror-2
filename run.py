@@ -575,7 +575,6 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 		status = cursor.fetchone()['status']
-		print status
 		if status == 'finished':
 			break
 		else:
@@ -589,7 +588,6 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 			y = x + 10
 		else:
 			y = len(ListingIds)
-		print ListingIds[x:y]
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
 			data = {"ListingIds": ListingIds[x:y]}
@@ -810,7 +808,7 @@ def history_user(OpenID, Username):
 			data_dict[l]['借款类型'] = '普通'
 		else:
 			data_dict[l]['借款类型'] = '其他'
-		cursor.execute("select BidAmount from lender where ListingId=%s and Username=%s", [item['ListingId'], Username])
+		cursor.execute("select BidAmount from lender where ListingId=%s and LenderName=%s", [item['ListingId'], Username])
 		data_dict[l]['我的投资金额'] = float(cursor.fetchone()['BidAmount'])
 
 		cursor.execute("select * from payback where ListingId=%s and OpenID=%s order by OrderId asc", [item['ListingId'], OpenID])
@@ -1270,7 +1268,6 @@ def history_user(OpenID, Username):
 	for k in [0, 1, 2]:
 	    for x in xrange(0, len(indicators[k])):
 	        indicators[k][x]['max'] = np.ceil(1.2 * np.max([stats[k][i]['value'][x] for i in xrange(0, len(stats[k]))]))
-	        print indicators[k][x]['max']
 	        # indicators[k][x]['min'] = np.min([stats[k][i]['value'][x] for i in xrange(0, len(stats[k]))])
 	        indicators[k][x]['min'] = 0
 
