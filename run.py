@@ -161,7 +161,40 @@ def index():
 # 个人中心
 @app.route('/user')
 def user():
-	return render_template('user.html', auth=is_auth())
+	(db,cursor) = connectdb()
+	cursor.execute("select data from user where OpenID=%s",[session['OpenID']])
+	profile = cursor.fetchone()['data']
+	closedb(db,cursor)
+
+	if profile == '':
+		return render_template('user_wait.html', auth=is_auth())
+
+	else:
+		dataset = {}
+		dataset['json'] = json.loads(profile)
+
+		for key in ['daily_amount_sum', 'daily_amount_sum_back', 'daily_interest', 'daily_rate', 'daily_amount_average', 'daily_term', 'daily_interest_sum', 'daily_interest_sum_total']:
+			dataset['json']['bid_stat'][key] = [float('%.1f' % d) for d in dataset['json']['bid_stat'][key]]
+
+		dataset['age'] = '%.1f' % ((float(time.time()) - dataset['json']['bid_stat']['from']) / 3600 / 24 / 365)
+		dataset['tags'] = [];
+		if dataset['json']['bid_stat']['bid_interest_average'] < 12:
+			dataset['tags'].append('低风险')
+			dataset['tags'].append('低收益')
+		elif dataset['json']['bid_stat']['bid_interest_average'] < 18:
+			dataset['tags'].append('中风险')
+			dataset['tags'].append('中收益')
+		else:
+			dataset['tags'].append('高风险')
+			dataset['tags'].append('高收益')
+		if dataset['json']['bid_stat']['bid_term_average'] < 8:
+			dataset['tags'].append('短期投资')
+		elif dataset['json']['bid_stat']['bid_term_average'] < 16:
+			dataset['tags'].append('中期投资')
+		else:
+			dataset['tags'].append('长期投资')
+
+		return render_template('user.html', dataset=json.dumps(dataset), auth=is_auth())
 
 # 个人中心例子
 @app.route('/example')
@@ -297,7 +330,7 @@ def auth():
 
 	closedb(db,cursor)
 
-	return redirect(url_for('example'))
+	return redirect(url_for('user'))
 
 # 退出授权
 @app.route('/logout')
@@ -743,7 +776,6 @@ def history_user(OpenID, Username):
 		else:
 			time.sleep(10)
 
-	print 'stage1'
 	cursor.execute("select ListingId from lender where LenderName=%s", [Username])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
@@ -868,8 +900,6 @@ def history_user(OpenID, Username):
 	data_dict = data.to_dict('records')
 	profile = {}
 
-	print 'stage2'
-
 	stats = {}
 	stats['from'] = data_dict[0]['借款成功时间戳']
 	stats['bid_num'] = len(data)
@@ -984,8 +1014,6 @@ def history_user(OpenID, Username):
 	stats['dates'] = dates
 
 	profile['bid_stat'] = stats
-
-	print 'stage3'
 
 	data['借款期限区间'] = '1-4'
 	data.at[data['借款期限'] >= 5, '借款期限区间'] = '5-8'
@@ -1114,8 +1142,6 @@ def history_user(OpenID, Username):
 
 	profile['bid_flow'] = {'months': months, 'flow': flow, 'params': params}
 
-	print 'stage4'
-
 	terms = [t for t in range(0, int(data['借款期限'].max() + 1))]
 	stats = {'借款期限': {t:[0, 0] for t in terms}, '剩余期限': {t:[0, 0] for t in terms}}
 	data['剩余期限'] = data['借款期限'] - data['当前还款期数']
@@ -1158,8 +1184,6 @@ def history_user(OpenID, Username):
 	stats = tmp
 	profile['bid_terms'] = {'terms': terms, 'data': stats}
 
-	print 'stage5'
-
 	ranges = ['0-4', '5-8', '9-12', '13-16', '17-20', '21-24']
 
 	data['剩余期限区间'] = '21-24'
@@ -1181,8 +1205,6 @@ def history_user(OpenID, Username):
 	stats = [[{'name': r, 'type': 'bar', 'stack': '总量', 'data': stats[r][0]} for r in ranges], [{'name': r, 'type': 'bar', 'stack': '总量', 'data': stats[r][1]} for r in ranges]]
 
 	profile['bid_terms_history'] = {'months': months, 'ranges': ranges, 'data': stats}
-
-	print 'stage6'
 
 	indicators = []
 	keys = [['信用标数量', '投资总金额', '平均利率', '平均期限', '首标比例', '男性比例', '平均年龄'], 
@@ -1299,8 +1321,6 @@ def history_user(OpenID, Username):
 
 	profile['bid_radar'] = {'indicators': indicators, 'data': stats, 'legend': rates}
 
-	print 'stage7'
-
 	params = {}
 	params['初始评级'] = ['AAA', 'AA', 'A', 'B', 'C', 'D', 'E', 'F']
 	params['借款类型'] = ['应收安全标', '电商', 'APP闪电', '普通', '其他']
@@ -1407,8 +1427,6 @@ def history_user(OpenID, Username):
 	    lines['bad'][key] = tmpl
 
 	profile['bid_bad'] = {'months': months, 'params': params, 'interest': interest, 'bad': bad, 'rates': rates, 'max': max_values, 'max_r': max_values_r, 'lines': lines}
-
-	print 'stage8'
 
 	cursor.execute("update user set data=%s where OpenID=%s", [json.dumps(profile), OpenID])
 

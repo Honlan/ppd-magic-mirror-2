@@ -1,0 +1,46 @@
+{% extends 'layout.html' %} {% block style %}
+<style>
+#wait {
+	text-align: center;
+}
+#wait h4 {
+	font-weight: normal;
+	font-size: 20px;
+}
+#wait h4 span {
+	margin-left: 8px;
+	margin-right: 8px;
+	color: rgba(221, 107, 102, 0.9)
+}
+#wait h5 {
+	font-weight: normal;
+	font-size: 16px;
+	color: #999;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#wait p {
+	color: #fff;
+}
+#wait p a {
+	text-decoration: underline;
+	margin-left: 8px;
+	margin-right: 8px;
+	color: rgba(221, 107, 102, 0.9);
+	font-size: 18px; 
+}
+</style>
+{% endblock %} {% block body %}
+<div id="wait">
+	<h4>正在生成您的<span>个人中心</span>分析页面</h4>
+	<h5>请稍作等待</h5>
+	<p>您也可以先浏览一下</p>
+	<p>基于比赛数据<a href="https://www.kesci.com/apps/home/#!/lab/dataset/58e893c49957300141f973dd/document" target="_blank">LCIS</a>生成的个人中心<a href="{{url_for('example')}}" target="_blank">示例</a></p>
+</div>
+<script>
+$(document).ready(function() {
+	$('.menu-wrap a').removeClass('active');
+    $('#nav2').addClass('active');
+});
+</script>
+{% endblock %}
