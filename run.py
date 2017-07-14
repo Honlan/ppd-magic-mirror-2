@@ -736,7 +736,7 @@ def history_user(OpenID, Username):
 		task = cursor.fetchone()
 		s = 0
 		for c in ['d', 'm', 's', 'p']:
-			for x in (0, 10):
+			for x in range(0, 10):
 				s += task[c + str(x)]
 		if s == 40:
 			break
