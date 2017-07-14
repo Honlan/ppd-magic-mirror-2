@@ -746,7 +746,7 @@ def history_user(OpenID, Username):
 			time.sleep(10)
 
 	print 'stage1'
-	cursor.execute("select ListingId from lender where Username=%s", [Username])
+	cursor.execute("select ListingId from lender where LenderName=%s", [Username])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
 	cursor.execute("select * from listing where ListingId in %s and Status=%s", [ListingIds, 3])
