@@ -745,6 +745,7 @@ def history_user(OpenID, Username):
 		else:
 			time.sleep(10)
 
+	print 'stage1'
 	cursor.execute("select ListingId from lender where Username=%s", [Username])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
@@ -869,6 +870,8 @@ def history_user(OpenID, Username):
 	data_dict = data.to_dict('records')
 	profile = {}
 
+	print 'stage2'
+
 	stats = {}
 	stats['from'] = data_dict[0]['借款成功时间戳']
 	stats['bid_num'] = len(data)
@@ -983,6 +986,8 @@ def history_user(OpenID, Username):
 	stats['dates'] = dates
 
 	profile['bid_stat'] = stats
+
+	print 'stage3'
 
 	data['借款期限区间'] = '1-4'
 	data.at[data['借款期限'] >= 5, '借款期限区间'] = '5-8'
@@ -1111,6 +1116,8 @@ def history_user(OpenID, Username):
 
 	profile['bid_flow'] = {'months': months, 'flow': flow, 'params': params}
 
+	print 'stage4'
+
 	terms = [t for t in range(0, data['借款期限'].max() + 1)]
 	stats = {'借款期限': {t:[0, 0] for t in terms}, '剩余期限': {t:[0, 0] for t in terms}}
 	data['剩余期限'] = data['借款期限'] - data['当前还款期数']
@@ -1153,6 +1160,8 @@ def history_user(OpenID, Username):
 	stats = tmp
 	profile['bid_terms'] = {'terms': terms, 'data': stats}
 
+	print 'stage5'
+
 	ranges = ['0-4', '5-8', '9-12', '13-16', '17-20', '21-24']
 
 	data['剩余期限区间'] = '21-24'
@@ -1174,6 +1183,8 @@ def history_user(OpenID, Username):
 	stats = [[{'name': r, 'type': 'bar', 'stack': '总量', 'data': stats[r][0]} for r in ranges], [{'name': r, 'type': 'bar', 'stack': '总量', 'data': stats[r][1]} for r in ranges]]
 
 	profile['bid_terms_history'] = {'months': months, 'ranges': ranges, 'data': stats}
+
+	print 'stage6'
 
 	indicators = []
 	keys = [['信用标数量', '投资总金额', '平均利率', '平均期限', '首标比例', '男性比例', '平均年龄'], 
@@ -1282,6 +1293,8 @@ def history_user(OpenID, Username):
 
 	profile['bid_radar'] = {'indicators': indicators, 'data': stats, 'legend': rates}
 
+	print 'stage7'
+
 	params = {}
 	params['初始评级'] = ['AAA', 'AA', 'A', 'B', 'C', 'D', 'E', 'F']
 	params['借款类型'] = ['应收安全标', '电商', 'APP闪电', '普通', '其他']
@@ -1388,6 +1401,8 @@ def history_user(OpenID, Username):
 	    lines['bad'][key] = tmpl
 
 	profile['bid_bad'] = {'months': months, 'params': params, 'interest': interest, 'bad': bad, 'rates': rates, 'max': max_values, 'max_r': max_values_r, 'lines': lines}
+
+	print 'stage8'
 
 	cursor.execute("update user set data=%s where OpenID=%s", [json.dumps(profile), OpenID])
 
