@@ -1262,7 +1262,7 @@ def history_user(OpenID, Username):
 			stats[0][x]['value'][6] = stats[0][x]['value'][6] / weight[x]
 
 	for x in xrange(0, len(stats[1])):
-	    stats[1][x]['value'] = [d / count[x] for d in stats[1][x]['value']]
+	    stats[1][x]['value'] = [0 if count[x] == 0 else d / count[x] for d in stats[1][x]['value']]
 
 	for x in xrange(0, len(stats[2])):
 	    stats[2][x]['value'] = [data[data['初始评级'] == rates[x]][k].mean() for k in keys[2]]
