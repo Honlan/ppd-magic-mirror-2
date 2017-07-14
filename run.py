@@ -1117,7 +1117,7 @@ def history_user(OpenID, Username):
 
 	print 'stage4'
 
-	terms = [t for t in range(0, data['借款期限'].max() + 1)]
+	terms = [t for t in range(0, int(data['借款期限'].max() + 1))]
 	stats = {'借款期限': {t:[0, 0] for t in terms}, '剩余期限': {t:[0, 0] for t in terms}}
 	data['剩余期限'] = data['借款期限'] - data['当前还款期数']
 	data_dict = data.to_dict('records')
