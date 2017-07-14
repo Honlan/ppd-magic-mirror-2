@@ -1009,9 +1009,9 @@ def history_user(OpenID, Username):
 	        stats[key][v] = {}
 
 	months = []
-	months.append(get_previous_month(start, '-', False))
 	start = time2str(start, '%Y-%m')[2:]
 	end = time2str(end, '%Y-%m')[2:]
+	months.append(get_previous_month(start, '-', False))
 	while True:
 		months.append(start)
 		if start == end:
