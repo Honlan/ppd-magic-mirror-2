@@ -64,11 +64,9 @@ def auth_data():
 	return result
 
 def time2str(t, f):
-	print t, f
 	return time.strftime(f, time.localtime(t))
 
 def str2time(s, f):
-	print s, f
 	return int(time.mktime(time.strptime(s, f)))
 
 def get_previous_month(current, spliter, hasday):
@@ -866,7 +864,7 @@ def history_user(OpenID, Username):
 	
 	data = pd.DataFrame.from_dict(data_dict)
 	print data['借款成功日期'].unique()
-	data['借款成功时间戳'] = data['借款成功日期'].apply(lambda x:str2time(x[:-3], "%Y-%m-%dT%H:%M:%S"))
+	data['借款成功时间戳'] = data['借款成功日期'].apply(lambda x:str2time(x[:x.rfind('.')], "%Y-%m-%dT%H:%M:%S"))
 	data.sort_values('借款成功时间戳')
 	data_dict = data.to_dict('records')
 	profile = {}
