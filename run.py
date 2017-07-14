@@ -1246,12 +1246,21 @@ def history_user(OpenID, Username):
 	    count[rdx] += 1
 
 	for x in xrange(0, len(stats[0])):
-	    stats[0][x]['value'][4] = stats[0][x]['value'][4] / count[x]
-	    stats[0][x]['value'][5] = stats[0][x]['value'][5] / count[x]
-	    
-	    stats[0][x]['value'][2] = stats[0][x]['value'][2] / weight[x]
-	    stats[0][x]['value'][3] = stats[0][x]['value'][3] / weight[x]
-	    stats[0][x]['value'][6] = stats[0][x]['value'][6] / weight[x]
+		if count[x] == 0:
+			stats[0][x]['value'][4] = 0
+			stats[0][x]['value'][5] = 0
+		else:
+		    stats[0][x]['value'][4] = stats[0][x]['value'][4] / count[x]
+		    stats[0][x]['value'][5] = stats[0][x]['value'][5] / count[x]
+
+		if weight[x] == 0:
+		    stats[0][x]['value'][2] = 0
+		    stats[0][x]['value'][3] = 0
+		    stats[0][x]['value'][6] = 0
+		else:
+			stats[0][x]['value'][2] = stats[0][x]['value'][2] / weight[x]
+		    stats[0][x]['value'][3] = stats[0][x]['value'][3] / weight[x]
+		    stats[0][x]['value'][6] = stats[0][x]['value'][6] / weight[x]
 
 	for x in xrange(0, len(stats[1])):
 	    stats[1][x]['value'] = [d / count[x] for d in stats[1][x]['value']]
