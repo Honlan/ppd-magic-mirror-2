@@ -575,6 +575,7 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 		status = cursor.fetchone()['status']
+		print status
 		if status == 'finished':
 			break
 		else:
@@ -588,6 +589,7 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 			y = x + 10
 		else:
 			y = len(ListingIds)
+		print ListingIds[x:y]
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
 			data = {"ListingIds": ListingIds[x:y]}
