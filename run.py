@@ -862,7 +862,7 @@ def history_user(OpenID, Username):
 	data_dict = [v for v in data_dict.values()]
 	data_dict = {k: [data_dict[x][k] for x in range(0, len(data_dict))] for k in data_dict[0].keys()}
 	
-	data = pd.from_dict(data_dict)
+	data = pd.DataFrame.from_dict(data_dict)
 	data['借款成功时间戳'] = data['借款成功日期'].apply(lambda x:str2time(x[:-3], "%Y-%m-%dT%H:%M:%S"))
 	data.sort_values('借款成功时间戳')
 	data_dict = data.to_dict('records')
