@@ -1313,8 +1313,12 @@ def history_user(OpenID, Username):
 	    stats[1][x]['value'] = [0 if count[x] == 0 else d / count[x] for d in stats[1][x]['value']]
 
 	for x in xrange(0, len(stats[2])):
-	    stats[2][x]['value'] = [data[data['初始评级'] == rates[x]][k].mean() for k in keys[2]]
-	    stats[2][x]['value'] = [0 if str(i) == 'NaN' else i for i in stats[2][x]['value']]
+		stats[2][x]['value'] = []
+		for k in keys[2]:
+			if len(data['初始评级'] == rates[x]) == 0:
+				stats[2][x]['value'].append(0)
+			else:
+				stats[2][x]['value'].append(data[data['初始评级'] == rates[x]][k].mean())
 	    
 	for x1 in xrange(0, len(stats)):
 	    for x2 in xrange(0, len(stats[x1])):
