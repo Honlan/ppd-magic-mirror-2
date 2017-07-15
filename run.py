@@ -63,11 +63,13 @@ def refresh():
 				if new_token_info == '':
 					continue
 				new_token_info = json.loads(new_token_info)
+				AuthTimestamp = int(time.time())
 				AccessToken = new_token_info['AccessToken']
 				RefreshToken = new_token_info['RefreshToken']
 				session['AccessToken'] = AccessToken
 				session['RefreshToken'] = RefreshToken
-				cursor.execute('update user set AccessToken=%s, RefreshToken=%s where OpenID=%s', [AccessToken, RefreshToken, session['OpenID']])
+				session['AuthTimestamp'] = AuthTimestamp
+				cursor.execute('update user set AccessToken=%s, RefreshToken=%s, AuthTimestamp=%s where OpenID=%s', [AccessToken, RefreshToken, AuthTimestamp, session['OpenID']])
 				break
 		closedb(db,cursor)
 	return
