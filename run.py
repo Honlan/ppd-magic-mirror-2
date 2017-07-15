@@ -238,6 +238,7 @@ def example():
 		dataset['json']['bid_stat'][key] = [float('%.1f' % d) for d in dataset['json']['bid_stat'][key]]
 
 	dataset['age'] = '%.1f' % ((float(time.time()) - dataset['json']['bid_stat']['from']) / 3600 / 24 / 365)
+	dataset['other'] = '75'
 	dataset['tags'] = [];
 	if dataset['json']['bid_stat']['bid_interest_average'] < 12:
 		dataset['tags'].append('低风险')
@@ -1396,8 +1397,8 @@ def history_user(OpenID, Username):
 	        for key in params.keys():
 	            bad[key][item[key]][bad_month] += float(item['待还本金'])
 
-	max_values = {'interest': {key: 0 for key in params.keys()}, 'bad': {key: 0 for key in params.keys()}}
-	max_values_r = {'interest': {key: 0 for key in params.keys()}, 'bad': {key: 0 for key in params.keys()}}
+	max_values = {'interest': {key: 0.0000001 for key in params.keys()}, 'bad': {key: 0.0000001 for key in params.keys()}}
+	max_values_r = {'interest': {key: 0.0000001 for key in params.keys()}, 'bad': {key: 0.0000001 for key in params.keys()}}
 	lines = {'interest':{key:[] for key in params.keys()}, 'bad':{key:[] for key in params.keys()}}
 
 	for key, value in params.items():

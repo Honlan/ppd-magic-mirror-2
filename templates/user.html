@@ -1264,8 +1264,8 @@ $(document).ready(function() {
     		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
     	},
     	r: function(d, i){
-    		var x = i % 26;
-    		var y = Math.floor(i / 26);
+    		var x = i % dataset['json']['bid_bad']['months'].length;
+    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
     		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
     	},
     	fill: function(d){
@@ -1289,8 +1289,8 @@ $(document).ready(function() {
     		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
     	},
     	r: function(d, i){
-    		var x = i % 26;
-    		var y = Math.floor(i / 26);
+    		var x = i % dataset['json']['bid_bad']['months'].length;
+    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
     		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
     	},
     	fill: function(d){
@@ -1358,8 +1358,8 @@ $(document).ready(function() {
     		}
     	}
     	$('#info h4 span:last-child').css('color', colorset[i]).text(name);
-		$('#info #s1').text((dataset['json']['bid_bad']['rates']['interest'][param17][i * 26 + parseInt(id)][2] * 100).toFixed(1));
-		$('#info #s2').text((dataset['json']['bid_bad']['rates']['bad'][param17][i * 26 + parseInt(id)][2] * 100).toFixed(1));
+		$('#info #s1').text((dataset['json']['bid_bad']['rates']['interest'][param17][i * dataset['json']['bid_bad']['months'].length + parseInt(id)][2] * 100).toFixed(1));
+		$('#info #s2').text((dataset['json']['bid_bad']['rates']['bad'][param17][i * dataset['json']['bid_bad']['months'].length + parseInt(id)][2] * 100).toFixed(1));
 		$('#info #s3').text(parseInt(dataset['json']['bid_bad']['interest'][param17][name][parseInt(id)]));
 		$('#info #s4').text(parseInt(dataset['json']['bid_bad']['bad'][param17][name][parseInt(id)]));
 
@@ -1389,8 +1389,8 @@ $(document).ready(function() {
     			}
     		},
     		r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		if (dataset['json']['bid_bad']['params'][param17][d[0]] == name && d[1] == id) {
 	    			return 6 + 30 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
 	    		}
@@ -1409,8 +1409,8 @@ $(document).ready(function() {
     			}
     		},
     		r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		if (dataset['json']['bid_bad']['params'][param17][d[0]] == name && d[1] == id) {
 	    			return 6 + 30 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
 	    		}
@@ -1428,16 +1428,16 @@ $(document).ready(function() {
     	interest17.transition().duration(400).attr({
     		'fill-opacity': 0.7,
     		r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
 	    	},
     	});
     	bad17.transition().duration(400).attr({
     		'fill-opacity': 0.7,
     		r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
 	    	},
     	});
@@ -1599,8 +1599,8 @@ $(document).ready(function() {
 	    		return plot17_height / 2 - gap17 - d[2] / dataset['json']['bid_bad']['max_r']['interest'][param17] * (plot17_height / 2 - gap17 - plot17_margins[0]);
 	    	},
 	    	r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
 	    	},
 	    	fill: function(d){
@@ -1635,8 +1635,8 @@ $(document).ready(function() {
 	    	}
 	    }).transition().duration(1000).attr({
 	    	r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['interest'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['interest'][param17]);
 	    	},
 	    });
@@ -1696,8 +1696,8 @@ $(document).ready(function() {
 	    		return plot17_height / 2 + gap17 + d[2] / dataset['json']['bid_bad']['max_r']['bad'][param17] * (plot17_height / 2 - gap17 - plot17_margins[2]);
 	    	},
 	    	r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
 	    	},
 	    	fill: function(d){
@@ -1732,8 +1732,8 @@ $(document).ready(function() {
 	    	}
 	    }).transition().duration(1000).attr({
 	    	r: function(d, i){
-	    		var x = i % 26;
-	    		var y = Math.floor(i / 26);
+	    		var x = i % dataset['json']['bid_bad']['months'].length;
+	    		var y = Math.floor(i / dataset['json']['bid_bad']['months'].length);
 	    		return 3 + 15 * Math.log(1 + dataset['json']['bid_bad']['bad'][param17][dataset['json']['bid_bad']['params'][param17][y]][x] / dataset['json']['bid_bad']['max']['bad'][param17]);
 	    	},
 	    });
