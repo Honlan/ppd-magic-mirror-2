@@ -41,6 +41,21 @@
 $(document).ready(function() {
 	$('.menu-wrap a').removeClass('active');
     $('#nav2').addClass('active');
+
+    $.ajax({
+    	url: '{{url_for("user_ready")}}',
+    	type: 'POST',
+    	dataType: 'json',
+    	data: {},
+    })
+    .done(function(data) {
+    	window.location.reload();
+    })
+    .fail(function() {
+    })
+    .always(function() {
+    });
+    
 });
 </script>
 {% endblock %}

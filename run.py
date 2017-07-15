@@ -158,6 +158,20 @@ def index():
 
 	return render_template('index.html', dataset=json.dumps(dataset), auth=is_auth())
 
+# 个人中心数据是否加载完毕
+@app.route('/user_ready', methods=['POST'])
+def user_ready():
+	(db,cursor) = connectdb()
+	while True:
+		cursor.execute("select data from user where OpenID=%s", [session['OpenID']])
+		profile = cursor.fetchone()['data']
+		if not profile == '':
+			break
+		time.sleep(5)
+	closedb(db,cursor)
+
+	return json.dumps({'result': 'ok', 'msg': '个人中心数据加载完毕'})
+
 # 个人中心
 @app.route('/user')
 def user():
