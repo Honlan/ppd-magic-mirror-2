@@ -74,6 +74,25 @@ def refresh():
 		closedb(db,cursor)
 	return
 
+# 重新生成个人报告
+def report():
+	if 'OpenID' in session:
+		(db,cursor) = connectdb()
+
+		cursor.execute("select timestamp from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
+		timestamp = cursor.fetchone()['timestamp']
+		if int(time.time()) > int(timestamp) + 3600 * 24 * 7:
+			history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
+			for x in range(0, 10):
+				history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+				history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+				history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+				history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+			history_user.apply_async(args=[session['OpenID'], session['Username']])
+		
+		closedb(db,cursor)
+	return
+
 # 获取用户授权资料
 def auth_data():
 	result = {}
@@ -160,6 +179,7 @@ def closedb(db,cursor):
 @app.route('/')
 def index():
 	refresh()
+	report()
 
 	(db,cursor) = connectdb()
 
@@ -211,6 +231,7 @@ def user_ready():
 @app.route('/user')
 def user():
 	refresh()
+	report()
 	
 	(db,cursor) = connectdb()
 	cursor.execute("select data from user where OpenID=%s",[session['OpenID']])
@@ -263,6 +284,7 @@ def user():
 @app.route('/example')
 def example():
 	refresh()
+	report()
 	
 	(db,cursor) = connectdb()
 	cursor.execute("select * from json_data where page=%s",['user'])
@@ -301,6 +323,7 @@ def example():
 @app.route('/invest')
 def invest():
 	refresh()
+	report()
 	
 	dataset = {}
 
@@ -340,6 +363,7 @@ def invest():
 @app.route('/chat')
 def chat():
 	refresh()
+	report()
 	
 	return render_template('chat.html', auth=is_auth())
 
