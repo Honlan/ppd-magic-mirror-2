@@ -1314,6 +1314,7 @@ def history_user(OpenID, Username):
 
 	for x in xrange(0, len(stats[2])):
 	    stats[2][x]['value'] = [data[data['初始评级'] == rates[x]][k].mean() for k in keys[2]]
+	    stats[2][x]['value'] = [0 if str(x) == 'NaN' else x for x in stats[2][x]['value']]
 	    
 	for x1 in xrange(0, len(stats)):
 	    for x2 in xrange(0, len(stats[x1])):
