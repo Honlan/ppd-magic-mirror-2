@@ -197,7 +197,7 @@ def user():
 		ages = [x['age'] for x in ages]
 		idx = -1
 		for x in range(0, len(ages)):
-			if ages[x] == dataset['age']:
+			if float(ages[x]) == float(dataset['age']):
 				idx = x
 				break
 		dataset['other'] = '%.1f' % (float(idx) * 100 / len(ages))
