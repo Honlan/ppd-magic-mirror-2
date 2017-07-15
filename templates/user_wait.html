@@ -1,61 +1,135 @@
 {% extends 'layout.html' %} {% block style %}
 <style>
 #wait {
-	text-align: center;
+    text-align: center;
 }
+
 #wait h4 {
-	font-weight: normal;
-	font-size: 20px;
+    font-weight: normal;
+    font-size: 20px;
 }
+
 #wait h4 span {
-	margin-left: 8px;
-	margin-right: 8px;
-	color: rgba(221, 107, 102, 0.9)
+    margin-left: 8px;
+    margin-right: 8px;
+    color: rgba(221, 107, 102, 0.9)
 }
+
 #wait h5 {
-	font-weight: normal;
-	font-size: 16px;
-	color: #999;
-	margin-top: 20px;
-	margin-bottom: 20px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #999;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
 #wait p {
-	color: #fff;
+    color: #fff;
 }
+
 #wait p a {
-	text-decoration: underline;
-	margin-left: 8px;
-	margin-right: 8px;
-	color: rgba(221, 107, 102, 0.9);
-	font-size: 18px; 
+    text-decoration: underline;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: rgba(221, 107, 102, 0.9);
+    font-size: 18px;
+}
+
+.spinner {
+    margin: 50px auto;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 70px;
+    -webkit-animation: rotate 2.0s infinite linear;
+    animation: rotate 2.0s infinite linear;
+}
+
+.dot1,
+.dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #66afb2;
+    border-radius: 100%;
+    -webkit-animation: bounce 2.0s infinite ease-in-out;
+    animation: bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+	background-color: #dfd498;
+    top: auto;
+    bottom: 0px;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes bounce {
+    0%,
+    100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
 }
 </style>
 {% endblock %} {% block body %}
 <div id="wait">
-	<h4>正在生成您的<span>个人中心</span>分析页面</h4>
-	<h5>请稍作等待</h5>
-	<p>您也可以先浏览一下</p>
-	<p>基于比赛数据<a href="https://www.kesci.com/apps/home/#!/lab/dataset/58e893c49957300141f973dd/document" target="_blank">LCIS</a>生成的个人中心<a href="{{url_for('example')}}" target="_blank">示例</a></p>
+    <h4>正在生成您的<span>个人中心</span>分析页面</h4>
+    <h5>请稍作等待</h5>
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+    <p>您也可以先浏览一下</p>
+    <p>基于比赛数据<a href="https://www.kesci.com/apps/home/#!/lab/dataset/58e893c49957300141f973dd/document" target="_blank">LCIS</a>生成的个人中心<a href="{{url_for('example')}}" target="_blank">示例</a></p>
 </div>
 <script>
 $(document).ready(function() {
-	$('.menu-wrap a').removeClass('active');
+    $('.menu-wrap a').removeClass('active');
     $('#nav2').addClass('active');
 
     $.ajax({
-    	url: '{{url_for("user_ready")}}',
-    	type: 'POST',
-    	dataType: 'json',
-    	data: {},
-    })
-    .done(function(data) {
-    	window.location.reload();
-    })
-    .fail(function() {
-    })
-    .always(function() {
-    });
-    
+            url: '{{url_for("user_ready")}}',
+            type: 'POST',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+            window.location.reload();
+        })
+        .fail(function() {})
+        .always(function() {});
+
 });
 </script>
 {% endblock %}

@@ -1314,10 +1314,7 @@ def history_user(OpenID, Username):
 
 	for x in xrange(0, len(stats[2])):
 	    stats[2][x]['value'] = [data[data['初始评级'] == rates[x]][k].mean() for k in keys[2]]
-	    print stats[2][x]['value']
-	    print [np.isnan(i) for i in stats[2][x]['value']]
 	    stats[2][x]['value'] = [0 if np.isnan(i) else i for i in stats[2][x]['value']]
-	    print stats[2][x]['value']
 	    
 	for x1 in xrange(0, len(stats)):
 	    for x2 in xrange(0, len(stats[x1])):
@@ -1426,7 +1423,7 @@ def history_user(OpenID, Username):
 	            if st == 0:
 	                ti.append(0)
 	                tb.append(0)
-	            else:    
+	            else:
 	                ti.append(si / st)
 	                tb.append(sb / st)
 	        rates['interest'][key].append(ti)
