@@ -51,6 +51,27 @@ def is_auth():
 		result['count'] = count
 	return result
 
+# 刷新AccessToken
+def refresh():
+	if 'OpenID' in session:
+		(db,cursor) = connectdb()
+		cursor.execute("select AuthTimestamp from user where OpenID=%s", [session['OpenID']])
+		timestamp = cursor.fetchone()['AuthTimestamp']
+		if int(time.time()) > int(timestamp) + 3600 * 24 * 7:
+			while True:
+				new_token_info = client.refresh_token(APPID, session['OpenID'], session['RefreshToken'])
+				if new_token_info == '':
+					continue
+				new_token_info = json.loads(new_token_info)
+				AccessToken = new_token_info['AccessToken']
+				RefreshToken = new_token_info['RefreshToken']
+				session['AccessToken'] = AccessToken
+				session['RefreshToken'] = RefreshToken
+				cursor.execute('update user set AccessToken=%s, RefreshToken=%s where OpenID=%s', [AccessToken, RefreshToken, session['OpenID']])
+				break
+		closedb(db,cursor)
+	return
+
 # 获取用户授权资料
 def auth_data():
 	result = {}
@@ -136,6 +157,8 @@ def closedb(db,cursor):
 # 平台透视
 @app.route('/')
 def index():
+	refresh()
+
 	(db,cursor) = connectdb()
 
 	# 删除较早登陆用户的session
@@ -185,6 +208,8 @@ def user_ready():
 # 个人中心
 @app.route('/user')
 def user():
+	refresh()
+	
 	(db,cursor) = connectdb()
 	cursor.execute("select data from user where OpenID=%s",[session['OpenID']])
 	profile = cursor.fetchone()['data']
@@ -235,6 +260,8 @@ def user():
 # 个人中心例子
 @app.route('/example')
 def example():
+	refresh()
+	
 	(db,cursor) = connectdb()
 	cursor.execute("select * from json_data where page=%s",['user'])
 	json_data = cursor.fetchall()
@@ -271,6 +298,8 @@ def example():
 # 投资顾问
 @app.route('/invest')
 def invest():
+	refresh()
+	
 	dataset = {}
 
 	# session['OpenID'] = '2fc103ba972f4212aaf5f3213d1968f1'
@@ -308,6 +337,8 @@ def invest():
 # 交流社区
 @app.route('/chat')
 def chat():
+	refresh()
+	
 	return render_template('chat.html', auth=is_auth())
 
 # 授权登陆
