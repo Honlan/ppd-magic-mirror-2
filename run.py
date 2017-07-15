@@ -873,7 +873,12 @@ def history_user(OpenID, Username):
 	cursor.execute("select ListingId from lender where LenderName=%s", [Username])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
-	cursor.execute("select * from listing where ListingId in %s and Status=%s", [ListingIds, 3])
+	
+	if len(ListingIds) == 0:
+		cursor.execute("select * from listing where ListingId=%s and Status=%s", [-999, 3])
+	else:
+		cursor.execute("select * from listing where ListingId in %s and Status=%s", [ListingIds, 3])
+
 	basic = cursor.fetchall()
 	data_dict = {}
 	for item in basic:
