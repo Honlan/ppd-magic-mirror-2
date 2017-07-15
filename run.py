@@ -137,6 +137,16 @@ def closedb(db,cursor):
 @app.route('/')
 def index():
 	(db,cursor) = connectdb()
+
+	# 删除较早登陆用户的session
+	if 'OpenID' in session:
+		cursor.execute("select AuthTimestamp from user where OpenID=%s", [session['OpenID']])
+		timestamp = cursor.fetchone()['AuthTimestamp']
+		if int(timestamp) < 1500088214:
+			closedb(db,cursor)
+			return redirect(url_for('logout'))
+		
+
 	cursor.execute("select * from json_data where page=%s",['index'])
 	json_data = cursor.fetchall()
 	
