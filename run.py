@@ -1316,10 +1316,14 @@ def history_user(OpenID, Username):
 	        # indicators[k][x]['min'] = np.min([stats[k][i]['value'][x] for i in xrange(0, len(stats[k]))])
 	        indicators[k][x]['min'] = 0
 
-	indicators[0][4]['max'] = 0.8
-	indicators[0][5]['max'] = 0.9
+	keys = [['信用标数量', '投资总金额', '平均利率', '平均期限', '首标比例', '男性比例', '平均年龄'], 
+			['手机认证', '户口认证', '视频认证', '学历认证', '征信认证', '淘宝认证'], 
+	        ['历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数']]
 
-	indicators[1][0]['max'] = 0.9
+	indicators[0][4]['max'] = 1
+	indicators[0][5]['max'] = 1
+
+	indicators[1][0]['max'] = 1
 	indicators[1][1]['max'] = 0.2
 	indicators[1][2]['max'] = 0.15
 	indicators[1][3]['max'] = 1
