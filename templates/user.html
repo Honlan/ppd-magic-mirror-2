@@ -190,7 +190,7 @@
     		<img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:60px;height:60px;border-radius:50%;margin:20px auto;margin-top:30px;opacity:0;">
     		<div id="tags"></div>
 	    	<p>我的拍龄<span class="number" id="age"></span>年</p>
-	    	<p>击败了<span class="number" id="other">75%</span>的用户</p>
+	    	<p>击败了<span class="number" id="other"></span>的用户</p>
     	</div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
@@ -398,6 +398,7 @@ $(document).ready(function() {
     	$('#tags').append('<span>' + dataset['tags'][i] + '</span>');
     }
     $('#plot1 #age').text(dataset['age']);
+    $('#plot1 #other').text(dataset['other'] + '%');
     $('#plot1 img').animate({opacity: 1}, 1000);
     $('#plot1 p').animate({opacity: 1}, 1000);
     $('#plot1 span').animate({opacity: 1}, 1000);

@@ -178,9 +178,9 @@ def user():
 	(db,cursor) = connectdb()
 	cursor.execute("select data from user where OpenID=%s",[session['OpenID']])
 	profile = cursor.fetchone()['data']
-	closedb(db,cursor)
 
 	if profile == '':
+		closedb(db,cursor)
 		return render_template('user_wait.html', auth=is_auth())
 
 	else:
@@ -191,6 +191,18 @@ def user():
 			dataset['json']['bid_stat'][key] = [float('%.1f' % d) for d in dataset['json']['bid_stat'][key]]
 
 		dataset['age'] = '%.1f' % ((float(time.time()) - dataset['json']['bid_stat']['from']) / 3600 / 24 / 365)
+		cursor.execute("update user set age=%s where OpenID=%s", [dataset['age'], session['OpenID']])
+		cursor.execute("select age from user where age!=%s order by age asc", [-1])
+		ages = cursor.fetchall()
+		ages = [x['age'] for x in ages]
+		idx = -1
+		for x in range(0, len(ages)):
+			if ages[x] == dataset['age']:
+				idx = x
+				break
+		dataset['other'] = '%.1f' % (float(idx) * 100 / len(ages))
+		closedb(db,cursor)
+
 		dataset['tags'] = [];
 		if dataset['json']['bid_stat']['bid_interest_average'] < 12:
 			dataset['tags'].append('低风险')
