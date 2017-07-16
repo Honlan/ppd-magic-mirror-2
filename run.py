@@ -551,7 +551,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				for item in list_result['LoanInfos']:
 					Listings.append(item)
 				PageIndex += 1
-
+			print len(Listings)
 			for item in Listings:
 				flag = True
 				if content.has_key(u'初始评级') and (not item['CreditCode'] in content[u'初始评级']):
