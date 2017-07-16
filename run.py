@@ -559,12 +559,17 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					cflag = False
 					condition = content[u'借款利率']
 					for c in condition:
+						print c
 						if c == u'13%以下' and int(item['Rate']) <= 13:
+							print 1
 							cflag = True
 						elif c == u'22%以上' and int(item['Rate']) >= 22:
+							print 2
 							cflag = True
 						else:
+							print 2
 							c = c[:-1].split('-')
+							print int(item['Rate']), int(c[0]), int(c[1])
 							if int(item['Rate']) >= int(c[0]) and int(item['Rate']) <= int(c[1]):
 								cflag = True
 					if not cflag:
