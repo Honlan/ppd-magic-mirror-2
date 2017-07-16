@@ -559,7 +559,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					cflag = False
 					condition = content[u'借款利率']
 					for c in condition:
-						print c
+						print '条件:' + c + ',' + '利率:' + str(item['Rate'])
 						if c == u'13%以下' and int(item['Rate']) <= 13:
 							print 'case 1'
 							cflag = True
@@ -567,9 +567,8 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 							print 'case 2'
 							cflag = True
 						else:
-							print 'case 3'
+							print 'case 3 ' + str(item['Rate']) + ' ' + str(c[0]) + ' ' + str(c[1])
 							c = c[:-1].split('-')
-							print int(item['Rate']), int(c[0]), int(c[1])
 							if int(item['Rate']) >= int(c[0]) and int(item['Rate']) <= int(c[1]):
 								cflag = True
 					if not cflag:
