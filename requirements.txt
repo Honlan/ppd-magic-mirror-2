@@ -6,3 +6,4 @@ celery
 redis
 Flask-Mail
 pandas
+requests

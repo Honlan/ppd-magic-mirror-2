@@ -42,7 +42,7 @@
         font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
         -webkit-font-smoothing: antialiased;
     }
-
+    
     #header #nav {
         position: absolute;
         right: 30px;
@@ -64,7 +64,7 @@
         -moz-transition: color .3s;
         -webkit-transition: color .3s;
     }
-
+    
     #header #nav a i {
         margin-right: 10px;
     }
@@ -135,7 +135,7 @@
         margin-bottom: 0;
         box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);
     }
-
+    
     #nav_auth {
         position: absolute;
         top: 22px;
@@ -157,7 +157,7 @@
         -o-transition: color, background-color .6s;
         transition: color, background-color .6s;
     }
-
+    
     #nav_auth:hover {
         background-color: #535d63;
         cursor: pointer;
@@ -166,6 +166,218 @@
     .BMap_cpyCtrl,
     .anchorBL {
         display: none;
+    }
+    
+    #chatbot {
+        z-index: 9999;
+        position: fixed;
+        right: -310px;
+        bottom: 60px;
+        width: 300px;
+        background-color: rgba(27, 27, 29, 0.8);
+        padding: 20px;
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+    }
+    
+    #chatbot input {
+        color: #fff;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        background-color: rgba(68, 70, 80, 0.8);
+        font-size: 14px;
+        width: 100%;
+        display: inline-block;
+    }
+    #chatbot .input-group-addon {
+        border: none;
+        background-color: rgba(68, 70, 80, 0.8);
+        color: #fff;
+        padding: 6px 10px;
+        -webkit-transition: color .4s;
+        -moz-transition: color .4s;
+        -ms-transition: color .4s;
+        -o-transition: color .4s;
+        transition: color .4s;
+    }
+    #chatbot .input-group-addon:hover {
+        color: rgba(221, 107, 102, 0.9);
+        cursor: pointer;
+    }
+    #chatbot #history {
+        width: 100%;
+        height: 350px;
+        background-color: rgba(68, 70, 80, 0.8);
+        font-size: 14px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        overflow-y: scroll;
+        padding-top: 74px;
+    }
+    #chatbot #history h4 {
+        text-align: center;
+        font-weight: normal;
+        font-size: 16px;
+        margin-top: 0px;
+        margin-bottom: 12px;
+        color: #fff;
+    }
+    #chatbot #history h5 {
+        text-align: center;
+        font-weight: normal;
+        font-size: 13px;
+        color: #ddd;
+    }
+    #chatbot #history .request {
+        text-align: right;
+        margin-right: 15px;
+        margin-left: 40px;
+        margin-bottom: 15px;
+    }
+    #chatbot #history .request span {
+        text-align: left;
+        padding: 6px 8px;
+        background-color: rgba(221, 107, 102, 0.9);
+        border-radius: 4px;
+        display: inline-block;
+        font-size: 13px;
+    }
+    #chatbot #history .response {
+        text-align: left;
+        margin-left: 15px;
+        margin-right: 40px;
+        margin-bottom: 15px;
+    }
+    #chatbot #history .response span {
+        text-align: left;
+        padding: 6px 8px;
+        background-color: #ddd;
+        border-radius: 4px;
+        color: #333;
+        display: inline-block;
+        font-size: 13px;
+    }
+    #chatbot #control {
+        position: absolute;
+        left: -55px;
+        top: 0;
+        z-index: 9999;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    @keyframes tickle
+    {
+        0%   {
+            left: 0;
+        }
+        20%  {
+            left: -10px;
+        }
+        40%  {
+            left: 0px;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    @-o-keyframes tickle
+    {
+        0%   {
+            left: 0;
+        }
+        20%  {
+            left: -10px;
+        }
+        40%  {
+            left: 0px;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    @-ms-keyframes tickle
+    {
+        0%   {
+            left: 0;
+        }
+        20%  {
+            left: -10px;
+        }
+        40%  {
+            left: 0px;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    @-moz-keyframes tickle
+    {
+        0%   {
+            left: 0;
+        }
+        20%  {
+            left: -10px;
+        }
+        40%  {
+            left: 0px;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    @-webkit-keyframes tickle
+    {
+        0%   {
+            left: 0;
+        }
+        20%  {
+            left: -10px;
+        }
+        40%  {
+            left: 0px;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    #chatbot #control img.inactive {
+        width: 80px;
+        border-radius: 50%;
+        position: relative;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-transition: transform .6s;
+        -moz-transition: transform .6s;
+        -ms-transition: transform .6s;
+        -o-transition: transform .6s;
+        transition: transform .6s;
+        -webkit-animation: tickle 2s ease 0s infinite;
+        -moz-animation: tickle 2s ease 0s infinite;
+        -ms-animation: tickle 2s ease 0s infinite;
+        -o-animation: tickle 2s ease 0s infinite;
+        animation: tickle 2s ease 0s infinite;
+    }
+    #chatbot #control img.active {
+        width: 80px;
+        border-radius: 50%;
+        position: relative;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: transform .6s;
+        -moz-transition: transform .6s;
+        -ms-transition: transform .6s;
+        -o-transition: transform .6s;
+        transition: transform .6s;
+    }
+    #chatbot #control img:hover {
+        cursor: pointer;
     }
     </style>
     {% block style %} {% endblock %}
@@ -185,12 +397,27 @@
             <span style="color:#888;display:inline-block;margin-left:20px;position:relative;top:-2px;">{{auth['Username']}}</span>
         </div>
         {% else %}
-        <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a>
-        {% endif %}
+        <a href="https://ac.ppdai.com/oauth2/login?AppID=2fb2e79ec7914ed99065d5cea99f95e0&ReturnUrl=http://zhanghonglun.cn/pdi/auth" id="nav_auth">授权登陆</a> {% endif %}
     </div>
     <div style="padding:50px 60px;">
         <div id="main">
             {% block body %} {% endblock %}
+        </div>
+    </div>
+    <div id="chatbot">
+        <div id="history">
+            <div style="background-color:rgba(83, 93, 99, 0.9);padding-top:15px;border-top-left-radius:4px;border-top-right-radius:4px;padding-bottom:6px;box-shadow: 0px 3px 5px rgba(20, 20, 20, 0.3);position:absolute;top:20px;" id="title">
+                <h4>拍知心</h4>
+                <h5>面向拍拍贷用户的智能聊天机器人</h4>
+            </div>
+            <p style="text-align:center;font-size:12px;margin-top:10px;color:#999;margin-bottom:15px;">功能持续完善中</p>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" name="chat" placeholder="">
+            <div class="input-group-addon"><span class="fa fa-fw fa-paper-plane"></span></div>
+        </div>
+        <div id="control">
+            <img src="{{url_for('static',filename='img/chatbot.png')}}" alt="" class="inactive">
         </div>
     </div>
     <div id="footer">
@@ -200,4 +427,93 @@
         <p style="font-size:13px;margin-top:5px;color:#ccc">已有<span style="color:#d94e5d;margin-left:10px;margin-right:10px;">{{ auth['count'] }}</span>名用户授权登陆</p>
     </div>
 </body>
+<script>
+$(document).ready(function() {
+    var chatting  = false;
+
+    $('#history #title').width($('#history').width());
+    
+    $('#chatbot input').keyup(function(event) {
+        if (event.key == 'Enter' && !chatting && $('#chatbot input').val() != '') {
+            chatting = true;
+            send();
+        }
+    });
+
+    $('#chatbot .input-group-addon').click(function(event) {
+        if (!chatting && $('#chatbot input').val() != '') {
+            chatting = true;
+            send();
+        }
+    });
+
+    function send() {
+        $('#history').append('<div class="request"><span>' + $('#chatbot input').val() + '</span></div>');
+        var msg = $('#chatbot input').val();
+        $('#chatbot input').val('');
+        $.ajax({
+            url: '{{url_for("chatbot")}}',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                message: msg
+            },
+        })
+        .done(function(data) {
+            chatting = false;
+            $('#history').append('<div class="response"><span>' + data['msg'] + '</span></div>');
+            var h1 = 0;
+            $('#history .request').each(function(index, el) {
+                h1 += $(this).height();
+            });
+            $('#history .response').each(function(index, el) {
+                h1 += $(this).height();
+            });
+            h1 += 999999;
+            var h2 = $('#history').height();
+
+            if (h1 > h2) {
+                $('#history').animate({
+                    scrollTop: h1 - h2,
+                }, 400);
+            }
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        });
+    }
+
+    var chatbot = false;
+
+    // $('#chatbot #control img').mouseenter(function(event) {
+    //     if (chatbot == false) {
+    //         $(this).parent('#control').parent('#chatbot').animate({right: -300
+    //         }, 400);
+    //     }
+    // });
+
+    // $('#chatbot #control img').mouseleave(function(event) {
+    //     if (chatbot == false) {
+    //         $(this).parent('#control').parent('#chatbot').animate({right: -310
+    //         }, 400);
+    //     }
+    // });
+
+    $('#chatbot #control img').click(function(event) {
+        if (chatbot) {
+            $(this).parent('#control').parent('#chatbot').animate({right: -310
+            }, 600);
+            $(this).removeClass('active').addClass('inactive');
+            chatbot = false;
+        }
+        else {
+            $(this).parent('#control').parent('#chatbot').animate({right: 0
+            }, 600);
+            $(this).removeClass('inactive').addClass('active');
+            chatbot = true;
+        }
+    });
+});
+</script>
 </html>

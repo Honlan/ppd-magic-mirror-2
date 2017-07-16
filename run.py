@@ -16,6 +16,7 @@ import pprint
 import random
 from celery import Celery
 import pandas as pd
+import requests
 
 # ppdai api
 from openapi_client import openapi_client as client
@@ -1537,6 +1538,24 @@ def history_user(OpenID, Username):
 	closedb(db,cursor)
 
 	return
+
+# 聊天
+@app.route('/chatbot', methods=['POST'])
+def chatbot():
+	data = request.form
+	keys = TULINGKEY.split('-')
+	for k in keys:
+		data_dict = {
+			'key': k,
+			'info': data['message'],
+			'userid': 'ppd-deep-invest-zhl'
+		}
+		r = requests.post('http://www.tuling123.com/openapi/api', data=data_dict).json()
+		if not str(r['code']) == '40004':
+			break
+
+	return json.dumps({'result': 'ok', 'msg': r['text']})
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
