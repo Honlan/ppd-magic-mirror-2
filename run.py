@@ -551,7 +551,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				for item in list_result['LoanInfos']:
 					Listings.append(item)
 				PageIndex += 1
-			print len(Listings)
 			for item in Listings:
 				flag = True
 				if content.has_key(u'初始评级') and (not item['CreditCode'] in content[u'初始评级']):
@@ -594,8 +593,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					sort_data = rsa.sort(data)
 					sign = rsa.sign(sort_data)
 					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-
-					print list_result
 
 					if list_result == '':
 						continue
