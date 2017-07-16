@@ -558,7 +558,9 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				if content.has_key(u'借款利率'):
 					cflag = False
 					condition = content[u'借款利率']
+					print condition
 					for c in condition:
+						c = unicode(c)
 						print '条件:' + c + ',' + '利率:' + str(item['Rate'])
 						if c == u'13%以下' and int(item['Rate']) <= 13:
 							print 'case 1'
