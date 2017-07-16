@@ -629,7 +629,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if active == 0:
 						finish = True
 						break
-
+			print finish
 			if finish:
 				break
 
