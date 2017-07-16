@@ -533,18 +533,26 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	if flag:
 		finish = False
 		while True:
-			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
-			data =  {
-			  "PageIndex": 1, 
-			}
-			sort_data = rsa.sort(data)
-			sign = rsa.sign(sort_data)
-			list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-			if list_result == '':
-				continue
-			list_result = json.loads(list_result)
+			PageIndex = 1
+			Listings = []
+			while True:
+				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
+				data =  {
+				  "PageIndex": PageIndex, 
+				}
+				sort_data = rsa.sort(data)
+				sign = rsa.sign(sort_data)
+				list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+				if list_result == '':
+					continue
+				list_result = json.loads(list_result)
+				if len(list_result['LoanInfos']) == 0:
+					break
+				for item in list_result['LoanInfos']:
+					Listings.append(item)
+				PageIndex += 1
 
-			for item in list_result['LoanInfos']:
+			for item in Listings:
 				flag = True
 				if content.has_key(u'初始评级') and (not item['CreditCode'] in content[u'初始评级']):
 					flag = False
@@ -586,11 +594,12 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					sort_data = rsa.sort(data)
 					sign = rsa.sign(sort_data)
 					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+
+					print list_result
+
 					if list_result == '':
 						continue
 					list_result = json.loads(list_result)
-
-					print list_result
 					
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
