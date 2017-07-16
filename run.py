@@ -526,7 +526,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	timedelta = int(strategy['timedelta'])
 	flag = True
 	for key in content.keys():
-		if not key in ['初始评级', '借款利率', '借款期限']:
+		if not key in [u'初始评级', u'借款利率', u'借款期限']:
 			flag = False
 
 	# 只需基本信息
@@ -546,17 +546,17 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 
 			for item in list_result['LoanInfos']:
 				flag = True
-				print content, item['CreditCode']
-				print item['CreditCode'] in content['初始评级']
-				if content.has_key('初始评级') and (not item['CreditCode'] in content['初始评级']):
+				print content, item['CreditCode'], content.keys()
+				print item['CreditCode'] in content[u'初始评级']
+				if content.has_key(u'初始评级') and (not item['CreditCode'] in content[u'初始评级']):
 					flag = False
-				if content.has_key('借款利率'):
+				if content.has_key(u'借款利率'):
 					cflag = False
-					condition = content['借款利率'].split('_')
+					condition = content[u'借款利率']
 					for c in condition:
-						if c == '13%以下' and int(item['Rate']) <= 13:
+						if c == u'13%以下' and int(item['Rate']) <= 13:
 							cflag = True
-						elif c == '22%以上' and int(item['Rate']) >= 22:
+						elif c == u'22%以上' and int(item['Rate']) >= 22:
 							cflag = True
 						else:
 							c = c[:-1].split('-')
@@ -564,17 +564,17 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 								cflag = True
 					if not cflag:
 						flag = False
-				if content.has_key('借款期限'):
+				if content.has_key(u'借款期限'):
 					cflag = False
-					condition = content['借款期限'].split('_')
+					condition = content[u'借款期限']
 					for c in condition:
-						if c == '3个月以下' and int(item['Months']) <= 3:
+						if c == u'3个月以下' and int(item['Months']) <= 3:
 							cflag = True
-						elif c == '12个月以上' and int(item['Months']) >= 12:
+						elif c == u'12个月以上' and int(item['Months']) >= 12:
 							cflag = True
-						elif c == '4至6个月' and int(item['Months']) >= 4 and int(item['Months']) <= 6:
+						elif c == u'4至6个月' and int(item['Months']) >= 4 and int(item['Months']) <= 6:
 							cflag = True
-						elif c == '6至12个月' and int(item['Months']) >= 6 and int(item['Months']) <= 12:
+						elif c == u'6至12个月' and int(item['Months']) >= 6 and int(item['Months']) <= 12:
 							cflag = True
 					if not cflag:
 						flag = False
