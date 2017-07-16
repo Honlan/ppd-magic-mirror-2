@@ -577,8 +577,8 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not cflag:
 						flag = False
 				if flag:
-					print item['ListingId'], strategy['id']
-					''' 
+					print int(item['ListingId']), int(strategy['amount'])
+					'''
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": int(item['ListingId']), 
@@ -607,12 +607,12 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not balance == '':
 						balance = json.loads(balance)['Balance']
 						cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
-						if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
+						if float(balance[1]['Balance']) + float(balance[0]['Balance']) < float(strategy['amount']):
 							finish = True
 							break
 
 				# 检查任务是否已结束
-				if strategy['OpenID'] in [0, '0']:
+				if int(strategy['OpenID']) == 0:
 					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 					sys_strategy = cursor.fetchone()['strategy']
 					if sys_strategy == '':
@@ -626,10 +626,9 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 				else:
 					cursor.execute("select active from strategy where id=%s", [strategy['id']])
 					active = cursor.fetchone()['active']
-					if active == 0:
+					if int(active) == 0:
 						finish = True
 						break
-			print finish
 			if finish:
 				break
 
