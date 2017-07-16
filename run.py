@@ -579,7 +579,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not cflag:
 						flag = False
 				if flag:
-					print item['ListingId'], strategy['id'], list_result
+					print item['ListingId'], strategy['id']
 					''' 
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
