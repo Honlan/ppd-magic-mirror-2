@@ -547,7 +547,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 			for item in list_result['LoanInfos']:
 				flag = True
 				print content, item['CreditCode']
-				print item['CreditCode'] in content[u'初始评级']
+				print item['CreditCode'] in content['初始评级']
 				if content.has_key('初始评级') and (not item['CreditCode'] in content['初始评级']):
 					flag = False
 				if content.has_key('借款利率'):
