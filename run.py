@@ -567,9 +567,9 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 							print 'case 2'
 							cflag = True
 						else:
-							print 'case 3 ' + str(item['Rate']) + ' ' + str(c[0]) + ' ' + str(c[1])
 							c = c[:-1].split('-')
 							if int(item['Rate']) >= int(c[0]) and int(item['Rate']) <= int(c[1]):
+								print 'case 3 ' + str(item['Rate']) + ' ' + str(c[0]) + ' ' + str(c[1])
 								cflag = True
 					if not cflag:
 						flag = False
