@@ -1557,6 +1557,14 @@ def chatbot():
 		if not str(r['code']) == '40004':
 			break
 
+	(db,cursor) = connectdb()
+
+	if 'OpenID' in session:
+		cursor.execute('insert into chatting(post,response,OpenID,timestamp) values(%s, %s, %s, %s)', [data['message'],r['text'],session['OpenID'],int(time.time())])
+	else:
+		cursor.execute('insert into chatting(post,response,OpenID,timestamp) values(%s, %s, %s, %s)', [data['message'],r['text'],'',int(time.time())])
+
+	closedb(db,cursor)
 	return json.dumps({'result': 'ok', 'msg': r['text']})
 
 
