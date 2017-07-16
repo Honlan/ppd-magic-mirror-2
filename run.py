@@ -577,8 +577,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not cflag:
 						flag = False
 				if flag:
-					print int(item['ListingId']), int(strategy['amount'])
-					'''
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": int(item['ListingId']), 
@@ -596,7 +594,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						timedelta = int(strategy['timedelta'])
 						break
-					'''
 
 					# 检查余额
 					access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
