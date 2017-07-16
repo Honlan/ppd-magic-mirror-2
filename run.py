@@ -601,20 +601,20 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						timedelta = int(strategy['timedelta'])
-						break
 
-					# 检查余额
-					access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
-					data = {}
-					sort_data = rsa.sort(data)
-					sign = rsa.sign(sort_data)
-					balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-					if not balance == '':
-						balance = json.loads(balance)['Balance']
-						cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
-						if float(balance[1]['Balance']) + float(balance[0]['Balance']) < float(strategy['amount']):
-							finish = True
-							break
+						# 检查余额
+						access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+						data = {}
+						sort_data = rsa.sort(data)
+						sign = rsa.sign(sort_data)
+						balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+						if not balance == '':
+							balance = json.loads(balance)['Balance']
+							cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
+							if float(balance[1]['Balance']) + float(balance[0]['Balance']) < float(strategy['amount']):
+								finish = True
+
+						break
 
 				# 检查任务是否已结束
 				if int(strategy['OpenID']) == 0:
