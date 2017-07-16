@@ -544,6 +544,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 
 			for item in list_result['LoanInfos']:
 				flag = True
+				print content, item['CreditCode'], item['CreditCode'] in content['初始评级']
 				if content.has_key('初始评级') and (not item['CreditCode'] in content['初始评级']):
 					flag = False
 				if content.has_key('借款利率'):
@@ -575,6 +576,8 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if not cflag:
 						flag = False
 				if flag:
+					print item['ListingId'], strategy['id'], list_result
+					''' 
 					access_url = "http://gw.open.ppdai.com/invest/BidService/Bidding"
 					data = {
 						"ListingId": int(item['ListingId']), 
@@ -587,24 +590,25 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if list_result == '':
 						continue
 					list_result = json.loads(list_result)
-					print item['ListingId'], strategy['id'], list_result
+					
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 						timedelta = int(strategy['timedelta'])
 						break
+					'''
 
-				# 检查余额
-				access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
-				data = {}
-				sort_data = rsa.sort(data)
-				sign = rsa.sign(sort_data)
-				balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-				if not balance == '':
-					balance = json.loads(balance)['Balance']
-					cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
-					if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
-						finish = True
-						break
+					# 检查余额
+					access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+					data = {}
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+					if not balance == '':
+						balance = json.loads(balance)['Balance']
+						cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
+						if balance[1]['Balance'] + balance[0]['Balance'] < strategy['amount']:
+							finish = True
+							break
 
 				# 检查任务是否已结束
 				if strategy['OpenID'] in [0, '0']:
