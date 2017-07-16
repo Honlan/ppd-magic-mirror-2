@@ -589,6 +589,8 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					if list_result == '':
 						continue
 					list_result = json.loads(list_result)
+
+					print list_result
 					
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
