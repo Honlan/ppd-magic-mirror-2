@@ -80,9 +80,11 @@ def report():
 	if 'OpenID' in session:
 		(db,cursor) = connectdb()
 
-		cursor.execute("select timestamp from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
-		timestamp = cursor.fetchone()['timestamp']
-		if int(time.time()) > int(timestamp) + 3600 * 24 * 7:
+		cursor.execute("select timestamp, report from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
+		d = cursor.fetchone()
+		timestamp = d['timestamp']
+		s = d['report']
+		if int(time.time()) > int(timestamp) + 3600 * 24 * 7 and int(s) == 0:
 			history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
 			for x in range(0, 10):
 				history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
@@ -1543,8 +1545,9 @@ def history_user(OpenID, Username):
 		    lines['bad'][key] = tmpl
 
 		profile['bid_bad'] = {'months': months, 'params': params, 'interest': interest, 'bad': bad, 'rates': rates, 'max': max_values, 'max_r': max_values_r, 'lines': lines}
-
 		cursor.execute("update user set data=%s where OpenID=%s", [json.dumps(profile), OpenID])
+
+		cursor.execute("update task set report=%s where name=%s and OpenID=%s", [0, 'bidBasicInfo', OpenID])
 
 	closedb(db,cursor)
 
