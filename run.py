@@ -602,7 +602,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					
 					if list_result['Result'] == 0:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
-						timedelta = int(strategy['timedelta'])
 
 						# 检查余额
 						access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
@@ -638,8 +637,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						break
 			if finish:
 				break
-
-			timedelta = 2 * timedelta
 
 			time.sleep(60 * timedelta)
 
