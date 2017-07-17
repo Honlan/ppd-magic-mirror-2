@@ -278,9 +278,13 @@
                 {% endfor %}
 			</div>
 		</div>
-		<div id="plot2">
-			<div class="plot-title">我的自动投标策略</div>
-			<div id="my">
+	</div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="plot2">
+            <div class="plot-title">我的自动投标策略</div>
+            <div id="my">
                 {% for item in dataset['my'] %}
                     {% if item['active'] == 1%}
                         <div class="cell active" id="{{item['id']}}">
@@ -299,10 +303,11 @@
                     {% endif %}
                 {% endfor %}
                 <div id='add'><span class='fa fa-fw fa-plus'></span></div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </div>
+<div>功能持续更新上线中，敬请期待！</div>
 <div id="add_info">
     <div id="add_info_content">
         <h4 style="margin-top:0px;margin-bottom:25px;">
