@@ -883,7 +883,7 @@ $(document).ready(function() {
                         }
                     }
                     if (flag) {
-                        var li = data['strategy']['content'][title][0].split('_');
+                        var li = data['strategy']['content'][title];
                         for (var i = 0; i < li.length; i++) {
                             $(this).children('.item[name="' + li[i] + '"]').addClass('active');
                         }
