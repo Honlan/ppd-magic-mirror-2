@@ -339,6 +339,9 @@ def invest():
 	dataset['my'] = cursor.fetchall()
 	cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
 	dataset['strategy_count'] = 0
+
+	dataset['strategy_weight'] = {u'初始评级': 0, u'借款利率': 0, u'借款期限': 0}
+
 	sys_strategy = cursor.fetchone()['strategy']
 	if not sys_strategy == '':
 		sys_strategy = sys_strategy.split('-')
@@ -347,7 +350,19 @@ def invest():
 				if int(dataset['sys'][x]['id']) == int(s):
 					dataset['sys'][x]['active'] = 1
 					dataset['strategy_count'] += 1
+					content = json.loads(dataset['sys'][x]['content'])
+					for key in content.keys():
+						if dataset['strategy_weight'].has_key(key):
+							dataset['strategy_weight'][key] += 1
 					break
+
+	for item in dataset['my']:
+		if int(item['active']) == 1:
+			content = json.loads(item['content'])
+			for key in content.keys():
+				if dataset['strategy_weight'].has_key(key):
+					dataset['strategy_weight'][key] += 1
+	dataset['strategy_weight'] = {'x': [key for key in dataset['strategy_weight'].keys()], 'data': [value for value in dataset['strategy_weight'].values()]}
 
 	cursor.execute("select balance, balanceBid, balanceWithdraw from user where OpenID=%s", [session['OpenID']])
 	dataset['balance'] = cursor.fetchone()
