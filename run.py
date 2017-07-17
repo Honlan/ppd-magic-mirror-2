@@ -635,7 +635,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						break
 
 				# 检查任务是否已结束
-				if int(strategy['OpenID']) == 0:
+				if strategy['OpenID'] in [0, '0']:
 					cursor.execute("select strategy from user where OpenID=%s", [OpenID])
 					sys_strategy = cursor.fetchone()['strategy']
 					if sys_strategy == '':
