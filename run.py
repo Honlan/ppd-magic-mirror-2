@@ -338,6 +338,11 @@ def invest():
 	cursor.execute("select * from strategy where OpenID=%s",[session['OpenID']])
 	dataset['my'] = cursor.fetchall()
 	cursor.execute("select strategy from user where OpenID=%s", [session['OpenID']])
+	if len(dataset['my']) < 4:
+		dataset['add'] = True
+	else:
+		dataset['add'] = False
+
 	dataset['strategy_count'] = 0
 
 	dataset['strategy_weight'] = {u'初始评级': 0, u'借款利率': 0, u'借款期限': 0}
@@ -362,6 +367,7 @@ def invest():
 			for key in content.keys():
 				if dataset['strategy_weight'].has_key(key):
 					dataset['strategy_weight'][key] += 1
+
 	dataset['strategy_weight'] = {'x': [key for key in dataset['strategy_weight'].keys()], 'data': [value for value in dataset['strategy_weight'].values()]}
 
 	cursor.execute("select balance, balanceBid, balanceWithdraw from user where OpenID=%s", [session['OpenID']])
@@ -530,6 +536,19 @@ def strategy_stop():
 	closedb(db,cursor)
 
 	return json.dumps({'result': 'ok', 'msg': '停用策略成功'})
+
+# 关闭策略投标
+@app.route('/strategy_content', methods=['POST'])
+def strategy_content():
+	(db,cursor) = connectdb()
+
+	data = request.form
+	cursor.execute("select * from strategy where id=%s", [data['strategyId']])
+	strategy = cursor.fetchone()
+	strategy['content'] = json.loads(strategy['content'])
+
+	closedb(db,cursor)
+	return json.dumps({'result': 'ok', 'msg': '获取策略数据成功', 'strategy': strategy})
 
 # 策略投标
 @celery.task

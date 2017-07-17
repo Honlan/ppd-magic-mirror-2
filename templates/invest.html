@@ -13,7 +13,7 @@
 
 #plot2 #my {
     height: 230px;
-    overflow-y: scroll; 
+    overflow-y: scroll;
 }
 
 #plot2 #add,
@@ -119,7 +119,8 @@
     margin-top: 65px;
 }
 
-#add_info {
+#add_info,
+#show_info {
     display: none;
     position: absolute;
     width: 100%;
@@ -130,7 +131,8 @@
     text-align: left;
 }
 
-#add_info_content {
+#add_info_content,
+#show_info_content {
     width: 820px;
     background-color: rgba(55, 58, 71, 0.8);
     border: 1px solid #ddd;
@@ -141,7 +143,8 @@
     position: relative;
 }
 
-#add_info_content input {
+#add_info_content input,
+#show_info_content input {
     display: inline-block;
     color: #fff;
     border: none;
@@ -157,7 +160,8 @@
     cursor: pointer;
 }
 
-#add_info_content span.title {
+#add_info_content span.title,
+#show_info_content span.title {
     display: inline-block;
     font-weight: normal;
     padding: 4px 10px;
@@ -173,7 +177,8 @@
     cursor: default;
 }
 
-#add_info_content span.item {
+#add_info_content span.item,
+#show_info_content span.item {
     display: inline-block;
     padding: 4px 10px;
     border: 1px solid #fff;
@@ -191,12 +196,14 @@
     cursor: pointer;
 }
 
-#add_info_content span.item.active {
+#add_info_content span.item.active,
+#show_info_content span.item.active {
     background-color: #4a606d;
     color: #fff;
 }
 
-#add_info_content button {
+#add_info_content button,
+#show_info_content button {
     display: inline-block;
     color: #fff;
     outline: none;
@@ -209,7 +216,8 @@
     margin-right: 15px;
 }
 
-#add_info_content button:hover {
+#add_info_content button:hover,
+#show_info_content button:hover {
     background-color: #4a606d;
 }
 
@@ -365,7 +373,9 @@
                     <span class="fa fa-fw fa-info"></span>
                     <span class="fa fa-fw fa-times"></span>
                 </div>
-                {% endif %} {% endfor %}
+                {% endif %} {% endfor %} {% if dataset['add'] %}
+                <div id='add'><span class='fa fa-fw fa-plus'></span></div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -486,6 +496,119 @@
         </div>
     </div>
 </div>
+<div id="show_info">
+    <div id="show_info_content">
+        <h4 style="margin-top:0px;margin-bottom:25px;">
+            投资策略详情
+            <input type="text" name="name" placeholder="策略名称" class="form-control" readOnly="readOnly">
+            <input type="text" name="description" placeholder="策略描述，不多于20字" class="form-control" style="width:400px;" readOnly="readOnly">
+        </h4>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">初始评级</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="AAA">AAA</span>
+            <span class="item" name="AA">AA</span>
+            <span class="item" name="A">A</span>
+            <span class="item" name="B">B</span>
+            <span class="item" name="C">C</span>
+            <span class="item" name="D">D</span>
+            <span class="item" name="E">E</span>
+            <span class="item" name="F">F</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">借款金额</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="1千以下">1千以下</span>
+            <span class="item" name="1千至5千">1千至5千</span>
+            <span class="item" name="5千至1万">5千至1万</span>
+            <span class="item" name="1万以上">1万以上</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">借款期限</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="3个月以下">3个月以下</span>
+            <span class="item" name="4至6个月">4至6个月</span>
+            <span class="item" name="6至12个月">6至12个月</span>
+            <span class="item" name="12个月以上">12个月以上</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">借款利率</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="13%以下">13%以下</span>
+            <span class="item" name="14-17%">14-17%</span>
+            <span class="item" name="18-21%">18-21%</span>
+            <span class="item" name="22%以上">22%以上</span>
+        </div>
+        <!-- <div style="margin-bottom:18px;">
+            <b>借款类型</b>
+            <span class="active">不限</span>
+        </div> -->
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">是否首标</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="是">是</span>
+            <span class="item" name="否">否</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">年龄</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="20以下">20以下</span>
+            <span class="item" name="21-30">21-30</span>
+            <span class="item" name="31-40">31-40</span>
+            <span class="item" name="41-50">41-50</span>
+            <span class="item" name="50以上">50以上</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">性别</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="男">男</span>
+            <span class="item" name="女">女</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">认证情况</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="手机认证">手机认证</span>
+            <span class="item" name="户口认证">户口认证</span>
+            <span class="item" name="视频认证">视频认证</span>
+            <span class="item" name="学历认证">学历认证</span>
+            <span class="item" name="征信认证">征信认证</span>
+            <span class="item" name="淘宝认证">淘宝认证</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">历史成功借款次数</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="有成功借款">有成功借款</span>
+            <span class="item" name="无成功借款">无成功借款</span>
+        </div>
+        <!-- <div style="margin-bottom:10px;">
+            <span class="title">历史成功借款金额</span>
+            <span class="item active">不限</span>
+        </div> -->
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">总待还本金</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="有待还">有待还</span>
+            <span class="item" name="无待还">无待还</span>
+        </div>
+        <div style="margin-bottom:10px;" class="field">
+            <span class="title">历史正常还款期数</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="有正常还款记录">有正常还款记录</span>
+            <span class="item" name="无正常还款记录">无正常还款记录</span>
+        </div>
+        <div style="margin-bottom:30px;" class="field">
+            <span class="title">历史逾期还款期数</span>
+            <span class="item all" name="不限">不限</span>
+            <span class="item" name="有逾期还款记录">有逾期还款记录</span>
+            <span class="item" name="无逾期还款记录">无逾期还款记录</span>
+        </div>
+        <div style="position:relative;">
+            <input type="text" name="amount" placeholder="单个标投资金额／元" class="form-control" style="position:absolute;right:0;top:-114px;" readOnly="readOnly">
+            <input type="text" name="timedelta" placeholder="投资时间间隔／分钟" class="form-control" style="position:absolute;right:0;top:-64px;" readOnly="readOnly">
+            <button id="show_info_close" class="form-control">关闭</button>
+        </div>
+    </div>
+</div>
 <div id="delete">
     <div id="delete_content">
         <h4 style="margin-top:10px;margin-bottom:40px;">确认删除个人投资策略</h4>
@@ -505,10 +628,6 @@ $(document).ready(function() {
 
     var datasetJson = eval({{datasetJson | safe}});
     console.log(datasetJson);
-
-    if (datasetJson['my'].length < 4) {
-        $('#my').append("<div id='add'><span class='fa fa-fw fa-plus'></span></div>");
-    }
 
     $('#add').click(function(event) {
         $('#add_info').fadeIn();
@@ -736,6 +855,52 @@ $(document).ready(function() {
         }]
     };
     plot4.setOption(option4);
+
+    $('.cell .fa-info').click(function(event) {
+        $.ajax({
+                url: '{{url_for("strategy_content")}}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    strategyId: $(this).parent('.cell').attr('id')
+                },
+            })
+            .done(function(data) {
+                $('#show_info_content input[name="name"]').val(data['strategy']['name']);
+                $('#show_info_content input[name="description"]').val(data['strategy']['description']);
+                $('#show_info_content input[name="amount"]').val(data['strategy']['amount']);
+                $('#show_info_content input[name="timedelta"]').val(data['strategy']['timedelta']);
+
+                $('#show_info_content .field').each(function(index, el) {
+                    $(this).children('.item').removeClass('active');
+
+                    var title = $(this).children('.title').text();
+                    var flag = false;
+                    for (var key in data['strategy']['content']) {
+                        if (key == title) {
+                            flag = true;
+                            break
+                        }
+                    }
+                    if (flag) {
+                        var li = data['strategy']['content'][title][0].split('_');
+                        for (var i = 0; i < li.length; i++) {
+                            $(this).children('.item[name="' + li[i] + '"]').addClass('active');
+                        }
+                    } else {
+                        $(this).children('.item.all').addClass('active');
+                    }
+                });
+                $('#show_info').fadeIn();
+
+            })
+            .fail(function() {})
+            .always(function() {});
+    });
+
+    $('#show_info_close').click(function(event) {
+        $('#show_info').fadeOut();
+    });
 });
 </script>
 {% endblock %}
