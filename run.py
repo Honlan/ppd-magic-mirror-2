@@ -1502,11 +1502,11 @@ def history_user(OpenID, Username):
 		indicators[0][5]['max'] = 1
 
 		indicators[1][0]['max'] = 1
-		indicators[1][1]['max'] = 0.2
-		indicators[1][2]['max'] = 0.15
+		indicators[1][1]['max'] = 1
+		indicators[1][2]['max'] = 1
 		indicators[1][3]['max'] = 1
-		indicators[1][4]['max'] = 0.12
-		indicators[1][5]['max'] = 0.012
+		indicators[1][4]['max'] = 1
+		indicators[1][5]['max'] = 1
 
 		indicators[2][0]['name'] = '成功借款次数'
 		indicators[2][1]['name'] = '成功借款金额'
