@@ -415,21 +415,34 @@ def auth():
 	session['AuthTimestamp'] = AuthTimestamp
 	session['ExpiresIn'] = ExpiresIn
 
-	access_url = "http://gw.open.ppdai.com/open/openApiPublicQueryService/QueryUserNameByOpenID"
-	data = {
-	  "OpenID": OpenID
-	}
-	sort_data = rsa.sort(data)
-	sign = rsa.sign(sort_data)
-	list_result = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))
+	while True:
+		access_url = "http://gw.open.ppdai.com/open/openApiPublicQueryService/QueryUserNameByOpenID"
+		data = {
+		  "OpenID": OpenID
+		}
+		sort_data = rsa.sort(data)
+		sign = rsa.sign(sort_data)
+		list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+		if list_result == '':
+			continue
+		else:
+			list_result = json.loads(list_result)
+			break
+
 	Username = rsa.decrypt(list_result['UserName'])
 	session['Username'] = Username
 
-	access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
-	data = {}
-	sort_data = rsa.sort(data)
-	sign = rsa.sign(sort_data)
-	balance = json.loads(client.send(access_url, json.dumps(data), APPID, sign, AccessToken))['Balance']
+	while True:
+		access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+		data = {}
+		sort_data = rsa.sort(data)
+		sign = rsa.sign(sort_data)
+		balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+		if balance == '':
+			continue
+		else:
+			balance = json.loads(balance)['Balance']
+			break
 
 	(db,cursor) = connectdb()
 	cursor.execute("select count(*) as count from user where OpenID=%s", [OpenID])
