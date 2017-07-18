@@ -81,20 +81,25 @@ def report():
 		(db,cursor) = connectdb()
 
 		cursor.execute("select timestamp, report from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
-		d = cursor.fetchone()
-		timestamp = d['timestamp']
-		s = d['report']
-		if int(time.time()) > int(timestamp) + 3600 * 24 * 7 and int(s) == 0:
-			history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
-			for x in range(0, 10):
-				history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-				history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-				history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-				history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-			history_user.apply_async(args=[session['OpenID'], session['Username']])
-		
-		closedb(db,cursor)
-	return
+		d = cursor.fetchall()
+		if len(d) == 0:
+			closedb(db,cursor)
+			return
+		else:
+			d = d[0]
+			timestamp = d['timestamp']
+			s = d['report']
+			if int(time.time()) > int(timestamp) + 3600 * 24 * 7 and int(s) == 0:
+				history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
+				for x in range(0, 10):
+					history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+					history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+					history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+					history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+				history_user.apply_async(args=[session['OpenID'], session['Username']])
+			
+			closedb(db,cursor)
+		return
 
 # 获取用户授权资料
 def auth_data():
