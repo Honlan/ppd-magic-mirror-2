@@ -328,6 +328,37 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+#plot6 {
+    width: 100%;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+
+#plot7, #plot8 {
+    width: 100%;
+    height: 350px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot9 {
+    width: 100%;
+    height: 400px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot10 {
+    width: 100%;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot11 {
+    width: 100%;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
 </style>
 {% endblock %} {% block body %}
 <div class="row">
@@ -677,7 +708,35 @@
         <div id="plot6"></div>
     </div>
 </div>
-<div>功能持续更新上线中，敬请期待！</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">安全系数模型性能分析</div>
+        <div id="plot7"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">逾期天数模型性能分析</div>
+        <div id="plot8"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">历史成功投标记录</div>
+        <div id="plot9"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">投标策略和模型数据统计</div>
+        <div id="plot10"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">你可能感兴趣的标的</div>
+        <div id="plot11"></div>
+    </div>
+</div>
+<div style="text-align:center;">功能持续更新上线中，敬请期待！</div>
 <script>
 $(document).ready(function() {
     $('.menu-wrap a').removeClass('active');
