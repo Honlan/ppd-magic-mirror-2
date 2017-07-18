@@ -764,7 +764,12 @@ def history_detail(OpenID, APPID, AccessToken, tail):
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
-		status = cursor.fetchone()['status']
+		status = cursor.fetchall()
+		if len(status) == 0:
+			return
+		else:
+			status = status[0]['status']
+
 		if status == 'finished':
 			break
 		else:
@@ -804,7 +809,12 @@ def history_money(OpenID, APPID, AccessToken, tail):
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
-		status = cursor.fetchone()['status']
+		status = cursor.fetchall()
+		if len(status) == 0:
+			return
+		else:
+			status = status[0]['status']
+
 		if status == 'finished':
 			break
 		else:
@@ -846,7 +856,12 @@ def history_status(OpenID, APPID, AccessToken, tail):
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
-		status = cursor.fetchone()['status']
+		status = cursor.fetchall()
+		if len(status) == 0:
+			return
+		else:
+			status = status[0]['status']
+
 		if status == 'finished':
 			break
 		else:
@@ -886,7 +901,12 @@ def history_payback(OpenID, APPID, AccessToken, tail):
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
-		status = cursor.fetchone()['status']
+		status = cursor.fetchall()
+		if len(status) == 0:
+			return
+		else:
+			status = status[0]['status']
+
 		if status == 'finished':
 			break
 		else:
@@ -923,7 +943,12 @@ def history_user(OpenID, Username):
 
 	while True:
 		cursor.execute("select * from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
-		task = cursor.fetchone()
+		task = cursor.fetchall()
+		if len(task) == 0:
+			return
+		else:
+			task = task[0]
+
 		s = 0
 		for c in ['d', 'm', 's', 'p']:
 			for x in range(0, 10):
