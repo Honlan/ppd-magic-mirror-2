@@ -89,14 +89,15 @@ def report():
 			d = d[0]
 			timestamp = d['timestamp']
 			s = d['report']
-			if int(time.time()) > int(timestamp) + 3600 * 24 * 7 and int(s) == 0:
-				history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
-				for x in range(0, 10):
-					history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-					history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-					history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-					history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
-				history_user.apply_async(args=[session['OpenID'], session['Username']])
+			if int(s) == 0:
+				if int(time.time()) > int(timestamp) + 3600 * 24 * 7:
+					history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
+					for x in range(0, 10):
+						history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+						history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+						history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+						history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
+					history_user.apply_async(args=[session['OpenID'], session['Username']])
 			
 			closedb(db,cursor)
 		return
