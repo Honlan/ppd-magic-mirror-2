@@ -534,6 +534,7 @@ def strategy_start():
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [1, data['strategyId']])
 	# strategy_autobid.apply_async(args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken']])
+	threading.Thread(target=strategy_autobid, args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken']]).start()
 	
 	closedb(db,cursor)
 	
@@ -565,7 +566,7 @@ def strategy_stop():
 
 	return json.dumps({'result': 'ok', 'msg': '停用策略成功'})
 
-# 关闭策略投标
+# 策略投标详情
 @app.route('/strategy_content', methods=['POST'])
 def strategy_content():
 	(db,cursor) = connectdb()
@@ -579,8 +580,7 @@ def strategy_content():
 	return json.dumps({'result': 'ok', 'msg': '获取策略数据成功', 'strategy': strategy})
 
 # 策略投标
-'''
-@celery.task
+# @celery.task
 def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	(db,cursor) = connectdb()
 
@@ -666,19 +666,24 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					list_result = json.loads(list_result)
 					
 					if list_result['Result'] == 0:
+						print '成功投标', strategyId, OpenID, list_result['ListingId'], list_result['Amount']
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 
 						# 检查余额
-						access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
-						data = {}
-						sort_data = rsa.sort(data)
-						sign = rsa.sign(sort_data)
-						balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-						if not balance == '':
-							balance = json.loads(balance)['Balance']
-							cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
-							if float(balance[1]['Balance']) + float(balance[0]['Balance']) < float(strategy['amount']):
-								finish = True
+						while True:
+							access_url = "http://gw.open.ppdai.com/balance/balanceService/QueryBalance"
+							data = {}
+							sort_data = rsa.sort(data)
+							sign = rsa.sign(sort_data)
+							balance = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+							if balance == '':
+								continue
+							else:
+								balance = json.loads(balance)['Balance']
+								break
+						cursor.execute('update user set balance=%s, balanceBid=%s, balanceWithdraw=%s where OpenID=%s', [balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance'], OpenID])
+						if float(balance[1]['Balance']) + float(balance[0]['Balance']) < float(strategy['amount']):
+							finish = True
 
 						break
 
@@ -729,8 +734,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 	closedb(db,cursor)
 
 	return
-'''
-
 
 # 获取用户投标记录基本信息
 # @celery.task
