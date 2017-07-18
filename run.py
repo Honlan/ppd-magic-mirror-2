@@ -736,12 +736,17 @@ def history_basic(OpenID, APPID, AccessToken):
 			"PageIndex": 1, 
 			"PageSize": 1000000
 		}
-		sort_data = rsa.sort(data)
-		sign = rsa.sign(sort_data)
-		list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-		if list_result == '':
-			continue
-		list_result = json.loads(list_result)
+
+		while True:
+			sort_data = rsa.sort(data)
+			sign = rsa.sign(sort_data)
+			list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+			if list_result == '':
+				continue
+			else:
+				list_result = json.loads(list_result)
+				break
+
 		for item in list_result['BidList']:
 			if int(item['ListingId']) == 0:
 				continue
