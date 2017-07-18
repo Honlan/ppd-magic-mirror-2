@@ -196,10 +196,6 @@ def index():
 	refresh()
 	report()
 
-	session['OpenID'] = '2fc103ba972f4212aaf5f3213d1968f1'
-	session['Username'] = 'zhanghonglun'
-	session['AccessToken'] = '79ea71eb-a83f-45e7-a3d7-bffca50238bc'
-
 	(db,cursor) = connectdb()
 
 	# 删除较早登陆用户的session
@@ -762,7 +758,6 @@ def history_basic(OpenID, APPID, AccessToken):
 			else:
 				list_result = json.loads(list_result)
 				break
-		print 'history_basic', current
 		for item in list_result['BidList']:
 			if int(item['ListingId']) == 0:
 				continue
@@ -783,10 +778,8 @@ def history_basic(OpenID, APPID, AccessToken):
 # @celery.task
 def history_detail(OpenID, APPID, AccessToken):
 	(db,cursor) = connectdb()
-	print 'history_detail ready'
 
 	while True:
-		print OpenID
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 		status = cursor.fetchall()
 		if len(status) == 0:
@@ -794,14 +787,10 @@ def history_detail(OpenID, APPID, AccessToken):
 		else:
 			status = status[0]['status']
 
-		print status
-
 		if status == 'finished':
 			break
 		else:
 			time.sleep(5)
-
-	print 'history_detail start'
 
 	cursor.execute("select ListingId from listing where OpenID=%s", [OpenID])
 	ListingIds = cursor.fetchall()
@@ -811,7 +800,6 @@ def history_detail(OpenID, APPID, AccessToken):
 			y = x + 10
 		else:
 			y = len(ListingIds)
-		print 'history_detail', ListingIds[x:y]
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
 			data = {"ListingIds": ListingIds[x:y]}
@@ -835,7 +823,6 @@ def history_detail(OpenID, APPID, AccessToken):
 # @celery.task
 def history_money(OpenID, APPID, AccessToken):
 	(db,cursor) = connectdb()
-	print 'history_money ready'
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
@@ -858,7 +845,6 @@ def history_money(OpenID, APPID, AccessToken):
 			y = x + 5
 		else:
 			y = len(ListingIds)
-		print 'history_money', ListingIds[x:y]
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
 			data = {"ListingIds": ListingIds[x:y]}
@@ -884,7 +870,6 @@ def history_money(OpenID, APPID, AccessToken):
 # @celery.task
 def history_status(OpenID, APPID, AccessToken):
 	(db,cursor) = connectdb()
-	print 'history_status ready'
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
@@ -907,7 +892,6 @@ def history_status(OpenID, APPID, AccessToken):
 			y = x + 20
 		else:
 			y = len(ListingIds)
-		print 'history_status', ListingIds[x:y]
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
 			data ={"ListingIds": ListingIds[x:y]}
@@ -931,7 +915,6 @@ def history_status(OpenID, APPID, AccessToken):
 # @celery.task
 def history_payback(OpenID, APPID, AccessToken):
 	(db,cursor) = connectdb()
-	print 'history_payback ready'
 
 	while True:
 		cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
@@ -950,7 +933,6 @@ def history_payback(OpenID, APPID, AccessToken):
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
 	for x in ListingIds:
-		print 'history_payback', x
 		while True:
 			access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
 			data =  {"ListingId": x}
