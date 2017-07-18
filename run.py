@@ -1503,15 +1503,15 @@ def history_user(OpenID, Username):
 				['手机认证', '户口认证', '视频认证', '学历认证', '征信认证', '淘宝认证'], 
 		        ['历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数']]
 
-		# indicators[0][4]['max'] = 1
-		# indicators[0][5]['max'] = 1
+		indicators[0][4]['max'] = 1
+		indicators[0][5]['max'] = 1
 
-		# indicators[1][0]['max'] = 1
-		# indicators[1][1]['max'] = 1
-		# indicators[1][2]['max'] = 1
-		# indicators[1][3]['max'] = 1
-		# indicators[1][4]['max'] = 1
-		# indicators[1][5]['max'] = 1
+		indicators[1][0]['max'] = 1
+		indicators[1][1]['max'] = 1
+		indicators[1][2]['max'] = 1
+		indicators[1][3]['max'] = 1
+		indicators[1][4]['max'] = 1
+		indicators[1][5]['max'] = 1
 
 		indicators[2][0]['name'] = '成功借款次数'
 		indicators[2][1]['name'] = '成功借款金额'
