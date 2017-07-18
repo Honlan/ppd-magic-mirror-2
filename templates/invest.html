@@ -300,6 +300,34 @@
     background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
+
+#plot5 {
+    background-color: #2c2f3c;
+    margin-bottom: 30px;
+}
+#plot5 .intro {
+    text-align: center;
+    padding: 60px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+#plot5 .intro .fa {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+#plot5 .intro h4 {
+    font-weight: normal;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+#plot5 .intro p {
+    color: #999;
+}
+#plot5 .intro span {
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+}
 </style>
 {% endblock %} {% block body %}
 <div class="row">
@@ -380,7 +408,6 @@
         </div>
     </div>
 </div>
-<div>功能持续更新上线中，敬请期待！</div>
 <div id="add_info">
     <div id="add_info_content">
         <h4 style="margin-top:0px;margin-bottom:25px;">
@@ -618,6 +645,39 @@
         </div>
     </div>
 </div>
+<div id="plot5">
+    <div class="plot-title">基于学习的智能投资</div>
+    <div class='row'>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="intro">
+                <span class="fa fa-fw fa-heart-o"></span>
+                <h4 style="color:rgba(221, 107, 102, 0.9);">基于学习</h4>
+                <p>集成多种机器学习和深度学习模型，预测标的<span>安全系数</span>和<span>逾期天数</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="intro">
+                <span class="fa fa-fw fa-bar-chart"></span>
+                <h4 style="color:rgba(117, 179, 117, 0.9);">风险量化</h4>
+                <p>按时还款或逾期少于10天的标的记作<span>正常标</span>，否则记作<span>问题标</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="intro">
+                <span class="fa fa-fw fa-bell-o"></span>
+                <h4 style="color:rgba(109, 188, 191, 0.9);">极限投资</h4>
+                <p>进一步识别正常标中可能发生<span>少量逾期</span>的标的，获取额外的<span>逾期收益</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p6">
+        <div class="plot-title">标的特征重要性排序</div>
+        <div id="plot6"></div>
+    </div>
+</div>
+<div>功能持续更新上线中，敬请期待！</div>
 <script>
 $(document).ready(function() {
     $('.menu-wrap a').removeClass('active');
