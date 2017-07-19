@@ -882,6 +882,8 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					else:
 						cursor.execute("update listing set OpenID=%s where ListingId=%s", [OpenID, item['ListingId']])
 
+				time.sleep(1)
+
 				PageIndex += 1
 				if PageIndex > int(list_result['TotalPages']):
 					break
