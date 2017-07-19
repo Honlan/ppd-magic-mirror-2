@@ -259,6 +259,9 @@ def user_ready():
 # 个人中心
 @app.route('/user')
 def user():
+	if not 'OpenID' in session:
+		return redirect(url_for('index'))
+
 	refresh()
 	report()
 	
@@ -312,9 +315,6 @@ def user():
 # 个人中心例子
 @app.route('/example')
 def example():
-	refresh()
-	report()
-	
 	(db,cursor) = connectdb()
 	cursor.execute("select * from json_data where page=%s",['user'])
 	json_data = cursor.fetchall()
@@ -351,6 +351,9 @@ def example():
 # 投资顾问
 @app.route('/invest')
 def invest():
+	if not 'OpenID' in session:
+		return redirect(url_for('index'))
+
 	refresh()
 	report()
 	
@@ -453,6 +456,9 @@ def invest():
 # 交流社区
 @app.route('/chat')
 def chat():
+	if not 'OpenID' in session:
+		return redirect(url_for('index'))
+		
 	refresh()
 	report()
 	
