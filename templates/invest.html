@@ -1182,11 +1182,7 @@ $(document).ready(function() {
     };
     plot9.setOption(option9);
 
-    var page10 = 0;
-    for (var i = page10 * 5; i < (page10 + 1) * 5; i++) {
-        if (i >= datasetJson['biddings'].length) {
-            break;
-        }
+    for (var i = 0; i < datasetJson['biddings'].length; i++) {
         var tmp = $('<div class="listing"></div>');
         var list = datasetJson['biddings'][i];
         tmp.append('<h4>' + list['Title'] + '<span>' + list['ListingId'] + '</span><span>' + list['timestamp'] +'</span></h4>');

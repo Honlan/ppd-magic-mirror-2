@@ -424,25 +424,26 @@ def invest():
 	dataset['calendar']['max_count'] = np.max([v for v in dataset['calendar']['count'].values()])
 	dataset['calendar']['count'] = [[d, dataset['calendar']['count'][d], dataset['calendar']['amount'][d]] for d in dates]
 
-	cursor.execute("select ListingId, CreditCode, Months, CurrentRate, Title from listing where ListingId in %s", [[x['ListingId'] for x in biddings]])
-	tmp = cursor.fetchall()
-	tmp = {str(t['ListingId']): t for t in tmp}
-	d = []
-	for x in range(0, len(biddings)):
-		lid = str(biddings[x]['ListingId'])
-		if tmp.has_key(lid):
-			biddings[x]['CreditCode'] = tmp[lid]['CreditCode']
-			biddings[x]['Months'] = tmp[lid]['Months']
-			biddings[x]['CurrentRate'] = tmp[lid]['CurrentRate']
-			biddings[x]['Title'] = tmp[lid]['Title']
-			biddings[x]['timestamp'] = time2str(float(biddings[x]['timestamp']), "%Y-%m-%d %H:%M:%S")
-			d.append(biddings[x])
-	biddings = d
-	cursor.execute("select id, name from strategy where id in %s", [[x['strategyId'] for x in biddings]])
-	tmp = cursor.fetchall()
-	tmp = {str(t['id']): t['name'] for t in tmp}
-	for x in range(0, len(biddings)):
-		biddings[x]['strategy'] = tmp[str(biddings[x]['strategyId'])]
+	if len(biddings) > 0:
+		cursor.execute("select ListingId, CreditCode, Months, CurrentRate, Title from listing where ListingId in %s", [[x['ListingId'] for x in biddings]])
+		tmp = cursor.fetchall()
+		tmp = {str(t['ListingId']): t for t in tmp}
+		d = []
+		for x in range(0, len(biddings)):
+			lid = str(biddings[x]['ListingId'])
+			if tmp.has_key(lid):
+				biddings[x]['CreditCode'] = tmp[lid]['CreditCode']
+				biddings[x]['Months'] = tmp[lid]['Months']
+				biddings[x]['CurrentRate'] = tmp[lid]['CurrentRate']
+				biddings[x]['Title'] = tmp[lid]['Title']
+				biddings[x]['timestamp'] = time2str(float(biddings[x]['timestamp']), "%Y-%m-%d %H:%M:%S")
+				d.append(biddings[x])
+		biddings = d
+		cursor.execute("select id, name from strategy where id in %s", [[x['strategyId'] for x in biddings]])
+		tmp = cursor.fetchall()
+		tmp = {str(t['id']): t['name'] for t in tmp}
+		for x in range(0, len(biddings)):
+			biddings[x]['strategy'] = tmp[str(biddings[x]['strategyId'])]
 	dataset['biddings'] = biddings
 
 	closedb(db,cursor)
