@@ -858,6 +858,7 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					}
 
 				while True:
+					time.sleep(5)
 					sort_data = rsa.sort(data)
 					sign = rsa.sign(sort_data)
 					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
@@ -885,8 +886,6 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 				PageIndex += 1
 				if PageIndex > int(list_result['TotalPages']):
 					break
-
-				time.sleep(5)
 
 			current -= 3600 * 24 * 30
 
