@@ -816,7 +816,7 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken, Username):
 
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
@@ -829,12 +829,12 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken, Username):
 def history_basic(OpenID, APPID, AccessToken, StartTime):
 	try:
 		(db,cursor) = connectdb()
-		app.logger.info('%s history_basic ready', [OpenID])
+		app.logger.info('%s history_basic ready' % [OpenID])
 
 		access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 		current = int(time.time()) + 3600 * 24
 		while current > StartTime:
-			app.logger.info('%s history_basic %s', [OpenID, str(current)])
+			app.logger.info('%s history_basic %s' % [OpenID, str(current)])
 
 			if current - 3600 * 24 * 30 > StartTime:
 				data = {
@@ -861,7 +861,7 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					list_result = json.loads(list_result)
 					break
 
-			app.logger.info('%s history_basic %s', [OpenID, str(len(list_result['BidList']))])
+			app.logger.info('%s history_basic %s' % [OpenID, str(len(list_result['BidList']))])
 
 			for item in list_result['BidList']:
 				if int(item['ListingId']) == 0:
@@ -877,7 +877,7 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 		cursor.execute("update task set status=%s, timestamp=%s where name=%s and OpenID=%s", ['finished', int(time.time()), 'bidBasicInfo', OpenID])
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
@@ -929,7 +929,7 @@ def history_detail(OpenID, APPID, AccessToken):
 
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
@@ -983,7 +983,7 @@ def history_money(OpenID, APPID, AccessToken):
 
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
@@ -1035,7 +1035,7 @@ def history_status(OpenID, APPID, AccessToken):
 
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
@@ -1084,7 +1084,7 @@ def history_payback(OpenID, APPID, AccessToken):
 
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
@@ -1787,7 +1787,7 @@ def history_user(OpenID, Username):
 
 		closedb(db,cursor)
 	except Exception, e:
-		app.logger.error('%s', [e])
+		app.logger.error('%s' % [e])
 	else:
 		pass
 	finally:
