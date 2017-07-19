@@ -495,17 +495,11 @@ def auth():
 	count = cursor.fetchone()['count']
 	if count == 0:
 		threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], 1180627200]).start()
-		# history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
 		threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-		# history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 		threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-		# history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 		threading.Thread(target=history_status, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-		# history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 		threading.Thread(target=history_payback, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-		# history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 		threading.Thread(target=history_user, args=[session['OpenID'], session['Username']]).start()
-		# history_user.apply_async(args=[session['OpenID'], session['Username']])
 
 	closedb(db,cursor)
 
