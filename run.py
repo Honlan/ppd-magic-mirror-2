@@ -847,14 +847,14 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 						"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
 						"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
 						"PageIndex": PageIndex, 
-						"PageSize": 2000
+						"PageSize": 200
 					}
 				else:
 					data = {
 						"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(StartTime))), 
 						"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
 						"PageIndex": 1, 
-						"PageSize": 2000
+						"PageSize": 200
 					}
 
 				while True:
