@@ -829,13 +829,11 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken, Username):
 def history_basic(OpenID, APPID, AccessToken, StartTime):
 	try:
 		(db,cursor) = connectdb()
-		app.logger.error(str(OpenID) + ' history_basic ready')
+		app.logger.debug(str(OpenID) + ' history_basic start')
 
 		access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 		current = int(time.time()) + 3600 * 24
 		while current > StartTime:
-			app.logger.error(str(OpenID) + ' history_basic ' + str(current))
-
 			if current - 3600 * 24 * 30 > StartTime:
 				data = {
 					"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
@@ -861,7 +859,7 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					list_result = json.loads(list_result)
 					break
 
-			app.logger.error(str(OpenID) + ' history_basic ' + str(len(list_result['BidList'])))
+			app.logger.debug(str(OpenID) + ' history_basic ' + str(current) + ' ' + str(len(list_result['BidList'])))
 
 			for item in list_result['BidList']:
 				if int(item['ListingId']) == 0:
@@ -876,6 +874,8 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 
 		cursor.execute("update task set status=%s, timestamp=%s where name=%s and OpenID=%s", ['finished', int(time.time()), 'bidBasicInfo', OpenID])
 		closedb(db,cursor)
+
+		app.logger.debug(str(OpenID) + ' history_basic finish')
 	except Exception, e:
 		app.logger.error(e)
 	else:
@@ -891,6 +891,8 @@ def history_detail(OpenID, APPID, AccessToken):
 	try:
 		(db,cursor) = connectdb()
 
+		app.logger.debug(str(OpenID) + ' history_detail ready')
+
 		while True:
 			cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 			status = cursor.fetchall()
@@ -903,6 +905,8 @@ def history_detail(OpenID, APPID, AccessToken):
 				break
 			else:
 				time.sleep(5)
+
+		app.logger.debug(str(OpenID) + ' history_detail start')
 
 		cursor.execute("select ListingId from listing where OpenID=%s", [OpenID])
 		ListingIds = cursor.fetchall()
@@ -928,6 +932,8 @@ def history_detail(OpenID, APPID, AccessToken):
 		cursor.execute("update task set d0=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
 
 		closedb(db,cursor)
+
+		app.logger.debug(str(OpenID) + ' history_detail finish')
 	except Exception, e:
 		app.logger.error(e)
 	else:
@@ -943,6 +949,8 @@ def history_money(OpenID, APPID, AccessToken):
 	try:
 		(db,cursor) = connectdb()
 
+		app.logger.debug(str(OpenID) + ' history_money ready')
+
 		while True:
 			cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 			status = cursor.fetchall()
@@ -955,6 +963,8 @@ def history_money(OpenID, APPID, AccessToken):
 				break
 			else:
 				time.sleep(5)
+
+		app.logger.debug(str(OpenID) + ' history_money start')
 
 		cursor.execute("select ListingId from listing where OpenID=%s", [OpenID])
 		ListingIds = cursor.fetchall()
@@ -982,6 +992,8 @@ def history_money(OpenID, APPID, AccessToken):
 		cursor.execute("update task set m0=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
 
 		closedb(db,cursor)
+
+		app.logger.debug(str(OpenID) + ' history_money finish')
 	except Exception, e:
 		app.logger.error(e)
 	else:
@@ -997,6 +1009,8 @@ def history_status(OpenID, APPID, AccessToken):
 	try:
 		(db,cursor) = connectdb()
 
+		app.logger.debug(str(OpenID) + ' history_status ready')
+
 		while True:
 			cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 			status = cursor.fetchall()
@@ -1009,6 +1023,8 @@ def history_status(OpenID, APPID, AccessToken):
 				break
 			else:
 				time.sleep(5)
+
+		app.logger.debug(str(OpenID) + ' history_status start')
 
 		cursor.execute("select ListingId from listing where OpenID=%s", [OpenID])
 		ListingIds = cursor.fetchall()
@@ -1034,6 +1050,8 @@ def history_status(OpenID, APPID, AccessToken):
 		cursor.execute("update task set s0=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
 
 		closedb(db,cursor)
+
+		app.logger.debug(str(OpenID) + ' history_status finish')
 	except Exception, e:
 		app.logger.error(e)
 	else:
@@ -1049,6 +1067,8 @@ def history_payback(OpenID, APPID, AccessToken):
 	try:
 		(db,cursor) = connectdb()
 
+		app.logger.debug(str(OpenID) + ' history_payback ready')
+
 		while True:
 			cursor.execute("select status from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 			status = cursor.fetchall()
@@ -1061,6 +1081,8 @@ def history_payback(OpenID, APPID, AccessToken):
 				break
 			else:
 				time.sleep(5)
+
+		app.logger.debug(str(OpenID) + ' history_payback start')
 
 		cursor.execute("select ListingId from listing where OpenID=%s", [OpenID])
 		ListingIds = cursor.fetchall()
@@ -1083,6 +1105,8 @@ def history_payback(OpenID, APPID, AccessToken):
 		cursor.execute("update task set p0=%s, timestamp=%s where name=%s and OpenID=%s", [1, int(time.time()), 'bidBasicInfo', OpenID])
 
 		closedb(db,cursor)
+
+		app.logger.debug(str(OpenID) + ' history_payback finish')
 	except Exception, e:
 		app.logger.error(e)
 	else:
@@ -1098,6 +1122,8 @@ def history_user(OpenID, Username):
 	try:
 		(db,cursor) = connectdb()
 
+		app.logger.debug(str(OpenID) + ' history_user ready')
+
 		while True:
 			cursor.execute("select * from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 			task = cursor.fetchall()
@@ -1111,6 +1137,8 @@ def history_user(OpenID, Username):
 				break
 			else:
 				time.sleep(5)
+
+		app.logger.debug(str(OpenID) + ' history_user start')
 
 		cursor.execute("select ListingId from lender where LenderName=%s", [Username])
 		ListingIds = cursor.fetchall()
@@ -1786,6 +1814,8 @@ def history_user(OpenID, Username):
 		cursor.execute("update listing set OpenID=%s where OpenID=%s", ['', OpenID])
 
 		closedb(db,cursor)
+
+		app.logger.debug(str(OpenID) + ' history_user finish')
 	except Exception, e:
 		app.logger.error(e)
 	else:
