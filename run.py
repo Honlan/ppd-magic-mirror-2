@@ -829,10 +829,13 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken, Username):
 def history_basic(OpenID, APPID, AccessToken, StartTime):
 	try:
 		(db,cursor) = connectdb()
+		app.logger.info('%s history_basic ready', OpenID)
 
 		access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 		current = int(time.time()) + 3600 * 24
 		while current > StartTime:
+			app.logger.info('%s history_basic %s' % [OpenID, str(current)])
+
 			if current - 3600 * 24 * 30 > StartTime:
 				data = {
 					"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
@@ -857,6 +860,9 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 				else:
 					list_result = json.loads(list_result)
 					break
+
+			app.logger.info('%s history_basic %s' % [OpenID, str(len(list_result['BidList']))])
+
 			for item in list_result['BidList']:
 				if int(item['ListingId']) == 0:
 					continue
