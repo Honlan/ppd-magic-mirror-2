@@ -1,0 +1,385 @@
+2017-07-19 22:58:19,795 - ERROR - run.py - history_basic - 842 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-19 22:58:19,797 - ERROR - run.py - history_detail - 916 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-19 22:58:19,797 - ERROR - run.py - history_money - 974 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-19 22:58:19,884 - ERROR - run.py - history_user - 1147 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-19 22:58:19,798 - ERROR - run.py - history_status - 1034 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-19 22:58:19,884 - ERROR - run.py - history_payback - 1092 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-19 22:58:26,846 - ERROR - run.py - history_basic - 902 - cannot concatenate 'str' and 'int' objects
+2017-07-19 23:00:00,539 - ERROR - run.py - history_basic - 842 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-19 23:00:00,540 - ERROR - run.py - history_money - 974 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-19 23:00:00,540 - ERROR - run.py - history_status - 1034 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-19 23:00:00,541 - ERROR - run.py - history_detail - 916 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-19 23:00:00,621 - ERROR - run.py - history_user - 1147 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-19 23:00:00,629 - ERROR - run.py - history_payback - 1092 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-19 23:00:06,889 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25813
+2017-07-19 23:00:06,891 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 1 200
+2017-07-19 23:00:14,378 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25543
+2017-07-19 23:00:14,380 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 2 200
+2017-07-19 23:00:17,766 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25876
+2017-07-19 23:00:17,769 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 3 200
+2017-07-19 23:00:21,938 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25777
+2017-07-19 23:00:21,941 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 4 200
+2017-07-19 23:00:25,938 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25707
+2017-07-19 23:00:25,941 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 5 200
+2017-07-19 23:00:30,033 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 26162
+2017-07-19 23:00:30,037 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 6 200
+2017-07-19 23:00:33,855 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25704
+2017-07-19 23:00:33,857 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 7 200
+2017-07-19 23:00:37,563 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25439
+2017-07-19 23:00:37,566 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500562800 8 200
+2017-07-19 23:06:19,407 - ERROR - run.py - history_basic - 842 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-19 23:06:19,408 - ERROR - run.py - history_money - 974 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-19 23:06:19,409 - ERROR - run.py - history_detail - 916 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-19 23:06:19,409 - ERROR - run.py - history_status - 1034 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-19 23:06:19,460 - ERROR - run.py - history_user - 1147 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-19 23:06:19,483 - ERROR - run.py - history_payback - 1092 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-19 23:06:29,540 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:06:34,789 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:06:39,827 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:06:44,870 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:07:06,975 - ERROR - run.py - history_basic - 842 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-19 23:07:06,976 - ERROR - run.py - history_money - 972 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-19 23:07:07,075 - ERROR - run.py - history_detail - 914 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-19 23:07:07,076 - ERROR - run.py - history_payback - 1090 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-19 23:07:07,076 - ERROR - run.py - history_status - 1032 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-19 23:07:07,088 - ERROR - run.py - history_user - 1145 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-19 23:07:10,825 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64119
+2017-07-19 23:07:10,828 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563226 1 500
+2017-07-19 23:07:24,573 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64357
+2017-07-19 23:07:24,576 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563226 2 500
+2017-07-19 23:07:39,243 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64401
+2017-07-19 23:07:39,249 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563226 3 500
+2017-07-19 23:08:41,480 - ERROR - run.py - history_detail - 915 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-19 23:08:41,481 - ERROR - run.py - history_basic - 842 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-19 23:08:41,481 - ERROR - run.py - history_money - 973 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-19 23:08:41,482 - ERROR - run.py - history_status - 1033 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-19 23:08:41,482 - ERROR - run.py - history_payback - 1091 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-19 23:08:41,483 - ERROR - run.py - history_user - 1146 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-19 23:08:51,697 - ERROR - run.py - history_basic - 870 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:09:01,748 - ERROR - run.py - history_basic - 870 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:09:16,837 - ERROR - run.py - history_basic - 842 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-19 23:09:16,839 - ERROR - run.py - history_money - 972 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-19 23:09:16,839 - ERROR - run.py - history_detail - 914 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-19 23:09:16,934 - ERROR - run.py - history_user - 1145 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-19 23:09:16,945 - ERROR - run.py - history_payback - 1090 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-19 23:09:16,941 - ERROR - run.py - history_status - 1032 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-19 23:09:19,748 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64119
+2017-07-19 23:09:19,754 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 1 500
+2017-07-19 23:09:33,661 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64357
+2017-07-19 23:09:33,667 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 2 500
+2017-07-19 23:09:47,706 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64401
+2017-07-19 23:09:47,714 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 3 500
+2017-07-19 23:10:00,449 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64277
+2017-07-19 23:10:00,453 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 4 500
+2017-07-19 23:10:09,466 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63203
+2017-07-19 23:10:09,472 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 5 500
+2017-07-19 23:10:16,343 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 62493
+2017-07-19 23:10:16,349 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 6 500
+2017-07-19 23:10:24,132 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 62572
+2017-07-19 23:10:24,135 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 7 500
+2017-07-19 23:10:31,254 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63243
+2017-07-19 23:10:31,260 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 8 500
+2017-07-19 23:10:39,496 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63015
+2017-07-19 23:10:39,501 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 9 500
+2017-07-19 23:10:47,658 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 62994
+2017-07-19 23:10:47,662 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 10 500
+2017-07-19 23:10:56,283 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 62877
+2017-07-19 23:10:56,287 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 11 500
+2017-07-19 23:11:07,353 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 0
+2017-07-19 23:11:10,909 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63007
+2017-07-19 23:11:10,915 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 12 500
+2017-07-19 23:11:20,601 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63125
+2017-07-19 23:11:20,606 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 13 500
+2017-07-19 23:11:30,157 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63251
+2017-07-19 23:11:30,165 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 14 500
+2017-07-19 23:11:39,995 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63110
+2017-07-19 23:11:40,001 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 15 500
+2017-07-19 23:11:50,912 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63237
+2017-07-19 23:11:50,918 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 16 500
+2017-07-19 23:12:01,295 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63119
+2017-07-19 23:12:01,300 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 17 500
+2017-07-19 23:12:13,466 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63490
+2017-07-19 23:12:13,472 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 18 500
+2017-07-19 23:12:25,726 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 60161
+2017-07-19 23:12:25,731 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1500563356 19 476
+2017-07-19 23:12:37,728 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63675
+2017-07-19 23:12:37,734 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1497971356 1 500
+2017-07-19 23:12:50,531 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63647
+2017-07-19 23:12:50,534 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1497971356 2 500
+2017-07-19 23:13:03,454 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64205
+2017-07-19 23:13:03,460 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1497971356 3 500
+2017-07-19 23:13:16,492 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63940
+2017-07-19 23:13:16,501 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1497971356 4 500
+2017-07-19 23:13:27,680 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 25519
+2017-07-19 23:13:27,682 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1497971356 5 198
+2017-07-19 23:13:38,641 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 62715
+2017-07-19 23:13:38,644 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1495379356 1 500
+2017-07-19 23:13:51,788 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63511
+2017-07-19 23:13:51,794 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1495379356 2 500
+2017-07-19 23:14:06,949 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63539
+2017-07-19 23:14:06,955 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1495379356 3 500
+2017-07-19 23:14:20,663 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64129
+2017-07-19 23:14:20,669 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1495379356 4 500
+2017-07-19 23:14:33,751 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 42115
+2017-07-19 23:14:33,755 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1495379356 5 333
+2017-07-19 23:14:49,435 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64946
+2017-07-19 23:14:49,441 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 1 500
+2017-07-19 23:15:04,165 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 65431
+2017-07-19 23:15:04,168 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 2 500
+2017-07-19 23:15:24,040 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64766
+2017-07-19 23:15:24,048 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 3 500
+2017-07-19 23:15:44,441 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63828
+2017-07-19 23:15:44,448 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 4 500
+2017-07-19 23:16:04,723 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63595
+2017-07-19 23:16:04,730 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 5 500
+2017-07-19 23:16:26,785 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 64152
+2017-07-19 23:16:26,793 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 6 500
+2017-07-19 23:16:47,386 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 46212
+2017-07-19 23:16:47,390 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1492787356 7 363
+2017-07-19 23:17:06,850 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 63417
+2017-07-19 23:17:06,855 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1490195356 1 500
+2017-07-19 23:17:23,326 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 61464
+2017-07-19 23:17:23,331 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1490195356 2 477
+2017-07-19 23:18:00,605 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 53906
+2017-07-19 23:18:00,611 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1487603356 1 419
+2017-07-19 23:18:16,843 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 19400
+2017-07-19 23:18:16,845 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1485011356 1 150
+2017-07-19 23:18:22,462 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 1479
+2017-07-19 23:18:22,462 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1482419356 1 11
+2017-07-19 23:18:23,485 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:23,486 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1479827356 1 1
+2017-07-19 23:18:23,622 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:23,623 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1477235356 1 1
+2017-07-19 23:18:23,808 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:23,808 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1474643356 1 1
+2017-07-19 23:18:23,993 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:23,994 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1472051356 1 1
+2017-07-19 23:18:24,162 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:24,162 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1469459356 1 1
+2017-07-19 23:18:24,275 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:24,276 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1466867356 1 1
+2017-07-19 23:18:24,461 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:24,462 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1464275356 1 1
+2017-07-19 23:18:24,616 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:24,617 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1461683356 1 1
+2017-07-19 23:18:24,740 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:24,740 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1459091356 1 1
+2017-07-19 23:18:24,890 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:24,890 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1456499356 1 1
+2017-07-19 23:18:25,056 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:25,057 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1453907356 1 1
+2017-07-19 23:18:25,297 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:25,298 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1451315356 1 1
+2017-07-19 23:18:25,449 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:25,449 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1448723356 1 1
+2017-07-19 23:18:25,595 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:25,596 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1446131356 1 1
+2017-07-19 23:18:25,753 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:25,753 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1443539356 1 1
+2017-07-19 23:18:25,880 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:25,880 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1440947356 1 1
+2017-07-19 23:18:26,060 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,060 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1438355356 1 1
+2017-07-19 23:18:26,195 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,195 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1435763356 1 1
+2017-07-19 23:18:26,380 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,380 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1433171356 1 1
+2017-07-19 23:18:26,511 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,512 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1430579356 1 1
+2017-07-19 23:18:26,670 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,670 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1427987356 1 1
+2017-07-19 23:18:26,808 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,809 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1425395356 1 1
+2017-07-19 23:18:26,966 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:26,967 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1422803356 1 1
+2017-07-19 23:18:27,122 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:27,122 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1420211356 1 1
+2017-07-19 23:18:27,292 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:27,293 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1417619356 1 1
+2017-07-19 23:18:27,465 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:27,466 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1415027356 1 1
+2017-07-19 23:18:27,639 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:27,639 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1412435356 1 1
+2017-07-19 23:18:27,777 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:27,777 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1409843356 1 1
+2017-07-19 23:18:28,086 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,087 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1407251356 1 1
+2017-07-19 23:18:28,216 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,217 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1404659356 1 1
+2017-07-19 23:18:28,354 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,354 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1402067356 1 1
+2017-07-19 23:18:28,537 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,538 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1399475356 1 1
+2017-07-19 23:18:28,680 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,681 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1396883356 1 1
+2017-07-19 23:18:28,836 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,836 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1394291356 1 1
+2017-07-19 23:18:28,987 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:28,987 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1391699356 1 1
+2017-07-19 23:18:29,315 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:29,316 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1389107356 1 1
+2017-07-19 23:18:29,465 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:29,465 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1386515356 1 1
+2017-07-19 23:18:29,615 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:29,616 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1383923356 1 1
+2017-07-19 23:18:29,763 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:29,764 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1381331356 1 1
+2017-07-19 23:18:29,922 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:29,922 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1378739356 1 1
+2017-07-19 23:18:30,124 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:30,124 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1376147356 1 1
+2017-07-19 23:18:30,245 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:30,246 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1373555356 1 1
+2017-07-19 23:18:30,417 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:30,417 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1370963356 1 1
+2017-07-19 23:18:30,562 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:30,562 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1368371356 1 1
+2017-07-19 23:18:30,726 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:30,727 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1365779356 1 1
+2017-07-19 23:18:30,883 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:30,883 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1363187356 1 1
+2017-07-19 23:18:31,009 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:31,009 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1360595356 1 1
+2017-07-19 23:18:31,176 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:31,176 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1358003356 1 1
+2017-07-19 23:18:31,463 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:31,464 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1355411356 1 1
+2017-07-19 23:18:31,613 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:31,614 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1352819356 1 1
+2017-07-19 23:18:31,771 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:31,771 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1350227356 1 1
+2017-07-19 23:18:31,946 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:31,947 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1347635356 1 1
+2017-07-19 23:18:32,102 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:32,103 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1345043356 1 1
+2017-07-19 23:18:32,287 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:32,288 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1342451356 1 1
+2017-07-19 23:18:32,592 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:32,593 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1339859356 1 1
+2017-07-19 23:18:32,729 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:32,729 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1337267356 1 1
+2017-07-19 23:18:32,860 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:32,861 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1334675356 1 1
+2017-07-19 23:18:33,043 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:33,044 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1332083356 1 1
+2017-07-19 23:18:33,198 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:33,199 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1329491356 1 1
+2017-07-19 23:18:33,356 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:33,357 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1326899356 1 1
+2017-07-19 23:18:33,538 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:33,538 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1324307356 1 1
+2017-07-19 23:18:33,716 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:33,717 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1321715356 1 1
+2017-07-19 23:18:33,949 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:33,949 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1319123356 1 1
+2017-07-19 23:18:34,068 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:34,069 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1316531356 1 1
+2017-07-19 23:18:34,248 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:34,249 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1313939356 1 1
+2017-07-19 23:18:34,461 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:34,461 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1311347356 1 1
+2017-07-19 23:18:34,627 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:34,628 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1308755356 1 1
+2017-07-19 23:18:34,805 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:34,806 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1306163356 1 1
+2017-07-19 23:18:35,033 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:35,033 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1303571356 1 1
+2017-07-19 23:18:35,177 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:35,177 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1300979356 1 1
+2017-07-19 23:18:35,360 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:35,361 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1298387356 1 1
+2017-07-19 23:18:35,490 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:35,490 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1295795356 1 1
+2017-07-19 23:18:35,615 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:35,615 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1293203356 1 1
+2017-07-19 23:18:36,098 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:36,099 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1290611356 1 1
+2017-07-19 23:18:36,215 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:36,216 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1288019356 1 1
+2017-07-19 23:18:36,347 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:36,347 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1285427356 1 1
+2017-07-19 23:18:36,493 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:36,494 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1282835356 1 1
+2017-07-19 23:18:36,619 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:36,619 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1280243356 1 1
+2017-07-19 23:18:36,882 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:36,882 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1277651356 1 1
+2017-07-19 23:18:37,037 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,038 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1275059356 1 1
+2017-07-19 23:18:37,157 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,157 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1272467356 1 1
+2017-07-19 23:18:37,330 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,331 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1269875356 1 1
+2017-07-19 23:18:37,509 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,510 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1267283356 1 1
+2017-07-19 23:18:37,634 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,635 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1264691356 1 1
+2017-07-19 23:18:37,802 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,802 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1262099356 1 1
+2017-07-19 23:18:37,960 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:37,961 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1259507356 1 1
+2017-07-19 23:18:38,131 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:38,131 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1256915356 1 1
+2017-07-19 23:18:38,277 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:38,277 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1254323356 1 1
+2017-07-19 23:18:38,438 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:38,439 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1251731356 1 1
+2017-07-19 23:18:38,580 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:38,581 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1249139356 1 1
+2017-07-19 23:18:38,725 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:38,726 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1246547356 1 1
+2017-07-19 23:18:39,146 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:39,147 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1243955356 1 1
+2017-07-19 23:18:39,290 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:39,291 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1241363356 1 1
+2017-07-19 23:18:39,453 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:39,453 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1238771356 1 1
+2017-07-19 23:18:39,654 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:39,656 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1236179356 1 1
+2017-07-19 23:18:39,809 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:39,809 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1233587356 1 1
+2017-07-19 23:18:39,965 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:39,965 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1230995356 1 1
+2017-07-19 23:18:40,201 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:40,201 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1228403356 1 1
+2017-07-19 23:18:40,334 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:40,334 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1225811356 1 1
+2017-07-19 23:18:40,516 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:40,516 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1223219356 1 1
+2017-07-19 23:18:40,898 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:40,899 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1220627356 1 1
+2017-07-19 23:18:41,096 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,097 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1218035356 1 1
+2017-07-19 23:18:41,239 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,240 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1215443356 1 1
+2017-07-19 23:18:41,367 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,368 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1212851356 1 1
+2017-07-19 23:18:41,502 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,503 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1210259356 1 1
+2017-07-19 23:18:41,681 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,681 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1207667356 1 1
+2017-07-19 23:18:41,867 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,867 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1205075356 1 1
+2017-07-19 23:18:41,990 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:41,991 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1202483356 1 1
+2017-07-19 23:18:42,175 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:42,176 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1199891356 1 1
+2017-07-19 23:18:42,404 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:42,405 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1197299356 1 1
+2017-07-19 23:18:42,551 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:42,552 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1194707356 1 1
+2017-07-19 23:18:42,679 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:42,680 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1192115356 1 1
+2017-07-19 23:18:42,865 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:42,865 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1189523356 1 1
+2017-07-19 23:18:43,009 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:43,009 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1186931356 1 1
+2017-07-19 23:18:43,150 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:43,150 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1184339356 1 1
+2017-07-19 23:18:43,285 - ERROR - run.py - history_basic - 869 - b49e5e00307b4430a6247b843ef49064 history_basic 156
+2017-07-19 23:18:43,286 - ERROR - run.py - history_basic - 877 - b49e5e00307b4430a6247b843ef49064 history_basic 1181747356 1 1
+2017-07-19 23:18:43,289 - ERROR - run.py - history_basic - 898 - b49e5e00307b4430a6247b843ef49064 history_basic finish
+2017-07-19 23:18:47,455 - ERROR - run.py - history_money - 987 - b49e5e00307b4430a6247b843ef49064 history_money start
+2017-07-19 23:18:47,455 - ERROR - run.py - history_detail - 929 - b49e5e00307b4430a6247b843ef49064 history_detail start
+2017-07-19 23:18:47,473 - ERROR - run.py - history_payback - 1105 - b49e5e00307b4430a6247b843ef49064 history_payback start
+2017-07-19 23:18:47,510 - ERROR - run.py - history_status - 1047 - b49e5e00307b4430a6247b843ef49064 history_status start

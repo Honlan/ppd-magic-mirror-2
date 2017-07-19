@@ -847,14 +847,14 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 						"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
 						"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
 						"PageIndex": PageIndex, 
-						"PageSize": 200
+						"PageSize": 500
 					}
 				else:
 					data = {
 						"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(StartTime))), 
 						"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
 						"PageIndex": 1, 
-						"PageSize": 200
+						"PageSize": 500
 					}
 
 				while True:
@@ -862,7 +862,7 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					sign = rsa.sign(sort_data)
 					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
 
-					app.logger.error(str(OpenID) + ' history_basic ' + len(list_result))
+					app.logger.error(str(OpenID) + ' history_basic ' + str(len(list_result)))
 					
 					if list_result == '':
 						continue
@@ -882,11 +882,11 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					else:
 						cursor.execute("update listing set OpenID=%s where ListingId=%s", [OpenID, item['ListingId']])
 
-				time.sleep(1)
-
 				PageIndex += 1
 				if PageIndex > int(list_result['TotalPages']):
 					break
+
+				time.sleep(5)
 
 			current -= 3600 * 24 * 30
 
@@ -935,6 +935,7 @@ def history_detail(OpenID, APPID, AccessToken):
 			else:
 				y = len(ListingIds)
 			while True:
+				time.sleep(5)
 				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
 				data = {"ListingIds": ListingIds[x:y]}
 				sort_data = rsa.sort(data)
@@ -993,6 +994,7 @@ def history_money(OpenID, APPID, AccessToken):
 			else:
 				y = len(ListingIds)
 			while True:
+				time.sleep(5)
 				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
 				data = {"ListingIds": ListingIds[x:y]}
 				sort_data = rsa.sort(data)
@@ -1053,6 +1055,7 @@ def history_status(OpenID, APPID, AccessToken):
 			else:
 				y = len(ListingIds)
 			while True:
+				time.sleep(5)
 				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
 				data ={"ListingIds": ListingIds[x:y]}
 				sort_data = rsa.sort(data)
@@ -1107,6 +1110,7 @@ def history_payback(OpenID, APPID, AccessToken):
 		ListingIds = [x['ListingId'] for x in ListingIds]
 		for x in ListingIds:
 			while True:
+				time.sleep(5)
 				access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
 				data =  {"ListingId": x}
 				sort_data = rsa.sort(data)
