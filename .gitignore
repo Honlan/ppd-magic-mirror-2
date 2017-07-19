@@ -3,3 +3,4 @@
 config.py
 venv/
 core/Global.py
+run.log
