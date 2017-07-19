@@ -862,7 +862,7 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 					sign = rsa.sign(sort_data)
 					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
 
-					app.logger.error(str(OpenID) + ' history_basic ' + list_result)
+					app.logger.error(str(OpenID) + ' history_basic ' + len(list_result))
 					
 					if list_result == '':
 						continue
