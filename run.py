@@ -91,19 +91,13 @@ def report():
 			timestamp = d['timestamp']
 			s = d['report']
 			if int(s) == 0:
-				if int(time.time()) > int(timestamp) + 3600 * 24 * 7:
-					threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-					# history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
+				if int(time.time()) > int(timestamp) + 3600 * 24:
+					threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], int(timestamp) - 600]).start()
 					threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-					# history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 					threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-					# history_money.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 					threading.Thread(target=history_status, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-					# history_status.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 					threading.Thread(target=history_payback, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-					# history_payback.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
 					threading.Thread(target=history_user, args=[session['OpenID'], session['Username']]).start()
-					# history_user.apply_async(args=[session['OpenID'], session['Username']])
 			
 			closedb(db,cursor)
 		return
@@ -389,6 +383,45 @@ def invest():
 	cursor.execute("select count(*) as count from strategy where OpenID=%s and active=%s", [session['OpenID'], 1])
 	dataset['strategy_count'] += cursor.fetchone()['count']
 
+	dates = []
+	start = 1483200000
+	while True:
+		b = time2str(start, '%Y-%m-%d')
+		if b[:4] == '2017':
+			dates.append(b)
+			start += 3600 * 24
+		else:
+			break
+	dataset['calendar'] = {'count':{d: 0 for d in dates}, 'amount':{d: 0 for d in dates}}
+
+	cursor.execute("select * from bidding where OpenID=%s order by timestamp asc",[session['OpenID']])
+	biddings = cursor.fetchall()
+	for item in biddings:
+		d = time2str(float(item['timestamp']), '%Y-%m-%d')
+		dataset['calendar']['count'][d] += 1
+		dataset['calendar']['amount'][d] += item['amount']
+
+	dataset['calendar']['max_count'] = np.max([v for v in dataset['calendar']['count'].values()])
+	dataset['calendar']['count'] = [[d, dataset['calendar']['count'][d], dataset['calendar']['amount'][d]] for d in dates]
+
+	dataset['biddings'] = biddings
+	cursor.execute("select ListingId, CreditCode, Months, CurrentRate, Title from listing where ListingId in %s", [[x['ListingId'] for x in biddings]])
+	tmp = cursor.fetchall()
+	tmp = {str(t['ListingId']): t for t in tmp}
+	for x in range(0, len(biddings)):
+		lid = str(biddings[x]['ListingId'])
+		biddings[x]['CreditCode'] = tmp[lid]['CreditCode']
+		biddings[x]['Months'] = tmp[lid]['Months']
+		biddings[x]['CurrentRate'] = tmp[lid]['CurrentRate']
+		biddings[x]['Title'] = tmp[lid]['Title']
+		biddings[x]['timestamp'] = time2str(float(biddings[x]['timestamp']), "%Y-%m-%d %H:%M:%S")
+
+	cursor.execute("select id, name from strategy where id in %s", [[x['strategyId'] for x in biddings]])
+	tmp = cursor.fetchall()
+	tmp = {str(t['id']): t['name'] for t in tmp}
+	for x in range(0, len(biddings)):
+		biddings[x]['strategy'] = tmp[str(biddings[x]['strategyId'])]
+
 	closedb(db,cursor)
 
 	return render_template('invest.html', auth=is_auth(), datasetJson=json.dumps(dataset), dataset=dataset)
@@ -461,7 +494,7 @@ def auth():
 	cursor.execute("select count(*) as count from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
 	count = cursor.fetchone()['count']
 	if count == 0:
-		threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+		threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], 1180627200]).start()
 		# history_basic.apply_async(args=[session['OpenID'], APPID, session['AccessToken']])
 		threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
 		# history_detail.apply_async(args=[session['OpenID'], APPID, session['AccessToken'], x])
@@ -666,8 +699,15 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 					list_result = json.loads(list_result)
 					
 					if list_result['Result'] == 0:
-						print '成功投标', strategyId, OpenID, list_result['ListingId'], list_result['Amount']
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
+
+						# 更新数据
+						threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], int(time.time()) - 600]).start()
+						threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+						threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+						threading.Thread(target=history_status, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+						threading.Thread(target=history_payback, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+						threading.Thread(target=history_user, args=[session['OpenID'], session['Username']]).start()
 
 						# 检查余额
 						while True:
@@ -737,20 +777,28 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 
 # 获取用户投标记录基本信息
 # @celery.task
-def history_basic(OpenID, APPID, AccessToken):
+def history_basic(OpenID, APPID, AccessToken, StartTime):
 	(db,cursor) = connectdb()
 
 	cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 	cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 	access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 	current = int(time.time()) + 3600 * 24
-	while current > 1180627200:
-		data = {
-			"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
-			"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
-			"PageIndex": 1, 
-			"PageSize": 1000000
-		}
+	while current > StartTime:
+		if current - 3600 * 24 * 30 > StartTime:
+			data = {
+				"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
+				"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
+				"PageIndex": 1, 
+				"PageSize": 1000000
+			}
+		else:
+			data = {
+				"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(StartTime))), 
+				"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
+				"PageIndex": 1, 
+				"PageSize": 1000000
+			}
 
 		while True:
 			sort_data = rsa.sort(data)
@@ -1641,7 +1689,8 @@ def history_user(OpenID, Username):
 		profile['bid_bad'] = {'months': months, 'params': params, 'interest': interest, 'bad': bad, 'rates': rates, 'max': max_values, 'max_r': max_values_r, 'lines': lines}
 		cursor.execute("update user set data=%s where OpenID=%s", [json.dumps(profile), OpenID])
 
-		cursor.execute("update task set report=%s where name=%s and OpenID=%s", [0, 'bidBasicInfo', OpenID])
+	cursor.execute("update task set report=%s where name=%s and OpenID=%s", [0, 'bidBasicInfo', OpenID])
+	cursor.execute("update listing set OpenID=%s where OpenID=%s", ['', OpenID])
 
 	closedb(db,cursor)
 
