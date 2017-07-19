@@ -458,7 +458,7 @@ def invest():
 def chat():
 	if not 'OpenID' in session:
 		return redirect(url_for('index'))
-		
+
 	refresh()
 	report()
 	
@@ -840,42 +840,50 @@ def history_basic(OpenID, APPID, AccessToken, StartTime):
 		access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 		current = int(time.time()) + 3600 * 24
 		while current > StartTime:
-			if current - 3600 * 24 * 30 > StartTime:
-				data = {
-					"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
-					"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
-					"PageIndex": 1, 
-					"PageSize": 1000000
-				}
-			else:
-				data = {
-					"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(StartTime))), 
-					"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
-					"PageIndex": 1, 
-					"PageSize": 1000000
-				}
-
+			PageIndex = 1
 			while True:
-				sort_data = rsa.sort(data)
-				sign = rsa.sign(sort_data)
-				list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-				if list_result == '':
-					continue
+				if current - 3600 * 24 * 30 > StartTime:
+					data = {
+						"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(current - 3600 * 24 * 30))), 
+						"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
+						"PageIndex": PageIndex, 
+						"PageSize": 20
+					}
 				else:
-					list_result = json.loads(list_result)
+					data = {
+						"StartTime": time.strftime('%Y-%m-%d', time.localtime(float(StartTime))), 
+						"EndTime": time.strftime('%Y-%m-%d', time.localtime(float(current))), 
+						"PageIndex": 1, 
+						"PageSize": 20
+					}
+
+				while True:
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+
+					if list_result == '':
+						continue
+					else:
+						list_result = json.loads(list_result)
+						break
+
+				app.logger.error(str(OpenID) + ' history_basic ' + str(current) + ' ' + str(PageIndex) + ' ' + str(len(list_result['BidList'])))
+
+				for item in list_result['BidList']:
+					if int(item['ListingId']) == 0:
+						continue
+					cursor.execute("select count(*) as count from listing where ListingId=%s", [item['ListingId']])
+					count = cursor.fetchone()['count']
+					if count == 0:
+						cursor.execute("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", [item['ListingId'], str(item['Title']), item['Months'], item['Rate'], item['Amount'], OpenID])
+					else:
+						cursor.execute("update listing set OpenID=%s where ListingId=%s", [OpenID, item['ListingId']])
+
+				PageIndex += 1
+				if PageIndex > int(list_result['TotalPages']):
 					break
 
-			app.logger.error(str(OpenID) + ' history_basic ' + str(current) + ' ' + str(len(list_result['BidList'])))
-
-			for item in list_result['BidList']:
-				if int(item['ListingId']) == 0:
-					continue
-				cursor.execute("select count(*) as count from listing where ListingId=%s", [item['ListingId']])
-				count = cursor.fetchone()['count']
-				if count == 0:
-					cursor.execute("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", [item['ListingId'], str(item['Title']), item['Months'], item['Rate'], item['Amount'], OpenID])
-				else:
-					cursor.execute("update listing set OpenID=%s where ListingId=%s", [OpenID, item['ListingId']])
 			current -= 3600 * 24 * 30
 
 		cursor.execute("update task set status=%s, timestamp=%s where name=%s and OpenID=%s", ['finished', int(time.time()), 'bidBasicInfo', OpenID])
