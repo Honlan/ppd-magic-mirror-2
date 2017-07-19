@@ -92,6 +92,9 @@ def report():
 			s = d['report']
 			if int(s) == 0:
 				if int(time.time()) > int(timestamp) + 3600 * 24:
+					cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
+					cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
+
 					threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], int(timestamp) - 600]).start()
 					threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
 					threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
@@ -494,6 +497,8 @@ def auth():
 	cursor.execute("select count(*) as count from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
 	count = cursor.fetchone()['count']
 	if count == 0:
+		cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
+	
 		threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], 1180627200]).start()
 		threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
 		threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
@@ -696,6 +701,9 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 
 						# 更新数据
+						cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
+						cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
+
 						threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], int(time.time()) - 600]).start()
 						threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
 						threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
@@ -774,8 +782,6 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 def history_basic(OpenID, APPID, AccessToken, StartTime):
 	(db,cursor) = connectdb()
 
-	cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
-	cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 	access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 	current = int(time.time()) + 3600 * 24
 	while current > StartTime:
@@ -1138,6 +1144,7 @@ def history_user(OpenID, Username):
 		data_dict[l]['待还利息'] = np.sum([float(p['OwingInterest']) for p in payback])
 		data_dict[l]['标当前逾期天数'] = np.sum([0 if float(p['OverdueDays']) < 0 else float(p['OverdueDays']) for p in payback])
 	data_dict = [v for v in data_dict.values()]
+
 	if len(data_dict) == 0:
 		cursor.execute("update user set data=%s where OpenID=%s", ['', OpenID])
 	else:
@@ -1177,6 +1184,9 @@ def history_user(OpenID, Username):
 		while start <= end:
 		    dates.append(time2str(start, '%Y/%m/%d')[2:])
 		    start += 3600 * 24
+
+		if not time2str(end, '%Y/%m/%d')[2:] in dates:
+			dates.append(time2str(end, '%Y/%m/%d')[2:])
 
 		daily_num = {d:0 for d in dates}
 		daily_amount = {d:0.0 for d in dates}
