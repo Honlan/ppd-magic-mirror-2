@@ -84,7 +84,17 @@ def report():
 		cursor.execute("select timestamp, report from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
 		d = cursor.fetchall()
 		if len(d) == 0:
+			cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
+
+			threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], 1180627200]).start()
+			threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+			threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+			threading.Thread(target=history_status, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+			threading.Thread(target=history_payback, args=[session['OpenID'], APPID, session['AccessToken']]).start()
+			threading.Thread(target=history_user, args=[session['OpenID'], session['Username']]).start()
+			
 			closedb(db,cursor)
+
 			return
 		else:
 			d = d[0]
@@ -565,8 +575,7 @@ def strategy_start():
 		cursor.execute("update user set strategy=%s where OpenID=%s", [sys_strategy, session['OpenID']])
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [1, data['strategyId']])
-	# strategy_autobid.apply_async(args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken']])
-	threading.Thread(target=strategy_autobid, args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken']]).start()
+	threading.Thread(target=strategy_autobid, args=[data['strategyId'], session['OpenID'], APPID, session['AccessToken'], session['Username']]).start()
 	
 	closedb(db,cursor)
 	
@@ -613,7 +622,7 @@ def strategy_content():
 
 # 策略投标
 # @celery.task
-def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
+def strategy_autobid(strategyId, OpenID, APPID, AccessToken, Username):
 	(db,cursor) = connectdb()
 
 	cursor.execute("select * from strategy where id=%s", [strategyId])
@@ -701,15 +710,35 @@ def strategy_autobid(strategyId, OpenID, APPID, AccessToken):
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 
 						# 更新数据
-						cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
-						cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
+						while True:
+							cursor.execute("select timestamp, report from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+							d = cursor.fetchall()
+							if len(d) == 0:
+								cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 
-						threading.Thread(target=history_basic, args=[session['OpenID'], APPID, session['AccessToken'], int(time.time()) - 600]).start()
-						threading.Thread(target=history_detail, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-						threading.Thread(target=history_money, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-						threading.Thread(target=history_status, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-						threading.Thread(target=history_payback, args=[session['OpenID'], APPID, session['AccessToken']]).start()
-						threading.Thread(target=history_user, args=[session['OpenID'], session['Username']]).start()
+								threading.Thread(target=history_basic, args=[OpenID, APPID, AccessToken, 1180627200]).start()
+								threading.Thread(target=history_detail, args=[OpenID, APPID, AccessToken]).start()
+								threading.Thread(target=history_money, args=[OpenID, APPID, AccessToken]).start()
+								threading.Thread(target=history_status, args=[OpenID, APPID, AccessToken]).start()
+								threading.Thread(target=history_payback, args=[OpenID, APPID, AccessToken]).start()
+								threading.Thread(target=history_user, args=[OpenID, Username]).start()
+								
+								break
+							else:
+								d = d[0]
+								s = d['report']
+								timestamp = d['timestamp']
+								if int(s) == 0:
+									cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
+									cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
+
+									threading.Thread(target=history_basic, args=[OpenID, APPID, AccessToken, int(timestamp) - 600]).start()
+									threading.Thread(target=history_detail, args=[OpenID, APPID, AccessToken]).start()
+									threading.Thread(target=history_money, args=[OpenID, APPID, AccessToken]).start()
+									threading.Thread(target=history_status, args=[OpenID, APPID, AccessToken]).start()
+									threading.Thread(target=history_payback, args=[OpenID, APPID, AccessToken]).start()
+									threading.Thread(target=history_user, args=[OpenID, Username]).start()
+									break
 
 						# 检查余额
 						while True:
