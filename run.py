@@ -199,14 +199,6 @@ def closedb(db,cursor):
 # 平台透视
 @app.route('/')
 def index():
-	# session['OpenID'] = 'b49e5e00307b4430a6247b843ef49064'
-	# session['Username'] = 'pdu0622373184'
-	# session['AccessToken'] = '7f6170d8-761f-4544-be66-7e245e9efc16'
-
-	session['OpenID'] = '2fc103ba972f4212aaf5f3213d1968f1'
-	session['Username'] = 'zhanghonglun'
-	session['AccessToken'] = 'dcdc4318-5898-4ba1-89a5-505a0706ae37'
-
 	refresh()
 	report()
 
