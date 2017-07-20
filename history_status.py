@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(3)
+			time.sleep(2)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_status start')
@@ -63,7 +63,7 @@ try:
 			else:
 				y = len(ListingIds)
 			while True:
-				time.sleep(3)
+				time.sleep(2)
 				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
 				data ={"ListingIds": ListingIds[x:y]}
 				sort_data = rsa.sort(data)

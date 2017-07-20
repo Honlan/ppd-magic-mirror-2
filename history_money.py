@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(3)
+			time.sleep(2)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_money start')
@@ -65,7 +65,7 @@ try:
 			else:
 				y = len(ListingIds)
 			while True:
-				time.sleep(3)
+				time.sleep(1)
 				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
 				data = {"ListingIds": ListingIds[x:y]}
 				sort_data = rsa.sort(data)

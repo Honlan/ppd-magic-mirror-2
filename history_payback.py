@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(3)
+			time.sleep(2)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_payback start')
@@ -61,7 +61,7 @@ try:
 		many = []
 		for x in ListingIds:
 			while True:
-				time.sleep(3)
+				time.sleep(0.5)
 				access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
 				data =  {"ListingId": x}
 				sort_data = rsa.sort(data)
