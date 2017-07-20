@@ -61,7 +61,7 @@ try:
 		many = []
 		for x in ListingIds:
 			while True:
-				time.sleep(0.5)
+				time.sleep(0.1)
 				access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
 				data =  {"ListingId": x}
 				sort_data = rsa.sort(data)
