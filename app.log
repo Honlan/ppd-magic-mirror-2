@@ -383,3 +383,688 @@
 2017-07-19 23:18:47,455 - ERROR - run.py - history_detail - 929 - b49e5e00307b4430a6247b843ef49064 history_detail start
 2017-07-19 23:18:47,473 - ERROR - run.py - history_payback - 1105 - b49e5e00307b4430a6247b843ef49064 history_payback start
 2017-07-19 23:18:47,510 - ERROR - run.py - history_status - 1047 - b49e5e00307b4430a6247b843ef49064 history_status start
+2017-07-20 09:41:20,148 - ERROR - history_basic.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic start
+2017-07-20 09:41:20,156 - ERROR - history_basic.py - <module> - 93 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic finish
+2017-07-20 09:47:16,162 - ERROR - history_detail.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail ready
+2017-07-20 09:47:16,163 - ERROR - history_basic.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic start
+2017-07-20 09:47:16,162 - ERROR - history_payback.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback ready
+2017-07-20 09:47:16,163 - ERROR - history_status.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_status ready
+2017-07-20 09:47:16,168 - ERROR - history_money.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_money ready
+2017-07-20 09:47:16,169 - ERROR - history_basic.py - <module> - 93 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic finish
+2017-07-20 09:47:16,170 - ERROR - history_money.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_money start
+2017-07-20 09:47:16,171 - ERROR - history_user.py - <module> - 35 - 2fc103ba972f4212aaf5f3213d1968f1 history_user ready
+2017-07-20 09:47:16,223 - ERROR - history_money.py - <module> - 84 - 2fc103ba972f4212aaf5f3213d1968f1 history_money finish
+2017-07-20 09:47:21,172 - ERROR - history_payback.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback start
+2017-07-20 09:47:21,172 - ERROR - history_status.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_status start
+2017-07-20 09:47:21,172 - ERROR - history_detail.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail start
+2017-07-20 09:47:21,208 - ERROR - history_payback.py - <module> - 79 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback finish
+2017-07-20 09:47:21,221 - ERROR - history_status.py - <module> - 82 - 2fc103ba972f4212aaf5f3213d1968f1 history_status finish
+2017-07-20 09:47:21,229 - ERROR - history_detail.py - <module> - 82 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail finish
+2017-07-20 09:47:26,179 - ERROR - history_user.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_user start
+2017-07-20 09:47:29,539 - ERROR - history_user.py - <module> - 731 - 2fc103ba972f4212aaf5f3213d1968f1 history_user finish
+2017-07-20 09:48:52,263 - ERROR - history_detail.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail ready
+2017-07-20 09:48:52,272 - ERROR - history_money.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_money ready
+2017-07-20 09:48:52,277 - ERROR - history_basic.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic start
+2017-07-20 09:48:52,277 - ERROR - history_user.py - <module> - 35 - 2fc103ba972f4212aaf5f3213d1968f1 history_user ready
+2017-07-20 09:48:52,280 - ERROR - history_basic.py - <module> - 93 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic finish
+2017-07-20 09:48:52,285 - ERROR - history_payback.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback ready
+2017-07-20 09:48:52,287 - ERROR - history_payback.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback start
+2017-07-20 09:48:52,288 - ERROR - history_status.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_status ready
+2017-07-20 09:48:52,289 - ERROR - history_status.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_status start
+2017-07-20 09:48:52,338 - ERROR - history_payback.py - <module> - 79 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback finish
+2017-07-20 09:48:52,342 - ERROR - history_status.py - <module> - 82 - 2fc103ba972f4212aaf5f3213d1968f1 history_status finish
+2017-07-20 09:48:57,276 - ERROR - history_detail.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail start
+2017-07-20 09:48:57,276 - ERROR - history_money.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_money start
+2017-07-20 09:48:57,316 - ERROR - history_money.py - <module> - 84 - 2fc103ba972f4212aaf5f3213d1968f1 history_money finish
+2017-07-20 09:48:57,324 - ERROR - history_detail.py - <module> - 82 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail finish
+2017-07-20 09:49:02,293 - ERROR - history_user.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_user start
+2017-07-20 09:49:05,761 - ERROR - history_user.py - <module> - 731 - 2fc103ba972f4212aaf5f3213d1968f1 history_user finish
+2017-07-20 09:59:00,706 - ERROR - history_money.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-20 09:59:00,738 - ERROR - history_detail.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-20 09:59:00,746 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 09:59:00,749 - ERROR - history_payback.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-20 09:59:00,756 - ERROR - history_basic.py - <module> - 89 - b49e5e00307b4430a6247b843ef49064 history_basic finish
+2017-07-20 09:59:00,772 - ERROR - history_user.py - <module> - 35 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-20 09:59:00,907 - ERROR - history_status.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-20 09:59:00,908 - ERROR - history_status.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_status start
+2017-07-20 09:59:05,711 - ERROR - history_money.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_money start
+2017-07-20 09:59:05,743 - ERROR - history_detail.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_detail start
+2017-07-20 09:59:05,761 - ERROR - history_payback.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_payback start
+2017-07-20 10:00:07,150 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:00:07,151 - ERROR - history_detail.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_detail ready
+2017-07-20 10:00:07,151 - ERROR - history_money.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_money ready
+2017-07-20 10:00:07,156 - ERROR - history_basic.py - <module> - 89 - b49e5e00307b4430a6247b843ef49064 history_basic finish
+2017-07-20 10:00:07,174 - ERROR - history_user.py - <module> - 35 - b49e5e00307b4430a6247b843ef49064 history_user ready
+2017-07-20 10:00:07,175 - ERROR - history_payback.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_payback ready
+2017-07-20 10:00:07,175 - ERROR - history_status.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_status ready
+2017-07-20 10:00:07,176 - ERROR - history_status.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_status start
+2017-07-20 10:00:07,177 - ERROR - history_payback.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_payback start
+2017-07-20 10:00:12,154 - ERROR - history_detail.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_detail start
+2017-07-20 10:00:12,154 - ERROR - history_money.py - <module> - 54 - b49e5e00307b4430a6247b843ef49064 history_money start
+2017-07-20 10:05:31,774 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:05:31,780 - ERROR - history_basic.py - <module> - 90 - b49e5e00307b4430a6247b843ef49064 history_basic finish
+2017-07-20 10:06:46,137 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:11:24,289 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:11:31,964 - ERROR - history_basic.py - <module> - 71 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 500
+2017-07-20 10:12:34,408 - ERROR - history_basic.py - <module> - 71 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 500
+2017-07-20 10:13:15,505 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:13:23,295 - ERROR - history_basic.py - <module> - 71 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 1 500
+2017-07-20 10:14:25,752 - ERROR - history_basic.py - <module> - 71 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 2 500
+2017-07-20 10:15:14,219 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:15:21,874 - ERROR - history_basic.py - <module> - 65 - b49e5e00307b4430a6247b843ef49064 history_basic 64228
+2017-07-20 10:15:21,881 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 1 500
+2017-07-20 10:16:43,481 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:16:50,916 - ERROR - history_basic.py - <module> - 65 - b49e5e00307b4430a6247b843ef49064 history_basic 64228
+2017-07-20 10:16:50,924 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 1 500
+2017-07-20 10:16:50,924 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 51350670
+2017-07-20 10:16:51,037 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 53565576
+2017-07-20 10:16:51,149 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 53664314
+2017-07-20 10:16:51,268 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 53972812
+2017-07-20 10:16:51,396 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 53981019
+2017-07-20 10:16:51,515 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54089004
+2017-07-20 10:16:51,633 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54096404
+2017-07-20 10:16:51,756 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54119657
+2017-07-20 10:16:51,876 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54126971
+2017-07-20 10:16:51,988 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54129619
+2017-07-20 10:16:52,104 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54132994
+2017-07-20 10:16:52,213 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54134388
+2017-07-20 10:16:52,324 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54144398
+2017-07-20 10:16:52,436 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54145981
+2017-07-20 10:16:52,550 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54146355
+2017-07-20 10:16:52,663 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54149974
+2017-07-20 10:16:52,772 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54151994
+2017-07-20 10:16:52,885 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54155010
+2017-07-20 10:16:52,999 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54157326
+2017-07-20 10:16:53,107 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54157840
+2017-07-20 10:16:53,216 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54159522
+2017-07-20 10:16:53,362 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54160837
+2017-07-20 10:16:53,494 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54161232
+2017-07-20 10:16:53,615 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54161389
+2017-07-20 10:16:53,748 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54161836
+2017-07-20 10:16:53,863 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54162565
+2017-07-20 10:16:53,981 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54162863
+2017-07-20 10:16:54,092 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54164639
+2017-07-20 10:16:54,208 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54169116
+2017-07-20 10:16:54,319 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54169454
+2017-07-20 10:16:54,431 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54170132
+2017-07-20 10:16:54,544 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54171272
+2017-07-20 10:16:54,650 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54172322
+2017-07-20 10:16:54,764 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54172935
+2017-07-20 10:16:54,872 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54173596
+2017-07-20 10:16:54,980 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54174065
+2017-07-20 10:16:55,090 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54176669
+2017-07-20 10:16:55,211 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54179656
+2017-07-20 10:16:55,328 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54180007
+2017-07-20 10:16:55,438 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54181265
+2017-07-20 10:16:55,554 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54182193
+2017-07-20 10:16:55,696 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54185237
+2017-07-20 10:16:55,815 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54188435
+2017-07-20 10:16:55,927 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54189012
+2017-07-20 10:16:56,036 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54189030
+2017-07-20 10:16:56,151 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54193934
+2017-07-20 10:16:56,263 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54194664
+2017-07-20 10:16:56,369 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54194733
+2017-07-20 10:16:56,477 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54197432
+2017-07-20 10:16:56,584 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54198597
+2017-07-20 10:16:56,690 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54200903
+2017-07-20 10:16:56,798 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54201835
+2017-07-20 10:16:56,910 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54203226
+2017-07-20 10:16:57,018 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54205706
+2017-07-20 10:16:57,128 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54207774
+2017-07-20 10:16:57,250 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54210779
+2017-07-20 10:16:57,366 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54211720
+2017-07-20 10:16:57,480 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54213270
+2017-07-20 10:16:57,591 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54215253
+2017-07-20 10:16:57,714 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54225395
+2017-07-20 10:16:57,829 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54232000
+2017-07-20 10:16:57,940 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54235052
+2017-07-20 10:16:58,054 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54235118
+2017-07-20 10:16:58,165 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54235411
+2017-07-20 10:16:58,284 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54236715
+2017-07-20 10:16:58,392 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54236887
+2017-07-20 10:16:58,507 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54238250
+2017-07-20 10:16:58,629 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54241778
+2017-07-20 10:16:58,758 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54244528
+2017-07-20 10:16:58,882 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54244593
+2017-07-20 10:16:58,989 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54249058
+2017-07-20 10:16:59,098 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54249240
+2017-07-20 10:16:59,208 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54251243
+2017-07-20 10:16:59,324 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54256307
+2017-07-20 10:16:59,439 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54257453
+2017-07-20 10:16:59,553 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54257766
+2017-07-20 10:16:59,668 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54258193
+2017-07-20 10:16:59,784 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54260048
+2017-07-20 10:16:59,899 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54263610
+2017-07-20 10:17:00,013 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54267530
+2017-07-20 10:17:00,121 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54271988
+2017-07-20 10:17:00,235 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54272558
+2017-07-20 10:17:00,342 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54273803
+2017-07-20 10:17:00,451 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54275111
+2017-07-20 10:17:00,560 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54276547
+2017-07-20 10:17:00,665 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54276986
+2017-07-20 10:17:00,772 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54279738
+2017-07-20 10:17:00,880 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54284669
+2017-07-20 10:17:00,986 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54284746
+2017-07-20 10:17:01,096 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54285674
+2017-07-20 10:17:01,206 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54288981
+2017-07-20 10:17:01,325 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54292909
+2017-07-20 10:17:01,437 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54296627
+2017-07-20 10:17:01,551 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54297104
+2017-07-20 10:17:01,666 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54297564
+2017-07-20 10:17:01,782 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54300244
+2017-07-20 10:17:01,902 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54301078
+2017-07-20 10:17:02,015 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54310849
+2017-07-20 10:17:02,122 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54312910
+2017-07-20 10:17:02,237 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54339650
+2017-07-20 10:17:02,350 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54344363
+2017-07-20 10:17:02,459 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54344401
+2017-07-20 10:17:02,565 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54345101
+2017-07-20 10:17:02,672 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54348469
+2017-07-20 10:17:02,790 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54349776
+2017-07-20 10:17:02,898 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54350895
+2017-07-20 10:17:03,007 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54354284
+2017-07-20 10:17:03,114 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54356344
+2017-07-20 10:17:03,226 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54357087
+2017-07-20 10:17:03,350 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54358178
+2017-07-20 10:17:03,465 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54358564
+2017-07-20 10:17:03,581 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54359052
+2017-07-20 10:17:03,706 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54360013
+2017-07-20 10:17:03,834 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54360015
+2017-07-20 10:17:03,962 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54360149
+2017-07-20 10:17:04,090 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54360176
+2017-07-20 10:17:04,229 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54361048
+2017-07-20 10:17:04,354 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54361515
+2017-07-20 10:17:04,468 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54362120
+2017-07-20 10:17:04,585 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54362318
+2017-07-20 10:17:04,692 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54363820
+2017-07-20 10:17:04,801 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54370327
+2017-07-20 10:17:04,910 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54371388
+2017-07-20 10:17:05,017 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54372738
+2017-07-20 10:17:05,131 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54376628
+2017-07-20 10:17:05,243 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54378385
+2017-07-20 10:17:05,368 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54379519
+2017-07-20 10:17:05,485 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54380513
+2017-07-20 10:17:05,601 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54380956
+2017-07-20 10:17:05,727 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54381214
+2017-07-20 10:17:05,854 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54383056
+2017-07-20 10:17:05,970 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54383169
+2017-07-20 10:17:06,079 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54384708
+2017-07-20 10:17:06,192 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54388005
+2017-07-20 10:17:06,302 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54388488
+2017-07-20 10:17:06,410 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54390210
+2017-07-20 10:17:06,516 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54390913
+2017-07-20 10:17:06,622 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54394622
+2017-07-20 10:17:06,731 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54394726
+2017-07-20 10:17:06,838 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54398311
+2017-07-20 10:17:06,947 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54402741
+2017-07-20 10:17:07,053 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54402884
+2017-07-20 10:17:07,160 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54404285
+2017-07-20 10:17:07,274 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54404303
+2017-07-20 10:17:07,400 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54404604
+2017-07-20 10:17:07,515 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54407612
+2017-07-20 10:17:07,627 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54408249
+2017-07-20 10:17:07,740 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54411253
+2017-07-20 10:17:07,859 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54411818
+2017-07-20 10:17:07,983 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54414240
+2017-07-20 10:17:08,091 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54414905
+2017-07-20 10:17:08,202 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54417902
+2017-07-20 10:17:08,335 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54418004
+2017-07-20 10:17:08,448 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54418051
+2017-07-20 10:17:08,557 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54418091
+2017-07-20 10:17:08,665 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54419581
+2017-07-20 10:17:08,775 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54420556
+2017-07-20 10:17:08,882 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54421819
+2017-07-20 10:17:08,996 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54422716
+2017-07-20 10:17:09,102 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54424240
+2017-07-20 10:17:09,212 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54425113
+2017-07-20 10:17:09,325 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54426447
+2017-07-20 10:17:09,446 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54426559
+2017-07-20 10:17:09,557 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54427076
+2017-07-20 10:17:09,671 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54427227
+2017-07-20 10:17:09,787 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54434023
+2017-07-20 10:17:09,902 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54434201
+2017-07-20 10:17:10,015 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54434846
+2017-07-20 10:17:10,123 - ERROR - history_basic.py - <module> - 75 - b49e5e00307b4430a6247b843ef49064 history_basic 54438350
+2017-07-20 10:27:08,437 - ERROR - history_basic.py - <module> - 36 - b49e5e00307b4430a6247b843ef49064 history_basic start
+2017-07-20 10:27:21,132 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 1 500
+2017-07-20 10:27:33,281 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 2 500
+2017-07-20 10:27:44,480 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 3 500
+2017-07-20 10:27:55,519 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 4 500
+2017-07-20 10:28:14,673 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 5 500
+2017-07-20 10:28:21,955 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 6 500
+2017-07-20 10:28:28,976 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 7 500
+2017-07-20 10:28:36,150 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 8 500
+2017-07-20 10:28:43,626 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 9 500
+2017-07-20 10:28:58,092 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 10 500
+2017-07-20 10:29:05,009 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 11 500
+2017-07-20 10:29:11,843 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 12 500
+2017-07-20 10:29:19,080 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 13 500
+2017-07-20 10:29:26,274 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 14 500
+2017-07-20 10:29:33,415 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 15 500
+2017-07-20 10:29:40,041 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 16 500
+2017-07-20 10:29:47,930 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 17 500
+2017-07-20 10:30:36,127 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 18 500
+2017-07-20 10:30:43,657 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-07-21 19 494
+2017-07-20 10:31:06,693 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-06-21 1 500
+2017-07-20 10:31:30,192 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-06-21 2 500
+2017-07-20 10:31:45,466 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-06-21 3 500
+2017-07-20 10:32:00,058 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-06-21 4 500
+2017-07-20 10:32:05,131 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-06-21 5 213
+2017-07-20 10:32:13,163 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-05-22 1 500
+2017-07-20 10:32:20,430 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-05-22 2 500
+2017-07-20 10:32:27,098 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-05-22 3 500
+2017-07-20 10:32:34,787 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-05-22 4 500
+2017-07-20 10:32:41,491 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-05-22 5 425
+2017-07-20 10:32:48,296 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 1 500
+2017-07-20 10:32:55,804 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 2 500
+2017-07-20 10:33:03,568 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 3 500
+2017-07-20 10:33:11,044 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 4 500
+2017-07-20 10:33:17,780 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 5 500
+2017-07-20 10:33:25,145 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 6 500
+2017-07-20 10:33:30,528 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-04-22 7 187
+2017-07-20 10:33:38,145 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-03-23 1 500
+2017-07-20 10:33:44,880 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-03-23 2 500
+2017-07-20 10:33:48,313 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-03-23 3 26
+2017-07-20 10:33:55,238 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-02-21 1 414
+2017-07-20 10:33:59,457 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2017-01-22 1 168
+2017-07-20 10:34:04,902 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-12-23 1 11
+2017-07-20 10:34:13,074 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-11-23 1 1
+2017-07-20 10:34:16,541 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-10-24 1 1
+2017-07-20 10:34:19,696 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-09-24 1 1
+2017-07-20 10:34:22,895 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-08-25 1 1
+2017-07-20 10:34:26,063 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-07-26 1 1
+2017-07-20 10:34:29,199 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-06-26 1 1
+2017-07-20 10:34:32,676 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-05-27 1 1
+2017-07-20 10:34:35,866 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-04-27 1 1
+2017-07-20 10:34:39,053 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-03-28 1 1
+2017-07-20 10:34:42,270 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-02-27 1 1
+2017-07-20 10:34:45,529 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2016-01-28 1 1
+2017-07-20 10:34:48,701 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-12-29 1 1
+2017-07-20 10:34:51,844 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-11-29 1 1
+2017-07-20 10:34:55,011 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-10-30 1 1
+2017-07-20 10:34:58,204 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-09-30 1 1
+2017-07-20 10:35:01,347 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-08-31 1 1
+2017-07-20 10:35:04,484 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-08-01 1 1
+2017-07-20 10:35:07,980 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-07-02 1 1
+2017-07-20 10:35:11,158 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-06-02 1 1
+2017-07-20 10:35:14,943 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-05-03 1 1
+2017-07-20 10:35:18,087 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-04-03 1 1
+2017-07-20 10:35:21,251 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-03-04 1 1
+2017-07-20 10:35:24,405 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-02-02 1 1
+2017-07-20 10:35:27,551 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2015-01-03 1 1
+2017-07-20 10:35:31,021 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-12-04 1 1
+2017-07-20 10:35:34,187 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-11-04 1 1
+2017-07-20 10:35:37,885 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-10-05 1 1
+2017-07-20 10:35:41,038 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-09-05 1 1
+2017-07-20 10:35:44,258 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-08-06 1 1
+2017-07-20 10:35:47,468 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-07-07 1 1
+2017-07-20 10:35:51,198 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-06-07 1 1
+2017-07-20 10:35:54,325 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-05-08 1 1
+2017-07-20 10:35:57,544 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-04-08 1 1
+2017-07-20 10:36:00,726 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-03-09 1 1
+2017-07-20 10:36:03,878 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-02-07 1 1
+2017-07-20 10:36:07,099 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2014-01-08 1 1
+2017-07-20 10:36:10,283 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-12-09 1 1
+2017-07-20 10:36:13,515 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-11-09 1 1
+2017-07-20 10:36:16,699 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-10-10 1 1
+2017-07-20 10:36:19,887 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-09-10 1 1
+2017-07-20 10:36:23,048 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-08-11 1 1
+2017-07-20 10:36:26,903 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-07-12 1 1
+2017-07-20 10:36:30,085 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-06-12 1 1
+2017-07-20 10:36:33,265 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-05-13 1 1
+2017-07-20 10:36:36,411 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-04-13 1 1
+2017-07-20 10:36:39,545 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-03-14 1 1
+2017-07-20 10:36:42,729 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-02-12 1 1
+2017-07-20 10:36:45,981 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2013-01-13 1 1
+2017-07-20 10:36:49,131 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-12-14 1 1
+2017-07-20 10:36:52,308 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-11-14 1 1
+2017-07-20 10:36:55,515 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-10-15 1 1
+2017-07-20 10:36:58,706 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-09-15 1 1
+2017-07-20 10:37:01,950 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-08-16 1 1
+2017-07-20 10:37:05,149 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-07-17 1 1
+2017-07-20 10:37:08,349 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-06-17 1 1
+2017-07-20 10:37:11,885 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-05-18 1 1
+2017-07-20 10:37:15,758 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-04-18 1 1
+2017-07-20 10:37:20,077 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-03-19 1 1
+2017-07-20 10:37:23,269 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-02-18 1 1
+2017-07-20 10:37:26,494 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2012-01-19 1 1
+2017-07-20 10:37:29,651 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-12-20 1 1
+2017-07-20 10:37:32,811 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-11-20 1 1
+2017-07-20 10:37:36,025 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-10-21 1 1
+2017-07-20 10:37:39,224 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-09-21 1 1
+2017-07-20 10:37:42,424 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-08-22 1 1
+2017-07-20 10:37:45,604 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-07-23 1 1
+2017-07-20 10:37:48,749 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-06-23 1 1
+2017-07-20 10:37:52,029 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-05-24 1 1
+2017-07-20 10:37:55,212 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-04-24 1 1
+2017-07-20 10:37:58,414 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-03-25 1 1
+2017-07-20 10:38:01,640 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-02-23 1 1
+2017-07-20 10:38:04,813 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2011-01-24 1 1
+2017-07-20 10:38:07,957 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-12-25 1 1
+2017-07-20 10:38:11,175 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-11-25 1 1
+2017-07-20 10:38:14,362 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-10-26 1 1
+2017-07-20 10:38:17,516 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-09-26 1 1
+2017-07-20 10:38:20,671 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-08-27 1 1
+2017-07-20 10:38:23,848 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-07-28 1 1
+2017-07-20 10:38:26,980 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-06-28 1 1
+2017-07-20 10:38:30,155 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-05-29 1 1
+2017-07-20 10:38:33,356 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-04-29 1 1
+2017-07-20 10:38:36,479 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-03-30 1 1
+2017-07-20 10:38:40,153 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-02-28 1 1
+2017-07-20 10:38:43,314 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2010-01-29 1 1
+2017-07-20 10:38:46,588 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-12-30 1 1
+2017-07-20 10:38:49,719 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-11-30 1 1
+2017-07-20 10:38:52,931 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-10-31 1 1
+2017-07-20 10:38:56,434 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-10-01 1 1
+2017-07-20 10:38:59,608 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-09-01 1 1
+2017-07-20 10:39:02,801 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-08-02 1 1
+2017-07-20 10:39:05,969 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-07-03 1 1
+2017-07-20 10:39:09,086 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-06-03 1 1
+2017-07-20 10:39:12,516 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-05-04 1 1
+2017-07-20 10:39:15,657 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-04-04 1 1
+2017-07-20 10:39:18,890 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-03-05 1 1
+2017-07-20 10:39:22,188 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-02-03 1 1
+2017-07-20 10:39:25,516 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2009-01-04 1 1
+2017-07-20 10:39:28,898 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-12-05 1 1
+2017-07-20 10:39:32,151 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-11-05 1 1
+2017-07-20 10:39:35,340 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-10-06 1 1
+2017-07-20 10:39:38,461 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-09-06 1 1
+2017-07-20 10:39:41,657 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-08-07 1 1
+2017-07-20 10:39:44,805 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-07-08 1 1
+2017-07-20 10:39:47,922 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-06-08 1 1
+2017-07-20 10:39:51,047 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-05-09 1 1
+2017-07-20 10:39:54,218 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-04-09 1 1
+2017-07-20 10:39:57,362 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-03-10 1 1
+2017-07-20 10:40:00,555 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-02-09 1 1
+2017-07-20 10:40:03,756 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2008-01-10 1 1
+2017-07-20 10:40:06,906 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-12-11 1 1
+2017-07-20 10:40:10,102 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-11-11 1 1
+2017-07-20 10:40:14,053 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-10-12 1 1
+2017-07-20 10:40:17,741 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-09-12 1 1
+2017-07-20 10:40:20,927 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-08-13 1 1
+2017-07-20 10:40:24,110 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-07-14 1 1
+2017-07-20 10:40:27,264 - ERROR - history_basic.py - <module> - 73 - b49e5e00307b4430a6247b843ef49064 history_basic 2007-06-14 1 1
+2017-07-20 10:40:27,265 - ERROR - history_basic.py - <module> - 86 - b49e5e00307b4430a6247b843ef49064 history_basic total records 18938
+2017-07-20 10:40:28,902 - ERROR - history_basic.py - <module> - 93 - b49e5e00307b4430a6247b843ef49064 history_basic finish
+2017-07-20 10:48:55,859 - ERROR - history_basic.py - <module> - 38 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic start
+2017-07-20 10:49:02,951 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-07-21 1 16
+2017-07-20 10:49:06,104 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-06-21 1 1
+2017-07-20 10:49:09,271 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-05-22 1 1
+2017-07-20 10:49:12,453 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-04-22 1 1
+2017-07-20 10:49:15,614 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-03-23 1 1
+2017-07-20 10:49:18,728 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-02-21 1 1
+2017-07-20 10:49:21,857 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-01-22 1 1
+2017-07-20 10:49:25,017 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-12-23 1 1
+2017-07-20 10:49:28,200 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-11-23 1 1
+2017-07-20 10:49:31,379 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-10-24 1 1
+2017-07-20 10:49:34,507 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-09-24 1 1
+2017-07-20 10:49:37,649 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-08-25 1 1
+2017-07-20 10:49:40,800 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-07-26 1 1
+2017-07-20 10:49:43,968 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-06-26 1 1
+2017-07-20 10:49:47,904 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-05-27 1 1
+2017-07-20 10:49:51,437 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-04-27 1 1
+2017-07-20 10:49:54,615 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-03-28 1 1
+2017-07-20 10:49:57,854 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-02-27 1 1
+2017-07-20 10:50:01,009 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-01-28 1 1
+2017-07-20 10:50:04,134 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-12-29 1 1
+2017-07-20 10:50:07,834 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-11-29 1 1
+2017-07-20 10:50:10,999 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-10-30 1 1
+2017-07-20 10:50:14,194 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-09-30 1 1
+2017-07-20 10:50:17,348 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-08-31 1 1
+2017-07-20 10:50:20,516 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-08-01 1 1
+2017-07-20 10:50:23,685 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-07-02 1 1
+2017-07-20 10:50:26,837 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-06-02 1 1
+2017-07-20 10:50:29,952 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-05-03 1 1
+2017-07-20 10:50:33,145 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-04-03 1 1
+2017-07-20 10:50:36,317 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-03-04 1 1
+2017-07-20 10:50:39,514 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-02-02 1 1
+2017-07-20 10:50:42,693 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-01-03 1 1
+2017-07-20 10:50:45,916 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-12-04 1 1
+2017-07-20 10:50:49,108 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-11-04 1 1
+2017-07-20 10:50:52,376 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-10-05 1 1
+2017-07-20 10:50:55,593 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-09-05 1 1
+2017-07-20 10:50:58,737 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-08-06 1 1
+2017-07-20 10:51:01,875 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-07-07 1 1
+2017-07-20 10:51:05,322 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-06-07 1 1
+2017-07-20 10:51:08,698 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-05-08 1 1
+2017-07-20 10:51:11,905 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-04-08 1 1
+2017-07-20 10:51:15,097 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-03-09 1 1
+2017-07-20 10:51:18,379 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-02-07 1 1
+2017-07-20 10:51:21,602 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-01-08 1 1
+2017-07-20 10:51:24,799 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-12-09 1 1
+2017-07-20 10:51:27,931 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-11-09 1 1
+2017-07-20 10:51:31,327 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-10-10 1 1
+2017-07-20 10:51:34,540 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-09-10 1 1
+2017-07-20 10:51:37,711 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-08-11 1 1
+2017-07-20 10:51:40,948 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-07-12 1 1
+2017-07-20 10:51:44,101 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-06-12 1 1
+2017-07-20 10:51:47,251 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-05-13 1 1
+2017-07-20 10:51:50,399 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-04-13 1 1
+2017-07-20 10:51:53,604 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-03-14 1 1
+2017-07-20 10:51:56,749 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-02-12 1 1
+2017-07-20 10:51:59,922 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-01-13 1 1
+2017-07-20 10:52:03,059 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-12-14 1 1
+2017-07-20 10:52:06,555 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-11-14 1 1
+2017-07-20 10:52:09,808 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-10-15 1 1
+2017-07-20 10:52:13,012 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-09-15 1 1
+2017-07-20 10:52:16,181 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-08-16 1 1
+2017-07-20 10:52:19,346 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-07-17 1 1
+2017-07-20 10:52:22,548 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-06-17 1 1
+2017-07-20 10:52:25,716 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-05-18 1 1
+2017-07-20 10:52:29,082 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-04-18 1 1
+2017-07-20 10:52:32,207 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-03-19 1 1
+2017-07-20 10:52:35,363 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-02-18 1 1
+2017-07-20 10:52:39,491 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-01-19 1 1
+2017-07-20 10:52:42,700 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-12-20 1 1
+2017-07-20 10:52:45,841 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-11-20 1 1
+2017-07-20 10:52:49,017 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-10-21 1 1
+2017-07-20 10:52:52,203 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-09-21 1 1
+2017-07-20 10:52:55,340 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-08-22 1 1
+2017-07-20 10:52:58,697 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-07-23 1 1
+2017-07-20 10:53:01,913 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-06-23 1 1
+2017-07-20 10:53:05,062 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-05-24 1 1
+2017-07-20 10:53:08,223 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-04-24 1 1
+2017-07-20 10:53:11,397 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-03-25 1 1
+2017-07-20 10:53:14,981 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-02-23 1 1
+2017-07-20 10:53:18,149 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-01-24 1 1
+2017-07-20 10:53:21,403 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-12-25 1 1
+2017-07-20 10:53:24,585 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-11-25 1 1
+2017-07-20 10:53:27,962 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-10-26 1 1
+2017-07-20 10:53:32,614 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-09-26 1 1
+2017-07-20 10:53:35,745 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-08-27 1 1
+2017-07-20 10:53:38,900 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-07-28 1 1
+2017-07-20 10:53:42,045 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-06-28 1 1
+2017-07-20 10:53:45,219 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-05-29 1 1
+2017-07-20 10:53:48,394 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-04-29 1 1
+2017-07-20 10:53:51,589 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-03-30 1 1
+2017-07-20 10:53:54,770 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-02-28 1 1
+2017-07-20 10:53:57,958 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-01-29 1 1
+2017-07-20 10:54:01,216 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-12-30 1 1
+2017-07-20 10:54:04,416 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-11-30 1 1
+2017-07-20 10:54:07,607 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-10-31 1 1
+2017-07-20 10:54:10,795 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-10-01 1 1
+2017-07-20 10:54:14,098 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-09-01 1 1
+2017-07-20 10:54:17,237 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-08-02 1 1
+2017-07-20 10:54:20,385 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-07-03 1 1
+2017-07-20 10:54:23,558 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-06-03 1 1
+2017-07-20 10:54:26,753 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-05-04 1 1
+2017-07-20 10:54:29,902 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-04-04 1 1
+2017-07-20 10:54:33,039 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-03-05 1 1
+2017-07-20 10:54:36,280 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-02-03 1 1
+2017-07-20 10:54:39,455 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-01-04 1 1
+2017-07-20 10:54:42,923 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-12-05 1 1
+2017-07-20 10:54:46,142 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-11-05 1 1
+2017-07-20 10:54:49,374 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-10-06 1 1
+2017-07-20 10:54:52,520 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-09-06 1 1
+2017-07-20 10:54:55,778 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-08-07 1 1
+2017-07-20 10:54:58,971 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-07-08 1 1
+2017-07-20 10:55:02,207 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-06-08 1 1
+2017-07-20 10:55:10,413 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-05-09 1 1
+2017-07-20 10:55:18,692 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-04-09 1 1
+2017-07-20 10:55:26,866 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-03-10 1 1
+2017-07-20 10:55:35,060 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-02-09 1 1
+2017-07-20 10:55:43,315 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-01-10 1 1
+2017-07-20 10:55:52,662 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-12-11 1 1
+2017-07-20 10:56:00,809 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-11-11 1 1
+2017-07-20 10:56:07,519 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-10-12 1 1
+2017-07-20 10:56:10,881 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-09-12 1 1
+2017-07-20 10:56:14,086 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-08-13 1 1
+2017-07-20 10:56:17,299 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-07-14 1 1
+2017-07-20 10:56:20,428 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-06-14 1 1
+2017-07-20 10:56:20,429 - ERROR - history_basic.py - <module> - 88 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic total records 16
+2017-07-20 10:56:20,524 - ERROR - history_basic.py - <module> - 95 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic finish
+2017-07-20 10:56:21,976 - ERROR - history_detail.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail ready
+2017-07-20 10:56:21,977 - ERROR - history_detail.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail start
+2017-07-20 10:56:21,981 - ERROR - history_money.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_money ready
+2017-07-20 10:56:21,982 - ERROR - history_money.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_money start
+2017-07-20 10:56:21,985 - ERROR - history_payback.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback ready
+2017-07-20 10:56:21,986 - ERROR - history_payback.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback start
+2017-07-20 10:56:21,992 - ERROR - history_user.py - <module> - 35 - 2fc103ba972f4212aaf5f3213d1968f1 history_user ready
+2017-07-20 10:56:21,994 - ERROR - history_status.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_status ready
+2017-07-20 10:56:21,996 - ERROR - history_status.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_status start
+2017-07-20 10:56:25,211 - ERROR - history_status.py - <module> - 88 - 'dict' object has no attribute 'append'
+2017-07-20 10:56:25,314 - ERROR - history_payback.py - <module> - 86 - 'dict' object has no attribute 'append'
+2017-07-20 10:56:27,778 - ERROR - history_detail.py - <module> - 88 - 'dict' object has no attribute 'append'
+2017-07-20 10:56:34,254 - ERROR - history_money.py - <module> - 91 - 'dict' object has no attribute 'append'
+2017-07-20 11:00:04,921 - ERROR - history_basic.py - <module> - 38 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic start
+2017-07-20 11:00:06,149 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-07-21 1 16
+2017-07-20 11:00:07,299 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-06-21 1 1
+2017-07-20 11:00:08,578 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-05-22 1 1
+2017-07-20 11:00:09,804 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-04-22 1 1
+2017-07-20 11:00:11,030 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-03-23 1 1
+2017-07-20 11:00:12,157 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-02-21 1 1
+2017-07-20 11:00:13,446 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2017-01-22 1 1
+2017-07-20 11:00:14,578 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-12-23 1 1
+2017-07-20 11:00:15,742 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-11-23 1 1
+2017-07-20 11:00:16,911 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-10-24 1 1
+2017-07-20 11:00:18,049 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-09-24 1 1
+2017-07-20 11:00:19,208 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-08-25 1 1
+2017-07-20 11:00:20,399 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-07-26 1 1
+2017-07-20 11:00:21,589 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-06-26 1 1
+2017-07-20 11:00:22,770 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-05-27 1 1
+2017-07-20 11:00:23,902 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-04-27 1 1
+2017-07-20 11:00:25,060 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-03-28 1 1
+2017-07-20 11:00:26,261 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-02-27 1 1
+2017-07-20 11:00:27,384 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2016-01-28 1 1
+2017-07-20 11:00:28,580 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-12-29 1 1
+2017-07-20 11:00:29,730 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-11-29 1 1
+2017-07-20 11:00:30,983 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-10-30 1 1
+2017-07-20 11:00:32,235 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-09-30 1 1
+2017-07-20 11:00:33,403 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-08-31 1 1
+2017-07-20 11:00:34,587 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-08-01 1 1
+2017-07-20 11:00:35,742 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-07-02 1 1
+2017-07-20 11:00:36,902 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-06-02 1 1
+2017-07-20 11:00:38,102 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-05-03 1 1
+2017-07-20 11:00:39,581 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-04-03 1 1
+2017-07-20 11:00:40,727 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-03-04 1 1
+2017-07-20 11:00:41,891 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-02-02 1 1
+2017-07-20 11:00:43,038 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2015-01-03 1 1
+2017-07-20 11:00:44,213 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-12-04 1 1
+2017-07-20 11:00:45,350 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-11-04 1 1
+2017-07-20 11:00:46,537 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-10-05 1 1
+2017-07-20 11:00:47,699 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-09-05 1 1
+2017-07-20 11:00:48,943 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-08-06 1 1
+2017-07-20 11:00:50,128 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-07-07 1 1
+2017-07-20 11:00:51,305 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-06-07 1 1
+2017-07-20 11:00:52,439 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-05-08 1 1
+2017-07-20 11:00:54,531 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-04-08 1 1
+2017-07-20 11:00:55,657 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-03-09 1 1
+2017-07-20 11:00:56,800 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-02-07 1 1
+2017-07-20 11:00:57,948 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2014-01-08 1 1
+2017-07-20 11:00:59,343 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-12-09 1 1
+2017-07-20 11:01:00,499 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-11-09 1 1
+2017-07-20 11:01:02,011 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-10-10 1 1
+2017-07-20 11:01:03,439 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-09-10 1 1
+2017-07-20 11:01:04,564 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-08-11 1 1
+2017-07-20 11:01:05,721 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-07-12 1 1
+2017-07-20 11:01:06,905 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-06-12 1 1
+2017-07-20 11:01:08,064 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-05-13 1 1
+2017-07-20 11:01:09,239 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-04-13 1 1
+2017-07-20 11:01:10,812 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-03-14 1 1
+2017-07-20 11:01:12,040 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-02-12 1 1
+2017-07-20 11:01:13,294 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2013-01-13 1 1
+2017-07-20 11:01:14,472 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-12-14 1 1
+2017-07-20 11:01:15,650 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-11-14 1 1
+2017-07-20 11:01:16,852 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-10-15 1 1
+2017-07-20 11:01:18,008 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-09-15 1 1
+2017-07-20 11:01:19,138 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-08-16 1 1
+2017-07-20 11:01:20,299 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-07-17 1 1
+2017-07-20 11:01:21,478 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-06-17 1 1
+2017-07-20 11:01:22,627 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-05-18 1 1
+2017-07-20 11:01:24,022 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-04-18 1 1
+2017-07-20 11:01:25,151 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-03-19 1 1
+2017-07-20 11:01:26,328 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-02-18 1 1
+2017-07-20 11:01:27,611 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2012-01-19 1 1
+2017-07-20 11:01:28,770 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-12-20 1 1
+2017-07-20 11:01:29,928 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-11-20 1 1
+2017-07-20 11:01:31,170 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-10-21 1 1
+2017-07-20 11:01:32,315 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-09-21 1 1
+2017-07-20 11:01:33,501 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-08-22 1 1
+2017-07-20 11:01:34,636 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-07-23 1 1
+2017-07-20 11:01:35,815 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-06-23 1 1
+2017-07-20 11:01:36,953 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-05-24 1 1
+2017-07-20 11:01:38,148 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-04-24 1 1
+2017-07-20 11:01:39,283 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-03-25 1 1
+2017-07-20 11:01:40,486 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-02-23 1 1
+2017-07-20 11:01:41,625 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2011-01-24 1 1
+2017-07-20 11:01:42,796 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-12-25 1 1
+2017-07-20 11:01:43,990 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-11-25 1 1
+2017-07-20 11:01:45,223 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-10-26 1 1
+2017-07-20 11:01:46,382 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-09-26 1 1
+2017-07-20 11:01:47,590 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-08-27 1 1
+2017-07-20 11:01:48,779 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-07-28 1 1
+2017-07-20 11:01:49,927 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-06-28 1 1
+2017-07-20 11:01:51,073 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-05-29 1 1
+2017-07-20 11:01:52,232 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-04-29 1 1
+2017-07-20 11:01:53,658 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-03-30 1 1
+2017-07-20 11:01:54,861 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-02-28 1 1
+2017-07-20 11:01:56,019 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2010-01-29 1 1
+2017-07-20 11:01:57,161 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-12-30 1 1
+2017-07-20 11:01:58,330 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-11-30 1 1
+2017-07-20 11:01:59,523 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-10-31 1 1
+2017-07-20 11:02:00,699 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-10-01 1 1
+2017-07-20 11:02:01,879 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-09-01 1 1
+2017-07-20 11:02:03,042 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-08-02 1 1
+2017-07-20 11:02:04,199 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-07-03 1 1
+2017-07-20 11:02:05,595 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-06-03 1 1
+2017-07-20 11:02:06,792 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-05-04 1 1
+2017-07-20 11:02:13,017 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-04-04 1 1
+2017-07-20 11:02:14,609 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-03-05 1 1
+2017-07-20 11:02:15,938 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-02-03 1 1
+2017-07-20 11:02:17,166 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2009-01-04 1 1
+2017-07-20 11:02:18,333 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-12-05 1 1
+2017-07-20 11:02:19,542 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-11-05 1 1
+2017-07-20 11:02:20,668 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-10-06 1 1
+2017-07-20 11:02:21,875 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-09-06 1 1
+2017-07-20 11:02:23,071 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-08-07 1 1
+2017-07-20 11:02:24,281 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-07-08 1 1
+2017-07-20 11:02:25,451 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-06-08 1 1
+2017-07-20 11:02:26,630 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-05-09 1 1
+2017-07-20 11:02:27,768 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-04-09 1 1
+2017-07-20 11:02:29,013 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-03-10 1 1
+2017-07-20 11:02:30,196 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-02-09 1 1
+2017-07-20 11:02:31,323 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2008-01-10 1 1
+2017-07-20 11:02:32,494 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-12-11 1 1
+2017-07-20 11:02:33,607 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-11-11 1 1
+2017-07-20 11:02:34,818 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-10-12 1 1
+2017-07-20 11:02:35,977 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-09-12 1 1
+2017-07-20 11:02:37,240 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-08-13 1 1
+2017-07-20 11:02:38,365 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-07-14 1 1
+2017-07-20 11:02:39,543 - ERROR - history_basic.py - <module> - 75 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic 2007-06-14 1 1
+2017-07-20 11:02:39,543 - ERROR - history_basic.py - <module> - 88 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic total records 16
+2017-07-20 11:02:39,655 - ERROR - history_basic.py - <module> - 95 - 2fc103ba972f4212aaf5f3213d1968f1 history_basic finish
+2017-07-20 11:02:40,785 - ERROR - history_money.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_money ready
+2017-07-20 11:02:40,785 - ERROR - history_detail.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail ready
+2017-07-20 11:02:40,786 - ERROR - history_money.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_money start
+2017-07-20 11:02:40,786 - ERROR - history_detail.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail start
+2017-07-20 11:02:40,789 - ERROR - history_payback.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback ready
+2017-07-20 11:02:40,790 - ERROR - history_status.py - <module> - 36 - 2fc103ba972f4212aaf5f3213d1968f1 history_status ready
+2017-07-20 11:02:40,790 - ERROR - history_payback.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback start
+2017-07-20 11:02:40,791 - ERROR - history_status.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_status start
+2017-07-20 11:02:40,858 - ERROR - history_user.py - <module> - 35 - 2fc103ba972f4212aaf5f3213d1968f1 history_user ready
+2017-07-20 11:02:45,509 - ERROR - history_status.py - <module> - 86 - 2fc103ba972f4212aaf5f3213d1968f1 history_status finish
+2017-07-20 11:02:51,235 - ERROR - history_detail.py - <module> - 86 - 2fc103ba972f4212aaf5f3213d1968f1 history_detail finish
+2017-07-20 11:03:01,434 - ERROR - history_money.py - <module> - 89 - 2fc103ba972f4212aaf5f3213d1968f1 history_money finish
+2017-07-20 11:03:32,275 - ERROR - history_payback.py - <module> - 84 - 2fc103ba972f4212aaf5f3213d1968f1 history_payback finish
+2017-07-20 11:03:34,932 - ERROR - history_user.py - <module> - 54 - 2fc103ba972f4212aaf5f3213d1968f1 history_user start
+2017-07-20 11:03:38,667 - ERROR - history_user.py - <module> - 731 - 2fc103ba972f4212aaf5f3213d1968f1 history_user finish
