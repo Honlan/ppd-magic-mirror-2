@@ -36,13 +36,10 @@ app.secret_key = SECRETKEY
 app.permanent_session_lifetime = timedelta(days=90)
 
 # 日志系统配置
-handler = logging.FileHandler('./app.log', encoding='UTF-8')
+handler = logging.FileHandler(FILE_PREFIX + 'app.log', encoding='UTF-8')
 logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(lineno)s - %(message)s')
 handler.setFormatter(logging_format)
 app.logger.addHandler(handler)
-
-# celery = Celery(app.name, broker=CELERY_BROKER_URL)
-# celery.conf.update(app.config)
 
 # 判断是否已授权
 def is_auth():
@@ -95,7 +92,7 @@ def report():
 		if len(d) == 0:
 			cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
-			Popen('python history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'], shell=True)
+			Popen('python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 			
 			closedb(db,cursor)
 
@@ -109,7 +106,7 @@ def report():
 					cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
 					cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
-					Popen('python history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(int(timestamp) - 600) + ' ' + session['Username'], shell=True)
+					Popen('python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(int(timestamp) - 600) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 			
 			closedb(db,cursor)
 		return
@@ -518,7 +515,7 @@ def auth():
 	if count == 0:
 		cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
-		Popen('python history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'], shell=True)
+		Popen('python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 
 	closedb(db,cursor)
 
@@ -580,7 +577,7 @@ def strategy_start():
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [1, data['strategyId']])
 
-	Popen('python strategy_autobid.py ' + str(data['strategyId']) + ' ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + session['Username'], shell=True)
+	Popen('python ' + FILE_PREFIX + 'strategy_autobid.py ' + str(data['strategyId']) + ' ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 	
 	closedb(db,cursor)
 	

@@ -32,6 +32,7 @@ APPID = sys.argv[2]
 AccessToken = sys.argv[3]
 StartTime = int(sys.argv[4])
 Username = sys.argv[5]
+FILE_PREFIX = sys.argv[6]
 
 try:
 	(db,cursor) = connectdb()
@@ -96,10 +97,10 @@ try:
 except Exception, e:
 	app.logger.error(e)
 else:
-	Popen('python history_detail.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('python history_money.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('python history_status.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('python history_payback.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('python history_user.py ' + OpenID + ' ' + Username, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_detail.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_money.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_status.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_payback.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_user.py ' + OpenID + ' ' + Username, shell=True)
 finally:
 	pass

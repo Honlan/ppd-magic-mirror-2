@@ -32,6 +32,7 @@ OpenID = sys.argv[2]
 APPID = sys.argv[3]
 AccessToken = sys.argv[4]
 Username = sys.argv[5]
+FILE_PREFIX = sys.argv[6]
 
 # 策略投标
 try:
@@ -128,7 +129,7 @@ try:
 							if len(d) == 0:
 								cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 
-								Popen('python history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(1180627200) + ' ' + Username, shell=True)
+								Popen('python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(1180627200) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
 								
 								break
 							else:
@@ -139,7 +140,7 @@ try:
 									cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 									cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 
-									Popen('python history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(int(timestamp) - 600) + ' ' + Username, shell=True)
+									Popen('python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(int(timestamp) - 600) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
 
 									break
 
