@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(2)
+			time.sleep(1)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_status start')
@@ -74,6 +74,7 @@ try:
 				list_result = json.loads(list_result)
 				for item in list_result['Infos']:
 					many.append([item['Status'], item['ListingId']])
+				cursor.execute("update task set history_status=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(y), 'bidBasicInfo', OpenID])
 				break
 		
 		if len(many) > 0:

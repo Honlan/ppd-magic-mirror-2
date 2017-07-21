@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(2)
+			time.sleep(1)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_money start')
@@ -77,6 +77,7 @@ try:
 				for item in list_result['ListingBidsInfos']:
 					for i in item['Bids']:
 						many.append([item['ListingId'], i['LenderName'], i['BidAmount'], i['BidDateTime']])
+				cursor.execute("update task set history_money=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(y), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:

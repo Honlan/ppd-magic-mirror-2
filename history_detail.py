@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(2)
+			time.sleep(1)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_detail start')
@@ -74,6 +74,7 @@ try:
 				list_result = json.loads(list_result)
 				for item in list_result['LoanInfos']:
 					many.append([str(item['FistBidTime']), str(item['LastBidTime']), item['LenderCount'], str(item['AuditingTime']), item['RemainFunding'], item['DeadLineTimeOrRemindTimeStr'], item['CreditCode'], item['Amount'], item['Months'], item['CurrentRate'], item['BorrowName'], item['Gender'], item['EducationDegree'], item['GraduateSchool'], item['StudyStyle'], item['Age'], item['SuccessCount'], item['WasteCount'], item['CancelCount'], item['FailedCount'], item['NormalCount'], item['OverdueLessCount'], item['OverdueMoreCount'], item['OwingPrincipal'], item['OwingAmount'], item['AmountToReceive'], str(item['FirstSuccessBorrowTime']), str(item['RegisterTime']), item['CertificateValidate'], item['NciicIdentityCheck'], item['PhoneValidate'], item['VideoValidate'], item['CreditValidate'], item['EducateValidate'], str(item['LastSuccessBorrowTime']), item['HighestPrincipal'], item['HighestDebt'], item['TotalPrincipal'], item['ListingId']])
+				cursor.execute("update task set history_detail=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(y), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:

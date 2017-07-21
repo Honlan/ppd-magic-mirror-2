@@ -48,7 +48,7 @@ try:
 		if status == 'finished':
 			break
 		else:
-			time.sleep(2)
+			time.sleep(1)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_payback start')
@@ -59,9 +59,11 @@ try:
 		if len(ListingIds) > 0:
 			cursor.execute("delete from payback where ListingId in %s", [ListingIds])
 		many = []
-		for x in ListingIds:
+		for x in range(0, len(ListingIds)):
+			c = x
+			x = ListingIds[x]
 			while True:
-				time.sleep(0.1)
+				time.sleep(0.5)
 				access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
 				data =  {"ListingId": x}
 				sort_data = rsa.sort(data)
@@ -72,6 +74,7 @@ try:
 				list_result = json.loads(list_result)
 				for item in list_result['ListingRepayment']:
 					many.append([item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
+				cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(c), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:
