@@ -349,7 +349,7 @@ def invest():
 	dataset = {}
 
 	(db,cursor) = connectdb()
-	cursor.execute("select * from strategy where OpenID=%s",[0])
+	cursor.execute("select * from strategy where OpenID=%s",['0'])
 	dataset['sys'] = cursor.fetchall()
 	cursor.execute("select * from strategy where OpenID=%s",[session['OpenID']])
 	dataset['my'] = cursor.fetchall()
