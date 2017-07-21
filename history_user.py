@@ -58,126 +58,123 @@ try:
 		ListingIds = [x['ListingId'] for x in ListingIds]
 		
 		if len(ListingIds) == 0:
-			cursor.execute("select * from listing where ListingId=%s and Status=%s", [-999, 3])
+			cursor.execute("update user set data=%s where OpenID=%s", ['', OpenID])
 		else:
 			cursor.execute("select * from listing where ListingId in %s and Status=%s", [ListingIds, 3])
 
-		basic = cursor.fetchall()
-		data_dict = {}
-		for item in basic:
-			l = str(item['ListingId']) 
-			data_dict[l] = {
-				'ListingId': str(item['ListingId']),
-				'借款金额': float(item['Amount']),
-				'借款期限': float(item['Months']),
-				'借款利率': float(item['CurrentRate']),
-				'借款成功日期': str(item['AuditingTime']),
-				'初始评级': item['CreditCode'],
-				'年龄': float(item['Age']),
-				'历史成功借款次数': float(item['SuccessCount']),
-				'历史成功借款金额': float(item['TotalPrincipal']),
-				'总待还本金': float(item['OwingPrincipal']),
-				'历史正常还款期数': float(item['NormalCount']),
-				'历史逾期还款期数': float(item['OverdueLessCount']) + float(item['OverdueMoreCount'])}
-			if int(item['SuccessCount']) == 0:
-				data_dict[l]['是否首标'] = '是'
-			else:
-				data_dict[l]['是否首标'] = '否'
-			if int(item['Gender']) == 0:
-				data_dict[l]['性别'] = '女'
-			else:
-				data_dict[l]['性别'] = '男'
-			if int(item['PhoneValidate']) == 1:
-				data_dict[l]['手机认证'] = '成功认证'
-			else:
-				data_dict[l]['手机认证'] = '未成功认证'
-			if int(item['NciicIdentityCheck']) == 1:
-				data_dict[l]['户口认证'] = '成功认证'
-			else:
-				data_dict[l]['户口认证'] = '未成功认证'
-			if int(item['VideoValidate']) == 1:
-				data_dict[l]['视频认证'] = '成功认证'
-			else:
-				data_dict[l]['视频认证'] = '未成功认证'
-			if int(item['CertificateValidate']) == 1:
-				data_dict[l]['学历认证'] = '成功认证'
-			else:
-				data_dict[l]['学历认证'] = '未成功认证'
-			if int(item['CreditValidate']) == 1:
-				data_dict[l]['征信认证'] = '成功认证'
-			else:
-				data_dict[l]['征信认证'] = '未成功认证'
-			if random.random() < 0.6 / 100:
-				data_dict[l]['淘宝认证'] = '成功认证'
-			else:
-				data_dict[l]['淘宝认证'] = '未成功认证'
-			r = random.random()
-			if r < 0.004:
-				data_dict[l]['借款类型'] = '应收安全标'
-			elif r < 0.006:
-				data_dict[l]['借款类型'] = '电商'
-			elif r < 0.302:
-				data_dict[l]['借款类型'] = 'APP闪电'
-			elif r < 0.722:
-				data_dict[l]['借款类型'] = '普通'
-			else:
-				data_dict[l]['借款类型'] = '其他'
-			cursor.execute("select BidAmount from lender where ListingId=%s and LenderName=%s", [item['ListingId'], Username])
-			data_dict[l]['我的投资金额'] = float(cursor.fetchone()['BidAmount'])
+			basic = cursor.fetchall()
+			data_dict = {}
+			for item in basic:
+				l = str(item['ListingId']) 
+				data_dict[l] = {
+					'ListingId': str(item['ListingId']),
+					'借款金额': float(item['Amount']),
+					'借款期限': float(item['Months']),
+					'借款利率': float(item['CurrentRate']),
+					'借款成功日期': str(item['AuditingTime']),
+					'初始评级': item['CreditCode'],
+					'年龄': float(item['Age']),
+					'历史成功借款次数': float(item['SuccessCount']),
+					'历史成功借款金额': float(item['TotalPrincipal']),
+					'总待还本金': float(item['OwingPrincipal']),
+					'历史正常还款期数': float(item['NormalCount']),
+					'历史逾期还款期数': float(item['OverdueLessCount']) + float(item['OverdueMoreCount'])}
+				if int(item['SuccessCount']) == 0:
+					data_dict[l]['是否首标'] = '是'
+				else:
+					data_dict[l]['是否首标'] = '否'
+				if int(item['Gender']) == 0:
+					data_dict[l]['性别'] = '女'
+				else:
+					data_dict[l]['性别'] = '男'
+				if int(item['PhoneValidate']) == 1:
+					data_dict[l]['手机认证'] = '成功认证'
+				else:
+					data_dict[l]['手机认证'] = '未成功认证'
+				if int(item['NciicIdentityCheck']) == 1:
+					data_dict[l]['户口认证'] = '成功认证'
+				else:
+					data_dict[l]['户口认证'] = '未成功认证'
+				if int(item['VideoValidate']) == 1:
+					data_dict[l]['视频认证'] = '成功认证'
+				else:
+					data_dict[l]['视频认证'] = '未成功认证'
+				if int(item['CertificateValidate']) == 1:
+					data_dict[l]['学历认证'] = '成功认证'
+				else:
+					data_dict[l]['学历认证'] = '未成功认证'
+				if int(item['CreditValidate']) == 1:
+					data_dict[l]['征信认证'] = '成功认证'
+				else:
+					data_dict[l]['征信认证'] = '未成功认证'
+				if random.random() < 0.6 / 100:
+					data_dict[l]['淘宝认证'] = '成功认证'
+				else:
+					data_dict[l]['淘宝认证'] = '未成功认证'
+				r = random.random()
+				if r < 0.004:
+					data_dict[l]['借款类型'] = '应收安全标'
+				elif r < 0.006:
+					data_dict[l]['借款类型'] = '电商'
+				elif r < 0.302:
+					data_dict[l]['借款类型'] = 'APP闪电'
+				elif r < 0.722:
+					data_dict[l]['借款类型'] = '普通'
+				else:
+					data_dict[l]['借款类型'] = '其他'
+				cursor.execute("select BidAmount from lender where ListingId=%s and LenderName=%s", [item['ListingId'], Username])
+				data_dict[l]['我的投资金额'] = float(cursor.fetchone()['BidAmount'])
 
-			cursor.execute("select * from payback where ListingId=%s and OpenID=%s order by OrderId asc", [item['ListingId'], OpenID])
-			payback = cursor.fetchall()
+				cursor.execute("select * from payback where ListingId=%s and OpenID=%s order by OrderId asc", [item['ListingId'], OpenID])
+				payback = cursor.fetchall()
 
-			current = -1
-			for x in range(0, len(payback)):
-				# 0：等待还款 1：准时还款 2：逾期还款 3：提前还款 4：部分还款
-				if int(payback[x]['RepayStatus']) == 0:
-					current = x
-					break
-			if current == -1:
-				data_dict[l]['当前到期期数'] = int(payback[-1]['OrderId'])
-				data_dict[l]['当前还款期数'] = int(payback[-1]['OrderId'])
-			else:
-				data_dict[l]['当前到期期数'] = int(payback[current]['OrderId'])
-				data_dict[l]['当前还款期数'] = current
-			if current == -1:
-				data_dict[l]['标当前状态'] = '已还清'
-			elif int(time.time()) > int(time.mktime(time.strptime(payback[current]['DueDate'], "%Y-%m-%d"))):
-				data_dict[l]['标当前状态'] = '逾期中'
-			else:
-				data_dict[l]['标当前状态'] = '正常还款中'
-			if current == 0:
-				data_dict[l]['上次还款日期'] = 'NULL'
-				data_dict[l]['上次还款本金'] = 'NULL'
-				data_dict[l]['上次还款利息'] = 'NULL'
-			elif current == -1:
-				data_dict[l]['上次还款日期'] = payback[-1]['RepayDate']
-				data_dict[l]['上次还款本金'] = payback[-1]['RepayPrincipal']
-				data_dict[l]['上次还款利息'] = payback[-1]['RepayInterest']
-			else:
-				data_dict[l]['上次还款日期'] = payback[current - 1]['RepayDate']
-				data_dict[l]['上次还款本金'] = payback[current - 1]['RepayPrincipal']
-				data_dict[l]['上次还款利息'] = payback[current - 1]['RepayInterest']
+				current = -1
+				for x in range(0, len(payback)):
+					# 0：等待还款 1：准时还款 2：逾期还款 3：提前还款 4：部分还款
+					if int(payback[x]['RepayStatus']) == 0:
+						current = x
+						break
+				if current == -1:
+					data_dict[l]['当前到期期数'] = int(payback[-1]['OrderId'])
+					data_dict[l]['当前还款期数'] = int(payback[-1]['OrderId'])
+				else:
+					data_dict[l]['当前到期期数'] = int(payback[current]['OrderId'])
+					data_dict[l]['当前还款期数'] = current
+				if current == -1:
+					data_dict[l]['标当前状态'] = '已还清'
+				elif int(time.time()) > int(time.mktime(time.strptime(payback[current]['DueDate'], "%Y-%m-%d"))):
+					data_dict[l]['标当前状态'] = '逾期中'
+				else:
+					data_dict[l]['标当前状态'] = '正常还款中'
+				if current == 0:
+					data_dict[l]['上次还款日期'] = 'NULL'
+					data_dict[l]['上次还款本金'] = 'NULL'
+					data_dict[l]['上次还款利息'] = 'NULL'
+				elif current == -1:
+					data_dict[l]['上次还款日期'] = payback[-1]['RepayDate']
+					data_dict[l]['上次还款本金'] = payback[-1]['RepayPrincipal']
+					data_dict[l]['上次还款利息'] = payback[-1]['RepayInterest']
+				else:
+					data_dict[l]['上次还款日期'] = payback[current - 1]['RepayDate']
+					data_dict[l]['上次还款本金'] = payback[current - 1]['RepayPrincipal']
+					data_dict[l]['上次还款利息'] = payback[current - 1]['RepayInterest']
 
-			if current == -1 or current == len(payback) - 1:
-				data_dict[l]['下次计划还款日期'] = 'NULL'
-				data_dict[l]['下次计划还款本金'] = 'NULL'
-				data_dict[l]['下次计划还款利息'] = 'NULL'
-			else:
-				data_dict[l]['下次计划还款日期'] = payback[current + 1]['RepayDate']
-				data_dict[l]['下次计划还款本金'] = payback[current + 1]['RepayPrincipal']
-				data_dict[l]['下次计划还款利息'] = payback[current + 1]['RepayInterest']
+				if current == -1 or current == len(payback) - 1:
+					data_dict[l]['下次计划还款日期'] = 'NULL'
+					data_dict[l]['下次计划还款本金'] = 'NULL'
+					data_dict[l]['下次计划还款利息'] = 'NULL'
+				else:
+					data_dict[l]['下次计划还款日期'] = payback[current + 1]['RepayDate']
+					data_dict[l]['下次计划还款本金'] = payback[current + 1]['RepayPrincipal']
+					data_dict[l]['下次计划还款利息'] = payback[current + 1]['RepayInterest']
 
-			data_dict[l]['已还本金'] = np.sum([float(p['RepayPrincipal']) for p in payback])
-			data_dict[l]['已还利息'] = np.sum([float(p['RepayInterest']) for p in payback])
-			data_dict[l]['待还本金'] = np.sum([float(p['OwingPrincipal']) for p in payback])
-			data_dict[l]['待还利息'] = np.sum([float(p['OwingInterest']) for p in payback])
-			data_dict[l]['标当前逾期天数'] = np.sum([0 if float(p['OverdueDays']) < 0 else float(p['OverdueDays']) for p in payback])
-		data_dict = [v for v in data_dict.values()]
+				data_dict[l]['已还本金'] = np.sum([float(p['RepayPrincipal']) for p in payback])
+				data_dict[l]['已还利息'] = np.sum([float(p['RepayInterest']) for p in payback])
+				data_dict[l]['待还本金'] = np.sum([float(p['OwingPrincipal']) for p in payback])
+				data_dict[l]['待还利息'] = np.sum([float(p['OwingInterest']) for p in payback])
+				data_dict[l]['标当前逾期天数'] = np.sum([0 if float(p['OverdueDays']) < 0 else float(p['OverdueDays']) for p in payback])
+			data_dict = [v for v in data_dict.values()]
 
-		if len(data_dict) == 0:
-			cursor.execute("update user set data=%s where OpenID=%s", ['', OpenID])
-		else:
 			data_dict = {k: [data_dict[x][k] for x in range(0, len(data_dict))] for k in data_dict[0].keys()}
 			
 			data = pd.DataFrame.from_dict(data_dict)
@@ -185,6 +182,8 @@ try:
 			data.sort_values('借款成功时间戳')
 			data_dict = data.to_dict('records')
 			profile = {}
+
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage1: load data', 'bidBasicInfo', OpenID])
 
 			stats = {}
 			stats['from'] = data_dict[0]['借款成功时间戳']
@@ -304,6 +303,8 @@ try:
 
 			profile['bid_stat'] = stats
 
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage2: bid_stat', 'bidBasicInfo', OpenID])
+
 			data['借款期限区间'] = '1-4'
 			data.at[data['借款期限'] >= 5, '借款期限区间'] = '5-8'
 			data.at[data['借款期限'] >= 9, '借款期限区间'] = '9-12'
@@ -325,6 +326,10 @@ try:
 			        stats[key][v] = {}
 
 			months = []
+			
+			start = np.min([d['借款成功时间戳'] for d in data_dict])
+			end = np.max([d['借款成功时间戳'] for d in data_dict])
+
 			start = time2str(start, '%Y-%m')[2:]
 			end = time2str(end, '%Y-%m')[2:]
 			months.append(get_previous_month(start, '-', False))
@@ -431,6 +436,8 @@ try:
 
 			profile['bid_flow'] = {'months': months, 'flow': flow, 'params': params}
 
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage3: bid_flow', 'bidBasicInfo', OpenID])
+
 			terms = [t for t in range(0, int(data['借款期限'].max() + 1))]
 			stats = {'借款期限': {t:[0, 0] for t in terms}, '剩余期限': {t:[0, 0] for t in terms}}
 			data['剩余期限'] = data['借款期限'] - data['当前还款期数']
@@ -473,6 +480,8 @@ try:
 			stats = tmp
 			profile['bid_terms'] = {'terms': terms, 'data': stats}
 
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage4: bid_term', 'bidBasicInfo', OpenID])
+
 			ranges = ['0-4', '5-8', '9-12', '13-16', '17-20', '21-24']
 
 			data['剩余期限区间'] = '21-24'
@@ -494,6 +503,8 @@ try:
 			stats = [[{'name': r, 'type': 'bar', 'stack': '总量', 'data': stats[r][0]} for r in ranges], [{'name': r, 'type': 'bar', 'stack': '总量', 'data': stats[r][1]} for r in ranges]]
 
 			profile['bid_terms_history'] = {'months': months, 'ranges': ranges, 'data': stats}
+
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage5: bid_terms_history', 'bidBasicInfo', OpenID])
 
 			indicators = []
 			keys = [['信用标数量', '投资总金额', '平均利率', '平均期限', '首标比例', '男性比例', '平均年龄'], 
@@ -615,6 +626,8 @@ try:
 
 			profile['bid_radar'] = {'indicators': indicators, 'data': stats, 'legend': rates}
 
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage6: bid_radar', 'bidBasicInfo', OpenID])
+
 			params = {}
 			params['初始评级'] = ['AAA', 'AA', 'A', 'B', 'C', 'D', 'E', 'F']
 			params['借款类型'] = ['应收安全标', '电商', 'APP闪电', '普通', '其他']
@@ -721,6 +734,9 @@ try:
 			    lines['bad'][key] = tmpl
 
 			profile['bid_bad'] = {'months': months, 'params': params, 'interest': interest, 'bad': bad, 'rates': rates, 'max': max_values, 'max_r': max_values_r, 'lines': lines}
+
+			cursor.execute("update task set history_user=%s where name=%s and OpenID=%s", ['stage7: bid_bad finish', 'bidBasicInfo', OpenID])
+
 			cursor.execute("update user set data=%s where OpenID=%s", [json.dumps(profile), OpenID])
 
 		cursor.execute("update task set report=%s where name=%s and OpenID=%s", [0, 'bidBasicInfo', OpenID])
