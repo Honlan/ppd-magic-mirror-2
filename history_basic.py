@@ -73,11 +73,12 @@ try:
 					list_result = json.loads(list_result)
 					break
 
-			app.logger.error(str(OpenID) + ' history_basic ' + time2str(current, '%Y-%m-%d') + ' ' + str(PageIndex) + ' ' + str(len(list_result['BidList'])))
 			for item in list_result['BidList']:
 				if int(item['ListingId']) == 0:
 					continue
 				listings.append([item['ListingId'], str(item['Title']), item['Months'], item['Rate'], item['Amount'], OpenID])
+
+			cursor.execute("update task set history_basic=%s where name=%s and OpenID=%s", [time2str(current, '%Y-%m-%d') + '_' + str(PageIndex) + '_' + str(len(listings)), 'bidBasicInfo', OpenID])
 
 			PageIndex += 1
 			if PageIndex > int(list_result['TotalPages']):
