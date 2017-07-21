@@ -417,7 +417,7 @@ def invest():
 	dataset['calendar']['count'] = [[d, dataset['calendar']['count'][d], dataset['calendar']['amount'][d]] for d in dates]
 
 	if len(biddings) > 0:
-		cursor.execute("select ListingId, CreditCode, Months, CurrentRate, Title from listing where ListingId in %s", [[x['ListingId'] for x in biddings]])
+		cursor.execute("select ListingId, CreditCode, Months, CurrentRate, Title from listing where ListingId in (%s)", [','.join([x['ListingId'] for x in biddings])])
 		tmp = cursor.fetchall()
 		tmp = {str(t['ListingId']): t for t in tmp}
 		d = []
@@ -431,7 +431,7 @@ def invest():
 				biddings[x]['timestamp'] = time2str(float(biddings[x]['timestamp']), "%Y-%m-%d %H:%M:%S")
 				d.append(biddings[x])
 		biddings = d
-		cursor.execute("select id, name from strategy where id in %s", [[x['strategyId'] for x in biddings]])
+		cursor.execute("select id, name from strategy where id in (%s)", [','.join([x['strategyId'] for x in biddings])])
 		tmp = cursor.fetchall()
 		tmp = {str(t['id']): t['name'] for t in tmp}
 		for x in range(0, len(biddings)):
@@ -457,14 +457,22 @@ def chat():
 @app.route('/auth')
 def auth():
 	code = request.values.get('code')
-	authorizeStr = client.authorize(appid=APPID, code=code)
-	authorizeObj = json.loads(authorizeStr)
+	while True:
+		try:
+			authorizeStr = client.authorize(appid=APPID, code=code)
+			authorizeObj = json.loads(authorizeStr)
 
-	OpenID = str(authorizeObj['OpenID'])
-	AccessToken = authorizeObj['AccessToken']
-	RefreshToken = authorizeObj['RefreshToken']
-	ExpiresIn = authorizeObj['ExpiresIn']
-	AuthTimestamp = int(time.time())
+			OpenID = str(authorizeObj['OpenID'])
+			AccessToken = authorizeObj['AccessToken']
+			RefreshToken = authorizeObj['RefreshToken']
+			ExpiresIn = authorizeObj['ExpiresIn']
+			AuthTimestamp = int(time.time())
+		except Exception, e:
+			continue
+		else:
+			break
+		finally:
+			pass
 
 	session['OpenID'] = OpenID
 	session['AccessToken'] = AccessToken
