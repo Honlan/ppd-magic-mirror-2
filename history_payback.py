@@ -74,7 +74,7 @@ try:
 				list_result = json.loads(list_result)
 				for item in list_result['ListingRepayment']:
 					many.append([item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
-				cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(c), 'bidBasicInfo', OpenID])
+				cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(c + 1), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:
