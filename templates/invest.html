@@ -150,7 +150,7 @@
     border: none;
     outline: none;
     box-shadow: none;
-    width: 150px;
+    width: 210px;
     background-color: #444650;
     font-size: 13px;
     margin-left: 15px;
@@ -374,7 +374,6 @@
 #plot10 {
     padding: 30px 35px;
     position: relative;
-    overflow-y: scroll;
 }
 #plot10 h4 {
     font-weight: normal;
@@ -479,7 +478,7 @@
     <div id="add_info_content">
         <h4 style="margin-top:0px;margin-bottom:25px;">
             新增个人投资策略
-            <input type="text" name="name" placeholder="策略名称" class="form-control">
+            <input type="text" name="name" placeholder="策略名称" class="form-control" style="width:150px;">
             <input type="text" name="description" placeholder="策略描述，不多于20字" class="form-control" style="width:400px;">
         </h4>
         <div style="margin-bottom:10px;">
@@ -582,7 +581,7 @@
             <span class="item">无逾期还款记录</span>
         </div>
         <div style="position:relative;">
-            <input type="text" name="amount" placeholder="单个标投资金额／元" class="form-control" style="position:absolute;right:0;top:-114px;">
+            <input type="text" name="amount" placeholder="单个标投资金额／元（50-500）" class="form-control" style="position:absolute;right:0;top:-114px;">
             <input type="text" name="timedelta" placeholder="投资时间间隔／分钟" class="form-control" style="position:absolute;right:0;top:-64px;">
             <button id="save" class="form-control">新增</button>
             <button id="cancel" class="form-control">取消</button>
@@ -594,7 +593,7 @@
     <div id="show_info_content">
         <h4 style="margin-top:0px;margin-bottom:25px;">
             投资策略详情
-            <input type="text" name="name" placeholder="策略名称" class="form-control" readOnly="readOnly">
+            <input type="text" name="name" placeholder="策略名称" class="form-control" readOnly="readOnly" style="width:150px;">
             <input type="text" name="description" placeholder="策略描述，不多于20字" class="form-control" style="width:400px;" readOnly="readOnly">
         </h4>
         <div style="margin-bottom:10px;" class="field">
@@ -738,6 +737,7 @@
         </div>
     </div>
     <p style="text-align:center;padding-bottom:60px;font-size:20px;color:#999;">与其费心设计<span style="color:#fff;margin-left:6px;margin-right:6px;">策略</span>&nbsp;&nbsp;&nbsp;不如交由<span style="color:#fff;margin-left:6px;margin-right:6px;">机器</span>自动选择</p>
+    <button id="mlbid" class="active">开始自动投标</button>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p6">
@@ -763,6 +763,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="plot-title">历史成功自动投标详情</div>
         <div id="plot10">
+            <div style="max-height:340px;overflow-y:scroll;"></div>
         </div>
     </div>
 </div>
@@ -822,7 +823,11 @@ $(document).ready(function() {
     $('#save').click(function(event) {
         if ($('#add_info_content input[name="name"]').val() == '' || $('#add_info_content input[name="description"]').val() == '' || $('#add_info_content input[name="amount"]').val() == '' || $('#add_info_content input[name="timedelta"]').val() == '') {
             $('#message').text('策略信息填写不完善');
-        } else {
+        } 
+        else if (parseInt($('#add_info_content input[name="amount"]').val()) > 500 || parseInt($('#add_info_content input[name="amount"]').val()) < 50) {
+            $('#message').text('单个标投资金额超出范围');
+        }
+        else {
             var data = {};
             $('#add_info_content span.title').each(function(index, el) {
                 var key = $(this).text();
@@ -1010,8 +1015,9 @@ $(document).ready(function() {
             }
         }],
         series: [{
-            name: '策略偏重',
+            name: '特征重要性',
             type: 'bar',
+            barWidth: '60%',
             data: datasetJson['strategy_weight']['data']
         }]
     };
@@ -1029,8 +1035,8 @@ $(document).ready(function() {
             .done(function(data) {
                 $('#show_info_content input[name="name"]').val(data['strategy']['name']);
                 $('#show_info_content input[name="description"]').val(data['strategy']['description']);
-                $('#show_info_content input[name="amount"]').val(data['strategy']['amount']);
-                $('#show_info_content input[name="timedelta"]').val(data['strategy']['timedelta']);
+                $('#show_info_content input[name="amount"]').val(data['strategy']['amount'] + '元');
+                $('#show_info_content input[name="timedelta"]').val(data['strategy']['timedelta'] + '分钟');
 
                 $('#show_info_content .field').each(function(index, el) {
                     $(this).children('.item').removeClass('active');
@@ -1062,6 +1068,218 @@ $(document).ready(function() {
     $('#show_info_close').click(function(event) {
         $('#show_info').fadeOut();
     });
+
+    var plot6 = echarts.init(document.getElementById('plot6'), 'dark');
+    var option6 = {
+        color: ['rgba(221, 107, 102, 0.9)'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            top: 30,
+            left: 50,
+            right: 35,
+            bottom: 50,
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['借款金额', '借款期限', '借款利率', '初始评级', '借款类型', '是否首标', '年龄', '性别', '手机认证', '户口认证', '视频认证', '学历认证', '征信认证', '淘宝认证', '历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数'],
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            }
+        }],
+        series: [{
+            name: '策略偏重',
+            type: 'bar',
+            barWidth: '60%',
+            data: [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.8]
+        }]
+    };
+    plot6.setOption(option6);
+
+    var plot7 = echarts.init(document.getElementById('plot7'), 'dark');
+    var option7 = {
+        color: [colorset[5], colorset[3]],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            top: 30,
+            left: 50,
+            right: 35,
+            bottom: 50,
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['决策树', '随机森林', 'AdaBoost', 'GBDT', '逻辑回归', '贝叶斯', 'XGBoost', 'LightGBM', 'ListingNet'],
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            }
+        }, {
+            type: 'value',
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            }
+        }],
+        series: [{
+            name: 'Accuracy',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            data: [1,2,3,4,5,6,7,8,9]
+        }, {
+            name: 'AUC',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            yAxisIndex: 1,
+            data: [9,8,7,6,5,4,3,2,1]
+        }]
+    };
+    plot7.setOption(option7);
+
+    var plot8 = echarts.init(document.getElementById('plot8'), 'dark');
+    var option8 = {
+        color: [colorset[5], colorset[3]],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            top: 30,
+            left: 50,
+            right: 35,
+            bottom: 50,
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['决策树', '随机森林', 'AdaBoost', 'GBDT', '逻辑回归', '贝叶斯', 'XGBoost', 'LightGBM', 'ListingNet'],
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                margin: 12,
+                show: true
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            }
+        }, {
+            type: 'value',
+            splitNumber: 3,
+            splitLine: {
+                show: true,
+            },
+            axisLine: {
+                show: false,
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true
+            }
+        }],
+        series: [{
+            name: 'Accuracy',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            data: [1,2,3,4,5,6,7,8,9]
+        }, {
+            name: 'AUC',
+            type: 'line',
+            symbol: 'none',
+            showSymbol: false,
+            smooth: true,
+            yAxisIndex: 1,
+            data: [9,8,7,6,5,4,3,2,1]
+        }]
+    };
+    plot8.setOption(option8);
 
     var plot9 = echarts.init(document.getElementById('plot9'), 'dark');
     var param9 = ['投资标数', 'count'];
@@ -1199,7 +1417,7 @@ $(document).ready(function() {
             'F': 0,
         }
         tmp.append('<p><span style="color:' + colorset[tcor[list['CreditCode']]] + ';margin-right:20px;">' + list['CreditCode'] + '</span><span style="margin-right:20px;color:#999;">' + list['CurrentRate'] + '%</span><span style="color:#999;margin-right:20px;">' + list['Months'] + '个月</span><span style="margin-right:20px;color:rgba(109, 188, 191, 0.9);">' + list['strategy'] + '</span>已投 <span style="color:rgba(117, 179, 117, 0.9);">' + list['amount'] + '</span> 元</p>')
-        $('#plot10').append(tmp);
+        $('#plot10>div').append(tmp);
     }
 });
 </script>
