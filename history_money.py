@@ -56,9 +56,11 @@ try:
 		cursor.execute("select ListingId from listing where OpenID=%s", [OpenID])
 		ListingIds = cursor.fetchall()
 		ListingIds = [x['ListingId'] for x in ListingIds]
+
 		if len(ListingIds) > 0:
 			cursor.execute("delete from lender where ListingId in %s", [ListingIds])
 		many = []
+		finished = 0
 		for x in range(0, len(ListingIds), 5):
 			if x + 5 <= len(ListingIds):
 				y = x + 5
@@ -75,9 +77,15 @@ try:
 					continue
 				list_result = json.loads(list_result)
 				for item in list_result['ListingBidsInfos']:
+					finished += 1
 					for i in item['Bids']:
 						many.append([item['ListingId'], i['LenderName'], i['BidAmount'], i['BidDateTime']])
-				cursor.execute("update task set history_money=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(y), 'bidBasicInfo', OpenID])
+
+				if len(many) >= 1000:
+					cursor.executemany("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", many)					
+					del many[:]
+
+				cursor.execute("update task set history_money=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(finished), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:

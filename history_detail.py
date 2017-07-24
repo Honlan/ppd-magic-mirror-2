@@ -57,6 +57,7 @@ try:
 		ListingIds = cursor.fetchall()
 		ListingIds = [x['ListingId'] for x in ListingIds]
 		many = []
+		finished = 0
 		for x in range(0, len(ListingIds), 10):
 			if x + 10 <= len(ListingIds):
 				y = x + 10
@@ -73,8 +74,14 @@ try:
 					continue
 				list_result = json.loads(list_result)
 				for item in list_result['LoanInfos']:
+					finished += 1
 					many.append([str(item['FistBidTime']), str(item['LastBidTime']), item['LenderCount'], str(item['AuditingTime']), item['RemainFunding'], item['DeadLineTimeOrRemindTimeStr'], item['CreditCode'], item['Amount'], item['Months'], item['CurrentRate'], item['BorrowName'], item['Gender'], item['EducationDegree'], item['GraduateSchool'], item['StudyStyle'], item['Age'], item['SuccessCount'], item['WasteCount'], item['CancelCount'], item['FailedCount'], item['NormalCount'], item['OverdueLessCount'], item['OverdueMoreCount'], item['OwingPrincipal'], item['OwingAmount'], item['AmountToReceive'], str(item['FirstSuccessBorrowTime']), str(item['RegisterTime']), item['CertificateValidate'], item['NciicIdentityCheck'], item['PhoneValidate'], item['VideoValidate'], item['CreditValidate'], item['EducateValidate'], str(item['LastSuccessBorrowTime']), item['HighestPrincipal'], item['HighestDebt'], item['TotalPrincipal'], item['ListingId']])
-				cursor.execute("update task set history_detail=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(y), 'bidBasicInfo', OpenID])
+				
+				if len(many) >= 200:
+					cursor.executemany("update listing set FistBidTime=%s, LastBidTime=%s, LenderCount=%s, AuditingTime=%s, RemainFunding=%s, DeadLineTimeOrRemindTimeStr=%s, CreditCode=%s, Amount=%s, Months=%s, CurrentRate=%s, BorrowName=%s, Gender=%s, EducationDegree=%s, GraduateSchool=%s, StudyStyle=%s, Age=%s, SuccessCount=%s, WasteCount=%s, CancelCount=%s, FailedCount=%s, NormalCount=%s, OverdueLessCount=%s, OverdueMoreCount=%s, OwingPrincipal=%s, OwingAmount=%s, AmountToReceive=%s, FirstSuccessBorrowTime=%s, RegisterTime=%s, CertificateValidate=%s, NciicIdentityCheck=%s, PhoneValidate=%s, VideoValidate=%s, CreditValidate=%s, EducateValidate=%s, LastSuccessBorrowTime=%s, HighestPrincipal=%s, HighestDebt=%s, TotalPrincipal=%s where ListingId=%s", many)
+					del many[:]
+
+				cursor.execute("update task set history_detail=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(finished), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:

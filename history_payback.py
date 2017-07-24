@@ -59,6 +59,7 @@ try:
 		if len(ListingIds) > 0:
 			cursor.execute("delete from payback where ListingId in %s", [ListingIds])
 		many = []
+		finished = 0
 		for x in range(0, len(ListingIds)):
 			c = x
 			x = ListingIds[x]
@@ -72,9 +73,15 @@ try:
 				if list_result == '':
 					continue
 				list_result = json.loads(list_result)
+				finished += 1
 				for item in list_result['ListingRepayment']:
 					many.append([item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
-				cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(c + 1), 'bidBasicInfo', OpenID])
+				
+				if len(many) >= 1000:
+					cursor.executemany("insert into payback(ListingId, OrderId, DueDate, RepayDate, RepayPrincipal, RepayInterest, OwingPrincipal, OwingInterest, OwingOverdue, OverdueDays, RepayStatus, OpenID) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", many)
+					del many[:]
+
+				cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(finished), 'bidBasicInfo', OpenID])
 				break
 
 		if len(many) > 0:

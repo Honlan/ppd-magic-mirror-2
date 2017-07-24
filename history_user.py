@@ -48,7 +48,7 @@ try:
 		if s == 4:
 			break
 		else:
-			time.sleep(3)
+			time.sleep(10)
 
 	if flag:
 		app.logger.error(str(OpenID) + ' history_user start')

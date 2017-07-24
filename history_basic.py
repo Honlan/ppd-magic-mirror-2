@@ -42,8 +42,8 @@ try:
 	current = int(time.time()) + 3600 * 24
 
 	listings = []
+	total = 0
 	while current > StartTime:
-
 		PageIndex = 1
 		while True:
 			if current - 3600 * 24 * 30 > StartTime:
@@ -76,9 +76,15 @@ try:
 			for item in list_result['BidList']:
 				if int(item['ListingId']) == 0:
 					continue
+				total += 1
 				listings.append([item['ListingId'], str(item['Title']), item['Months'], item['Rate'], item['Amount'], OpenID])
 
-			cursor.execute("update task set history_basic=%s where name=%s and OpenID=%s", [time2str(current, '%Y-%m-%d') + '_' + str(PageIndex) + '_' + str(len(listings)), 'bidBasicInfo', OpenID])
+			if len(listings) >= 1000:
+				cursor.execute("delete from listing where ListingId in %s", [[x[0] for x in listings]])
+				cursor.executemany("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", listings)
+				del listings[:]
+
+			cursor.execute("update task set history_basic=%s where name=%s and OpenID=%s", [time2str(current, '%Y-%m-%d') + '_' + str(PageIndex) + '_' + str(total), 'bidBasicInfo', OpenID])
 
 			PageIndex += 1
 			if PageIndex > int(list_result['TotalPages']):
@@ -87,7 +93,7 @@ try:
 		current -= 3600 * 24 * 30
 
 	if len(listings) > 0:
-		app.logger.error(str(OpenID) + ' history_basic total records ' + str(len(listings)))
+		app.logger.error(str(OpenID) + ' history_basic total records ' + str(total))
 		cursor.execute("delete from listing where ListingId in %s", [[x[0] for x in listings]])
 		cursor.executemany("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", listings)
 	

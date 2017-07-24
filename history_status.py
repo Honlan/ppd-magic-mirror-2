@@ -57,6 +57,7 @@ try:
 		ListingIds = cursor.fetchall()
 		ListingIds = [x['ListingId'] for x in ListingIds]
 		many = []
+		finished = 0
 		for x in range(0, len(ListingIds), 20):
 			if x + 20 <= len(ListingIds):
 				y = x + 20
@@ -73,8 +74,14 @@ try:
 					continue
 				list_result = json.loads(list_result)
 				for item in list_result['Infos']:
+					finished += 1
 					many.append([item['Status'], item['ListingId']])
-				cursor.execute("update task set history_status=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(y), 'bidBasicInfo', OpenID])
+
+				if len(many) >= 200:
+					cursor.executemany("update listing set Status=%s where ListingId=%s", many)
+					del many[:]
+
+				cursor.execute("update task set history_status=%s where name=%s and OpenID=%s",['total_' + str(len(ListingIds)) + '_finished_' + str(finished), 'bidBasicInfo', OpenID])
 				break
 		
 		if len(many) > 0:
