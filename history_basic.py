@@ -62,7 +62,7 @@ try:
 				}
 
 			while True:
-				time.sleep(1)
+				time.sleep(0.5)
 				sort_data = rsa.sort(data)
 				sign = rsa.sign(sort_data)
 				list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
