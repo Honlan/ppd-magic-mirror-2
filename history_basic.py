@@ -104,10 +104,10 @@ try:
 except Exception, e:
 	app.logger.error(e)
 else:
-	Popen('sudo python ' + FILE_PREFIX + 'history_detail.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('sudo python ' + FILE_PREFIX + 'history_money.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('sudo python ' + FILE_PREFIX + 'history_status.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('sudo python ' + FILE_PREFIX + 'history_payback.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
-	Popen('sudo python ' + FILE_PREFIX + 'history_user.py ' + OpenID + ' ' + Username, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_detail.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_money.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_status.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_payback.py ' + OpenID + ' ' + APPID + ' ' + AccessToken, shell=True)
+	Popen('python ' + FILE_PREFIX + 'history_user.py ' + OpenID + ' ' + Username, shell=True)
 finally:
 	pass
