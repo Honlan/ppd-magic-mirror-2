@@ -30,28 +30,6 @@ from run import time2str, str2time, get_previous_month, get_next_month, connectd
 cursor.execute("select * from user where data=%s", [''])
 users = cursor.fetchall()
 
-# 刷新token
-if True:
-	for user in users:
-		while True:
-			new_token_info = client.refresh_token(APPID, user['OpenID'], user['RefreshToken'])
-			if new_token_info == '':
-				continue
-			new_token_info = json.loads(new_token_info)
-			AuthTimestamp = int(time.time())
-			AccessToken = new_token_info['AccessToken']
-			RefreshToken = new_token_info['RefreshToken']
-			session['AccessToken'] = AccessToken
-			session['RefreshToken'] = RefreshToken
-			session['AuthTimestamp'] = AuthTimestamp
-			cursor.execute('update user set AccessToken=%s, RefreshToken=%s, AuthTimestamp=%s where OpenID=%s', [AccessToken, RefreshToken, AuthTimestamp, user['OpenID']])
-			break
-
-	print '刷新令牌完毕'
-
-	cursor.execute("select * from user where data=%s", [''])
-	users = cursor.fetchall()
-
 for user in users:
 	OpenID = user['OpenID']
 	AccessToken = user['AccessToken']
