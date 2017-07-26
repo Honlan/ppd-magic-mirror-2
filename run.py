@@ -92,7 +92,7 @@ def report():
 		if len(d) == 0:
 			cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
-			Popen('python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
+			Popen('sudo python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 			
 			closedb(db,cursor)
 
@@ -106,7 +106,7 @@ def report():
 					cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
 					cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
-					Popen('python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(int(timestamp) - 600) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
+					Popen('sudo python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(int(timestamp) - 600) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 			
 			closedb(db,cursor)
 		return
@@ -531,7 +531,7 @@ def auth():
 	if count == 0:
 		cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
-		Popen('python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
+		Popen('sudo python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 
 	closedb(db,cursor)
 
@@ -593,7 +593,7 @@ def strategy_start():
 	else:
 		cursor.execute("update strategy set active=%s where id=%s", [1, data['strategyId']])
 
-	Popen('python ' + FILE_PREFIX + 'strategy_autobid.py ' + str(data['strategyId']) + ' ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
+	Popen('sudo python ' + FILE_PREFIX + 'strategy_autobid.py ' + str(data['strategyId']) + ' ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
 	
 	closedb(db,cursor)
 	

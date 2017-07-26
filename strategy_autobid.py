@@ -129,7 +129,7 @@ try:
 							if len(d) == 0:
 								cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 
-								Popen('python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(1180627200) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
+								Popen('sudo python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(1180627200) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
 								
 								break
 							else:
@@ -140,7 +140,7 @@ try:
 									cursor.execute("delete from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 									cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 
-									Popen('python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(int(timestamp) - 600) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
+									Popen('sudo python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(int(timestamp) - 600) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
 
 									break
 
