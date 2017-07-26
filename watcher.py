@@ -43,6 +43,7 @@ for user in users:
 	cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 	current = int(time.time()) + 3600 * 24
 	StartTime = 1180627200
+	access_url = "http://gw.open.ppdai.com/invest/BidService/BidList"
 	listings = []
 	total = 0
 	while current > StartTime:
@@ -94,7 +95,7 @@ for user in users:
 		del listings[:]
 
 	while True:
-		cursor.execute("select * from listing where LenderCount=%s and OpenID=%s limit 500", ['', OpenID])
+		cursor.execute("select * from listing where LenderCount=%s and OpenID=%s limit 200", ['', OpenID])
 		listings = cursor.fetchall()
 
 		# 获取详情
