@@ -63,9 +63,11 @@ def is_auth():
 def refresh():
 	if 'OpenID' in session:
 		(db,cursor) = connectdb()
-		cursor.execute("select AuthTimestamp from user where OpenID=%s", [session['OpenID']])
-		timestamp = cursor.fetchone()['AuthTimestamp']
-		if int(time.time()) > int(timestamp) + 3600 * 24 * 7:
+		cursor.execute("select * from user where OpenID=%s", [session['OpenID']])
+		d = cursor.fetchone()
+		timestamp = d['AuthTimestamp']
+		AccessToken = d['AccessToken']
+		if int(time.time()) > int(timestamp) + 3600 * 24 * 7 or (not session['AccessToken'] == AccessToken):
 			while True:
 				new_token_info = client.refresh_token(APPID, session['OpenID'], session['RefreshToken'])
 				if new_token_info == '':
