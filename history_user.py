@@ -664,13 +664,14 @@ try:
 			    
 			    if item['标当前状态'] == '逾期中':
 			        bad_month = item['下次计划还款日期'].split('/')
-			        year = bad_month[0][2:]
-			        month = bad_month[1]
-			        if len(month) == 1:
-			            month = '0' + month
-			        bad_month = year + '-' + month
-			        for key in params.keys():
-			            bad[key][item[key]][bad_month] += float(item['待还本金'])
+			        if len(bad_month) == 3:
+				        year = bad_month[0][2:]
+				        month = bad_month[1]
+				        if len(month) == 1:
+				            month = '0' + month
+				        bad_month = year + '-' + month
+				        for key in params.keys():
+				            bad[key][item[key]][bad_month] += float(item['待还本金'])
 
 			max_values = {'interest': {key: 0.0000001 for key in params.keys()}, 'bad': {key: 0.0000001 for key in params.keys()}}
 			max_values_r = {'interest': {key: 0.0000001 for key in params.keys()}, 'bad': {key: 0.0000001 for key in params.keys()}}

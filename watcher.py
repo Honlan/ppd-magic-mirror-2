@@ -34,12 +34,39 @@ for user in users:
 	OpenID = user['OpenID']
 	AccessToken = user['AccessToken']
 	Username = user['Username']
+	AuthTimestamp = time2str(int(user['AuthTimestamp']), '%Y-%m-%d %H:%M:%S')
+	RefreshToken = user['RefreshToken']
+
 	cursor.execute("select count(*) as count from task where OpenID=%s", [OpenID])
 	count = cursor.fetchone()['count']
 	if count > 0:
 		continue
 
-	print Username
+	print Username, AuthTimestamp, OpenID
+
+	failure = False
+	while True:
+		new_token_info = client.refresh_token(APPID, OpenID, RefreshToken)
+		if new_token_info == '':
+			continue
+		else:
+			new_token_info = json.loads(new_token_info)
+			AuthTimestamp = int(time.time())
+			if not new_token_info.has_key('AccessToken'):
+				failure = True
+				print new_token_info.values()[0]
+				break
+			else:
+				AccessToken = new_token_info['AccessToken']
+				RefreshToken = new_token_info['RefreshToken']
+				cursor.execute('update user set AccessToken=%s, RefreshToken=%s, AuthTimestamp=%s where OpenID=%s', [AccessToken, RefreshToken, AuthTimestamp, OpenID])
+				print 'Refresh Token for', Username
+				break
+				
+	if failure:
+		continue
+
+	print '开始获取数据'
 	cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', OpenID, 'pending'])
 	current = int(time.time()) + 3600 * 24
 	StartTime = 1180627200
@@ -89,120 +116,131 @@ for user in users:
 
 		current -= 3600 * 24 * 30
 
+	print '标的总数量', len(listings)
+
+	cursor.execute("update task set status=%s, timestamp=%s where name=%s and OpenID=%s", ['finished', int(time.time()), 'bidBasicInfo', OpenID])
+
 	if len(listings) > 0:
 		cursor.execute("delete from listing where ListingId in %s", [[x[0] for x in listings]])
 		cursor.executemany("insert into listing(ListingId, Title, Months, CurrentRate, Amount, OpenID) values(%s, %s, %s, %s, %s, %s)", listings)
 		del listings[:]
 
-	while True:
-		cursor.execute("select * from listing where LenderCount=%s and OpenID=%s limit 200", ['', OpenID])
-		listings = cursor.fetchall()
+		while True:
+			cursor.execute("select * from listing where LenderCount=%s and OpenID=%s limit 200", [0, OpenID])
+			listings = cursor.fetchall()
 
-		# 获取详情
-		ListingIds = [x['ListingId'] for x in listings]
-		many = []
-		for x in range(0, len(ListingIds), 10):
-			if x + 10 <= len(ListingIds):
-				y = x + 10
-			else:
-				y = len(ListingIds)
-			while True:
-				time.sleep(0.5)
-				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
-				data = {"ListingIds": ListingIds[x:y]}
-				sort_data = rsa.sort(data)
-				sign = rsa.sign(sort_data)
-				list_result = client.send(access_url, json.dumps(data), APPID, sign)
-				if list_result == '':
-					continue
-				list_result = json.loads(list_result)
-				for item in list_result['LoanInfos']:
-					many.append([str(item['FistBidTime']), str(item['LastBidTime']), item['LenderCount'], str(item['AuditingTime']), item['RemainFunding'], item['DeadLineTimeOrRemindTimeStr'], item['CreditCode'], item['Amount'], item['Months'], item['CurrentRate'], item['BorrowName'], item['Gender'], item['EducationDegree'], item['GraduateSchool'], item['StudyStyle'], item['Age'], item['SuccessCount'], item['WasteCount'], item['CancelCount'], item['FailedCount'], item['NormalCount'], item['OverdueLessCount'], item['OverdueMoreCount'], item['OwingPrincipal'], item['OwingAmount'], item['AmountToReceive'], str(item['FirstSuccessBorrowTime']), str(item['RegisterTime']), item['CertificateValidate'], item['NciicIdentityCheck'], item['PhoneValidate'], item['VideoValidate'], item['CreditValidate'], item['EducateValidate'], str(item['LastSuccessBorrowTime']), item['HighestPrincipal'], item['HighestDebt'], item['TotalPrincipal'], item['ListingId']])
+			# 获取详情
+			ListingIds = [x['ListingId'] for x in listings]
+			many = []
+			for x in range(0, len(ListingIds), 10):
+				if x + 10 <= len(ListingIds):
+					y = x + 10
+				else:
+					y = len(ListingIds)
+				while True:
+					time.sleep(0.5)
+					access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
+					data = {"ListingIds": ListingIds[x:y]}
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					list_result = client.send(access_url, json.dumps(data), APPID, sign)
+					if list_result == '':
+						continue
+					list_result = json.loads(list_result)
+					for item in list_result['LoanInfos']:
+						many.append([str(item['FistBidTime']), str(item['LastBidTime']), item['LenderCount'], str(item['AuditingTime']), item['RemainFunding'], item['DeadLineTimeOrRemindTimeStr'], item['CreditCode'], item['Amount'], item['Months'], item['CurrentRate'], item['BorrowName'], item['Gender'], item['EducationDegree'], item['GraduateSchool'], item['StudyStyle'], item['Age'], item['SuccessCount'], item['WasteCount'], item['CancelCount'], item['FailedCount'], item['NormalCount'], item['OverdueLessCount'], item['OverdueMoreCount'], item['OwingPrincipal'], item['OwingAmount'], item['AmountToReceive'], str(item['FirstSuccessBorrowTime']), str(item['RegisterTime']), item['CertificateValidate'], item['NciicIdentityCheck'], item['PhoneValidate'], item['VideoValidate'], item['CreditValidate'], item['EducateValidate'], str(item['LastSuccessBorrowTime']), item['HighestPrincipal'], item['HighestDebt'], item['TotalPrincipal'], item['ListingId']])
+					break
+			cursor.executemany("update listing set FistBidTime=%s, LastBidTime=%s, LenderCount=%s, AuditingTime=%s, RemainFunding=%s, DeadLineTimeOrRemindTimeStr=%s, CreditCode=%s, Amount=%s, Months=%s, CurrentRate=%s, BorrowName=%s, Gender=%s, EducationDegree=%s, GraduateSchool=%s, StudyStyle=%s, Age=%s, SuccessCount=%s, WasteCount=%s, CancelCount=%s, FailedCount=%s, NormalCount=%s, OverdueLessCount=%s, OverdueMoreCount=%s, OwingPrincipal=%s, OwingAmount=%s, AmountToReceive=%s, FirstSuccessBorrowTime=%s, RegisterTime=%s, CertificateValidate=%s, NciicIdentityCheck=%s, PhoneValidate=%s, VideoValidate=%s, CreditValidate=%s, EducateValidate=%s, LastSuccessBorrowTime=%s, HighestPrincipal=%s, HighestDebt=%s, TotalPrincipal=%s where ListingId=%s", many)
+			print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'detail finished'
+
+			# 获取投资金额
+			many = []
+			cursor.execute("delete from lender where ListingId in %s", [ListingIds])
+			for x in range(0, len(ListingIds), 5):
+				if x + 5 <= len(ListingIds):
+					y = x + 5
+				else:
+					y = len(ListingIds)
+				while True:
+					time.sleep(0.5)
+					access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
+					data = {"ListingIds": ListingIds[x:y]}
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					list_result = client.send(access_url, json.dumps(data), APPID, sign)
+					if list_result == '':
+						continue
+					list_result = json.loads(list_result)
+					for item in list_result['ListingBidsInfos']:
+						for i in item['Bids']:
+							many.append([item['ListingId'], i['LenderName'], i['BidAmount'], i['BidDateTime']])
+					break
+			cursor.executemany("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", many)					
+			print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'money finished'
+
+			# 获取还款记录
+			many = []
+			cursor.execute("delete from payback where ListingId in %s", [ListingIds])
+			for x in ListingIds:
+				while True:
+					time.sleep(0.5)
+					access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
+					data = {"ListingId": x}
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
+					if list_result == '':
+						continue
+					list_result = json.loads(list_result)
+					for item in list_result['ListingRepayment']:
+						many.append([item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
+					break
+			cursor.executemany("insert into payback(ListingId, OrderId, DueDate, RepayDate, RepayPrincipal, RepayInterest, OwingPrincipal, OwingInterest, OwingOverdue, OverdueDays, RepayStatus, OpenID) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", many)
+			print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'payback finished'
+
+			# 获取标的状态
+			many = []
+			for x in range(0, len(ListingIds), 20):
+				if x + 20 <= len(ListingIds):
+					y = x + 20
+				else:
+					y = len(ListingIds)
+				while True:
+					time.sleep(2)
+					access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
+					data = {"ListingIds": ListingIds[x:y]}
+					sort_data = rsa.sort(data)
+					sign = rsa.sign(sort_data)
+					list_result = client.send(access_url, json.dumps(data), APPID, sign)
+					if list_result == '':
+						continue
+					list_result = json.loads(list_result)
+					for item in list_result['Infos']:
+						many.append([item['Status'], item['ListingId']])
+					break
+			cursor.executemany("update listing set Status=%s where ListingId=%s", many)
+			print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'status finished'
+
+			cursor.execute("select count(*) as count from listing where LenderCount=%s and OpenID=%s", [0, OpenID])
+			count = cursor.fetchone()['count']
+			print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), '剩余标的数量：', count
+			cursor.execute("update task set history_detail=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
+			cursor.execute("update task set history_money=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
+			cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
+			cursor.execute("update task set history_status=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
+
+			if count == 0:
+				cursor.execute("update task set d0=%s, m0=%s, p0=%s, s0=%s, timestamp=%s where name=%s and OpenID=%s", [1, 1, 1, 1, int(time.time()), 'bidBasicInfo', OpenID])
 				break
-		cursor.executemany("update listing set FistBidTime=%s, LastBidTime=%s, LenderCount=%s, AuditingTime=%s, RemainFunding=%s, DeadLineTimeOrRemindTimeStr=%s, CreditCode=%s, Amount=%s, Months=%s, CurrentRate=%s, BorrowName=%s, Gender=%s, EducationDegree=%s, GraduateSchool=%s, StudyStyle=%s, Age=%s, SuccessCount=%s, WasteCount=%s, CancelCount=%s, FailedCount=%s, NormalCount=%s, OverdueLessCount=%s, OverdueMoreCount=%s, OwingPrincipal=%s, OwingAmount=%s, AmountToReceive=%s, FirstSuccessBorrowTime=%s, RegisterTime=%s, CertificateValidate=%s, NciicIdentityCheck=%s, PhoneValidate=%s, VideoValidate=%s, CreditValidate=%s, EducateValidate=%s, LastSuccessBorrowTime=%s, HighestPrincipal=%s, HighestDebt=%s, TotalPrincipal=%s where ListingId=%s", many)
-		print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'detail finished'
-
-		# 获取投资金额
-		many = []
-		cursor.execute("delete from lender where ListingId in %s", [ListingIds])
-		for x in range(0, len(ListingIds), 5):
-			if x + 5 <= len(ListingIds):
-				y = x + 5
-			else:
-				y = len(ListingIds)
-			while True:
-				time.sleep(0.5)
-				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
-				data = {"ListingIds": ListingIds[x:y]}
-				sort_data = rsa.sort(data)
-				sign = rsa.sign(sort_data)
-				list_result = client.send(access_url, json.dumps(data), APPID, sign)
-				if list_result == '':
-					continue
-				list_result = json.loads(list_result)
-				for item in list_result['ListingBidsInfos']:
-					for i in item['Bids']:
-						many.append([item['ListingId'], i['LenderName'], i['BidAmount'], i['BidDateTime']])
-		cursor.executemany("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", many)					
-		print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'money finished'
-
-		# 获取还款记录
-		many = []
-		cursor.execute("delete from payback where ListingId in %s", [ListingIds])
-		for x in ListingIds:
-			while True:
-				time.sleep(0.5)
-				access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
-				data = {"ListingId": x}
-				sort_data = rsa.sort(data)
-				sign = rsa.sign(sort_data)
-				list_result = client.send(access_url, json.dumps(data), APPID, sign, AccessToken)
-				if list_result == '':
-					continue
-				list_result = json.loads(list_result)
-				for item in list_result['ListingRepayment']:
-					many.append([item['ListingId'], item['OrderId'], item['DueDate'], item['RepayDate'], item['RepayPrincipal'], item['RepayInterest'], item['OwingPrincipal'], item['OwingInterest'], item['OwingOverdue'], item['OverdueDays'], item['RepayStatus'], OpenID])
-		cursor.executemany("insert into payback(ListingId, OrderId, DueDate, RepayDate, RepayPrincipal, RepayInterest, OwingPrincipal, OwingInterest, OwingOverdue, OverdueDays, RepayStatus, OpenID) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", many)
-		print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'payback finished'
-
-		# 获取标的状态
-		many = []
-		for x in range(0, len(ListingIds), 20):
-			if x + 20 <= len(ListingIds):
-				y = x + 20
-			else:
-				y = len(ListingIds)
-			while True:
-				time.sleep(0.5)
-				access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
-				data = {"ListingIds": ListingIds[x:y]}
-				sort_data = rsa.sort(data)
-				sign = rsa.sign(sort_data)
-				list_result = client.send(access_url, json.dumps(data), APPID, sign)
-				if list_result == '':
-					continue
-				list_result = json.loads(list_result)
-				for item in list_result['Infos']:
-					many.append([item['Status'], item['ListingId']])
-		cursor.executemany("update listing set Status=%s where ListingId=%s", many)
-		print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), 'status finished'
-
-		cursor.execute("select count(*) as count from listing where LenderCount=%s and OpenID", ['', OpenID])
-		count = cursor.fetchone()['count']
-		print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), '剩余标的数量：', count
-		cursor.execute("update task set history_detail=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
-		cursor.execute("update task set history_money=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
-		cursor.execute("update task set history_payback=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
-		cursor.execute("update task set history_status=%s where name=%s and OpenID=%s",['total_' + str(total) + '_left_' + str(count), 'bidBasicInfo', OpenID])
-
-		if count == 0:
-			cursor.execute("update task set d0=%s, m0=%s, p0=%s, s0=%s, timestamp=%s where name=%s and OpenID=%s", [1, 1, 1, 1, int(time.time()), 'bidBasicInfo', OpenID])
-			break
+	else:
+		cursor.execute("update task set d0=%s, m0=%s, p0=%s, s0=%s, timestamp=%s where name=%s and OpenID=%s", [1, 1, 1, 1, int(time.time()), 'bidBasicInfo', OpenID])
 
 	# 生成个人中心
 	cursor.execute("select ListingId from lender where LenderName=%s", [Username])
 	ListingIds = cursor.fetchall()
 	ListingIds = [x['ListingId'] for x in ListingIds]
+
+	print '开始生成个人中心', len(ListingIds)
 	
 	if len(ListingIds) == 0:
 		cursor.execute("update user set data=%s where OpenID=%s", ['', OpenID])
@@ -811,13 +849,14 @@ for user in users:
 		    
 		    if item['标当前状态'] == '逾期中':
 		        bad_month = item['下次计划还款日期'].split('/')
-		        year = bad_month[0][2:]
-		        month = bad_month[1]
-		        if len(month) == 1:
-		            month = '0' + month
-		        bad_month = year + '-' + month
-		        for key in params.keys():
-		            bad[key][item[key]][bad_month] += float(item['待还本金'])
+		        if len(bad_month) == 3:
+			        year = bad_month[0][2:]
+			        month = bad_month[1]
+			        if len(month) == 1:
+			            month = '0' + month
+			        bad_month = year + '-' + month
+			        for key in params.keys():
+			            bad[key][item[key]][bad_month] += float(item['待还本金'])
 
 		max_values = {'interest': {key: 0.0000001 for key in params.keys()}, 'bad': {key: 0.0000001 for key in params.keys()}}
 		max_values_r = {'interest': {key: 0.0000001 for key in params.keys()}, 'bad': {key: 0.0000001 for key in params.keys()}}
@@ -888,5 +927,4 @@ for user in users:
 
 	cursor.execute("update task set report=%s where name=%s and OpenID=%s", [0, 'bidBasicInfo', OpenID])
 	cursor.execute("update listing set OpenID=%s where OpenID=%s", ['', OpenID])
-	print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), '完成用户，', Username
-
+	print time2str(int(time.time()), '%Y-%m-%d %H:%M:%S'), '完成用户', Username
