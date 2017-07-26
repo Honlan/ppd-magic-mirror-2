@@ -77,7 +77,7 @@ try:
 					finished += 1
 					many.append([item['Status'], item['ListingId']])
 
-				if len(many) >= 200:
+				if len(many) >= 100:
 					cursor.executemany("update listing set Status=%s where ListingId=%s", many)
 					del many[:]
 

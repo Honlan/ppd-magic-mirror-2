@@ -81,7 +81,7 @@ try:
 					for i in item['Bids']:
 						many.append([item['ListingId'], i['LenderName'], i['BidAmount'], i['BidDateTime']])
 
-				if len(many) >= 1000:
+				if len(many) >= 500:
 					cursor.executemany("insert into lender(ListingId, LenderName, BidAmount, BidDateTime) values(%s, %s, %s, %s)", many)					
 					del many[:]
 
