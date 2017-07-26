@@ -197,8 +197,6 @@ def closedb(db,cursor):
 @app.route('/')
 def index():
 	if 'OpenID' in session:
-		return render_template('index.html')
-		
 		return redirect(url_for('home'))
 	else:
 		return render_template('index.html')
