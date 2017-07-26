@@ -193,9 +193,19 @@ def closedb(db,cursor):
 	db.close()
 	cursor.close()
 
-# 平台透视
+# 首页
 @app.route('/')
 def index():
+	if 'OpenID' in session:
+		return render_template('index.html')
+		
+		return redirect(url_for('home'))
+	else:
+		return render_template('index.html')
+
+# 平台透视
+@app.route('/home')
+def home():
 	refresh()
 	report()
 
@@ -229,7 +239,7 @@ def index():
 		radar[key] = tmp
 	dataset['json']['bid_status_stat']['pies'] = radar;
 
-	return render_template('index.html', dataset=json.dumps(dataset), auth=is_auth())
+	return render_template('home.html', dataset=json.dumps(dataset), auth=is_auth())
 
 # 个人中心数据是否加载完毕
 @app.route('/user_ready', methods=['POST'])
@@ -527,7 +537,7 @@ def auth():
 
 	closedb(db,cursor)
 
-	return redirect(url_for('user'))
+	return redirect(url_for('home'))
 
 # 退出授权
 @app.route('/logout')
