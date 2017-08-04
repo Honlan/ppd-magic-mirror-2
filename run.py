@@ -207,7 +207,7 @@ def index():
 @app.route('/home')
 def home():
 	refresh()
-	report()
+	# report()
 
 	(db,cursor) = connectdb()
 
@@ -262,7 +262,7 @@ def user():
 		return redirect(url_for('index'))
 
 	refresh()
-	report()
+	# report()
 	
 	(db,cursor) = connectdb()
 	cursor.execute("select data from user where OpenID=%s",[session['OpenID']])
@@ -354,7 +354,7 @@ def invest():
 		return redirect(url_for('index'))
 
 	refresh()
-	report()
+	# report()
 	
 	dataset = {}
 
@@ -459,7 +459,7 @@ def chat():
 		return redirect(url_for('index'))
 
 	refresh()
-	report()
+	# report()
 	
 	return render_template('chat.html', auth=is_auth())
 
@@ -528,12 +528,14 @@ def auth():
 		cursor.execute('insert into user(OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance, balanceBid, balanceWithdraw) values(%s, %s, %s, %s, %s, %s, %s, %s, %s)', [OpenID, AccessToken, RefreshToken, ExpiresIn, AuthTimestamp, Username, balance[1]['Balance'], balance[0]['Balance'], balance[2]['Balance']])
 	
 	# 是否需要获取个人投资记录
+	'''
 	cursor.execute("select count(*) as count from task where name=%s and OpenID=%s", ['bidBasicInfo', session['OpenID']])
 	count = cursor.fetchone()['count']
 	if count == 0:
 		cursor.execute("insert into task(name, OpenID, status) values(%s, %s, %s)", ['bidBasicInfo', session['OpenID'], 'pending'])
 
 		Popen('sudo python ' + FILE_PREFIX + 'history_basic.py ' + session['OpenID'] + ' ' + APPID + ' ' + session['AccessToken'] + ' ' + str(1180627200) + ' ' + session['Username'] + ' ' + FILE_PREFIX, shell=True)
+	'''
 
 	closedb(db,cursor)
 

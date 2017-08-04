@@ -138,7 +138,6 @@ for user in users:
 				else:
 					y = len(ListingIds)
 				while True:
-					time.sleep(0.5)
 					access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingInfos"
 					data = {"ListingIds": ListingIds[x:y]}
 					sort_data = rsa.sort(data)
@@ -162,7 +161,6 @@ for user in users:
 				else:
 					y = len(ListingIds)
 				while True:
-					time.sleep(0.5)
 					access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingBidInfos"
 					data = {"ListingIds": ListingIds[x:y]}
 					sort_data = rsa.sort(data)
@@ -183,7 +181,6 @@ for user in users:
 			cursor.execute("delete from payback where ListingId in %s", [ListingIds])
 			for x in ListingIds:
 				while True:
-					time.sleep(0.5)
 					access_url = "http://gw.open.ppdai.com/invest/RepaymentService/FetchLenderRepayment"
 					data = {"ListingId": x}
 					sort_data = rsa.sort(data)
@@ -206,7 +203,6 @@ for user in users:
 				else:
 					y = len(ListingIds)
 				while True:
-					time.sleep(0.5)
 					access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/BatchListingStatusInfos"
 					data = {"ListingIds": ListingIds[x:y]}
 					sort_data = rsa.sort(data)

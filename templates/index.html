@@ -28,14 +28,19 @@
         animation-duration: .5s;
     }
     
-    body {
+    html {
         font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
         -webkit-font-smoothing: antialiased;
-        background-color: #373a47;
-        color: #fff;
         background-image: url("{{url_for('static', filename='img/bg.jpg')}}");
         background-size: cover;
+        background-position: center center;
         padding: 140px 60px;
+        width: 100vw;
+        height: 100vh;
+    }
+    body {
+        background: transparent;
+        color: #fff;
     }
     #header {
         text-align: center;

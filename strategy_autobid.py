@@ -123,6 +123,7 @@ try:
 						cursor.execute("insert into bidding(OpenID, ListingId, strategyId, amount, timestamp) values(%s,%s,%s,%s,%s)", [OpenID, list_result['ListingId'], strategy['id'], list_result['Amount'], int(time.time())])
 
 						# 更新数据
+						'''
 						while True:
 							cursor.execute("select timestamp, report from task where name=%s and OpenID=%s", ['bidBasicInfo', OpenID])
 							d = cursor.fetchall()
@@ -143,6 +144,7 @@ try:
 									Popen('python ' + FILE_PREFIX + 'history_basic.py ' + OpenID + ' ' + APPID + ' ' + AccessToken + ' ' + str(int(timestamp) - 600) + ' ' + Username + ' ' + FILE_PREFIX, shell=True)
 
 									break
+						'''
 
 						# 检查余额
 						while True:
