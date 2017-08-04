@@ -206,6 +206,9 @@ def index():
 # 平台透视
 @app.route('/home')
 def home():
+	if not 'OpenID' in session:
+		return redirect(url_for('index'))
+
 	refresh()
 	# report()
 
@@ -314,6 +317,12 @@ def user():
 # 个人中心例子
 @app.route('/example')
 def example():
+	if not 'OpenID' in session:
+		return redirect(url_for('index'))
+
+	refresh()
+	# report()
+
 	(db,cursor) = connectdb()
 	cursor.execute("select * from json_data where page=%s",['user'])
 	json_data = cursor.fetchall()
