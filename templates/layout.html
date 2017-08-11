@@ -456,6 +456,21 @@ $(document).ready(function() {
     function send() {
         $('#history').append('<div class="request"><span>' + $('#chatbot input').val() + '</span></div>');
         var msg = $('#chatbot input').val();
+        var h1 = 0;
+        $('#history .request').each(function(index, el) {
+            h1 += $(this).height();
+        });
+        $('#history .response').each(function(index, el) {
+            h1 += $(this).height();
+        });
+        h1 += 999999;
+        var h2 = $('#history').height();
+
+        if (h1 > h2) {
+            $('#history').animate({
+                scrollTop: h1 - h2,
+            }, 400);
+        }
         $('#chatbot input').val('');
         $.ajax({
             url: '{{url_for("chatbot")}}',
