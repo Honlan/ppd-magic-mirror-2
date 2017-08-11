@@ -335,9 +335,9 @@
     margin-right: 5px;
 }
 
-#plot6 {
+#plot6, #plot13 {
     width: 100%;
-    height: 300px;
+    height: 250px;
     background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
@@ -345,7 +345,7 @@
 #plot7,
 #plot8 {
     width: 100%;
-    height: 350px;
+    height: 250px;
     background-color: #2c2f3c !important;
     margin-bottom: 30px;
 }
@@ -360,16 +360,31 @@
 
 #plot11 {
     width: 100%;
-    height: 300px;
     background-color: #2c2f3c !important;
     margin-bottom: 30px;
+    padding: 30px 60px;
+}
+#plot11 table {
+    width: 100%;
+    opacity: 0;
+}
+#plot11 table tr {
+    width: 100%;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+}
+#plot11 table tr:last-child {
+    border-bottom: none;
+}
+#plot11 table tr th, #plot11 table tr td {
+    padding: 10px 20px;
+    text-align: center;
 }
 
 #plot12 {
     width: 100%;
-    height: 300px;
     background-color: #2c2f3c !important;
-    margin-bottom: 30px;
+    padding: 30px 40px;
+    padding-bottom: 10px;
 }
 #plot10 {
     padding: 30px 35px;
@@ -393,6 +408,16 @@
     color: #999;
     font-size: 12px;
     margin-left: 15px;
+}
+#plot12 .cell {
+    display: inline-block;
+    width: 18%;
+    margin-left: 0.75%;
+    margin-right: 0.75%;
+    padding: 15px;
+    background-color: #373a47;
+    margin-bottom: 20px;
+    vertical-align: top;
 }
 </style>
 {% endblock %} {% block body %}
@@ -711,14 +736,59 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">自动投标策略历史数据统计</div>
+        <div id="plot11">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>总金额</th>
+                    <th>数量</th>
+                    <th>平均金额</th>
+                    <th>平均利率</th>
+                    <th>平均期限</th>
+                    <th>10日坏标逾期率</th>
+                    <th>30日坏标逾期率</th>
+                    <th>90日坏标逾期率</th>
+                </tr>
+                {% for item in dataset['json']['strategy_stat'] %}
+                    <tr>
+                        <td class="1">{{item['name']}}</td>
+                        <td class="2">{{item['总金额']}}</td>
+                        <td class="3">{{item['数量']}}</td>
+                        <td class="4">{{item['平均金额']}}</td>
+                        <td class="5">{{item['平均利率']}}</td>
+                        <td class="6">{{item['平均期限']}}</td>
+                        <td class="7">{{item['10日坏标逾期率']}}</td>
+                        <td class="8">{{item['30日坏标逾期率']}}</td>
+                        <td class="9">{{item['90日坏标逾期率']}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">历史成功自动投标记录</div>
+        <div id="plot9"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="plot-title">历史成功自动投标详情</div>
+        <div id="plot10">
+            <div style="max-height:340px;overflow-y:scroll;"></div>
+        </div>
+    </div>
+</div>
 <div id="plot5">
-    <div class="plot-title">基于学习的智能投资</div>
+    <div class="plot-title">ListingNet 智能投资模型</div>
     <div class='row'>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="intro">
                 <span class="fa fa-fw fa-heart-o"></span>
                 <h4 style="color:rgba(221, 107, 102, 0.9);">基于学习</h4>
-                <p>集成多种机器学习和深度学习模型，预测标的<span>安全系数</span>和<span>逾期天数</span></p>
+                <p>集成多种机器学习和深度学习模型，预测标的<span>安全评分</span>和<span>逾期概率</span></p>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -740,46 +810,45 @@
     <!-- <button id="mlbid" class="active">开始自动投标</button> -->
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="position:relative;" id="p6">
-        <div class="plot-title">标的特征重要性排序</div>
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+        <div class="plot-title">ListingNet 模型架构</div>
+        <div id="plot13"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="position:relative;">
+        <div class="plot-title">ListingNet 标的特征重要性排序</div>
         <div id="plot6"></div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="plot-title">安全系数模型性能分析</div>
+        <div class="plot-title">安全评分模型性能对比</div>
         <div id="plot7"></div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="plot-title">逾期天数模型性能分析</div>
+        <div class="plot-title">逾期概率模型性能对比</div>
         <div id="plot8"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="plot-title">历史成功自动投标统计</div>
-        <div id="plot9"></div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="plot-title">历史成功自动投标详情</div>
-        <div id="plot10">
-            <div style="max-height:340px;overflow-y:scroll;"></div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="plot-title">投标策略和模型数据统计</div>
-        <div id="plot11"></div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="plot-title">你可能感兴趣的标的</div>
-        <div id="plot12"></div>
+        <div id="plot12">
+            {% for item in dataset['listings'] %}
+                <div class="cell">
+                    <p style="font-size:20px;"><span style="color:{{item['color']}};margin-right:15px;">{{item['CreditCode']}}</span><span>{{item['Rate']}}</span>%</p>
+                    <p style="font-size:13px;color:#999;">安全评分<span style="color:#f2f2f2;margin-left:8px;font-size:16px;">{{item['score']}}</span></p>
+                    <p style="font-size:13px;color:#999;max-height:19px;overflow-y:hidden;">{{item['Title']}}<span>{{item['Months']}}个月</span></p>
+                    <p style="font-size:13px;color:#999;margin-bottom:5px;">总计<span style="font-size:14px;color:#f2f2f2;margin-left:6px;">{{item['Amount']}}</span></p>
+                    <p style="font-size:13px;color:#999;">剩余<span style="font-size:14px;color:#f2f2f2;margin-left:6px;">{{item['RemainFunding']}}</span></p>
+                    <div style="position:relative;">
+                        <span class="left" style="width:{{item['ratio']}}%;height:16px;display:inline-block;background-color:rgba(109, 188, 191, 0.9);position:absolute;top:0;left:0;"></span>
+                        <span class="right" style="width:100%;height:16px;display:inline-block;background-color:rgba(243, 230, 162, 0.9);"></span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
-<div style="text-align:center;">功能持续更新上线中，敬请期待！</div>
 <script>
 $(document).ready(function() {
     $('.menu-wrap a').removeClass('active');
@@ -1086,7 +1155,7 @@ $(document).ready(function() {
         },
         xAxis: [{
             type: 'category',
-            data: ['借款金额', '借款期限', '借款利率', '初始评级', '借款类型', '是否首标', '年龄', '性别', '手机认证', '户口认证', '视频认证', '学历认证', '征信认证', '淘宝认证', '历史成功借款次数', '历史成功借款金额', '总待还本金', '历史正常还款期数', '历史逾期还款期数'],
+            data: ["借款金额","历史成功借款金额","总待还本金","年龄","历史正常还款期数","借款期限","借款利率","历史逾期还款期数","历史成功借款次数","学历认证","性别","借款类型","手机认证","初始评级","视频认证","户口认证","征信认证","淘宝认证","是否首标"],
             axisLine: {
                 show: false
             },
@@ -1118,10 +1187,10 @@ $(document).ready(function() {
             name: '策略偏重',
             type: 'bar',
             barWidth: '60%',
-            data: [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.8]
+            data: [1.0000,0.6730,0.6501,0.5602,0.4455,0.3059,0.2600,0.2314,0.2275,0.0793,0.0755,0.0554,0.0526,0.0500,0.0411,0.0306,0.0172,0.0019,0.0000]
         }]
     };
-    // plot6.setOption(option6);
+    plot6.setOption(option6);
 
     var plot7 = echarts.init(document.getElementById('plot7'), 'dark');
     var option7 = {
@@ -1135,12 +1204,13 @@ $(document).ready(function() {
         grid: {
             top: 30,
             left: 50,
-            right: 35,
+            right: 50,
             bottom: 50,
         },
         xAxis: [{
             type: 'category',
-            data: ['决策树', '随机森林', 'AdaBoost', 'GBDT', '逻辑回归', '贝叶斯', 'XGBoost', 'LightGBM', 'ListingNet'],
+            data: ['逻辑回归', 'ExtraTrees', '随机森林', 'KNN', 'AdaBoost', 'SVM', '决策树', '高斯贝叶斯', 'GradientBoost', 'XGBoost', 'ListingNet'],
+
             axisLine: {
                 show: false
             },
@@ -1165,8 +1235,11 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
-                show: true
-            }
+                show: true,
+                textStyle: {
+                    color: colorset[5]
+                }
+            },
         }, {
             type: 'value',
             splitNumber: 3,
@@ -1180,8 +1253,11 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
-                show: true
-            }
+                show: true,
+                textStyle: {
+                    color: colorset[3]
+                }
+            },
         }],
         series: [{
             name: 'Accuracy',
@@ -1189,7 +1265,7 @@ $(document).ready(function() {
             symbol: 'none',
             showSymbol: false,
             smooth: true,
-            data: [1,2,3,4,5,6,7,8,9]
+            data: [0.9478,0.9395,0.9422,0.9392,0.9478,0.9478,0.9053,0.7246,0.9477,0.9678,0.9823]
         }, {
             name: 'AUC',
             type: 'line',
@@ -1197,10 +1273,10 @@ $(document).ready(function() {
             showSymbol: false,
             smooth: true,
             yAxisIndex: 1,
-            data: [9,8,7,6,5,4,3,2,1]
+            data: [0.6328,0.5479,0.5519,0.5295,0.6432,0.5089,0.5299,0.6079,0.6562,0.7271,0.8425]
         }]
     };
-    // plot7.setOption(option7);
+    plot7.setOption(option7);
 
     var plot8 = echarts.init(document.getElementById('plot8'), 'dark');
     var option8 = {
@@ -1219,7 +1295,7 @@ $(document).ready(function() {
         },
         xAxis: [{
             type: 'category',
-            data: ['决策树', '随机森林', 'AdaBoost', 'GBDT', '逻辑回归', '贝叶斯', 'XGBoost', 'LightGBM', 'ListingNet'],
+            data: ['逻辑回归', 'ExtraTrees', '随机森林', 'KNN', 'AdaBoost', 'SVM', '决策树', '高斯贝叶斯', 'GradientBoost', 'XGBoost', 'ListingNet'],
             axisLine: {
                 show: false
             },
@@ -1244,7 +1320,10 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
-                show: true
+                show: true,
+                textStyle: {
+                    color: colorset[5]
+                }
             }
         }, {
             type: 'value',
@@ -1259,7 +1338,10 @@ $(document).ready(function() {
                 show: false
             },
             axisLabel: {
-                show: true
+                show: true,
+                textStyle: {
+                    color: colorset[3]
+                }
             }
         }],
         series: [{
@@ -1268,7 +1350,7 @@ $(document).ready(function() {
             symbol: 'none',
             showSymbol: false,
             smooth: true,
-            data: [1,2,3,4,5,6,7,8,9]
+            data: [0.6822,0.6533,0.6616,0.6236,0.6897,0.6574,0.6006,0.5706,0.6938,0.7448,0.8552]
         }, {
             name: 'AUC',
             type: 'line',
@@ -1276,10 +1358,10 @@ $(document).ready(function() {
             showSymbol: false,
             smooth: true,
             yAxisIndex: 1,
-            data: [9,8,7,6,5,4,3,2,1]
+            data: [0.6491,0.5951,0.6136,0.5674,0.6698,0.6241,0.5625,0.6234,0.6785,0.7255,0.8183]
         }]
     };
-    // plot8.setOption(option8);
+    plot8.setOption(option8);
 
     var plot9 = echarts.init(document.getElementById('plot9'), 'dark');
     var param9 = ['投资标数', 'count'];
@@ -1418,6 +1500,53 @@ $(document).ready(function() {
         }
         tmp.append('<p><span style="color:' + colorset[tcor[list['CreditCode']]] + ';margin-right:20px;">' + list['CreditCode'] + '</span><span style="margin-right:20px;color:#999;">' + list['CurrentRate'] + '%</span><span style="color:#999;margin-right:20px;">' + list['Months'] + '个月</span><span style="margin-right:20px;color:rgba(109, 188, 191, 0.9);">' + list['strategy'] + '</span>已投 <span style="color:rgba(117, 179, 117, 0.9);">' + list['amount'] + '</span> 元</p>')
         $('#plot10>div').append(tmp);
+    }
+    if (datasetJson['biddings'].length == 0) {
+        $('#plot10').append('<p>暂无数据</p>');
+    }
+
+    var plot13_width = $('#plot13').width();
+    var plot13_height = $('#plot13').height();
+    var margin_top = 0;
+    var margin_left = 0;
+    if (parseFloat(plot13_width) / parseFloat(plot13_height) > 2.2) {
+        margin_left = parseInt((plot13_width - plot13_height * 2.2) / 2);
+        plot13_width = parseInt(plot13_height * 2.2);
+    }
+    else {
+        margin_top = parseInt((plot13_height - plot13_width / 2.2) / 2);
+        plot13_height = parseInt(plot13_width / 2.2);
+    }
+    var $img = $('<img src="' + "{{url_for('static',filename='img/model.png')}}" + '">');
+    $img.width(plot13_width);
+    $img.height(plot13_height);
+    $img.css({
+        'margin-top': margin_top,
+        'margin_left': margin_left
+    });
+    $('#plot13').append($img);
+
+    var cold_colors = d3.interpolate(d3.rgb(243, 230, 162), d3.rgb(221, 107, 102));
+    for (var i = 1; i < 10; i++) {
+        var max = 0, min = 9999999999;
+        $('#plot11 td.' + String(i)).each(function(index, el) {
+            var v = parseFloat($(this).text());
+            if (v > max) {
+                max = v;
+            }
+            if (v < min) {
+                min = v;
+            }
+        });
+        $('#plot11 td.' + String(i)).each(function(index, el) {
+            var v = parseFloat($(this).text());
+            $(this).css('color', cold_colors((v - min) / (max - min)));
+        });
+        if (i == 9) {
+            $('#plot11 table').animate({
+                opacity: 1
+            }, 600);
+        }
     }
 });
 </script>

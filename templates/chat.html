@@ -1,14 +1,586 @@
 {% extends 'layout.html' %} {% block style %}
 <style>
+#plot1 {
+	width: 100%;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot1 .news {
+    padding: 30px 40px;
+}
+#plot1 .news .cell {
+    position: relative;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+}
+#plot1 .news .cell img {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 108px;
+    box-shadow: 2px 2px 2px rgba(40, 40, 40, 0.4);
+    display: inline-block;
+}
+#plot1 .news .cell:first-child {
+    padding-top: 0;
+}
+#plot1 .news .cell:first-child img {
+    top: 0;
+}
+#plot1 .news .cell:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+#plot1 .news .cell h5 {
+    margin-top: 0;
+}
+#plot1 .news .cell h5 .media, #plot1 .news .cell h5 .timestamp {
+    margin-left: 10px;
+    font-size: 13px;
+    color: #bbb;
+}
+#plot1 .news .cell p {
+    font-size: 13px;
+    color: #999;
+    max-height: 54px;
+    margin-bottom: 0;
+    overflow-y: hidden;
+}
+#plot2 {
+	width: 100%;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot2 #info p {
+    font-size: 13px;
+    color: #888;
+}
+#plot2 #info p span {
+    color: #fff;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+#plot2 #info ul {
+    text-indent: 0;
+    border-top: 1px solid rgba(200, 200, 200, 0.2);
+    margin-top: 10px;
+    padding-top: 36px;
+    padding-left: 12px;
+    padding-right: 12px;
+    list-style-type: none;
+}
+#plot2 #info li {
+    font-size: 14px;
+    width: 100%;
+    border-left: 1px solid rgba(240, 240, 240, 0.8);
+    border-right: 1px solid rgba(240, 240, 240, 0.8);
+    text-indent: 0;
+    padding: 8px 27px;
+}
+#plot2 #info li:first-child {
+    padding-top: 15px;
+    border-top: 1px solid rgba(240, 240, 240, 0.8);
+}
+#plot2 #info li:last-child {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(240, 240, 240, 0.8);
+}
+#plot2 #info li span {
+    margin-right: 18px;
+}
+#plot3 {
+	width: 100%;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot3 .notes {
+    padding: 30px 40px;
+}
+#plot3 .notes .cell {
+    padding-bottom: 18px;
+    padding-top: 18px;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+}
+#plot3 .notes .cell:first-child {
+    padding-top: 0;
+}
+#plot3 .notes .cell:first-child img {
+    top: 0;
+}
+#plot3 .notes .cell:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+#plot3 .notes .cell h5 {
+    border-left: 5px solid #535d63;
+    padding-left: 10px;
+    margin-top: 0;
+}
+#plot3 .notes .cell p {
+    font-size: 13px;
+    color: #999;
+    max-height: 36px;
+    margin-bottom: 0;
+    overflow-y: hidden;
+}
+#plot3 .notes .cell h5 span {
+    margin-left: 10px;
+    font-size: 13px;
+    color: #bbb;
+}
+#plot4 {
+	width: 100%;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot4 #rank {
+    padding: 25px;
+    padding-bottom: 26px;
+}
+#plot4 #rank .cell {
+    position: relative;
+    margin-bottom: 21px;
+}
+#plot4 #rank .cell>div {
+    padding-left: 55px;
+}
+#plot4 #rank .cell h5 {
+    color: #eee;
+    margin-top: 0px;
+}
+#plot4 #rank .cell p {
+    margin-bottom: 0;
+    color: #888;
+    font-size: 13px;
+}
+#plot4 #rank .cell span {
+    color: #ccc;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+#plot4 #rank .cell span:first-child {
+    margin-left: 0;
+}
+#plot4 #rank .cell img {
+    width: 40px;
+    position: absolute;
+    left: 0;
+    top: -3px;
+    border-radius: 50%;
+}
+#plot4 #rank .cell:last-child {
+    margin-bottom: 0;
+}
+#previous {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 20px 16px;
+    border-radius: 2px;
+    border: 1px solid #f2f2f2;
+    color: #f2f2f2;
+    background-color: #2c2f3c;
+    margin-bottom: 30px;
+    -webkit-transition: color, background-color .6s;
+    -ms-transition: color, background-color .6s;
+    -moz-transition: color, background-color .6s;
+    -o-transition: color, background-color .6s;
+    transition: color, background-color .6s;
+}
+    
+#previous:hover {
+    background-color: #535d63;
+    cursor: pointer;
+}
+#plot5, #plot6 {
+    width: 100%;
+    height: 300px;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+}
+#plot5 {
+    padding: 25px 40px;
+}
+#plot5 .cell {
+    width: 23%;
+    display: inline-block;
+    margin-right: 1.9%;
+    vertical-align: top;
+    background-color: #373a47;
+}
+#plot5 .cell:last-child {
+    margin-right: 0;
+}
+#plot5 .cell .img {
+    width: 100%;
+    height: 100px;
+    background-size: cover;
+    background-position: center center;
+}
+#plot5 .cell h5 {
+    margin-top: 0;
+    line-height: 1.3;
+    font-size: 14px;
+}
+#plot5 .cell p {
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #999;
+}
+#plot7, #plot8 {
+    width: 100%;
+    background-color: #2c2f3c !important;
+    margin-bottom: 30px;
+    padding: 30px 40px;
+}
+#plot7 .cell, #plot8 .cell {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+}
+#plot7 .cell:first-child, #plot8 .cell:first-child {
+    padding-top: 0;
+}
+#plot7 .cell:last-child, #plot8 .cell:last-child {
+    padding-bottom: 0;
+    border: none;
+}
+#plot7 .cell .q, #plot8 .cell .q {
+    position: relative;
+    margin-bottom: 10px;
+}
+#plot7 .cell .q img, #plot8 .cell .q img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    border-radius: 50%;
+}
+#plot7 .cell .q>div, #plot8 .cell .q>div {
+    padding-left: 60px;
+}
+#plot7 .cell .q h5, #plot8 .cell .q h5 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #f2f2f2;
+    margin-bottom: 8px;
+}
+#plot7 .cell .q h5 span, #plot8 .cell .q h5 span {
+    margin-left: 6px;
+    color: #aaa;
+}
+#plot7 .cell .q p, #plot8 .cell .q p {
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #999;
+    max-height: 36px;
+    overflow-y: hidden;
+}
+#plot7 .cell .a p, #plot8 .cell .a p {
+    padding-left: 70px;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 4px;
+    max-height: 36px;
+    overflow-y: hidden;
+}
+#plot7 .cell .a p:last-child, #plot8 .cell .a p:last-child {
+    margin-bottom: 0;
+}
+#plot9 {
+    width: 100%;
+    background-color: #2c2f3c !important;
+    padding: 30px 40px;
+    padding-bottom: 10px;
+} 
+#plot9 h5, #plot9 h6 {
+    margin-top: 0;
+    line-height: 1.4;
+}
+#plot9 h5 {
+    font-size: 14px;
+}
+#plot9 h6 {
+    font-size: 13px;
+    color: #999;
+}
+#plot9 p {
+    font-size: 13px;
+    color: #aaa;
+    max-height: 90px;
+    overflow-y: hidden;
+    margin-bottom: 0;
+}
+#plot9 .cell {
+    padding: 20px;
+    display: inline-block;
+    width: 23%;
+    margin-right: 0.75%;
+    margin-left: 0.75%;
+    vertical-align: top;
+    margin-bottom: 20px;
+}
 </style>
 {% endblock %} {% block body %}
-<div style="text-align:center;">
-	功能持续更新上线中，敬请期待！
+<script src="{{url_for('static',filename='js/echarts2/echarts.js')}}"></script>
+<script>
+require.config({
+    paths: {
+        echarts: "{{url_for('static', filename='js/echarts2')}}"
+    }
+});
+</script>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+    	<div id="plot1">
+            <div class="plot-title">官方资讯</div>
+            <div class="news">
+                {% for item in dataset['ppdnews'] %}
+                    <div class="cell">
+                        <img src="{{item['thumb']}}" alt="">
+                        <div style="padding-left:130px;">
+                            <h5>{{item['title']}}<span class="media">{{item['media']}}</span><span class="timestamp">{{item['timestamp']}}</span></h5>
+                            <p>{{item['content']}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>    
+    	</div>
+    	<div id="plot3">
+            <div class="plot-title">公告通知</div>
+            <div class="notes">
+                {% for item in dataset['ppdnotes'] %}
+                    <div class="cell">
+                        <h5>{{item['title']}}<span>{{item['timestamp']}}</span></h5>
+                        <p>{{item['content']}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+    	</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    	<div id="plot2">
+            <div class="plot-title">个人活跃</div>
+            <div style="text-align:center;">
+                <img src="{{url_for('static', filename='img/avatar.png')}}" alt="" style="width:60px;height:60px;border-radius:50%;margin:35px auto;margin-bottom:10px;">
+            </div>
+            <div style="padding:20px 30px 30px 30px;" id="info">
+                <p>发表文章<span>37</span>回答问题<span>27</span></p>
+                <p style="line-height:1.6;">获得<span>287</span>次赞同<br/><span style="margin-left:0;">27</span>次感谢<span>745</span>次收藏</p>
+                <div style="border-top:1px solid rgba(200, 200, 200, 0.2);margin-top:30px;padding-top:10px;">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div style="text-align:center;">
+                                <h5>关注了</h5>
+                                <p style="font-size:20px;color:rgba(109, 188, 191, 0.9);">15</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div style="text-align:center;">
+                                <h5>关注者</h5>
+                                <p style="font-size:20px;color:rgba(221, 107, 102, 0.9);">535</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li><span class="fa fa-fw fa-question-circle"></span>我的提问</li>
+                    <li><span class="fa fa-fw fa-pencil"></span>我的回答</li>
+                    <li><span class="fa fa-fw fa-sticky-note"></span>我的文章</li>
+                    <li><span class="fa fa-fw fa-heart"></span>我的关注</li>
+                    <li><span class="fa fa-fw fa-star"></span>我的收藏</li>
+                </ul>
+            </div>
+    	</div>
+    	<div id="plot4">
+            <div class="plot-title">活跃排行</div>
+            <div id="rank">
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/1.png')}}" alt="">
+                    <div>
+                        <h5>pdu0774053220</h5>
+                        <p><span>8297</span>关注者<span>12287</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/14.png')}}" alt="">
+                    <div>
+                        <h5>pdu1381311435</h5>
+                        <p><span>8108</span>关注者<span>11874</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/2.png')}}" alt="">
+                    <div>
+                        <h5>pdu2675752764</h5>
+                        <p><span>7928</span>关注者<span>10284</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/10.png')}}" alt="">
+                    <div>
+                        <h5>pdu2138477680</h5>
+                        <p><span>7472</span>关注者<span>9283</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/5.png')}}" alt="">
+                    <div>
+                        <h5>pdu8848066221</h5>
+                        <p><span>7294</span>关注者<span>8721</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/4.png')}}" alt="">
+                    <div>
+                        <h5>pdu3383245021</h5>
+                        <p><span>6975</span>关注者<span>8284</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/9.png')}}" alt="">
+                    <div>
+                        <h5>pdu3835735287</h5>
+                        <p><span>6822</span>关注者<span>7384</span>赞同</p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <img src="{{url_for('static',filename='img/avatar/11.png')}}" alt="">
+                    <div>
+                        <h5>pdu3482706435</h5>
+                        <p><span>6532</span>关注者<span>7197</span>赞同</p>
+                    </div>
+                </div>
+            </div>    
+    	</div>
+    </div>
+</div>
+<a href="http://zhanghonglun.cn/ppd" target="_blank" id="previous">访问往届金奖作品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P2P深度透视&nbsp;OMNIRank&nbsp;平台风险评估&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;了解关于P2P的更多内容</a>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="plot-title">媒体新闻</div>
+        <div id="plot5">
+            {% for item in dataset['toutiao'] %}
+                <div class="cell">
+                    <div class="img" style="background-image:url({{item['thumb']}})"></div>
+                    <div style="padding:15px;">
+                        <div style="max-height:120px;overflow-y:hidden;">
+                            <h5>{{item['title']}}</h5>
+                            <p>{{item['content']}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="plot-title">关键词云</div>
+        <div id="plot6"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">投资问答</div>
+        <div id="plot7">
+            {% for item in dataset['ppdqa'] %}
+                <div class="cell">
+                    <div class="q">
+                        <img src="{{item['thumb']}}" alt="">
+                        <div>
+                            <h5>{{item['title']}}<span>{{item['media']}}</span></h5>
+                            <p>{{item['q']}}</p>
+                        </div>    
+                    </div>
+                    <div class="a">
+                        {% for i in item['a'] %}
+                            <p>- {{i}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">投资交流</div>
+        <div id="plot8">
+            {% for item in dataset['ppdchat'] %}
+                <div class="cell">
+                    <div class="q">
+                        <img src="{{item['thumb']}}" alt="">
+                        <div>
+                            <h5>{{item['title']}}<span>{{item['media']}}</span></h5>
+                            <p>{{item['q']}}</p>
+                        </div>    
+                    </div>
+                    <div class="a">
+                        {% for i in item['a'] %}
+                            <p>- {{i}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="plot-title">投资笔记</div>
+        <div id="plot9">
+            {% for item in dataset['ppdshare'] %}
+                <div class="cell" style="background-color:#373a47;">
+                    <h5>{{item['title']}}</h5>
+                    <h6>{{item['media']}}</h6>
+                    <p>{{item['content']}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 <script>
 $(document).ready(function() {
 	$('.menu-wrap a').removeClass('active');
     $('#nav4').addClass('active');
+
+    var dataset = eval({{datasetJson | safe}});
+    console.log(dataset);
+
+    require(
+        [
+            'echarts',
+            'echarts/chart/wordCloud'
+        ],
+        function(ec) {
+            var plot6 = ec.init(document.getElementById('plot6'));
+            var option = {
+                tooltip: {
+                    show: false
+                },
+                series: [{
+                    name: '平台关键词',
+                    type: 'wordCloud',
+                    size: ['100%', '100%'],
+                    textRotation: [0, 45, 90, -45],
+                    textPadding: 0,
+                    autoSize: {
+                        enable: true,
+                    },
+                    data: dataset['json']['wordcloud']
+                }]
+            };
+            plot6.setOption(option);
+        }
+    );
+
+    var maxheight = 0;
+    $('#plot9 .cell').each(function(index, el) {
+        if ($(this).height() > maxheight) {
+            maxheight = $(this).height();
+        }
+        if (index == 7) {
+            $('#plot9 .cell').height(maxheight);
+        }
+    });
 });
 </script>
 {% endblock %}

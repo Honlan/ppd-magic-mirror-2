@@ -1,9 +1,12 @@
 Flask
 mysql-python
 numpy
+scipy
 rsa
 celery
 redis
 Flask-Mail
 pandas
 requests
+sklearn
+jieba

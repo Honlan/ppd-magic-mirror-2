@@ -4,3 +4,4 @@ config.py
 venv/
 core/Global.py
 app.log
+QA.pkl

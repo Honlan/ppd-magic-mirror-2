@@ -19,6 +19,7 @@ import pandas as pd
 import requests
 import threading
 import logging
+import math
 
 from subprocess import Popen
 
@@ -41,6 +42,29 @@ logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s -
 handler.setFormatter(logging_format)
 app.logger.addHandler(handler)
 
+from sklearn.feature_extraction.text import TfidfVectorizer # 
+from sklearn.feature_extraction.text import TfidfTransformer
+from six.moves import cPickle as pickle
+import jieba
+
+class TFIDFPredictor:
+	def __init__(self):
+		self.vectorizer = TfidfVectorizer()
+
+	def train(self, questions):
+		fit = self.vectorizer.fit_transform(questions)
+
+	def predict(self, test_question , questions):
+		vector_doc = self.vectorizer.transform(questions)
+		vector_context = self.vectorizer.transform([' '.join( jieba.cut( test_question ) )])
+		result = np.dot(vector_doc, vector_context.T).todense()
+		result = np.asarray(result).flatten()
+		return np.argsort(result, axis=0)[::-1]
+
+pkl_file = open('QA.pkl', 'rb')
+[TFIDF, questions, answers] = pickle.load(pkl_file)
+pkl_file.close()
+
 # 判断是否已授权
 def is_auth():
 	result = {}
@@ -53,10 +77,10 @@ def is_auth():
 	if 'OpenID' in session:
 		result['is_auth'] = True
 		result['Username'] = escape(session['Username'])
-		result['count'] = count
+		result['count'] = count * 2 + count % 2
 	else:
 		result['is_auth'] = False
-		result['count'] = count
+		result['count'] = count * 2 + count % 2
 	return result
 
 # 刷新AccessToken
@@ -368,6 +392,22 @@ def invest():
 	dataset = {}
 
 	(db,cursor) = connectdb()
+	cursor.execute("select * from json_data where page=%s",['invest'])
+	json_data = cursor.fetchall()	
+	dataset['json'] = {item['keyword']: json.loads(item['json']) for item in json_data}
+
+	tmp = []
+	for key, value in dataset['json']['strategy_stat'].items():
+		value['name'] = key
+		value[u'平均金额'] = int(value[u'总金额'] / value[u'数量'])
+		for k, v in value.items():
+			if k in ['平均利率', '平均期限']:
+				value[k] = '%.2f' % value[k]
+			elif k in ['10日坏标逾期率', '30日坏标逾期率', '90日坏标逾期率']:
+				value[k] = '%.3f' % value[k]
+		tmp.append(value)
+	dataset['json']['strategy_stat'] = tmp
+
 	cursor.execute("select * from strategy where OpenID=%s",['0'])
 	dataset['sys'] = cursor.fetchall()
 	cursor.execute("select * from strategy where OpenID=%s",[session['OpenID']])
@@ -381,7 +421,6 @@ def invest():
 	dataset['strategy_count'] = 0
 
 	dataset['strategy_weight'] = {u'初始评级': 0, u'借款利率': 0, u'借款期限': 0}
-
 	sys_strategy = cursor.fetchone()['strategy']
 	if not sys_strategy == '':
 		sys_strategy = sys_strategy.split('-')
@@ -457,6 +496,50 @@ def invest():
 			biddings[x]['strategy'] = tmp[str(biddings[x]['strategyId'])]
 	dataset['biddings'] = biddings
 
+	while True:
+		access_url = "http://gw.open.ppdai.com/invest/LLoanInfoService/LoanList"
+		data =  {
+		  "PageIndex": 1, 
+		}
+		sort_data = rsa.sort(data)
+		sign = rsa.sign(sort_data)
+		list_result = client.send(access_url, json.dumps(data), APPID, sign)
+		if list_result == '':
+			continue
+		else:
+			list_result = json.loads(list_result)
+			break
+	mapping = {}
+	mapping['AAA'] = 15
+	mapping['AA'] = 10
+	mapping['A'] = 5
+	mapping['B'] = 3
+	mapping['C'] = 1
+	mapping['D'] = 0
+	mapping['E'] = 0
+	mapping['F'] = 0
+	colorset = {}
+	colorset['AAA'] = 'rgba(243, 230, 162, 0.9)'
+	colorset['AA'] = 'rgba(234, 126, 83, 0.9)'
+	colorset['A'] = 'rgba(221, 107, 102, 0.9)'
+	colorset['B'] = 'rgba(230, 157, 135, 0.9)'
+	colorset['C'] = 'rgba(215, 135, 230, 0.9)'
+	colorset['D'] = 'rgba(110, 113, 199, 0.9)' 
+	colorset['E'] = 'rgba(109, 188, 191, 0.9)'
+	colorset['F'] = 'rgba(117, 179, 117, 0.9)'
+	for x in range(0, len(list_result['LoanInfos'])):
+		item = list_result['LoanInfos'][x]
+		list_result['LoanInfos'][x]['score'] = mapping[item['CreditCode']] * (int(item['Rate']) - 9) * (6 / float(item['Months']))
+		list_result['LoanInfos'][x]['ratio'] = 95 - 95 * item['RemainFunding'] / item['Amount']
+		list_result['LoanInfos'][x]['color'] = colorset[item['CreditCode']]
+	list_result['LoanInfos'].sort(key=lambda x:x['score'], reverse=True)
+	dataset['listings'] = list_result['LoanInfos'][:10]
+	dataset['listing_max'] = np.max([float(x['score']) for x in dataset['listings']])
+	for x in xrange(0, len(dataset['listings'])):
+		dataset['listings'][x]['score'] = '%.2f' % (0.98 * dataset['listings'][x]['score'] / dataset['listing_max'])
+		dataset['listings'][x]['Amount'] = int(dataset['listings'][x]['Amount'])
+		dataset['listings'][x]['RemainFunding'] = int(dataset['listings'][x]['RemainFunding'])
+
 	closedb(db,cursor)
 
 	return render_template('invest.html', auth=is_auth(), datasetJson=json.dumps(dataset), dataset=dataset)
@@ -470,7 +553,88 @@ def chat():
 	refresh()
 	# report()
 	
-	return render_template('chat.html', auth=is_auth())
+	dataset = {}
+
+	(db,cursor) = connectdb()
+
+	cursor.execute("select * from json_data where page=%s",['chat'])
+	json_data = cursor.fetchall()
+	
+	dataset['json'] = {item['keyword']: json.loads(item['json']) for item in json_data}
+
+	cursor.execute("select * from news where source=%s order by timestamp desc limit 5", ['拍拍贷新闻'])
+	dataset['ppdnews'] = cursor.fetchall()
+	for x in xrange(0, len(dataset['ppdnews'])):
+		dataset['ppdnews'][x]['timestamp'] = time2str(float(dataset['ppdnews'][x]['timestamp']), '%Y-%m-%d %H:%M:%S')
+
+	cursor.execute("select * from news where source=%s order by timestamp desc limit 5", ['拍拍贷公告'])
+	dataset['ppdnotes'] = cursor.fetchall()
+	for x in xrange(0, len(dataset['ppdnotes'])):
+		dataset['ppdnotes'][x]['timestamp'] = time2str(float(dataset['ppdnotes'][x]['timestamp']), '%Y-%m-%d %H:%M:%S')
+
+	cursor.execute("select * from news where source=%s and thumb!=%s order by timestamp desc limit 4", ['今日头条', ''])
+	dataset['toutiao'] = cursor.fetchall()
+	for x in xrange(0, len(dataset['toutiao'])):
+		dataset['toutiao'][x]['timestamp'] = time2str(float(dataset['toutiao'][x]['timestamp']), '%Y-%m-%d')
+
+	cursor.execute("select * from news where source=%s limit 200", ['拍拍贷问答'])
+	dataset['ppdqa'] = cursor.fetchall()
+	count = 0
+	for x in xrange(0, len(dataset['ppdqa'])):
+		dataset['ppdqa'][x]['thumb'] = url_for('static',filename='img/avatar/') + str(1 + int(random.random() * 15)) + '.png'
+		dataset['ppdqa'][x]['content'] = dataset['ppdqa'][x]['content'].split('^')
+		dataset['ppdqa'][x]['q'] = dataset['ppdqa'][x]['content'][0]
+		dataset['ppdqa'][x]['a'] = []
+		if len(dataset['ppdqa'][x]['content']) > 3:
+			N = 3
+		else:
+			N = len(dataset['ppdqa'][x]['content'])
+		for i in range(1, N):
+			dataset['ppdqa'][x]['a'].append(dataset['ppdqa'][x]['content'][i])
+	tmp = []
+	while count < 3:
+		tmp.append(dataset['ppdqa'][int(random.random() * len(dataset['ppdqa']))])
+		count += 1
+	dataset['ppdqa'] = tmp
+
+	cursor.execute("select * from news where source=%s limit 200", ['拍拍贷交流'])
+	dataset['ppdchat'] = cursor.fetchall()
+	count = 0
+	for x in xrange(0, len(dataset['ppdchat'])):
+		dataset['ppdchat'][x]['thumb'] = url_for('static',filename='img/avatar/') + str(1 + int(random.random() * 15)) + '.png'
+		dataset['ppdchat'][x]['content'] = dataset['ppdchat'][x]['content'].split('^')
+		dataset['ppdchat'][x]['q'] = dataset['ppdchat'][x]['content'][0]
+		dataset['ppdchat'][x]['a'] = []
+		if len(dataset['ppdchat'][x]['content']) > 3:
+			N = 3
+		else:
+			N = len(dataset['ppdchat'][x]['content'])
+		for i in range(1, N):
+			dataset['ppdchat'][x]['a'].append(dataset['ppdchat'][x]['content'][i])
+	tmp = []
+	while count < 3:
+		tmp.append(dataset['ppdchat'][int(random.random() * len(dataset['ppdchat']))])
+		count += 1
+	dataset['ppdchat'] = tmp
+
+	cursor.execute("select * from news where source=%s", ['拍拍贷笔记'])
+	dataset['ppdshare'] = cursor.fetchall()
+	count = 0
+	tmp = []
+	while count < 8:
+		item = dataset['ppdshare'][int(random.random() * len(dataset['ppdshare']))]
+		if len(item['content']) < 100:
+			continue
+		tmp.append(item)
+		count += 1
+	dataset['ppdshare'] = tmp
+	colors = ['rgba(84, 148, 191, 1)','rgba(221, 107, 102, 1)','rgba(230, 157, 135, 1)','rgba(234, 126, 83, 1)','rgba(243, 230, 162, 1)']
+	for x in xrange(0, len(dataset['ppdshare'])):
+		dataset['ppdshare'][x]['color'] = colors[int(math.floor(random.random() * len(colors)))]
+
+	closedb(db,cursor)
+	
+	return render_template('chat.html', auth=is_auth(), datasetJson=json.dumps(dataset), dataset=dataset)
 
 # 授权登陆
 @app.route('/auth')
@@ -665,17 +829,24 @@ def chatbot():
 		r = requests.post('http://www.tuling123.com/openapi/api', data=data_dict).json()
 		if not str(r['code']) == '40004':
 			break
+	question = data['message']
+	answer = r['text']
+
+	if random.random() < 0.5:
+		sort = TFIDF.predict(question, questions)
+		match_q = questions[int(sort[0])]
+		match_a = answers[int(sort[0])]
+		answer = match_a
 
 	(db,cursor) = connectdb()
 
 	if 'OpenID' in session:
-		cursor.execute('insert into chatting(post,response,OpenID,timestamp) values(%s, %s, %s, %s)', [data['message'],r['text'],session['OpenID'],int(time.time())])
+		cursor.execute('insert into chatting(post,response,OpenID,timestamp) values(%s, %s, %s, %s)', [question,answer,session['OpenID'],int(time.time())])
 	else:
-		cursor.execute('insert into chatting(post,response,OpenID,timestamp) values(%s, %s, %s, %s)', [data['message'],r['text'],'',int(time.time())])
+		cursor.execute('insert into chatting(post,response,OpenID,timestamp) values(%s, %s, %s, %s)', [question,answer,'',int(time.time())])
 
 	closedb(db,cursor)
-	return json.dumps({'result': 'ok', 'msg': r['text']})
-
+	return json.dumps({'result': 'ok', 'msg': answer})
 
 if __name__ == '__main__':
 	app.run(debug=True)
