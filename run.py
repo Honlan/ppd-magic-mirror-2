@@ -61,9 +61,17 @@ class TFIDFPredictor:
 		result = np.asarray(result).flatten()
 		return np.argsort(result, axis=0)[::-1]
 
-pkl_file = open(FILE_PREFIX + 'QA.pkl', 'rb')
-[TFIDF, questions, answers] = pickle.load(pkl_file)
-pkl_file.close()
+
+files = open(FILE_PREFIX + 'QA.pickle')
+dataset = pickle.load(files)
+files.close()
+questions = []
+answers = []
+for i, j in dataset:
+	questions.append(' '.join(jieba.cut(i)))
+	answers.append(j)
+TFIDF = TFIDFPredictor()
+TFIDF.train(questions)
 
 # 判断是否已授权
 def is_auth():
