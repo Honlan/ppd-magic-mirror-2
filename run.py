@@ -91,7 +91,7 @@ def refresh():
 		d = cursor.fetchone()
 		timestamp = d['AuthTimestamp']
 		AccessToken = d['AccessToken']
-		if int(time.time()) > int(timestamp) + 3600 * 24 * 7 or (not session['AccessToken'] == AccessToken):
+		if (int(time.time()) > int(timestamp) + 3600 * 24 * 7) or (not session['AccessToken'] == AccessToken):
 			while True:
 				new_token_info = client.refresh_token(APPID, session['OpenID'], session['RefreshToken'])
 				if new_token_info == '':
