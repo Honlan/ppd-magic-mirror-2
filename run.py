@@ -61,7 +61,7 @@ class TFIDFPredictor:
 		result = np.asarray(result).flatten()
 		return np.argsort(result, axis=0)[::-1]
 
-pkl_file = open('QA.pkl', 'rb')
+pkl_file = open(FILE_PREFIX + 'QA.pkl', 'rb')
 [TFIDF, questions, answers] = pickle.load(pkl_file)
 pkl_file.close()
 
