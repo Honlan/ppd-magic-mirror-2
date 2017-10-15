@@ -109,6 +109,7 @@ try:
 					data = {
 						"ListingId": int(item['ListingId']), 
 						"Amount": int(strategy['amount']),
+						"UseCoupon": "true"
 						# 50 - 500
 					}
 					sort_data = rsa.sort(data)
