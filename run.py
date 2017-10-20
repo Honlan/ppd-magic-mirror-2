@@ -542,7 +542,10 @@ def invest():
 		list_result['LoanInfos'][x]['color'] = colorset[item['CreditCode']]
 	list_result['LoanInfos'].sort(key=lambda x:x['score'], reverse=True)
 	dataset['listings'] = list_result['LoanInfos'][:10]
-	dataset['listing_max'] = np.max([float(x['score']) for x in dataset['listings']])
+	if len(dataset['listings']) == 0:
+		data['listing_max'] = 0.0000001
+	else:
+		dataset['listing_max'] = np.max([float(x['score']) for x in dataset['listings']])
 	for x in xrange(0, len(dataset['listings'])):
 		dataset['listings'][x]['score'] = '%.2f' % (0.98 * dataset['listings'][x]['score'] / dataset['listing_max'])
 		dataset['listings'][x]['Amount'] = int(dataset['listings'][x]['Amount'])
